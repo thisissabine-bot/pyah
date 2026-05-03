@@ -10,8 +10,8 @@ export default function Footer() {
             <img
               src="/logo-verticaal-wit.svg"
               alt="Private Yoga at Home"
-              height={48}
-              className="h-12 w-auto mb-3"
+              height={250}
+              className="h-[250px] w-auto mb-3"
             />
             <p className="text-sm leading-relaxed">
               Professionele yogadocenten die bij jou thuis komen. Persoonlijk,

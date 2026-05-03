@@ -10,13 +10,13 @@ export default function Header() {
   return (
     <header className="bg-white border-b border-pyah-zacht sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between py-4">
           <Link href="/">
             <img
               src="/logo-horizontaal-roze.svg"
               alt="Private Yoga at Home"
-              height={48}
-              className="h-12 w-auto"
+              height={250}
+              className="h-[250px] w-auto"
             />
           </Link>
 
