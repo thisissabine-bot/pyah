@@ -16,7 +16,7 @@ export default function Header() {
               src="/logo-horizontaal-roze.svg"
               alt="Private Yoga at Home"
               height={56}
-              className="h-20 w-auto"
+              className="h-[300px] w-auto"
             />
           </Link>
 
