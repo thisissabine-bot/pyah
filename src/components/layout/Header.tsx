@@ -11,13 +11,13 @@ export default function Header() {
     <header className="bg-white border-b border-pyah-zacht sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-semibold tracking-tight text-pyah-diep">
-              PYAH
-            </span>
-            <span className="hidden sm:block text-sm text-pyah-donker/60">
-              Private Yoga at Home
-            </span>
+          <Link href="/">
+            <img
+              src="/logo-horizontaal-roze.svg"
+              alt="Private Yoga at Home"
+              height={36}
+              className="h-9 w-auto"
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">

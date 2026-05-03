@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   title: "Private Yoga at Home | Yogadocent aan huis",
   description:
     "Vind een zorgvuldig geselecteerde yogadocent voor privélessen aan huis. Persoonlijk, professioneel en in jouw eigen omgeving.",
+  icons: {
+    icon: "/favicon-pyah.png",
+  },
 };
 
 export default function RootLayout({

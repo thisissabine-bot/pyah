@@ -7,7 +7,12 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
-            <p className="text-lg font-semibold text-white mb-2">PYAH</p>
+            <img
+              src="/logo-verticaal-wit.svg"
+              alt="Private Yoga at Home"
+              height={48}
+              className="h-12 w-auto mb-3"
+            />
             <p className="text-sm leading-relaxed">
               Professionele yogadocenten die bij jou thuis komen. Persoonlijk,
               zorgvuldig geselecteerd.
