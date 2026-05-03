@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Search, Home, Star, Shield, Heart } from "lucide-react";
 import DocentCard from "@/components/docenten/DocentCard";
-import { DOCENTEN_TESTDATA } from "@/lib/testdata";
+import { DOCENTEN_TESTDATA, getStartprijs } from "@/lib/testdata";
 
 export default function HomePage() {
   return (
@@ -93,7 +93,7 @@ export default function HomePage() {
                 slug={docent.slug}
                 locatie={docent.locatie}
                 yogastijlen={docent.yogastijlen}
-                startprijs_cent={docent.startprijs_cent}
+                startprijs_cent={getStartprijs(docent)}
                 foto_url={docent.foto_url}
               />
             ))}
