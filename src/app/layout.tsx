@@ -24,6 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="nl" className={`${dmSans.variable} h-full antialiased`}>
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/zan4wgj.css" />
+      </head>
       <body className="min-h-full flex flex-col text-pyah-donker">
         <Header />
         <main className="flex-1">{children}</main>

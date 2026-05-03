@@ -36,7 +36,7 @@ export default function DocentProfiel({ docent }: Props) {
       </nav>
 
       {/* Hero kaart */}
-      <div className="bg-white rounded-3xl border border-pyah-zacht/40 shadow-sm overflow-hidden mb-8">
+      <div className="bg-white rounded-3xl border-[0.5px] border-pyah-zacht shadow-sm overflow-hidden mb-8">
         <div className="flex flex-col sm:flex-row">
           {/* Foto */}
           <div className="w-full sm:w-64 h-64 sm:h-auto bg-pyah-licht flex-shrink-0 flex items-center justify-center">
@@ -71,7 +71,7 @@ export default function DocentProfiel({ docent }: Props) {
                 {docent.yogastijlen.map((stijl) => (
                   <span
                     key={stijl}
-                    className="text-xs bg-pyah-licht text-pyah-accent border border-pyah-zacht px-3 py-1 rounded-full"
+                    className="text-xs bg-pyah-licht text-pyah-accent px-3 py-1 rounded-full"
                   >
                     {stijl}
                   </span>
@@ -110,7 +110,7 @@ export default function DocentProfiel({ docent }: Props) {
         {/* Linkerkolom: bio + details */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Bio */}
-          <section className="bg-white rounded-2xl border border-pyah-zacht/40 shadow-sm p-6">
+          <section className="bg-white rounded-2xl border-[0.5px] border-pyah-zacht shadow-sm p-6">
             <h2 className="text-lg font-semibold text-pyah-diep mb-4">Over {docent.naam.split(" ")[0]}</h2>
             <div className="text-pyah-donker/80 text-sm leading-relaxed space-y-3">
               {docent.bio.split("\n\n").map((alinea, i) => (
@@ -121,13 +121,13 @@ export default function DocentProfiel({ docent }: Props) {
 
           {/* Specialisaties */}
           {docent.specialisaties.length > 0 && (
-            <section className="bg-white rounded-2xl border border-pyah-zacht/40 shadow-sm p-6">
+            <section className="bg-white rounded-2xl border-[0.5px] border-pyah-zacht shadow-sm p-6">
               <h2 className="text-lg font-semibold text-pyah-diep mb-4">Specialisaties</h2>
               <div className="flex flex-wrap gap-2">
                 {docent.specialisaties.map((spec) => (
                   <span
                     key={spec}
-                    className="text-sm bg-pyah-licht text-pyah-donker border border-pyah-zacht px-3 py-1.5 rounded-full"
+                    className="text-sm bg-pyah-licht text-pyah-accent px-3 py-1.5 rounded-full"
                   >
                     {spec}
                   </span>
@@ -137,7 +137,7 @@ export default function DocentProfiel({ docent }: Props) {
           )}
 
           {/* Opleiding */}
-          <section className="bg-white rounded-2xl border border-pyah-zacht/40 shadow-sm p-6">
+          <section className="bg-white rounded-2xl border-[0.5px] border-pyah-zacht shadow-sm p-6">
             <h2 className="text-lg font-semibold text-pyah-diep mb-4">
               Opleiding &amp; certificering
             </h2>
@@ -160,7 +160,7 @@ export default function DocentProfiel({ docent }: Props) {
           </section>
 
           {/* Reviews placeholder */}
-          <section className="bg-white rounded-2xl border border-pyah-zacht/40 shadow-sm p-6">
+          <section className="bg-white rounded-2xl border-[0.5px] border-pyah-zacht shadow-sm p-6">
             <h2 className="text-lg font-semibold text-pyah-diep mb-4">Ervaringen</h2>
             <p className="text-sm text-pyah-donker/50 italic">
               Na afloop van een les kunnen klanten een review achterlaten. Dit profiel heeft nog
@@ -171,7 +171,7 @@ export default function DocentProfiel({ docent }: Props) {
 
         {/* Rechterkolom: tarieven + boeking */}
         <div className="flex flex-col gap-4">
-          <div className="bg-white rounded-2xl border border-pyah-zacht/40 shadow-sm p-6 sticky top-24">
+          <div className="bg-white rounded-2xl border-[0.5px] border-pyah-zacht shadow-sm p-6 sticky top-24">
             <h2 className="text-lg font-semibold text-pyah-diep mb-5">Tarieven</h2>
 
             <div className="flex flex-col gap-3">
@@ -230,7 +230,7 @@ export default function DocentProfiel({ docent }: Props) {
             </a>
             <Link
               href="/docenten"
-              className="block w-full text-center mt-3 border border-pyah-zacht text-pyah-donker py-3 rounded-full text-sm hover:bg-pyah-licht transition-colors"
+              className="block w-full text-center mt-3 border border-pyah-accent text-pyah-accent py-3 rounded-full text-sm hover:bg-pyah-licht transition-colors"
             >
               ← Terug naar overzicht
             </Link>

@@ -198,7 +198,7 @@ export default function ZoekPagina({ docenten }: Props) {
           {stijlFilter.map((s) => (
             <span
               key={s}
-              className="flex items-center gap-1.5 text-xs bg-pyah-licht border border-pyah-zacht text-pyah-accent px-3 py-1 rounded-full"
+              className="flex items-center gap-1.5 text-xs bg-pyah-licht text-pyah-accent px-3 py-1 rounded-full"
             >
               {s}
               <button onClick={() => toggleStijl(s)}>
@@ -207,7 +207,7 @@ export default function ZoekPagina({ docenten }: Props) {
             </span>
           ))}
           {locatieFilter && (
-            <span className="flex items-center gap-1.5 text-xs bg-pyah-licht border border-pyah-zacht text-pyah-accent px-3 py-1 rounded-full">
+            <span className="flex items-center gap-1.5 text-xs bg-pyah-licht text-pyah-accent px-3 py-1 rounded-full">
               {locatieFilter}
               <button onClick={() => setLocatieFilter("")}>
                 <X size={12} />
@@ -215,7 +215,7 @@ export default function ZoekPagina({ docenten }: Props) {
             </span>
           )}
           {niveauFilter && (
-            <span className="flex items-center gap-1.5 text-xs bg-pyah-licht border border-pyah-zacht text-pyah-accent px-3 py-1 rounded-full">
+            <span className="flex items-center gap-1.5 text-xs bg-pyah-licht text-pyah-accent px-3 py-1 rounded-full">
               {niveauFilter === "startend" ? "Startend" : "Ervaren"}
               <button onClick={() => setNiveauFilter("")}>
                 <X size={12} />
