@@ -10,7 +10,7 @@ export default function Footer() {
             <img
               src="/logo-verticaal-wit.svg"
               alt="Private Yoga at Home"
-              style={{ height: '64px', width: 'auto' }}
+              style={{ height: '60px', width: 'auto', display: 'block' }}
               className="mb-3"
             />
             <p className="text-sm leading-relaxed">

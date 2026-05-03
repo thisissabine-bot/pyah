@@ -15,7 +15,7 @@ export default function Header() {
             <img
               src="/logo-horizontaal-roze.svg"
               alt="Private Yoga at Home"
-              style={{ height: '64px', width: 'auto' }}
+              style={{ height: '60px', width: 'auto', display: 'block' }}
             />
           </Link>
 
