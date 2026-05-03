@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pyah-licht: #ebe3e0;
+  --color-pyah-zacht: #d4baad;
+  --color-pyah-accent: #a66658;
+  --color-pyah-donker: #484f47;
+  --color-pyah-diep: #260f09;
+
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-arsenica);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #484f47;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
