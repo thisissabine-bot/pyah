@@ -11,7 +11,6 @@ export default function HomePage() {
           src="/Sabine yogadocent 1920x1080.jpg"
           alt="Sabine, yogadocent aan huis"
           fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
           priority
         />
         <div className="hero-overlay" />
@@ -28,7 +27,7 @@ export default function HomePage() {
 
       {/* SECTIE 1 — Intro */}
       <section className="page-section section-white">
-        <div className="container text-center">
+        <div className="container">
           <p className="text-intro mb-text">
             Je agenda is vol. Je hoofd staat zelden stil. En toch voel je dat je lichaam iets anders nodig heeft dan nog een to-do.
           </p>
@@ -112,7 +111,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTIE 4 — Feature cards */}
-      <section className="page-section section-white">
+      <section className="page-section section-pearl">
         <div className="container">
           <h2 className="heading-h2 mb-section">Zorgvuldig geselecteerde docenten</h2>
           <div className="grid-3col">
@@ -148,7 +147,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTIE 5 — Kwaliteitseisen */}
-      <section className="page-section section-pearl">
+      <section className="page-section section-white">
         <div className="container">
           <h4 className="heading-h4 mb-text">
             Niet iedere yogadocent is zomaar toegelaten tot het platform
@@ -193,7 +192,7 @@ export default function HomePage() {
           <p className="text-body on-dark mb-cta">
             Bekijk de profielen van onze yogadocenten in Haarlem en voel of er iemand is die bij jou aansluit. Begin vrijblijvend met een kennismakingsgesprek — en ervaar zelf wat persoonlijke yoga aan huis voor jou kan betekenen.
           </p>
-          <div className="flex gap-4 flex-wrap">
+          <div className="btn-row">
             <Link className="btn-1 on-dark" href="/docenten">Bekijk de docenten</Link>
             <Link className="btn-2 on-dark" href="/hoe-werkt-het">Hoe werkt het?</Link>
           </div>

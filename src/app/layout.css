@@ -97,6 +97,13 @@
    4. INTERNE SPACING TUSSEN ELEMENTEN
    ---------------------------------------------------------- */
 
+/* Rij van twee of meer knoppen naast elkaar */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .mb-section  { margin-bottom: 48px; }
 .mb-heading  { margin-bottom: 40px; }
 .mb-subtitle { margin-bottom: 24px; }
@@ -114,6 +121,7 @@
 
 .feature-card {
   background-color: #ebe3e0;
+  padding: 24px;
 }
 
 .feature-icon {

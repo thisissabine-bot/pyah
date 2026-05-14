@@ -39,6 +39,11 @@
   align-items: center;
 }
 
+.hero-with-image img {
+  object-fit: cover;
+  object-position: center;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
