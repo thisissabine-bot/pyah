@@ -27,21 +27,22 @@ export default function HomePage() {
 
       {/* SECTIE 1 — Intro */}
       <section className="page-section section-white">
-        <div className="container">
+        <div className="container-narrow">
           <p className="text-intro mb-text">
             Je agenda is vol. Je hoofd staat zelden stil. En toch voel je dat je lichaam iets anders nodig heeft dan nog een to-do.
           </p>
-          <p className="text-intro mb-text">
-            Met privé yoga aan huis in Haarlem hoef je nergens heen. Een zorgvuldig geselecteerde yogadocent komt naar jou toe — op jouw tijd, in jouw tempo, afgestemd op wat jij nodig hebt.
+          <p className="text-intro mb-cta">
+            Met privé yoga aan huis in Haarlem hoef je nergens heen. Een zorgvuldig geselecteerde yogadocent komt naar jou toe op jouw tijd, in jouw tempo, afgestemd op wat jij nodig hebt.
           </p>
           <p className="text-intro">
-            Geen groepsles waar je je aan moet aanpassen. Geen reistijd. Gewoon rust, ruimte en echte aandacht — bij jou thuis.
+            Geen groepsles waar je je aan moet aanpassen.<br />
+            Geen reistijd. Gewoon rust, ruimte en echte aandacht bij jou thuis.
           </p>
         </div>
       </section>
 
       {/* SECTIE 2 — Zo werkt het */}
-      <section className="page-section section-creme">
+      <section className="page-section section-creme section-centered">
         <div className="container">
           <p className="heading-overline mb-text">In drie stappen</p>
           <h2 className="heading-h2 mb-subtitle">Zo werkt het</h2>

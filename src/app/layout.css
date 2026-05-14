@@ -15,6 +15,12 @@
   padding: 0 16px;
 }
 
+.container-narrow {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 @media (min-width: 640px) {
   .container {
     padding: 0 24px;
@@ -108,8 +114,8 @@
 .mb-heading  { margin-bottom: 40px; }
 .mb-subtitle { margin-bottom: 24px; }
 .mb-cta      { margin-bottom: 32px; }
-.mb-icon     { margin-bottom: 16px; }
-.mb-text     { margin-bottom: 8px; }
+.mb-icon     { margin-bottom: 20px; }
+.mb-text     { margin-bottom: 10px; }
 .mb-meta     { margin-bottom: 4px; }
 .mb-tags     { margin-bottom: 12px; }
 .mb-action   { margin-bottom: 16px; }
@@ -128,7 +134,7 @@
   width: 48px;
   height: 48px;
   background-color: #ffffff;
-  border-radius: 12px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,10 +145,12 @@
   width: 56px;
   height: 56px;
   background-color: #ebe3e0;
-  border-radius: 16px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

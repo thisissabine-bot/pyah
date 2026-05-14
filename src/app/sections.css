@@ -76,3 +76,20 @@
 .site-footer {
   background-color: #260f09;
 }
+
+/* --- Gecentreerde sectie-modifier --- */
+
+.section-centered .container,
+.section-centered .container-narrow {
+  text-align: center;
+}
+
+.section-centered .grid-3col,
+.section-centered .grid-cards {
+  text-align: left;
+}
+
+.section-centered .grid-3col .heading-h3,
+.section-centered .grid-cards .heading-h3 {
+  text-align: center;
+}
