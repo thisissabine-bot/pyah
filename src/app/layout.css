@@ -1,0 +1,163 @@
+/* ============================================================
+   PYAH — Base Layout & Spacing
+   Private Yoga at Home · privateyogaathome.nl
+   Bron: pyah-claude-instructiekaart-layout-spacing.md
+   ============================================================ */
+
+
+/* ----------------------------------------------------------
+   1. CONTAINER
+   ---------------------------------------------------------- */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   2. SECTIE-SPACING
+   ---------------------------------------------------------- */
+
+.page-section {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.page-section-hero {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.footer-inner {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+@media (min-width: 640px) {
+  .page-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .page-section-hero {
+    min-height: 640px;
+    padding-top: 112px;
+    padding-bottom: 112px;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   3. GRID-SYSTEMEN
+   ---------------------------------------------------------- */
+
+.grid-3col,
+.grid-cards,
+.grid-footer {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.grid-3col  { gap: 32px; }
+.grid-cards { gap: 24px; }
+.grid-footer { gap: 32px; }
+
+@media (min-width: 640px) {
+  .grid-3col,
+  .grid-footer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3col,
+  .grid-footer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   4. INTERNE SPACING TUSSEN ELEMENTEN
+   ---------------------------------------------------------- */
+
+.mb-section  { margin-bottom: 48px; }
+.mb-heading  { margin-bottom: 40px; }
+.mb-subtitle { margin-bottom: 24px; }
+.mb-cta      { margin-bottom: 32px; }
+.mb-icon     { margin-bottom: 16px; }
+.mb-text     { margin-bottom: 8px; }
+.mb-meta     { margin-bottom: 4px; }
+.mb-tags     { margin-bottom: 12px; }
+.mb-action   { margin-bottom: 16px; }
+
+
+/* ----------------------------------------------------------
+   5. FEATURE / USP-KAARTEN
+   ---------------------------------------------------------- */
+
+.feature-card {
+  background-color: #ebe3e0;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stap-icoontjes (Zo werkt het sectie) */
+.stap-icon {
+  width: 56px;
+  height: 56px;
+  background-color: #ebe3e0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ----------------------------------------------------------
+   7. ANIMATIES & TRANSITIONS
+   ---------------------------------------------------------- */
+
+/* Kaarten hover */
+.feature-card,
+.docent-card {
+  transition: all 0.2s ease;
+}
+
+.feature-card:hover,
+.docent-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Links hover */
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #a66658;
+}

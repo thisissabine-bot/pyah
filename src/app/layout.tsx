@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Lato } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
+import "./typography.css";
+import "./layout.css";
+import "./navigation.css";
+import "./sections.css";
+import "./buttons.css";
 
-const dmSans = DM_Sans({
+const lato = Lato({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-dm-sans",
+  weight: ["300", "400", "700"],
+  variable: "--font-lato",
   display: "swap",
 });
 
@@ -26,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="nl" className={`${dmSans.variable} h-full antialiased`}>
+    <html lang="nl" className={`${lato.variable} h-full antialiased`}>
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/zan4wgj.css" />
       </head>

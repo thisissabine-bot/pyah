@@ -2,110 +2,64 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white border-b border-pyah-zacht sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between py-4">
-          <Link href="/">
+    <>
+    <header className="site-header">
+      <div className="nav-container">
+          <Link href="/" className="nav-logo">
             <img
-              src="/logo-horizontaal-roze.svg"
+              src="/logo-horizontaal-wit.svg"
               alt="Private Yoga at Home"
-              style={{ height: '60px', width: 'auto', display: 'block' }}
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
-            <Link
-              href="/docenten"
-              className="text-sm text-pyah-donker hover:text-pyah-accent transition-colors"
-            >
-              Docenten
-            </Link>
-            <Link
-              href="/over"
-              className="text-sm text-pyah-donker hover:text-pyah-accent transition-colors"
-            >
-              Over PYAH
-            </Link>
-            <Link
-              href="/voor-docenten"
-              className="text-sm text-pyah-donker hover:text-pyah-accent transition-colors"
-            >
-              Voor docenten
-            </Link>
+          <nav>
+            <ul className="nav-menu">
+              <li><Link href="/docenten" className="nav-link">Docent zoeken</Link></li>
+              <li><Link href="/hoe-werkt-het" className="nav-link">Hoe werkt het?</Link></li>
+              <li><Link href="/over" className="nav-link">Over PYAH</Link></li>
+              <li><Link href="/tarieven" className="nav-link">Tarieven</Link></li>
+            </ul>
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
-            <Link
-              href="/auth/login"
-              className="text-sm text-pyah-donker hover:text-pyah-accent transition-colors"
-            >
-              Inloggen
-            </Link>
-            <Link
-              href="/voor-docenten"
-              className="text-sm bg-pyah-accent text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity"
-            >
-              Docent worden
-            </Link>
+          <div className="nav-actions">
+            <Link href="/auth/login" className="nav-link-secondary">Inloggen</Link>
+            <Link href="/voor-docenten" className="btn-1 on-dark">Docent worden</Link>
           </div>
 
           <button
-            className="md:hidden p-2 text-pyah-donker"
+            className="nav-toggle"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Menu openen"
           >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
           </button>
-        </div>
       </div>
 
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-pyah-zacht">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-4">
-            <Link
-              href="/docenten"
-              className="text-sm text-pyah-donker hover:text-pyah-accent"
-              onClick={() => setMenuOpen(false)}
-            >
-              Docenten
-            </Link>
-            <Link
-              href="/over"
-              className="text-sm text-pyah-donker hover:text-pyah-accent"
-              onClick={() => setMenuOpen(false)}
-            >
-              Over PYAH
-            </Link>
-            <Link
-              href="/voor-docenten"
-              className="text-sm text-pyah-donker hover:text-pyah-accent"
-              onClick={() => setMenuOpen(false)}
-            >
-              Voor docenten
-            </Link>
-            <Link
-              href="/auth/login"
-              className="text-sm text-pyah-donker hover:text-pyah-accent"
-              onClick={() => setMenuOpen(false)}
-            >
-              Inloggen
-            </Link>
-            <Link
-              href="/voor-docenten"
-              className="text-sm bg-pyah-accent text-white px-4 py-2 rounded-full text-center hover:opacity-90"
-              onClick={() => setMenuOpen(false)}
-            >
-              Docent worden
-            </Link>
-          </div>
-        </div>
-      )}
     </header>
+
+      <div
+        className={`nav-overlay${menuOpen ? " nav-drawer-open" : ""}`}
+        onClick={() => setMenuOpen(false)}
+      />
+      <div className={`nav-drawer${menuOpen ? " nav-drawer-open" : ""}`}>
+        <Link href="/docenten" className="nav-link" onClick={() => setMenuOpen(false)}>Docent zoeken</Link>
+        <Link href="/hoe-werkt-het" className="nav-link" onClick={() => setMenuOpen(false)}>Hoe werkt het?</Link>
+        <Link href="/over" className="nav-link" onClick={() => setMenuOpen(false)}>Over PYAH</Link>
+        <Link href="/tarieven" className="nav-link" onClick={() => setMenuOpen(false)}>Tarieven</Link>
+        <div className="nav-actions">
+          <Link href="/auth/login" className="nav-link-secondary" onClick={() => setMenuOpen(false)}>Inloggen</Link>
+          <Link href="/voor-docenten" className="btn-1 on-dark" onClick={() => setMenuOpen(false)}>Docent worden</Link>
+        </div>
+      </div>
+    </>
   );
 }

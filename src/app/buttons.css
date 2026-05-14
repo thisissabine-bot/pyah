@@ -1,0 +1,96 @@
+/* ============================================================
+   PYAH BUTTON SYSTEM
+   3 knoppen — elk met normaal, hover en active staat
+   Transition altijd: all 0.2s ease
+   ============================================================ */
+
+/* --- KNOP 1 — Op donkere achtergrond, lichte knop -------- */
+.btn-1 {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #260f09;
+  background-color: #d4baad;
+  border: none;
+  border-radius: 0;
+  padding: 10px 24px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-1:hover {
+  background-color: #a66658;
+  color: #ffffff;
+}
+.btn-1:active {
+  background-color: #484f47;
+  color: #ffffff;
+  transform: scale(0.97);
+}
+
+/* --- KNOP 2 — Op donkere achtergrond, groene knop -------- */
+.btn-2 {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #484f47;
+  border: none;
+  border-radius: 0;
+  padding: 10px 24px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-2:hover {
+  background-color: #a66658;
+  color: #ffffff;
+}
+.btn-2:active {
+  background-color: #d4baad;
+  color: #260f09;
+  transform: scale(0.97);
+}
+
+/* --- KNOP 3 — Op lichte achtergrond, terracotta knop ----- */
+.btn-3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #a66658;
+  border: none;
+  border-radius: 0;
+  padding: 10px 24px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-3:hover {
+  background-color: #d4baad;
+  color: #260f09;
+}
+.btn-3:active {
+  background-color: #484f47;
+  color: #ffffff;
+  transform: scale(0.97);
+}
+
+/* --- .on-dark — Contextuele markering voor donkere secties - */
+/* Voeg toe aan .btn-1 of .btn-2 wanneer de knop op een       */
+/* donkere achtergrond (#260f09) staat.                        */
+/* Voorbeeld: <a class="btn-1 on-dark" href="#">Label</a>     */
+.on-dark {
+  /* Geen visuele override — stijl wordt bepaald door .btn-1 / .btn-2 */
+  /* Deze class dient als semantische markering en HTML-hook           */
+}
+
+/* ============================================================
+   GEBRUIK
+   Donkere achtergrond  →  .btn-1 of .btn-2  (+ .on-dark toevoegen)
+   Lichte achtergrond   →  .btn-3
+   Nooit andere knopstijlen gebruiken of verzinnen.
+   ============================================================ */

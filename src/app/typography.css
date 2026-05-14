@@ -1,0 +1,144 @@
+/* ============================================================
+   PYAH TYPOGRAPHY SYSTEM
+   Gebaseerd op: PYAH Typografie Stijlgids
+   Lettertypes: Arsenica Variable (koppen) + Lato (tekst)
+   ============================================================ */
+
+/* --- OVERLINE -------------------------------------------- */
+.heading-overline {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #a66658;
+}
+
+/* --- H1 — Hero-kop / Pagina-titel ----------------------- */
+.heading-h1 {
+  font-family: "arsenica-variable", serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 600;
+  color: #a66658;
+  line-height: 1.15;
+}
+
+/* --- H2 — Sectie-kop / Subkop --------------------------- */
+.heading-h2 {
+  font-family: "arsenica-variable", serif;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 600;
+  color: #484f47;
+  line-height: 1.2;
+}
+
+/* --- H3 — Tussenkop (Playfair) -------------------------- */
+.heading-h3 {
+  font-family: "arsenica-variable", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #a66658;
+  line-height: 1.3;
+}
+
+/* --- H4 — Tussenkop / Card-titel (Lato) ----------------- */
+.heading-h4 {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #a66658;
+  line-height: 1.3;
+}
+
+/* --- H5 — Tussenkop ------------------------------------- */
+.heading-h5 {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #260f09;
+  line-height: 1.4;
+}
+
+/* --- INTRO — Introductietekst / Lead-in ----------------- */
+.text-intro {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #260f09;
+  line-height: 1.6;
+}
+
+/* --- BODY — Lopende tekst ------------------------------- */
+.text-body {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: #260f09;
+  line-height: 1.7;
+}
+
+/* --- SMALL — Labels, badges, meta ----------------------- */
+.text-small {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #260f09;
+  line-height: 1.5;
+}
+
+/* --- QUOTE — Citaat ------------------------------------- */
+.text-quote {
+  font-family: "arsenica-variable", serif;
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  color: #a66658;
+  line-height: 1.5;
+}
+
+/* --- BUTTON — CTA-knoppen, navigatie -------------------- */
+.btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #260f09;
+  background: transparent;
+  border: 1px solid #260f09;
+  border-radius: 4px;
+  padding: 7px 20px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ============================================================
+   KLEURVARIANTEN — gebruik deze modifier-classes
+   als een element op een donkere achtergrond staat
+   ============================================================ */
+
+.heading-h1.on-dark,
+.heading-h2.on-dark,
+.heading-h3.on-dark,
+.heading-h4.on-dark,
+.heading-h5.on-dark,
+.text-intro.on-dark,
+.text-body.on-dark,
+.text-small.on-dark,
+.heading-overline.on-dark {
+  color: #ffffff;
+}
+
+.btn.on-dark {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* ============================================================
+   KLEURPALET (ter referentie)
+   --color-terracotta : #a66658
+   --color-mosgroen   : #484f47
+   --color-donkerbruin: #260f09
+   --color-wit        : #ffffff
+   ============================================================ */

@@ -1,0 +1,196 @@
+/* ============================================================
+   PYAH — Navigatie & Header Stylesheet
+   Instructiekaart: pyah-claude-instructiekaart-navigatie.md
+   
+   LET OP: Wijzig GEEN waarden zonder ook de instructiekaart
+   bij te werken. Voeg GEEN inline styles toe. Maak GEEN
+   nieuwe class-namen aan buiten dit bestand.
+   ============================================================ */
+
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+
+.site-header {
+  background-color: #260f09;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+
+/* ─── LOGO ───────────────────────────────────────────────── */
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.nav-logo img {
+  display: block;
+  height: 50px;
+  width: auto;
+}
+
+
+/* ─── NAV POSITIE ────────────────────────────────────────── */
+
+.nav-container nav {
+  margin-left: auto;
+}
+
+
+/* ─── NAVIGATIELINKS ─────────────────────────────────────── */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  margin-bottom: 0;
+}
+
+.nav-link {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+.nav-link-active {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #a66658;
+  text-decoration: none;
+}
+
+.nav-link-active:hover {
+  text-decoration: underline;
+  color: #a66658;
+}
+
+
+/* ─── RECHTS: INLOGGEN + DOCENT WORDEN ───────────────────── */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.nav-link-secondary {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
+}
+
+.nav-link-secondary:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+
+/* ─── HAMBURGER (mobiel) ─────────────────────────────────── */
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #ffffff;
+}
+
+
+/* ─── MOBIEL MENU (slide-in van rechts) ──────────────────── */
+
+.nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 280px;
+  background-color: #260f09;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 32px 40px;
+  gap: 24px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 200;
+}
+
+.nav-drawer.nav-drawer-open {
+  transform: translateX(0);
+}
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 150;
+}
+
+.nav-overlay.nav-drawer-open {
+  display: block;
+}
+
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .nav-menu,
+  .nav-actions {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-drawer .nav-link,
+  .nav-drawer .nav-link-active,
+  .nav-drawer .nav-link-secondary {
+    font-size: 18px;
+  }
+
+  .nav-drawer .nav-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 16px;
+  }
+}
