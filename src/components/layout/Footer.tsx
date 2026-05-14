@@ -5,12 +5,12 @@ export default function Footer() {
   return (
     <footer className="bg-pyah-diep text-white/80 mt-auto">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-start">
           <div>
             <img
               src="/logo-verticaal-wit.svg"
               alt="Private Yoga at Home"
-              style={{ height: '60px', width: 'auto', display: 'block' }}
+              style={{ height: '100px', width: 'auto', display: 'block' }}
               className="mb-3"
             />
             <p className="text-sm leading-relaxed">
@@ -21,7 +21,7 @@ export default function Footer() {
 
           <div>
             <p className="text-sm font-medium text-white mb-3">Navigatie</p>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 list-none pl-0">
               <li>
                 <Link href="/docenten" className="text-sm hover:text-white transition-colors">
                   Docenten zoeken
@@ -42,7 +42,7 @@ export default function Footer() {
 
           <div>
             <p className="text-sm font-medium text-white mb-3">Contact</p>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 list-none pl-0">
               <li>
                 <a
                   href="mailto:info@privateyogaathome.nl"
@@ -67,7 +67,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 mt-10 pt-6 text-xs text-white/40">
+        <div className="border-t border-white/10 mt-10 pt-6 text-xs text-white/40 text-center">
           © {new Date().getFullYear()} Private Yoga at Home · privateyogaathome.nl
         </div>
       </div>

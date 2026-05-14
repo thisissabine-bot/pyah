@@ -90,23 +90,36 @@ export default function HomePage() {
       {/* SECTIE 3 — Waarom privé yoga */}
       <section className="page-section section-white">
         <div className="container">
-          <p className="heading-overline mb-text">Persoonlijk & afgestemd</p>
-          <h2 className="heading-h2 mb-subtitle">Waarom privé yoga aan huis?</h2>
-          <p className="text-intro mb-text">
-            Groepslessen zijn voor veel mensen een prima start. Maar als je merkt dat de les net niet aansluit op jouw lijf, je tempo of je situatie, dan mis je iets.
-          </p>
-          <p className="text-body mb-section">
-            Bij een groepsles volg je het ritme van de groep. Bij privé yoga aan huis volgt de docent jóuw ritme.
-          </p>
-          <h3 className="heading-h3 mb-text">Dat maakt het verschil voor mensen die:</h3>
-          <ul className="mb-section">
-            <li className="text-body">herstellende zijn van een blessure of burn-out en veilige, rustige begeleiding zoeken</li>
-            <li className="text-body">weinig tijd hebben en yoga in hun drukke leven willen passen, zonder reistijd</li>
-            <li className="text-body">zich niet prettig voelen in een groep, of behoefte hebben aan echt persoonlijke aandacht</li>
-            <li className="text-body">zwanger zijn of net bevallen en yoga willen die helemaal is afgestemd op hun lichaam</li>
-          </ul>
-          <blockquote className="text-quote">
-            Yoga werkt het beste als het aansluit bij waar je nu bent. Privé yoga aan huis maakt dat mogelijk.
+          <div className="grid-2col-image">
+            <div>
+              <p className="heading-overline mb-text">Persoonlijk & afgestemd</p>
+              <h2 className="heading-h2 mb-subtitle">Waarom privé yoga aan huis?</h2>
+              <p className="text-intro mb-text">
+                Groepslessen zijn voor veel mensen een prima start. Maar als je merkt dat de les net niet aansluit op jouw lijf, je tempo of je situatie, dan mis je iets.
+              </p>
+              <p className="text-body mb-section">
+                Bij een groepsles volg je het ritme van de groep. Bij privé yoga aan huis volgt de docent jóuw ritme.
+              </p>
+              <h3 className="heading-h3 mb-text">Dat maakt het verschil voor mensen die:</h3>
+              <ul className="check-list">
+                <li>herstellende zijn van een blessure of burn-out en veilige, rustige begeleiding zoeken</li>
+                <li>weinig tijd hebben en yoga in hun drukke leven willen passen, zonder reistijd</li>
+                <li>zich niet prettig voelen in een groep, of behoefte hebben aan echt persoonlijke aandacht</li>
+                <li>zwanger zijn of net bevallen en yoga willen die helemaal is afgestemd op hun lichaam</li>
+              </ul>
+            </div>
+            <div className="image-col-inner">
+              <Image
+                src="/PYAH waarom privé yoga aan huis_.jpg"
+                alt="Privé yogales aan huis"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
+            </div>
+          </div>
+          <blockquote className="text-quote mt-section">
+            Yoga werkt het beste als het aansluit bij waar je nu bent.<br />Privé yoga aan huis maakt dat mogelijk.
           </blockquote>
         </div>
       </section>
@@ -114,33 +127,34 @@ export default function HomePage() {
       {/* SECTIE 4 — Feature cards */}
       <section className="page-section section-pearl">
         <div className="container">
-          <h2 className="heading-h2 mb-section">Zorgvuldig geselecteerde docenten</h2>
+          <p className="heading-overline mb-text">Voor yoga die echt bij je past.</p>
+          <h2 className="heading-h2 mb-section">Yoga thuis, professioneel geregeld</h2>
           <div className="grid-3col">
             <div className="feature-card">
               <div className="feature-icon mb-icon">
                 <Shield size={24} className="text-pyah-accent" aria-hidden="true" />
               </div>
-              <h3 className="heading-h3 mb-text">Zorgvuldig geselecteerde docenten</h3>
+              <h3 className="heading-h3 mb-text">Docenten die met aandacht<br />zijn geselecteerd</h3>
               <p className="text-body">
-                We werken alleen met docenten die we screenen op opleiding, ervaring en yogastijl. Zo kies je met vertrouwen een startende of ervaren docent die bij je past.
+                We werken alleen met yogadocenten die we zorgvuldig selecteren op opleiding, ervaring en manier van lesgeven. Zo vind je met vertrouwen een docent die past bij jouw wensen, niveau en persoonlijkheid.
               </p>
             </div>
             <div className="feature-card">
               <div className="feature-icon mb-icon">
                 <Star size={24} className="text-pyah-accent" aria-hidden="true" />
               </div>
-              <h3 className="heading-h3 mb-text">Privé yoga, afgestemd op jouw lichaam</h3>
+              <h3 className="heading-h3 mb-text">Privé yoga afgestemd<br />op jouw lichaam en leven</h3>
               <p className="text-body">
-                Jij bepaalt je doel en tempo. De docent stemt de les af op jouw situatie — van stress en herstel tot sterker en soepeler worden.
+                Geen standaard les, maar yoga die aansluit op wat jij nodig hebt. Of je nu meer rust zoekt, wilt herstellen van stress of juist sterker en soepeler wilt worden, de lessen worden afgestemd op jouw tempo en doelen.
               </p>
             </div>
             <div className="feature-card">
               <div className="feature-icon mb-icon">
                 <CheckCircle size={24} className="text-pyah-accent" aria-hidden="true" />
               </div>
-              <h3 className="heading-h3 mb-text">Alles makkelijk & veilig geregeld</h3>
+              <h3 className="heading-h3 mb-text">Alles makkelijk<br />& veilig geregeld</h3>
               <p className="text-body">
-                Bekijk profielen, kies je docent, plan je les en betaal veilig online. Alles op één plek.
+                Bekijk docentprofielen, kies een docent die bij je past, plan je les en betaal veilig online. Alles overzichtelijk op één plek geregeld.
               </p>
             </div>
           </div>
@@ -171,31 +185,48 @@ export default function HomePage() {
       {/* SECTIE 6 — Founder */}
       <section className="page-section section-terracotta">
         <div className="container">
-          <p className="heading-overline on-dark mb-text">Over de founder</p>
-          <h2 className="heading-h2 on-dark mb-subtitle">Waarom Private Yoga at Home bestaat</h2>
-          <p className="text-intro on-dark mb-section">
-            Private Yoga at Home is opgericht door Sabine Blok, founder van Private Yoga Amsterdam.
-          </p>
-          <blockquote className="text-quote on-dark mb-text">
-            &ldquo;Na vijf jaar lang mensen thuis begeleiden weet ik hoe groot het verschil is tussen een les in een studio en een les in je eigen vertrouwde omgeving. Mensen ontspannen dieper. Ze durven meer te vragen. En ze gaan echt vooruit, omdat elke les is afgestemd op hún situatie.
-            <br /><br />
-            Vanuit die ervaring bouw ik Private Yoga at Home: een platform waar iedereen die dat wil, een goede yogadocent aan huis kan vinden — met de kwaliteit, het vertrouwen en het gemak dat daarbij hoort.&rdquo;
-          </blockquote>
-          <p className="text-small on-dark">— Sabine Blok, founder Private Yoga at Home</p>
+          <div className="grid-2col-image">
+            <div>
+              <p className="heading-overline on-dark mb-text">Over de founder</p>
+              <h2 className="heading-h2 on-dark mb-subtitle">Waarom Private Yoga at Home bestaat</h2>
+              <p className="text-intro on-dark mb-section">
+                Private Yoga at Home is opgericht door Sabine Blok, founder van Private Yoga Amsterdam.
+              </p>
+              <blockquote className="mb-text">
+                <p className="text-body on-dark mb-text">
+                  &ldquo;Na vijf jaar lang mensen thuis begeleiden weet ik hoe groot het verschil is tussen een les in een studio en een les in je eigen vertrouwde omgeving. Mensen ontspannen dieper. Ze durven meer te vragen. En ze gaan echt vooruit, omdat elke les is afgestemd op hún situatie.
+                </p>
+                <p className="text-body on-dark">
+                  Vanuit die ervaring bouw ik Private Yoga at Home: een platform waar iedereen die dat wil, een goede yogadocent aan huis kan vinden — met de kwaliteit, het vertrouwen en het gemak dat daarbij hoort.&rdquo;
+                </p>
+              </blockquote>
+              <p className="text-small on-dark">— Sabine Blok, founder Private Yoga at Home</p>
+            </div>
+            <div className="image-col-inner">
+              <Image
+                src="/PYAH Sabine Blok founder.jpg"
+                alt="Sabine Blok, founder Private Yoga at Home"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* SECTIE 7 — CTA */}
-      <section className="page-section section-dark">
+      <section className="page-section section-moss section-centered">
         <div className="container">
           <p className="heading-overline on-dark mb-text">Maak een begin</p>
-          <h3 className="heading-h3 on-dark mb-subtitle">Benieuwd welke docent bij jou past?</h3>
+          <h3 className="heading-h2 on-dark mb-subtitle">Benieuwd welke docent bij jou past?</h3>
           <p className="text-body on-dark mb-cta">
-            Bekijk de profielen van onze yogadocenten in Haarlem en voel of er iemand is die bij jou aansluit. Begin vrijblijvend met een kennismakingsgesprek — en ervaar zelf wat persoonlijke yoga aan huis voor jou kan betekenen.
+            Bekijk de profielen van onze yogadocenten in Haarlem en voel of er iemand is die bij jou aansluit.<br />
+            Begin vrijblijvend met een kennismakingsgesprek en ervaar zelf wat persoonlijke yoga aan huis voor jou kan betekenen.
           </p>
           <div className="btn-row">
             <Link className="btn-1 on-dark" href="/docenten">Bekijk de docenten</Link>
-            <Link className="btn-2 on-dark" href="/hoe-werkt-het">Hoe werkt het?</Link>
+            <Link className="btn-3" href="/hoe-werkt-het">Hoe werkt het?</Link>
           </div>
         </div>
       </section>

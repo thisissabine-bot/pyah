@@ -26,7 +26,7 @@ export default function DocentCard({
     .toUpperCase();
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 overflow-hidden border-[0.5px] border-pyah-zacht">
+    <div className="bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 overflow-hidden border-[0.5px] border-pyah-zacht">
       <div className="h-48 bg-pyah-licht flex items-center justify-center">
         {foto_url ? (
           <img src={foto_url} alt={naam} className="w-full h-full object-cover" />
@@ -47,7 +47,7 @@ export default function DocentCard({
           {yogastijlen.map((stijl) => (
             <span
               key={stijl}
-              className="text-xs bg-pyah-licht text-pyah-accent px-2.5 py-0.5 rounded-full"
+              className="text-xs bg-pyah-licht text-pyah-accent px-2.5 py-0.5"
             >
               {stijl}
             </span>
@@ -63,7 +63,7 @@ export default function DocentCard({
           </span>
           <Link
             href={`/docenten/${slug}`}
-            className="text-sm bg-pyah-accent text-white px-4 py-1.5 rounded-full hover:opacity-90 transition-opacity"
+            className="text-sm bg-pyah-accent text-white px-4 py-1.5 hover:opacity-90 transition-opacity"
           >
             Bekijk profiel
           </Link>

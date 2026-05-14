@@ -75,12 +75,12 @@
   font-weight: 400;
   color: #ffffff;
   text-decoration: none;
-  transition: text-decoration 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .nav-link:hover {
-  text-decoration: underline;
-  color: #ffffff;
+  color: #a66658;
+  text-decoration: none;
 }
 
 .nav-link-active {
@@ -92,8 +92,8 @@
 }
 
 .nav-link-active:hover {
-  text-decoration: underline;
-  color: #a66658;
+  color: #d4baad;
+  text-decoration: none;
 }
 
 
@@ -118,7 +118,8 @@
 
 .nav-link-secondary:hover {
   opacity: 1;
-  text-decoration: underline;
+  text-decoration: none;
+  color: #a66658;
 }
 
 

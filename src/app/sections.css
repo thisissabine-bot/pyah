@@ -93,3 +93,7 @@
 .section-centered .grid-cards .heading-h3 {
   text-align: center;
 }
+
+.section-centered .btn-row {
+  justify-content: center;
+}
