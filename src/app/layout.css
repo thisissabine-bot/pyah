@@ -163,14 +163,226 @@
    7. ANIMATIES & TRANSITIONS
    ---------------------------------------------------------- */
 
-/* Kaarten hover */
+/* ----------------------------------------------------------
+   6. DOCENT CARD
+   ---------------------------------------------------------- */
+
 .docent-card {
+  background-color: #ffffff;
+  border: 1px solid #d4baad;
+  overflow: hidden;
   transition: all 0.2s ease;
 }
 
 .docent-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(38, 15, 9, 0.08);
 }
+
+.docent-card-foto {
+  height: 220px;
+  background-color: #ebe3e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.docent-card-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.docent-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.docent-card-locatie {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.docent-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #a66658;
+  background-color: #ebe3e0;
+  padding: 2px 10px;
+}
+
+.docent-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+/* ----------------------------------------------------------
+   7. ZOEKPAGINA
+   ---------------------------------------------------------- */
+
+.zoek-header {
+  background-color: #ebe3e0;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.zoek-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.zoek-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.zoek-input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d4baad;
+  pointer-events: none;
+}
+
+.zoek-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1px solid #d4baad;
+  background-color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  color: #260f09;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.zoek-input:focus {
+  border-color: #a66658;
+}
+
+.zoek-input-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d4baad;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.filter-panel {
+  background-color: #ebe3e0;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .filter-panel {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.filter-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #484f47;
+  margin-bottom: 8px;
+}
+
+.filter-chip {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid #d4baad;
+  background-color: #ffffff;
+  color: #484f47;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  border-color: #a66658;
+}
+
+.filter-chip.actief {
+  background-color: #a66658;
+  border-color: #a66658;
+  color: #ffffff;
+}
+
+.filter-optie {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  color: #484f47;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+.filter-optie:hover {
+  background-color: #d4baad;
+}
+
+.filter-optie.actief {
+  background-color: #a66658;
+  color: #ffffff;
+}
+
+.actieve-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.actieve-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  color: #a66658;
+  background-color: #ebe3e0;
+  padding: 4px 10px;
+}
+
+.actieve-chip button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #a66658;
+  display: flex;
+  align-items: center;
+}
+
 
 .feature-card {
   transition: box-shadow 0.2s ease;
@@ -262,4 +474,539 @@ a:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 11px 11px;
+}
+
+
+/* ----------------------------------------------------------
+   10. ZOEKPAGINA V2 — Postcode + Kaartjes
+   ---------------------------------------------------------- */
+
+/* Scherm 1 — Postcode */
+.zoek-stap1-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 72px);
+  padding: 48px 24px;
+  background-color: #ffffff;
+}
+
+.zoek-stap1 {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.pc-rij {
+  display: inline-flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.pc-invoer {
+  width: 120px;
+  padding: 10px 12px;
+  border: 1px solid #d4baad;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #ffffff;
+  color: #260f09;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.pc-invoer:focus {
+  border-color: #a66658;
+}
+
+.pc-invoer::placeholder {
+  color: #d4baad;
+  letter-spacing: normal;
+  text-transform: none;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.pc-knop {
+  padding: 10px 18px;
+  background: #ebe3e0;
+  border: none;
+  color: #484f47;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: default;
+  white-space: nowrap;
+  transition: background 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.pc-knop.gereed {
+  background: #a66658;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.pc-knop.gereed:hover {
+  background: #484f47;
+  color: #ffffff;
+}
+
+.pc-fout {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #a66658;
+  margin-top: 6px;
+}
+
+.pc-overslaan {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #484f47;
+  font-style: italic;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: color 0.2s ease;
+}
+
+.pc-overslaan:hover {
+  color: #a66658;
+}
+
+/* Scherm 2 — Topbar */
+.zoek-topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-bottom: 1px solid #ebe3e0;
+  flex-wrap: wrap;
+}
+
+.zoek-terug {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #484f47;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.zoek-terug:hover {
+  color: #a66658;
+}
+
+.loc-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ebe3e0;
+  padding: 6px 12px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #484f47;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.loc-pill:hover {
+  background: #d4baad;
+}
+
+.kaart-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #484f47;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-track {
+  width: 36px;
+  height: 20px;
+  background: #ebe3e0;
+  border: 1px solid #d4baad;
+  position: relative;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggle-track.aan {
+  background: #a66658;
+  border-color: #a66658;
+}
+
+.toggle-knop {
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  transition: left 0.2s ease;
+}
+
+.toggle-track.aan .toggle-knop {
+  left: 19px;
+}
+
+/* Kaartpaneel */
+.kaart-paneel {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+
+.kaart-paneel.open {
+  max-height: 460px;
+}
+
+.zoek-kaart-map {
+  height: 420px;
+  width: 100%;
+}
+
+.kaart-box {
+  background: #ebe3e0;
+  height: 160px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 24px;
+}
+
+.kaart-pin {
+  position: absolute;
+  font-size: 16px;
+}
+
+.kaart-jij {
+  position: absolute;
+  background: #a66658;
+  color: #ffffff;
+  padding: 3px 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.kaart-label {
+  background: #ffffff;
+  padding: 5px 14px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #484f47;
+  font-style: italic;
+}
+
+/* Zoeklayout: sidebar + resultaten */
+.zoek-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 48px;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .zoek-layout {
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+  }
+}
+
+/* Sidebar */
+.zoek-sidebar {
+  padding-right: 0;
+}
+
+@media (min-width: 768px) {
+  .zoek-sidebar {
+    padding-right: 24px;
+    border-right: 1px solid #ebe3e0;
+  }
+}
+
+.sb-titel {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #a66658;
+  margin: 16px 0 8px;
+}
+
+.sb-titel:first-child {
+  margin-top: 0;
+}
+
+.niveau-rij {
+  display: flex;
+}
+
+.niveau-knop {
+  flex: 1;
+  padding: 7px 4px;
+  border: 1px solid #d4baad;
+  border-right: none;
+  background: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  color: #484f47;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.niveau-knop:last-child {
+  border-right: 1px solid #d4baad;
+}
+
+.niveau-knop.actief {
+  background: #a66658;
+  border-color: #a66658;
+  color: #ffffff;
+}
+
+.sb-divider {
+  border: none;
+  border-top: 1px solid #ebe3e0;
+  margin: 14px 0;
+}
+
+.sb-groep {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #484f47;
+  margin: 8px 0 6px;
+}
+
+.filter-rij {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 0;
+  color: #260f09;
+  transition: color 0.15s ease;
+}
+
+.filter-rij:hover {
+  color: #a66658;
+}
+
+.filter-rij input {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: #a66658;
+  flex-shrink: 0;
+}
+
+.meer-knop {
+  background: none;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  color: #a66658;
+  cursor: pointer;
+  padding: 3px 0;
+  margin-top: 2px;
+  display: block;
+}
+
+.wis-knop {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d4baad;
+  background: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  color: #484f47;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.2s ease;
+}
+
+.wis-knop:hover {
+  background: #ebe3e0;
+}
+
+/* Resultaten kolom */
+.zoek-resultaten {
+  padding-left: 0;
+}
+
+@media (min-width: 768px) {
+  .zoek-resultaten {
+    padding-left: 48px;
+  }
+}
+
+.resultaten-kop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sorteer-rij {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.sorteer-knop {
+  padding: 5px 12px;
+  border: 1px solid #d4baad;
+  background: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  color: #484f47;
+  transition: all 0.15s ease;
+}
+
+.sorteer-knop.actief {
+  background: #a66658;
+  border-color: #a66658;
+  color: #ffffff;
+}
+
+/* Kaartjes grid */
+.kaartjes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+@media (min-width: 1024px) {
+  .kaartjes-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.kaartje {
+  background: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: opacity 0.15s ease;
+}
+
+.kaartje:hover {
+  opacity: 0.85;
+}
+
+.kaartje-ervaren .kaartje-foto {
+  border-top: 2px solid #a66658;
+}
+
+.kaartje-foto {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #ebe3e0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.kaartje-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kaartje-initialen {
+  font-family: "arsenica-variable", serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #a66658;
+}
+
+.kaartje-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #484f47;
+  color: #ebe3e0;
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  padding: 4px 8px;
+  letter-spacing: 0.03em;
+}
+
+.kaartje-badge-start {
+  background: #d4baad;
+  color: #260f09;
+}
+
+.kaartje-naam {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #260f09;
+  margin-bottom: 3px;
+}
+
+.kaartje-stijl {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  color: #484f47;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.kaartje-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kaartje-prijs {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  color: #484f47;
+}
+
+.kaartje-prijs strong {
+  color: #260f09;
+  font-weight: 700;
+}
+
+.afstand-ok {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  background: #ebe3e0;
+  color: #484f47;
+  padding: 2px 7px;
+}
+
+.afstand-ver {
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  background: #d4baad;
+  color: #260f09;
+  padding: 2px 7px;
 }

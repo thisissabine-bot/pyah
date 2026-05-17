@@ -1,0 +1,199 @@
+/* ─── PAGINA WRAPPER ─────────────────────────────────────── */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #260f09;
+}
+
+/* ─── LOGO ───────────────────────────────────────────────── */
+
+.logoWrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.logo {
+  height: 16px;
+  width: auto;
+}
+
+@media (min-width: 640px) {
+  .logoWrap {
+    padding-top: 56px;
+  }
+
+  .logo {
+    height: 100px;
+  }
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+
+.footer {
+  background-color: #260f09;
+  border-top: 1px solid rgba(235, 227, 224, 0.1);
+  padding: 32px 0;
+  margin-top: auto;
+  text-align: center;
+}
+
+.footerText {
+  opacity: 0.6;
+}
+
+.footerLink {
+  color: #d4baad;
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  color: #ebe3e0;
+}
+
+/* ─── HERO ───────────────────────────────────────────────── */
+
+.heroSection {
+  padding-top: 40px;
+  padding-bottom: 0;
+}
+
+@media (min-width: 640px) {
+  .heroSection {
+    padding-top: 56px;
+    padding-bottom: 0;
+  }
+}
+
+.aanmeldenSection {
+  padding-top: 0;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 640px) {
+  .aanmeldenSection {
+    padding-bottom: 80px;
+  }
+}
+
+
+.heroInner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.overline {
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* ─── SCHEIDING ──────────────────────────────────────────── */
+
+.divider {
+  width: 48px;
+  height: 1px;
+  background-color: #a66658;
+  margin: 39px auto 40px;
+}
+
+/* ─── FORMULIERBLOK EN DOCENTENBLOK ──────────────────────── */
+
+.block {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blockText {
+  margin-bottom: 28px;
+}
+
+/* ─── E-MAILFORMULIER ────────────────────────────────────── */
+
+.emailForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+@media (min-width: 480px) {
+  .emailForm {
+    flex-direction: row;
+  }
+
+  .emailInput {
+    flex: 1;
+  }
+}
+
+.emailInput {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 10px 14px;
+  border: 1px solid rgba(235, 227, 224, 0.25);
+  background-color: rgba(235, 227, 224, 0.08);
+  color: #ebe3e0;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 100%;
+}
+
+.emailInput::placeholder {
+  color: rgba(235, 227, 224, 0.45);
+}
+
+.emailInput:focus {
+  border-color: #a66658;
+}
+
+/* ─── SUCCES-BERICHT ─────────────────────────────────────── */
+
+.formSuccess {
+  padding: 16px 20px;
+  background-color: rgba(166, 102, 88, 0.15);
+  border: 1px solid #a66658;
+  color: #ebe3e0;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* ─── GEEN SPAM LABEL ────────────────────────────────────── */
+
+.noSpam {
+  display: block;
+  margin-top: 14px;
+}
+
+/* ─── OR-DIVIDER ─────────────────────────────────────────── */
+
+.orDivider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 480px;
+  margin: 48px auto;
+}
+
+.orDivider::before,
+.orDivider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: rgba(235, 227, 224, 0.15);
+}
+
+.orDivider span {
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(235, 227, 224, 0.4);
+  white-space: nowrap;
+}

@@ -10,9 +10,9 @@ Klanten vinden hier een zorgvuldig geselecteerde yogadocent aan huis.
 Docenten krijgen een professioneel profiel en boekingssysteem.
 
 **Domeinnaam:** privateyogaathome.nl (geregistreerd via Cloud86)
-**Hosting:** Vercel (gratis tier, koppelen aan domein na deploy)
+**Hosting:** Netlify (gratis tier, koppelen aan domein na deploy)
 **Database:** Supabase (gratis tier)
-**Betalingen:** Stripe
+**Betalingen:** Mollie
 **Framework:** Next.js 14 (App Router) met Tailwind CSS
 **Taal:** TypeScript
 

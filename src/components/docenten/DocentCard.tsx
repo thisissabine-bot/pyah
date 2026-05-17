@@ -26,45 +26,34 @@ export default function DocentCard({
     .toUpperCase();
 
   return (
-    <div className="bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 overflow-hidden border-[0.5px] border-pyah-zacht">
-      <div className="h-48 bg-pyah-licht flex items-center justify-center">
+    <div className="docent-card">
+      <div className="docent-card-foto">
         {foto_url ? (
-          <img src={foto_url} alt={naam} className="w-full h-full object-cover" />
+          <img src={foto_url} alt={naam} />
         ) : (
-          <span className="text-3xl font-semibold text-pyah-accent/60">{initials}</span>
+          <span className="heading-h2" style={{ color: "rgba(166,102,88,0.4)" }}>{initials}</span>
         )}
       </div>
 
-      <div className="p-5">
-        <h3 className="font-semibold text-pyah-diep text-lg mb-1">{naam}</h3>
+      <div className="docent-card-body">
+        <h3 className="heading-h3">{naam}</h3>
 
-        <div className="flex items-center gap-1 text-pyah-donker/60 text-sm mb-3">
-          <MapPin size={13} />
-          <span>{locatie}</span>
+        <div className="docent-card-locatie">
+          <MapPin size={13} color="#d4baad" />
+          <span className="text-small">{locatie}</span>
         </div>
 
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="docent-card-badges">
           {yogastijlen.map((stijl) => (
-            <span
-              key={stijl}
-              className="text-xs bg-pyah-licht text-pyah-accent px-2.5 py-0.5"
-            >
-              {stijl}
-            </span>
+            <span key={stijl} className="badge">{stijl}</span>
           ))}
         </div>
 
-        <div className="flex items-center justify-between">
-          <span className="text-sm text-pyah-donker/70">
-            Vanaf{" "}
-            <span className="font-semibold text-pyah-donker">
-              €{(startprijs_cent / 100).toFixed(0)}
-            </span>
-          </span>
-          <Link
-            href={`/docenten/${slug}`}
-            className="text-sm bg-pyah-accent text-white px-4 py-1.5 hover:opacity-90 transition-opacity"
-          >
+        <div className="docent-card-footer">
+          <p className="text-body">
+            Vanaf <strong>€{(startprijs_cent / 100).toFixed(0)}</strong>
+          </p>
+          <Link href={`/docenten/${slug}`} className="btn-3">
             Bekijk profiel
           </Link>
         </div>

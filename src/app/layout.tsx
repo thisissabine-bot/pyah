@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import "./typography.css";
 import "./layout.css";
@@ -36,9 +34,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/zan4wgj.css" />
       </head>
       <body className="min-h-full flex flex-col text-pyah-donker">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
