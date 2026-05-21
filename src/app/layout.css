@@ -488,7 +488,7 @@ a:hover {
   justify-content: center;
   min-height: calc(100vh - 72px);
   padding: 48px 24px;
-  background-color: #ffffff;
+  background-color: #ebe3e0;
 }
 
 .zoek-stap1 {
@@ -574,6 +574,12 @@ a:hover {
 .pc-overslaan:hover {
   color: #a66658;
 }
+
+.zoek-pagina-wrapper {
+  background-color: #ebe3e0;
+  min-height: calc(100vh - 72px);
+}
+
 
 /* Scherm 2 — Topbar */
 .zoek-topbar {
@@ -894,12 +900,20 @@ a:hover {
 .kaartjes-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  gap: 16px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 640px) {
   .kaartjes-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .kaartjes-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 32px;
   }
 }
 
@@ -909,15 +923,15 @@ a:hover {
   text-decoration: none;
   display: block;
   transition: opacity 0.15s ease;
+  box-shadow: 0 2px 8px rgba(38, 15, 9, 0.07);
+  border-radius: 1mm;
+  overflow: hidden;
 }
 
 .kaartje:hover {
   opacity: 0.85;
 }
 
-.kaartje-ervaren .kaartje-foto {
-  border-top: 2px solid #a66658;
-}
 
 .kaartje-foto {
   width: 100%;
@@ -962,6 +976,10 @@ a:hover {
   color: #260f09;
 }
 
+.kaartje-body {
+  padding: 10px 8px 8px;
+}
+
 .kaartje-naam {
   font-family: 'Lato', sans-serif;
   font-size: 14px;
@@ -974,7 +992,7 @@ a:hover {
   font-family: 'Lato', sans-serif;
   font-size: 12px;
   color: #484f47;
-  font-style: italic;
+  font-style: normal;
   margin-bottom: 8px;
 }
 
@@ -991,22 +1009,15 @@ a:hover {
 }
 
 .kaartje-prijs strong {
-  color: #260f09;
+  color: #484f47;
   font-weight: 700;
 }
 
-.afstand-ok {
-  font-family: 'Lato', sans-serif;
-  font-size: 11px;
-  background: #ebe3e0;
-  color: #484f47;
-  padding: 2px 7px;
-}
-
+.afstand-ok,
 .afstand-ver {
   font-family: 'Lato', sans-serif;
   font-size: 11px;
-  background: #d4baad;
+  background: #ebe3e0;
   color: #260f09;
   padding: 2px 7px;
 }

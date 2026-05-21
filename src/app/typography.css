@@ -32,7 +32,7 @@
   line-height: 1.2;
 }
 
-/* --- H3 — Tussenkop (Playfair) -------------------------- */
+/* --- H3 — Tussenkop (Arsenica Variable) ----------------- */
 .heading-h3 {
   font-family: "arsenica-variable", serif;
   font-size: 20px;
@@ -50,7 +50,7 @@
   line-height: 1.3;
 }
 
-/* --- H5 — Tussenkop ------------------------------------- */
+/* --- H5 — Kleine tussenkop ------------------------------ */
 .heading-h5 {
   font-family: 'Lato', sans-serif;
   font-size: 15px;
@@ -68,6 +68,10 @@
   font-weight: 500;
   color: #260f09;
   line-height: 1.6;
+}
+
+/* Gebruik .text-intro--centered alleen waar centreren gewenst is */
+.text-intro--centered {
   text-align: center;
 }
 
@@ -116,10 +120,19 @@
 }
 
 /* ============================================================
-   KLEURVARIANTEN — gebruik deze modifier-classes
-   als een element op een donkere achtergrond staat
+   KLEURMODIFIER — mosgroen
+   Gebruik .accent-moss om een kop of tekstelement
+   naar mosgroen (#484f47) te zetten in plaats van terracotta.
    ============================================================ */
+.accent-moss {
+  color: #484f47;
+}
 
+/* ============================================================
+   ON-DARK MODIFIER
+   Voeg .on-dark toe aan tekstelementen én knoppen
+   wanneer de sectie een donkere achtergrond heeft.
+   ============================================================ */
 .heading-h1.on-dark,
 .heading-h2.on-dark,
 .heading-h3.on-dark,
