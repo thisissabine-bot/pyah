@@ -110,7 +110,7 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
   /* ── SCHERM 1: Postcode ─────────────────────────────────── */
   if (scherm === "postcode") {
     return (
-      <div className="zoek-stap1-wrapper" style={{ backgroundColor: 'rgba(235, 227, 224, 0.5)' }}>
+      <div className="zoek-stap1-wrapper">
         <div className="zoek-stap1">
           <p className="heading-overline mb-text">Vind jouw docent</p>
           <h2 className="heading-h2 mb-subtitle">Wat is je postcode?</h2>
@@ -148,152 +148,156 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
 
   /* ── SCHERM 2: Resultaten ───────────────────────────────── */
   return (
-    <div className="zoek-pagina-wrapper" style={{ backgroundColor: 'rgba(235, 227, 224, 0.5)', minHeight: '100vh' }}>
+    <div className="zoek-pagina-wrapper">
 
       {/* Titel */}
       <div className="text-center px-4 sm:px-8 xl:px-16" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
-        <h2 className="heading-h2" style={{ color: '#a66658' }}>
+        <h1 className="heading-h1">
           {postcode ? "Docenten bij jou in de buurt" : "Alle docenten in regio Haarlem"}
-        </h2>
+        </h1>
       </div>
 
       {/* Balk: navigatie + filters */}
-      <div className="py-3 px-4 sm:px-8 xl:px-16" style={{ backgroundColor: 'transparent', borderTop: '1px solid #d4baad', borderBottom: '1px solid #d4baad' }}>
+      <div className="zoek-topbar px-4 sm:px-8 xl:px-16" style={{ borderTop: '1px solid #d4baad', borderBottom: '1px solid #d4baad', paddingTop: '10px', paddingBottom: '10px' }}>
 
-        {/* Regel 1: Postcode */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
-          <button className="zoek-terug" onClick={() => setScherm("postcode")}>
-            <ArrowLeft size={14} />
-            Postcode aanpassen
-          </button>
-          {postcode && (
-            <div className="loc-pill" onClick={() => setScherm("postcode")}>
-              <MapPin size={13} />
-              <span>{postcode.toUpperCase()}</span>
-              <span>×</span>
-            </div>
-          )}
-        </div>
-
-        {/* Regel 2: Filters + chips + Toon kaart */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-          <button
-            className="btn-3"
-            onClick={() => setFilterPanelOpen(!filterPanelOpen)}
-          >
-            {filterPanelOpen ? "Minder filters" : "Filters"}
-          </button>
-
-          {actieveFilters.map(f => (
-            <span key={f.label} className="actieve-chip">
-              {f.label}
-              <button onClick={() => removeFilter(f)}>×</button>
-            </span>
-          ))}
-
-          {actieveFilters.length > 0 && (
-            <button className="meer-knop" style={{ marginTop: 0 }} onClick={clearAll}>Wis alles</button>
-          )}
-
-          <label className="kaart-toggle" style={{ marginLeft: 'auto' }}>
-            <div
-              className={`toggle-track${kaartOpen ? " aan" : ""}`}
-              onClick={() => setKaartOpen(!kaartOpen)}
-            >
-              <div className="toggle-knop" />
-            </div>
-            Toon kaart
-          </label>
-        </div>
-
-        {/* Uitklapbaar filterpaneel */}
-        {filterPanelOpen && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px', marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #ebe3e0' }}>
-            {/* Kolom 1: Ervaringsniveau */}
-            <div>
-              <p className="sb-titel">Ervaringsniveau</p>
-              <label className="filter-rij">
-                <input
-                  type="checkbox"
-                  checked={niveau === "startend"}
-                  onChange={() => setNiveau(niveau === "startend" ? "" : "startend")}
-                />
-                Startend
-              </label>
-              <label className="filter-rij">
-                <input
-                  type="checkbox"
-                  checked={niveau === "ervaren"}
-                  onChange={() => setNiveau(niveau === "ervaren" ? "" : "ervaren")}
-                />
-                Ervaren
-              </label>
-            </div>
-            {/* Kolom 2: Rustige yoga */}
-            <div>
-              <p className="sb-titel">Yogastijl — rustig</p>
-              {RUSTIGE_STIJLEN.map(s => (
-                <label key={s} className="filter-rij">
-                  <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
-                  {s}
-                </label>
-              ))}
-            </div>
-            {/* Kolom 3: Actieve yoga */}
-            <div>
-              <p className="sb-titel">Yogastijl — actief</p>
-              {ACTIEVE_STIJLEN.map(s => (
-                <label key={s} className="filter-rij">
-                  <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
-                  {s}
-                </label>
-              ))}
-              {meerStijlen && MEER_STIJLEN.map(s => (
-                <label key={s} className="filter-rij">
-                  <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
-                  {s}
-                </label>
-              ))}
-              <button className="meer-knop" onClick={() => setMeerStijlen(!meerStijlen)}>
-                {meerStijlen ? "– minder" : "+ meer stijlen"}
-              </button>
-            </div>
-            {/* Kolom 3: Specialisme */}
-            <div>
-              <p className="sb-titel">Specialisme</p>
-              {BASIS_SPECIALISMEN.map(s => (
-                <label key={s} className="filter-rij">
-                  <input type="checkbox" checked={specialismeFilter.has(s)} onChange={() => toggleSpecialisme(s)} />
-                  {s}
-                </label>
-              ))}
-              {meerSpecialismen && MEER_SPECIALISMEN.map(s => (
-                <label key={s} className="filter-rij">
-                  <input type="checkbox" checked={specialismeFilter.has(s)} onChange={() => toggleSpecialisme(s)} />
-                  {s}
-                </label>
-              ))}
-              <button className="meer-knop" onClick={() => setMeerSpecialismen(!meerSpecialismen)}>
-                {meerSpecialismen ? "– minder" : "+ meer specialismen"}
-              </button>
-            </div>
+        {/* Links: Postcode + Filters */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <button className="zoek-terug" onClick={() => setScherm("postcode")}>
+              <ArrowLeft size={14} />
+              Postcode aanpassen
+            </button>
+            {postcode && (
+              <div className="loc-pill" onClick={() => setScherm("postcode")}>
+                <MapPin size={13} />
+                <span>{postcode.toUpperCase()}</span>
+                <span>×</span>
+              </div>
+            )}
           </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <button className="btn-3" onClick={() => setFilterPanelOpen(!filterPanelOpen)}>
+              {filterPanelOpen ? "Minder filters" : "Filters"}
+            </button>
+            {actieveFilters.map(f => (
+              <span key={f.label} className="actieve-chip">
+                {f.label}
+                <button onClick={() => removeFilter(f)}>×</button>
+              </span>
+            ))}
+            {actieveFilters.length > 0 && (
+              <button className="meer-knop" style={{ marginTop: 0 }} onClick={clearAll}>Wis alles</button>
+            )}
+          </div>
+        </div>
+
+        {/* Midden: intro-tekst (alleen tablet/desktop) */}
+        {gridCols > 2 && (
+          <p className="heading-h3 accent-moss" style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto' }}>
+            Zoek op de yogastijl of specialisme die jij op dit moment nodig hebt en vind jouw docent.
+          </p>
         )}
+        {gridCols <= 2 && <div />}
+
+        {/* Rechts: Toon kaart */}
+        <label className="kaart-toggle">
+          <div
+            className={`toggle-track${kaartOpen ? " aan" : ""}`}
+            onClick={() => setKaartOpen(!kaartOpen)}
+          >
+            <div className="toggle-knop" />
+          </div>
+          Toon kaart
+        </label>
       </div>
+
+      {/* Uitklapbaar filterpaneel */}
+      {filterPanelOpen && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px', marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #ebe3e0' }}>
+          {/* Kolom 1: Ervaringsniveau */}
+          <div>
+            <p className="sb-titel">Ervaringsniveau</p>
+            <label className="filter-rij">
+              <input
+                type="checkbox"
+                checked={niveau === "startend"}
+                onChange={() => setNiveau(niveau === "startend" ? "" : "startend")}
+              />
+              Startend
+            </label>
+            <label className="filter-rij">
+              <input
+                type="checkbox"
+                checked={niveau === "ervaren"}
+                onChange={() => setNiveau(niveau === "ervaren" ? "" : "ervaren")}
+              />
+              Ervaren
+            </label>
+          </div>
+          {/* Kolom 2: Rustige yoga */}
+          <div>
+            <p className="sb-titel">Yogastijl — rustig</p>
+            {RUSTIGE_STIJLEN.map(s => (
+              <label key={s} className="filter-rij">
+                <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
+                {s}
+              </label>
+            ))}
+          </div>
+          {/* Kolom 3: Actieve yoga */}
+          <div>
+            <p className="sb-titel">Yogastijl — actief</p>
+            {ACTIEVE_STIJLEN.map(s => (
+              <label key={s} className="filter-rij">
+                <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
+                {s}
+              </label>
+            ))}
+            {meerStijlen && MEER_STIJLEN.map(s => (
+              <label key={s} className="filter-rij">
+                <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
+                {s}
+              </label>
+            ))}
+            <button className="meer-knop" onClick={() => setMeerStijlen(!meerStijlen)}>
+              {meerStijlen ? "– minder" : "+ meer stijlen"}
+            </button>
+          </div>
+          {/* Kolom 4: Specialisme */}
+          <div>
+            <p className="sb-titel">Specialisme</p>
+            {BASIS_SPECIALISMEN.map(s => (
+              <label key={s} className="filter-rij">
+                <input type="checkbox" checked={specialismeFilter.has(s)} onChange={() => toggleSpecialisme(s)} />
+                {s}
+              </label>
+            ))}
+            {meerSpecialismen && MEER_SPECIALISMEN.map(s => (
+              <label key={s} className="filter-rij">
+                <input type="checkbox" checked={specialismeFilter.has(s)} onChange={() => toggleSpecialisme(s)} />
+                {s}
+              </label>
+            ))}
+            <button className="meer-knop" onClick={() => setMeerSpecialismen(!meerSpecialismen)}>
+              {meerSpecialismen ? "– minder" : "+ meer specialismen"}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Kaartpaneel */}
       <div className={`kaart-paneel${kaartOpen ? " open" : ""}`}>
         <ZoekKaart docenten={resultaten} />
       </div>
 
-      {/* Resultaten — volledige breedte */}
+      {/* Resultaten */}
       <div className="px-4 py-6 sm:px-8 sm:py-8 xl:px-16 xl:py-12">
         <div className="resultaten-kop">
           <span className="text-small">{resultaten.length} gevonden</span>
         </div>
 
         {resultaten.length > 0 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: `repeat(${gridCols}, 1fr)`, gap: '24px' }}>
+          <div className="kaartjes-grid">
             {resultaten.map(docent => {
               const initials = docent.naam.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
               const ervaren = docent.ervaringsniveau === "ervaren";
@@ -302,7 +306,6 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
                   key={docent.id}
                   href={`/docenten/${docent.slug}`}
                   className={`kaartje${ervaren ? " kaartje-ervaren" : ""}`}
-                  style={{ borderRadius: '1mm', overflow: 'hidden' }}
                 >
                   <div className="kaartje-foto">
                     {docent.foto_url
@@ -313,14 +316,14 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
                       <div className="kaartje-badge">Ervaren</div>
                     )}
                   </div>
-                  <div className="kaartje-body" style={{ padding: '10px 8px 8px' }}>
+                  <div className="kaartje-body">
                     <p className="kaartje-naam" style={{ fontFamily: '"arsenica-variable", serif', fontSize: '15px', color: '#a66658' }}>{docent.naam}</p>
                     <p className="kaartje-stijl">{docent.yogastijlen.slice(0, 2).join(" · ")}</p>
                     <div className="kaartje-footer">
                       <span className="kaartje-prijs">
                         v.a. <strong>€{(getStartprijs(docent) / 100).toFixed(0)}</strong>
                       </span>
-                      <span className={docent.reisafstand_km <= 10 ? "afstand-ok" : "afstand-ver"} style={{ background: '#ebe3e0', color: '#260f09' }}>
+                      <span className={docent.reisafstand_km <= 10 ? "afstand-ok" : "afstand-ver"}>
                         {docent.reisafstand_km} km
                       </span>
                     </div>
