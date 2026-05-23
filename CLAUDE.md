@@ -7,6 +7,8 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.6 | 23-05-2026 | Verbod op Tailwind utilities voor typografie expliciet gedocumenteerd |
+| v1.5 | 23-05-2026 | Kleurmodifiers voor koppen gedocumenteerd: .accent-terracotta, .accent-moss, .on-dark |
 | v1.4 | 23-05-2026 | DocentCard rounded-2xl expliciet benoemd als enige uitzondering op rechte hoeken |
 | v1.3 | 23-05-2026 | Deploy Vercel → Netlify gecorrigeerd |
 | v1.2 | 23-05-2026 | Knopstijlen gecorrigeerd: 3 varianten (btn-dark-a, btn-dark-b, btn-light) conform Brandbook |
@@ -86,6 +88,19 @@ const lato \= Lato({ weight: \['300', '400', '700'\], subsets: \['latin'\], vari
 
 \*\*Typografie & CSS-systeem\*\*  
 \`typography.css\` is het enige bronbestand voor typografie. Dit bestand wordt nooit aangepast. Als iets visueel niet klopt, pas dan altijd de klassen in de component aan — niet het CSS-systeem.
+
+\*\*Kleurmodifiers voor koppen\*\*  
+Koppen H1, H2 en H3 kunnen wisselen tussen terracotta en mosgroen afhankelijk van de pagina en sectie. Gebruik daarvoor altijd een modifier class in combinatie met de heading class:
+\- \`.accent-terracotta\` — zet een kop naar \`#a66658\`
+\- \`.accent-moss\` — zet een kop naar \`#484f47\`
+\- \`.on-dark\` — zet een kop naar \`#ffffff\` op een donkere achtergrond
+
+Voorbeeld: \`<h2 class="heading-h2 accent-terracotta">Titel</h2>\`
+
+Kies nooit zelf een kleur — vraag Sabine welke modifier van toepassing is als dit niet expliciet is aangegeven.
+
+\*\*Geen Tailwind op tekstelementen\*\*  
+Gebruik nooit Tailwind utilities zoals \`text-sm\`, \`text-xl\`, \`font-bold\`, \`text-pyah-\*\`, \`leading-relaxed\` etc. op tekstelementen. Gebruik uitsluitend de classes uit \`typography.css\` en \`layout.css\`. Als een passende class ontbreekt, meld dit dan aan Sabine — voeg geen Tailwind toe als vervanging en verzin geen nieuwe class zelf.
 
 \---
 
