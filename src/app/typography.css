@@ -105,19 +105,45 @@
 }
 
 /* --- BUTTON — CTA-knoppen, navigatie -------------------- */
-.btn {
+/*
+   3 varianten, afhankelijk van context:
+   — .btn-dark-a   : op donkere achtergrond, roze startkleur
+   — .btn-dark-b   : op donkere achtergrond, mosgroen startkleur
+   — .btn-light    : op lichte achtergrond, terracotta startkleur
+
+   Alle knoppen: rechte hoeken (border-radius: 0), geen border.
+*/
+
+/* Gedeelde basisstijl */
+.btn-dark-a,
+.btn-dark-b,
+.btn-light {
   font-family: 'Lato', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: #260f09;
-  background: transparent;
-  border: 1px solid #260f09;
+  border: none;
   border-radius: 0;
   padding: 7px 20px;
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color 0.15s ease;
 }
+
+/* Variant A — donkere achtergrond, roze start */
+.btn-dark-a             { background-color: #d4baad; color: #260f09; }
+.btn-dark-a:hover       { background-color: #a66658; color: #ffffff; }
+.btn-dark-a:active      { background-color: #484f47; color: #ffffff; }
+
+/* Variant B — donkere achtergrond, mosgroen start */
+.btn-dark-b             { background-color: #484f47; color: #ffffff; }
+.btn-dark-b:hover       { background-color: #a66658; color: #ffffff; }
+.btn-dark-b:active      { background-color: #d4baad; color: #260f09; }
+
+/* Variant — lichte achtergrond, terracotta start */
+.btn-light              { background-color: #a66658; color: #ffffff; }
+.btn-light:hover        { background-color: #d4baad; color: #260f09; }
+.btn-light:active       { background-color: #484f47; color: #ffffff; }
 
 /* ============================================================
    KLEURMODIFIER — mosgroen
@@ -130,8 +156,9 @@
 
 /* ============================================================
    ON-DARK MODIFIER
-   Voeg .on-dark toe aan tekstelementen én knoppen
-   wanneer de sectie een donkere achtergrond heeft.
+   Voeg .on-dark toe aan tekstelementen wanneer de sectie
+   een donkere achtergrond heeft. Niet van toepassing op knoppen
+   — gebruik daarvoor .btn-dark-a of .btn-dark-b.
    ============================================================ */
 .heading-h1.on-dark,
 .heading-h2.on-dark,
@@ -143,11 +170,6 @@
 .text-small.on-dark,
 .heading-overline.on-dark {
   color: #ffffff;
-}
-
-.btn.on-dark {
-  color: #ffffff;
-  border-color: #ffffff;
 }
 
 /* ============================================================
