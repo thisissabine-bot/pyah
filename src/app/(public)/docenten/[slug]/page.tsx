@@ -5,6 +5,7 @@ import { getDocent, getAllSlugs } from "@/lib/docenten";
 
 interface Props {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ terug?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -22,11 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function DocentProfielPage({ params }: Props) {
+export default async function DocentProfielPage({ params, searchParams }: Props) {
   const { slug } = await params;
+  const { terug } = await searchParams;
   const docent = await getDocent(slug);
 
   if (!docent) notFound();
 
-  return <DocentProfiel docent={docent} />;
+  return <DocentProfiel docent={docent} terug={terug ?? ""} />;
 }

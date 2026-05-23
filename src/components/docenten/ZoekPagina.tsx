@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 const ZoekKaart = dynamic(() => import("./ZoekKaart"), { ssr: false });
 import type { Docent } from "@/lib/testdata";
@@ -15,23 +16,12 @@ const MEER_STIJLEN = ["Ashtanga", "Power yoga", "Iyengar", "Kundalini"];
 const BASIS_SPECIALISMEN = ["Stress & herstel", "Burn-out", "Blessures", "Zwangerschap"];
 const MEER_SPECIALISMEN = ["Postnataal", "Menopauze", "Senioren", "Nek- & rugklachten", "HSP", "Beginners"];
 
-function isValidPostcode(v: string): boolean {
-  return /^\d{4}\s?[A-Za-z]{2}$/.test(v.trim());
-}
-
-function formatPostcode(raw: string): string {
-  const cleaned = raw.replace(/\s/g, "");
-  const digits = cleaned.slice(0, 4).replace(/\D/g, "");
-  const letters = cleaned.slice(4).replace(/[^A-Za-z]/g, "").slice(0, 2);
-  return (digits + (letters.length ? " " + letters : "")).toUpperCase();
-}
-
 type ActiveFilter = { label: string; type: "stijl" | "specialisme" | "niveau" };
 
-export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
-  const [scherm, setScherm] = useState<"postcode" | "resultaten">("postcode");
-  const [postcode, setPostcode] = useState("");
-  const [postcodeError, setPostcodeError] = useState(false);
+export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { docenten: Docent[], locatie?: string }) {
+  const router = useRouter();
+  const [locatieInput, setLocatieInput] = useState(initLocatie);
+  const [locatie, setLocatie] = useState(initLocatie);
   const [kaartOpen, setKaartOpen] = useState(false);
   const [niveau, setNiveau] = useState<"" | "startend" | "ervaren">("");
   const [stijlFilter, setStijlFilter] = useState<Set<string>>(new Set());
@@ -49,21 +39,19 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
       else setGridCols(5);
     }
     updateCols();
-    window.addEventListener('resize', updateCols);
-    return () => window.removeEventListener('resize', updateCols);
+    window.addEventListener("resize", updateCols);
+    return () => window.removeEventListener("resize", updateCols);
   }, []);
 
-  function handlePostcodeInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setPostcode(formatPostcode(e.target.value));
-    setPostcodeError(false);
+  function applyLocatie(value: string) {
+    setLocatie(value);
+    const params = value ? `?locatie=${encodeURIComponent(value)}` : "";
+    router.push(`/docenten${params}`);
   }
 
-  function goSearch() {
-    if (postcode && !isValidPostcode(postcode)) {
-      setPostcodeError(true);
-      return;
-    }
-    setScherm("resultaten");
+  function clearLocatie() {
+    setLocatieInput("");
+    applyLocatie("");
   }
 
   function toggleStijl(s: string) {
@@ -96,6 +84,7 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
 
   const resultaten = useMemo(() => {
     const filtered = docenten.filter(d => {
+      if (locatie && !d.locatie.toLowerCase().includes(locatie.toLowerCase())) return false;
       if (niveau && d.ervaringsniveau !== niveau) return false;
       if (stijlFilter.size > 0 && !Array.from(stijlFilter).some(s => d.yogastijlen.includes(s))) return false;
       if (specialismeFilter.size > 0 && !Array.from(specialismeFilter).some(s => d.specialisaties.includes(s))) return false;
@@ -105,78 +94,51 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
       a.ervaringsniveau === "ervaren" && b.ervaringsniveau !== "ervaren" ? -1 :
       b.ervaringsniveau === "ervaren" && a.ervaringsniveau !== "ervaren" ? 1 : 0
     );
-  }, [docenten, niveau, stijlFilter, specialismeFilter]);
+  }, [docenten, locatie, niveau, stijlFilter, specialismeFilter]);
 
-  /* ── SCHERM 1: Postcode ─────────────────────────────────── */
-  if (scherm === "postcode") {
-    return (
-      <div className="zoek-stap1-wrapper">
-        <div className="zoek-stap1">
-          <p className="heading-overline mb-text">Vind jouw docent</p>
-          <h2 className="heading-h2 mb-subtitle">Wat is je postcode?</h2>
-          <p className="text-body mb-section">
-            We laten je zien welke docenten het dichtst bij jou in de buurt zijn.
-          </p>
-          <div className="pc-rij">
-            <input
-              className="pc-invoer"
-              type="text"
-              maxLength={7}
-              placeholder="2011 AB"
-              value={postcode}
-              onChange={handlePostcodeInput}
-              onKeyDown={(e) => e.key === "Enter" && goSearch()}
-              autoFocus
-            />
-            <button
-              className={`pc-knop${isValidPostcode(postcode) ? " gereed" : ""}`}
-              onClick={goSearch}
-            >
-              Zoek docenten
-            </button>
-          </div>
-          {postcodeError && (
-            <p className="pc-fout">Vul een geldige postcode in (bijv. 2011 AB)</p>
-          )}
-          <p className="pc-overslaan" onClick={() => setScherm("resultaten")}>
-            Ik zoek in de hele regio Haarlem
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  /* ── SCHERM 2: Resultaten ───────────────────────────────── */
   return (
     <div className="zoek-pagina-wrapper">
 
       {/* Titel */}
-      <div className="text-center px-4 sm:px-8 xl:px-16" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
+      <div className="text-center px-4 sm:px-8 xl:px-16" style={{ paddingTop: "32px", paddingBottom: "32px" }}>
         <h1 className="heading-h1">
-          {postcode ? "Docenten bij jou in de buurt" : "Alle docenten in regio Haarlem"}
+          {locatie ? `Docenten in ${locatie}` : "Alle docenten in regio Haarlem"}
         </h1>
       </div>
 
-      {/* Balk: navigatie + filters */}
-      <div className="zoek-topbar px-4 sm:px-8 xl:px-16" style={{ borderTop: '1px solid #d4baad', borderBottom: '1px solid #d4baad', paddingTop: '10px', paddingBottom: '10px' }}>
+      {/* Balk: locatie + filters + kaart-toggle */}
+      <div className="zoek-topbar px-4 sm:px-8 xl:px-16" style={{ borderTop: "1px solid #d4baad", borderBottom: "1px solid #d4baad", paddingTop: "10px", paddingBottom: "10px" }}>
 
-        {/* Links: Postcode + Filters */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', justifyContent: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button className="zoek-terug" onClick={() => setScherm("postcode")}>
-              <ArrowLeft size={14} />
-              Postcode aanpassen
-            </button>
-            {postcode && (
-              <div className="loc-pill" onClick={() => setScherm("postcode")}>
+        {/* Links: Locatie-invoer + actieve filters */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px", justifyContent: "center" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <input
+                className="pc-invoer"
+                type="text"
+                placeholder="Stad of postcode"
+                value={locatieInput}
+                onChange={e => setLocatieInput(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && applyLocatie(locatieInput)}
+                style={{ width: "140px" }}
+              />
+              <button
+                className={`pc-knop${locatieInput ? " gereed" : ""}`}
+                onClick={() => applyLocatie(locatieInput)}
+              >
+                Zoek
+              </button>
+            </div>
+            {locatie && (
+              <div className="loc-pill" onClick={clearLocatie}>
                 <MapPin size={13} />
-                <span>{postcode.toUpperCase()}</span>
+                <span>{locatie}</span>
                 <span>×</span>
               </div>
             )}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-            <button className="btn-3" onClick={() => setFilterPanelOpen(!filterPanelOpen)}>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+            <button className="btn-light" onClick={() => setFilterPanelOpen(!filterPanelOpen)}>
               {filterPanelOpen ? "Minder filters" : "Filters"}
             </button>
             {actieveFilters.map(f => (
@@ -191,9 +153,9 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
           </div>
         </div>
 
-        {/* Midden: intro-tekst (alleen tablet/desktop) */}
+        {/* Midden: intro-tekst (tablet/desktop) */}
         {gridCols > 2 && (
-          <p className="heading-h3 accent-moss" style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto' }}>
+          <p className="heading-h3 accent-moss" style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}>
             Zoek op de yogastijl of specialisme die jij op dit moment nodig hebt en vind jouw docent.
           </p>
         )}
@@ -213,28 +175,18 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
 
       {/* Uitklapbaar filterpaneel */}
       {filterPanelOpen && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px', marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #ebe3e0' }}>
-          {/* Kolom 1: Ervaringsniveau */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px", marginTop: "20px", paddingTop: "16px", borderTop: "1px solid #ebe3e0" }}>
           <div>
             <p className="sb-titel">Ervaringsniveau</p>
             <label className="filter-rij">
-              <input
-                type="checkbox"
-                checked={niveau === "startend"}
-                onChange={() => setNiveau(niveau === "startend" ? "" : "startend")}
-              />
+              <input type="checkbox" checked={niveau === "startend"} onChange={() => setNiveau(niveau === "startend" ? "" : "startend")} />
               Startend
             </label>
             <label className="filter-rij">
-              <input
-                type="checkbox"
-                checked={niveau === "ervaren"}
-                onChange={() => setNiveau(niveau === "ervaren" ? "" : "ervaren")}
-              />
+              <input type="checkbox" checked={niveau === "ervaren"} onChange={() => setNiveau(niveau === "ervaren" ? "" : "ervaren")} />
               Ervaren
             </label>
           </div>
-          {/* Kolom 2: Rustige yoga */}
           <div>
             <p className="sb-titel">Yogastijl — rustig</p>
             {RUSTIGE_STIJLEN.map(s => (
@@ -244,7 +196,6 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
               </label>
             ))}
           </div>
-          {/* Kolom 3: Actieve yoga */}
           <div>
             <p className="sb-titel">Yogastijl — actief</p>
             {ACTIEVE_STIJLEN.map(s => (
@@ -263,7 +214,6 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
               {meerStijlen ? "– minder" : "+ meer stijlen"}
             </button>
           </div>
-          {/* Kolom 4: Specialisme */}
           <div>
             <p className="sb-titel">Specialisme</p>
             {BASIS_SPECIALISMEN.map(s => (
@@ -304,7 +254,7 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
               return (
                 <Link
                   key={docent.id}
-                  href={`/docenten/${docent.slug}`}
+                  href={`/docenten/${docent.slug}?terug=${encodeURIComponent(locatie)}`}
                   className={`kaartje${ervaren ? " kaartje-ervaren" : ""}`}
                 >
                   <div className="kaartje-foto">
@@ -317,7 +267,7 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
                     )}
                   </div>
                   <div className="kaartje-body">
-                    <p className="kaartje-naam" style={{ fontFamily: '"arsenica-variable", serif', fontSize: '15px', color: '#a66658' }}>{docent.naam}</p>
+                    <p className="kaartje-naam" style={{ fontFamily: '"arsenica-variable", serif', fontSize: "15px", color: "#a66658" }}>{docent.naam}</p>
                     <p className="kaartje-stijl">{docent.yogastijlen.slice(0, 2).join(" · ")}</p>
                     <div className="kaartje-footer">
                       <span className="kaartje-prijs">
@@ -336,7 +286,7 @@ export default function ZoekPagina({ docenten }: { docenten: Docent[] }) {
           <div style={{ paddingTop: "32px" }}>
             <p className="heading-h3 mb-text">Geen resultaten</p>
             <p className="text-body mb-cta">Probeer andere filters.</p>
-            <button className="btn-3" onClick={clearAll}>Filters wissen</button>
+            <button className="btn-light" onClick={clearAll}>Filters wissen</button>
           </div>
         )}
       </div>

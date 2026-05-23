@@ -7,7 +7,12 @@ export const metadata = {
     "Vind een gecertificeerde yogadocent die bij jou thuiskomt. Filter op stijl, stad en niveau.",
 };
 
-export default async function DocentenPage() {
+interface Props {
+  searchParams: Promise<{ locatie?: string }>;
+}
+
+export default async function DocentenPage({ searchParams }: Props) {
+  const { locatie } = await searchParams;
   const docenten = await getAllDocenten();
-  return <ZoekPagina docenten={docenten} />;
+  return <ZoekPagina docenten={docenten} locatie={locatie ?? ""} />;
 }

@@ -8,7 +8,7 @@ import type { Docent } from "@/lib/testdata"
 
 const DocentKaart = dynamic(() => import("./DocentKaart"), { ssr: false })
 
-export default function DocentProfiel({ docent }: { docent: Docent }) {
+export default function DocentProfiel({ docent, terug = "" }: { docent: Docent, terug?: string }) {
   const initials = docent.naam.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
   const ervaren = docent.ervaringsniveau === "ervaren"
 
@@ -35,7 +35,7 @@ export default function DocentProfiel({ docent }: { docent: Docent }) {
 
       {/* Broodkruimel */}
       <div className="text-xs text-pyah-zacht mb-8 tracking-wide">
-        <Link href="/docenten" className="hover:text-pyah-accent transition-colors">← Terug naar docenten</Link>
+        <Link href={terug ? `/docenten?locatie=${encodeURIComponent(terug)}` : "/docenten"} className="hover:text-pyah-accent transition-colors">← Terug naar docenten</Link>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-12 items-start [&>*:last-child]:order-first [&>*:last-child]:lg:order-last">
@@ -236,7 +236,7 @@ export default function DocentProfiel({ docent }: { docent: Docent }) {
           </div>
 
           <Link
-            href="/docenten"
+            href={terug ? `/docenten?locatie=${encodeURIComponent(terug)}` : "/docenten"}
             className="block w-full text-center mt-3 border border-pyah-accent text-pyah-accent py-3 text-sm hover:bg-pyah-licht transition-colors"
           >
             ← Terug naar overzicht
