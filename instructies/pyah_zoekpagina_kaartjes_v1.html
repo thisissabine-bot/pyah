@@ -1,0 +1,306 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;border-radius:0 !important}
+.pyah{font-family:'Playfair Display',serif;background:#fff}
+.pyah *{font-family:'Playfair Display',serif}
+.screen{display:none}.screen.active{display:block}
+.step1{padding:3rem 1.5rem;max-width:480px;margin:0 auto;text-align:center}
+.eyebrow{font-size:15px;color:#484f47;letter-spacing:.04em;margin-bottom:10px;font-style:normal;font-weight:400}
+.step1 h2{font-size:26px;font-weight:700;color:#a66658;margin-bottom:8px;line-height:1.3}
+.step1 p{font-size:14px;color:#484f47;line-height:1.7;margin-bottom:28px}
+.pc-row{display:inline-flex;gap:10px;margin-bottom:8px}
+.pc-input{width:110px !important;min-width:0 !important;max-width:110px !important;flex:none !important;padding:10px 12px;border:0.5px solid #d4baad;font-size:14px;letter-spacing:.08em;text-transform:uppercase;background:#fff;color:#260f09;outline:none;font-family:'Playfair Display',serif;transition:border-color .15s}
+.pc-input:focus{border-color:#a66658}
+.pc-input::placeholder{color:#d4baad;letter-spacing:normal;text-transform:none;font-style:italic;font-size:12px}
+.pc-btn{padding:10px 18px;background:#ebe3e0;border:none;color:#484f47;font-size:14px;font-weight:500;cursor:default;white-space:nowrap;font-family:'Playfair Display',serif;transition:background .25s,color .25s;flex-shrink:0}
+.pc-btn.ready{background:#a66658 !important;color:#fff !important;cursor:pointer}
+.pc-btn.ready:hover{background:#484f47 !important;color:#fff !important}
+.pc-skip{font-size:13px;color:#484f47;cursor:pointer;font-style:italic;margin-top:12px}
+.pc-skip:hover{color:#a66658}
+.pc-error{font-size:13px;color:#a66658;margin-top:6px;display:none}
+.topbar{display:flex;align-items:center;gap:10px;padding:1rem 1.5rem;border-bottom:0.5px solid #ebe3e0;flex-wrap:wrap}
+.loc-pill{display:flex;align-items:center;gap:6px;background:#ebe3e0;padding:6px 12px;font-size:13px;color:#484f47;cursor:pointer}
+.loc-pill:hover{background:#d4baad}
+.loc-pill i{font-size:14px;color:#a66658}
+.loc-pill.hidden{display:none}
+.map-toggle{display:flex;align-items:center;gap:8px;margin-left:auto;font-size:13px;color:#484f47;cursor:pointer;user-select:none}
+.ttrack{width:36px;height:20px;background:#ebe3e0;border:0.5px solid #d4baad;position:relative;transition:background .2s;flex-shrink:0}
+.ttrack.on{background:#a66658;border-color:#a66658}
+.tthumb{width:14px;height:14px;background:#fff;position:absolute;top:2px;left:3px;transition:left .2s}
+.ttrack.on .tthumb{left:19px}
+.map-panel{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.map-panel.open{max-height:200px}
+.map-box{background:#ebe3e0;height:160px;position:relative;display:flex;align-items:center;justify-content:center;margin:0 1.5rem}
+.map-label{background:#fff;padding:5px 14px;font-size:13px;color:#484f47;font-style:italic}
+.pin{position:absolute;font-size:16px}
+.you-tag{position:absolute;background:#a66658;color:#fff;padding:3px 10px;font-size:11px;font-weight:500}
+.search-layout{display:grid;grid-template-columns:200px 1fr;gap:0;padding:0 1.5rem;margin-top:24px}
+.sidebar{padding-right:24px;border-right:0.5px solid #ebe3e0}
+.sb-title{font-size:11px;font-weight:700;letter-spacing:.07em;color:#a66658;margin:16px 0 8px}
+.sb-title:first-child{margin-top:0}
+.level-row{display:flex;gap:0}
+.lvl{flex:1;padding:7px 4px;border:0.5px solid #d4baad;background:#fff;font-size:12px;cursor:pointer;color:#484f47;text-align:center;font-family:'Playfair Display',serif;transition:all .15s;border-right:none}
+.lvl:last-child{border-right:0.5px solid #d4baad}
+.lvl.on{background:#a66658;border-color:#a66658;color:#fff}
+.divider{border:none;border-top:0.5px solid #ebe3e0;margin:14px 0}
+.yoga-group-lbl{font-size:12px;font-weight:700;color:#484f47;margin:8px 0 6px}
+.fc{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;padding:4px 0;color:#260f09}
+.fc:hover{color:#a66658}
+.fc input{width:14px;height:14px;cursor:pointer;accent-color:#a66658;flex-shrink:0}
+.show-more{background:none;border:none;font-size:12px;color:#a66658;cursor:pointer;padding:3px 0;font-family:'Playfair Display',serif}
+.collapsible{overflow:hidden;max-height:0;transition:max-height .3s}
+.collapsible.open{max-height:400px}
+.clear-btn{width:100%;padding:8px;border:0.5px solid #d4baad;background:#fff;font-size:12px;color:#484f47;cursor:pointer;margin-top:12px;font-family:'Playfair Display',serif}
+.clear-btn:hover{background:#ebe3e0}
+.results-col{padding-left:24px}
+.results-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.results-hd h3{font-size:18px;font-weight:700;color:#a66658}
+.results-meta{font-size:13px;color:#484f47;font-style:italic}
+.sort-row{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.sort-lbl{font-size:12px;color:#484f47}
+.sort-btn{padding:5px 12px;border:0.5px solid #d4baad;background:#fff;font-size:12px;cursor:pointer;color:#484f47;font-family:'Playfair Display',serif;transition:all .15s}
+.sort-btn.on{background:#a66658;border-color:#a66658;color:#fff}
+.active-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.atag{display:flex;align-items:center;gap:4px;background:#ebe3e0;padding:4px 10px;font-size:12px;color:#484f47}
+.atag button{background:none;border:none;cursor:pointer;color:#a66658;font-size:14px;line-height:1;padding:0}
+
+/* KAARTJES */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:20px}
+.card{background:#fff;cursor:pointer;transition:opacity .15s}
+.card:hover{opacity:.85}
+.card.ervaren .card-photo{border-top:2px solid #a66658}
+.card-photo{width:100%;aspect-ratio:1/1;background:#ebe3e0;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:10px;position:relative}
+.card-photo-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#a66658;background:#ebe3e0;font-family:'Playfair Display',serif}
+.card-badge{position:absolute;bottom:0;left:0;right:0;background:#484f47;color:#ebe3e0;font-size:10px;padding:4px 8px;letter-spacing:.03em;display:flex;align-items:center;gap:4px}
+.card-badge-start{background:#d4baad;color:#260f09}
+.card-badge i{font-size:11px}
+.card-name{font-size:14px;font-weight:700;color:#260f09;margin-bottom:3px}
+.card-stijl{font-size:12px;color:#484f47;margin-bottom:8px;font-style:italic}
+.card-footer{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-size:12px;color:#484f47}
+.card-price strong{color:#260f09;font-weight:700}
+.dist-ok{font-size:11px;background:#ebe3e0;color:#484f47;padding:2px 7px}
+.dist-far{font-size:11px;background:#d4baad;color:#260f09;padding:2px 7px}
+.back-btn{background:none;border:none;font-size:13px;color:#484f47;cursor:pointer;display:flex;align-items:center;gap:4px;font-family:'Playfair Display',serif}
+.back-btn:hover{color:#a66658}
+</style>
+
+<div class="pyah">
+
+<div class="screen active" id="s1">
+  <div class="step1">
+    <div class="eyebrow">Vind jouw docent</div>
+    <h2>Wat is je postcode?</h2>
+    <p>We laten je zien welke docenten het dichtst bij jou in de buurt zijn.</p>
+    <div class="pc-row">
+      <input class="pc-input" id="pc-field" type="text" maxlength="7" placeholder="2011 AB">
+      <button class="pc-btn" id="pc-btn" onclick="goSearch()">Zoek docenten</button>
+    </div>
+    <div class="pc-error" id="pc-error">Vul een geldige postcode in (bijv. 2011 AB)</div>
+    <div class="pc-skip" onclick="goSkip()">Ik zoek in de hele regio Haarlem</div>
+  </div>
+</div>
+
+<div class="screen" id="s2">
+  <div class="topbar">
+    <button class="back-btn" onclick="goBack()">
+      <i class="ti ti-arrow-left" aria-hidden="true" style="font-size:13px"></i> Postcode aanpassen
+    </button>
+    <div class="loc-pill hidden" id="loc-pill" onclick="goBack()">
+      <i class="ti ti-map-pin" aria-hidden="true"></i>
+      <span id="pc-display"></span> ×
+    </div>
+    <label class="map-toggle" onclick="toggleMap()">
+      <div class="ttrack" id="mtrack"><div class="tthumb"></div></div>
+      Toon kaart
+    </label>
+  </div>
+
+  <div class="map-panel" id="mpanel">
+    <div class="map-box">
+      <span class="pin" style="left:35%;top:30%">📍</span>
+      <span class="pin" style="left:55%;top:48%">📍</span>
+      <span class="pin" style="left:43%;top:58%">📍</span>
+      <span class="pin" style="left:64%;top:35%">📍</span>
+      <span class="pin" style="left:27%;top:54%">📍</span>
+      <span class="you-tag" style="left:46%;top:43%">Jij</span>
+      <div class="map-label">Kaart — regio Haarlem</div>
+    </div>
+  </div>
+
+  <div class="search-layout">
+    <div class="sidebar">
+      <div class="sb-title" style="margin-top:0">Ervaringsniveau</div>
+      <div class="level-row">
+        <button class="lvl on" onclick="setLvl(this)">Alle</button>
+        <button class="lvl" onclick="setLvl(this)">Startend</button>
+        <button class="lvl" onclick="setLvl(this)">Ervaren</button>
+      </div>
+      <div class="divider"></div>
+      <div class="sb-title">Yogastijl</div>
+      <div class="yoga-group-lbl">Rustige yoga</div>
+      <div style="display:flex;flex-direction:column">
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Yin yoga')"> Yin yoga</label>
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Restorative')"> Restorative</label>
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Yoga Nidra')"> Yoga Nidra</label>
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Hatha')"> Hatha</label>
+      </div>
+      <div class="yoga-group-lbl" style="margin-top:10px">Actieve yoga</div>
+      <div style="display:flex;flex-direction:column">
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Vinyasa')"> Vinyasa</label>
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Slow Flow')"> Slow Flow</label>
+      </div>
+      <div class="collapsible" id="stijl-more">
+        <div style="display:flex;flex-direction:column;margin-top:4px">
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Ashtanga')"> Ashtanga</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Power yoga')"> Power yoga</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Iyengar')"> Iyengar</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Kundalini')"> Kundalini</label>
+        </div>
+      </div>
+      <button class="show-more" id="stijl-btn" onclick="toggleMore('stijl')">+ meer stijlen</button>
+      <div class="divider"></div>
+      <div class="sb-title">Specialisme</div>
+      <div style="display:flex;flex-direction:column">
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Stress & herstel')"> Stress & herstel</label>
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Burn-out')"> Burn-out</label>
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Blessures')"> Blessures</label>
+        <label class="fc"><input type="checkbox" onchange="toggleF(this,'Zwangerschap')"> Zwangerschap</label>
+      </div>
+      <div class="collapsible" id="spec-more">
+        <div style="display:flex;flex-direction:column;margin-top:4px">
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Postnataal')"> Postnataal</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Menopauze')"> Menopauze</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Senioren')"> Senioren</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Nek- & rugklachten')"> Nek- & rugklachten</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'HSP')"> HSP</label>
+          <label class="fc"><input type="checkbox" onchange="toggleF(this,'Beginners')"> Beginners</label>
+        </div>
+      </div>
+      <button class="show-more" id="spec-btn" onclick="toggleMore('spec')">+ meer specialismen</button>
+      <button class="clear-btn" onclick="clearAll()">Filters wissen</button>
+    </div>
+
+    <div class="results-col">
+      <div class="results-hd">
+        <h3 id="results-title">Docenten bij jou in de buurt</h3>
+        <span class="results-meta">5 gevonden</span>
+      </div>
+      <div class="sort-row">
+        <span class="sort-lbl">Sorteren:</span>
+        <button class="sort-btn on" onclick="setSort(this)">Dichtstbij</button>
+        <button class="sort-btn" onclick="setSort(this)">Ervaren eerst</button>
+      </div>
+      <div class="active-tags" id="atags"></div>
+
+      <div class="cards">
+        <div class="card ervaren">
+          <div class="card-photo">
+            <div class="card-photo-inner">SB</div>
+            <div class="card-badge"><i class="ti ti-rosette-discount-check" aria-hidden="true"></i> Ervaren</div>
+          </div>
+          <div class="card-name">Sarah B.</div>
+          <div class="card-stijl">Yin · Restorative</div>
+          <div class="card-footer">
+            <div class="card-price">v.a. <strong>€99</strong></div>
+            <span class="dist-ok">3 km</span>
+          </div>
+        </div>
+
+        <div class="card ervaren">
+          <div class="card-photo">
+            <div class="card-photo-inner">LL</div>
+            <div class="card-badge"><i class="ti ti-rosette-discount-check" aria-hidden="true"></i> Ervaren</div>
+          </div>
+          <div class="card-name">Laura L.</div>
+          <div class="card-stijl">Hatha · Slow Flow</div>
+          <div class="card-footer">
+            <div class="card-price">v.a. <strong>€99</strong></div>
+            <span class="dist-ok">7 km</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-photo">
+            <div class="card-photo-inner">MV</div>
+            <div class="card-badge card-badge-start">Startend</div>
+          </div>
+          <div class="card-name">Miriam V.</div>
+          <div class="card-stijl">Vinyasa · Hatha</div>
+          <div class="card-footer">
+            <div class="card-price">v.a. <strong>€80</strong></div>
+            <span class="dist-ok">9 km</span>
+          </div>
+        </div>
+
+        <div class="card ervaren">
+          <div class="card-photo">
+            <div class="card-photo-inner">KR</div>
+            <div class="card-badge"><i class="ti ti-rosette-discount-check" aria-hidden="true"></i> Ervaren</div>
+          </div>
+          <div class="card-name">Karin R.</div>
+          <div class="card-stijl">Iyengar</div>
+          <div class="card-footer">
+            <div class="card-price">v.a. <strong>€99</strong></div>
+            <span class="dist-far">12 km</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-photo">
+            <div class="card-photo-inner">TP</div>
+            <div class="card-badge card-badge-start">Startend</div>
+          </div>
+          <div class="card-name">Tom P.</div>
+          <div class="card-stijl">Ashtanga · Power</div>
+          <div class="card-footer">
+            <div class="card-price">v.a. <strong>€80</strong></div>
+            <span class="dist-far">15 km</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let mapOpen=false,activeF=new Set();
+const field=document.getElementById('pc-field');
+const btn=document.getElementById('pc-btn');
+function isValid(v){return /^\d{4}\s?[A-Za-z]{2}$/.test(v.trim())}
+field.addEventListener('input',function(){
+  const raw=this.value.replace(/\s/g,'');
+  const digits=raw.slice(0,4).replace(/\D/g,'');
+  const letters=raw.slice(4).replace(/[^A-Za-z]/g,'').slice(0,2);
+  this.value=(digits+(letters.length?(' '+letters):'')).toUpperCase();
+  document.getElementById('pc-error').style.display='none';
+  if(isValid(this.value)){btn.classList.add('ready')}else{btn.classList.remove('ready')}
+});
+field.addEventListener('keydown',function(e){if(e.key==='Enter')goSearch()});
+function goSearch(){
+  const v=field.value.trim();
+  if(!isValid(v)&&v!==''){document.getElementById('pc-error').style.display='block';return;}
+  const pill=document.getElementById('loc-pill');
+  document.getElementById('pc-display').textContent=v.toUpperCase();
+  pill.classList.toggle('hidden',!v);
+  document.getElementById('results-title').textContent=v?'Docenten bij jou in de buurt':'Alle docenten in regio Haarlem';
+  document.getElementById('s1').classList.remove('active');
+  document.getElementById('s2').classList.add('active');
+}
+function goSkip(){
+  document.getElementById('loc-pill').classList.add('hidden');
+  document.getElementById('results-title').textContent='Alle docenten in regio Haarlem';
+  document.getElementById('s1').classList.remove('active');
+  document.getElementById('s2').classList.add('active');
+}
+function goBack(){document.getElementById('s2').classList.remove('active');document.getElementById('s1').classList.add('active')}
+function toggleMap(){mapOpen=!mapOpen;document.getElementById('mpanel').classList.toggle('open',mapOpen);document.getElementById('mtrack').classList.toggle('on',mapOpen)}
+function setLvl(b){document.querySelectorAll('.lvl').forEach(x=>x.classList.remove('on'));b.classList.add('on')}
+function setSort(b){document.querySelectorAll('.sort-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on')}
+function toggleMore(id){const el=document.getElementById(id+'-more');const b=document.getElementById(id+'-btn');const open=el.classList.toggle('open');b.textContent=open?'– minder':'+ meer '+(id==='stijl'?'stijlen':'specialismen')}
+function toggleF(cb,label){if(cb.checked)activeF.add(label);else activeF.delete(label);renderTags()}
+function renderTags(){const c=document.getElementById('atags');c.innerHTML='';activeF.forEach(l=>{const d=document.createElement('div');d.className='atag';d.innerHTML=l+' <button onclick="removeF(\''+l+'\')">×</button>';c.appendChild(d)})}
+function removeF(l){activeF.delete(l);document.querySelectorAll('.fc input').forEach(cb=>{if(cb.closest('.fc').textContent.trim()===l)cb.checked=false});renderTags()}
+function clearAll(){activeF.clear();document.querySelectorAll('.fc input').forEach(cb=>cb.checked=false);renderTags()}
+</script>

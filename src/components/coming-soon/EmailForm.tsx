@@ -9,7 +9,11 @@ export default function EmailForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    // TODO: verbind met Supabase — supabase.from('aanmeldingen').insert({ email, type: 'klant' })
+    await fetch('/api/aanmeldingen', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
     setSubmitted(true)
   }
 
@@ -32,7 +36,7 @@ export default function EmailForm() {
         required
         autoComplete="email"
       />
-      <button type="submit" className="btn-1 on-dark">
+      <button type="submit" className="btn-dark-a">
         Houd me op de hoogte
       </button>
     </form>

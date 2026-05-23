@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PYAH — Docentprofiel wireframe v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#ebe3e0;
+  --sand:#d4baad;
+  --terra:#a66658;
+  --forest:#484f47;
+  --dark:#260f09;
+  --divider:1px solid #d4baad;
+}
+
+body{
+  font-family:'Lato',sans-serif;
+  font-weight:300;
+  color:var(--dark);
+  background:#f6f2f0;
+  font-size:14px;
+  line-height:1.6;
+  padding:32px 24px;
+}
+
+/* ─── wrapper ─── */
+.wire-label{
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--terra);
+  margin-bottom:20px;
+  font-weight:400;
+}
+
+.page{
+  background:#fff;
+  max-width:980px;
+  margin:0 auto;
+  padding:40px 48px 64px;
+}
+
+/* ─── layout ─── */
+.layout{
+  display:grid;
+  grid-template-columns:1fr 260px;
+  gap:48px;
+  align-items:start;
+}
+.main-col{}
+.side-col{position:sticky;top:24px}
+
+/* ─── horizontal rule ─── */
+.divider{
+  border:none;
+  border-top:var(--divider);
+  margin:28px 0;
+}
+
+/* ─── breadcrumb ─── */
+.breadcrumb{
+  font-size:12px;
+  color:var(--sand);
+  margin-bottom:32px;
+  letter-spacing:.03em;
+}
+.breadcrumb a{color:var(--sand);text-decoration:none}
+.breadcrumb span{color:var(--terra)}
+
+/* ─── hero: naam + locatie ─── */
+.hero-name{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:700;
+  color:var(--dark);
+  margin-bottom:8px;
+  line-height:1.2;
+}
+.hero-meta{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  font-size:13px;
+  color:var(--forest);
+}
+.hero-meta .dot{color:var(--sand)}
+
+/* ─── section label ─── */
+.sec-label{
+  font-size:11px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--terra);
+  margin-bottom:14px;
+}
+
+/* ─── foto galerij ─── */
+.gallery-main{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:8px;
+  transition:all .2s;
+}
+.gallery-main.full-view{
+  grid-template-columns:1fr;
+}
+.photo-main{
+  aspect-ratio:1/1;
+  background:var(--cream);
+  border-radius:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  color:var(--sand);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-weight:500;
+  cursor:pointer;
+  transition:opacity .15s;
+  position:relative;
+  overflow:hidden;
+}
+.photo-main:hover{opacity:.9}
+.photo-main.is-selected{
+  outline:2px solid var(--terra);
+  outline-offset:-2px;
+}
+.photo-main .photo-num{
+  position:absolute;
+  bottom:8px;
+  right:10px;
+  font-size:10px;
+  color:var(--sand);
+}
+.full-view .photo-main.secondary-hidden{display:none}
+.full-view .photo-main.primary-photo{
+  aspect-ratio:16/9;
+}
+
+/* thumbnail strip */
+.thumb-strip-wrap{
+  overflow-x:auto;
+  padding-bottom:6px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--sand) transparent;
+}
+.thumb-strip{
+  display:flex;
+  gap:6px;
+  width:max-content;
+}
+.thumb{
+  width:64px;
+  height:64px;
+  flex-shrink:0;
+  background:var(--cream);
+  border-radius:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  color:var(--sand);
+  cursor:pointer;
+  border:1.5px solid transparent;
+  transition:border-color .15s, opacity .15s;
+  font-weight:500;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.thumb:hover{opacity:.8}
+.thumb.active{border-color:var(--terra)}
+.thumb.video-thumb{
+  background:#e8e2df;
+  color:var(--terra);
+  font-size:18px;
+}
+.thumb-back{
+  display:none;
+  font-size:11px;
+  color:var(--terra);
+  cursor:pointer;
+  margin-top:6px;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+
+/* ─── badge + stijlen ─── */
+.badge-stijlen-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.badge{
+  font-size:11px;
+  font-weight:600;
+  padding:4px 12px;
+  border-radius:100px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.badge-ervaren{background:var(--terra);color:#fff}
+.badge-startend{background:var(--cream);color:var(--forest)}
+.tag{
+  font-size:12px;
+  font-weight:400;
+  padding:3px 10px;
+  background:var(--cream);
+  border-radius:100px;
+  color:var(--forest);
+}
+
+/* ─── placeholder bars ─── */
+.bar{height:11px;background:var(--cream);border-radius:3px;margin-bottom:7px}
+.bar.full{width:100%}
+.bar.l{width:80%}
+.bar.m{width:60%}
+.bar.s{width:40%}
+.bar.xs{width:25%}
+
+/* ─── opleiding items ─── */
+.opl-list{display:flex;flex-direction:column;gap:10px}
+.opl-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.opl-icon{
+  width:32px;height:32px;
+  background:var(--cream);
+  border-radius:0;
+  flex-shrink:0;
+}
+.opl-text{flex:1}
+
+/* ─── stijlen gegroepeerd ─── */
+.stijl-group{margin-bottom:16px}
+.stijl-group-label{
+  font-size:12px;
+  font-weight:500;
+  color:var(--forest);
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}
+
+/* ─── werkgebied ─── */
+.werkgebied-map{
+  height:80px;
+  background:var(--cream);
+  border-radius:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  color:var(--sand);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:10px;
+}
+.werkgebied-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+
+/* ─── reviews ─── */
+.review-score-row{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:16px;
+}
+.score-big{
+  font-family:'Playfair Display',serif;
+  font-size:36px;
+  font-weight:700;
+  color:var(--dark);
+  line-height:1;
+}
+.stars{color:#c8935a;font-size:14px;letter-spacing:2px}
+.review-count{font-size:12px;color:var(--forest)}
+.review-card{
+  padding:12px 0;
+  border-top:var(--divider);
+}
+.review-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:6px;
+}
+.review-name{font-size:13px;font-weight:500;color:var(--dark)}
+.review-stars{color:#c8935a;font-size:12px}
+
+/* ─── sidebar CTA ─── */
+.cta-panel{
+  background:var(--cream);
+  border-radius:0;
+  padding:24px 20px;
+}
+.cta-title{
+  font-family:'Playfair Display',serif;
+  font-size:14px;
+  font-weight:700;
+  color:var(--dark);
+  margin-bottom:16px;
+}
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:8px 0;
+  border-bottom:1px solid var(--sand);
+  font-size:13px;
+}
+.price-row:last-of-type{border-bottom:none}
+.price-label{color:var(--forest)}
+.price-amount{font-weight:500;color:var(--dark)}
+.cta-btn{
+  display:block;
+  width:100%;
+  margin-top:18px;
+  padding:13px 0;
+  background:var(--terra);
+  color:#fff;
+  text-align:center;
+  font-family:'Lato',sans-serif;
+  font-size:13.5px;
+  font-weight:500;
+  letter-spacing:.04em;
+  border:none;
+  border-radius:0;
+  cursor:pointer;
+}
+.cta-sub{
+  font-size:11px;
+  color:var(--forest);
+  text-align:center;
+  margin-top:8px;
+  letter-spacing:.04em;
+}
+.cta-locatie{
+  margin-top:20px;
+  padding-top:16px;
+  border-top:var(--divider);
+}
+.cta-locatie .sec-label{margin-bottom:6px}
+.cta-locatie p{font-size:13px;color:var(--forest)}
+.cta-locatie small{font-size:11px;color:var(--sand);display:block;margin-top:2px}
+</style>
+</head>
+<body>
+
+<p class="wire-label">PYAH — Wireframe docentprofiel v2 · Intern gebruik</p>
+
+<div class="page">
+
+  <!-- breadcrumb -->
+  <div class="breadcrumb">
+    <a href="#">← Terug naar docenten</a>
+  </div>
+
+  <div class="layout">
+
+    <!-- ═══════ LINKER KOLOM ═══════ -->
+    <div class="main-col">
+
+      <!-- 1. Naam + locatie -->
+      <h1 class="hero-name">Naam van de docent</h1>
+      <div class="hero-meta">
+        <span>📍 Haarlem</span>
+        <span class="dot">·</span>
+        <span>4 km van jou</span>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 2. Foto's + video -->
+      <div class="gallery-main" id="galleryMain">
+        <div class="photo-main primary-photo" data-idx="0" onclick="selectThumb(0)">
+          <span>foto 1</span>
+          <span class="photo-num">1/6</span>
+        </div>
+        <div class="photo-main secondary-hidden" data-idx="1" onclick="selectThumb(1)">
+          <span>foto 2</span>
+          <span class="photo-num">2/6</span>
+        </div>
+      </div>
+
+      <div class="thumb-strip-wrap">
+        <div class="thumb-strip" id="thumbStrip">
+          <div class="thumb active" data-idx="0" onclick="selectThumb(0)">1</div>
+          <div class="thumb" data-idx="1" onclick="selectThumb(1)">2</div>
+          <div class="thumb" data-idx="2" onclick="selectThumb(2)">3</div>
+          <div class="thumb" data-idx="3" onclick="selectThumb(3)">4</div>
+          <div class="thumb" data-idx="4" onclick="selectThumb(4)">5</div>
+          <div class="thumb video-thumb" data-idx="5" data-type="video" onclick="selectThumb(5)">▶</div>
+        </div>
+      </div>
+      <div class="thumb-back" id="thumbBack" onclick="resetGallery()">← Terug naar overzicht</div>
+
+      <hr class="divider">
+
+      <!-- 3. Niveau + yogastijlen -->
+      <div class="badge-stijlen-row">
+        <span class="badge badge-ervaren">Ervaren</span>
+        <span class="tag">Yin yoga</span>
+        <span class="tag">Restorative</span>
+        <span class="tag">Yoga Nidra</span>
+        <span class="tag">Stress & herstel</span>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 4. Bio -->
+      <div class="sec-label">Over mij</div>
+      <div class="bar full"></div>
+      <div class="bar full"></div>
+      <div class="bar l"></div>
+      <div style="margin-top:10px"></div>
+      <div class="bar full"></div>
+      <div class="bar full"></div>
+      <div class="bar m"></div>
+
+      <hr class="divider">
+
+      <!-- 5. Opleidingen + certificaten -->
+      <div class="sec-label">Opleidingen & certificaten</div>
+      <div class="opl-list">
+        <div class="opl-item">
+          <div class="opl-icon"></div>
+          <div class="opl-text">
+            <div class="bar m" style="margin-bottom:4px"></div>
+            <div class="bar xs"></div>
+          </div>
+        </div>
+        <div class="opl-item">
+          <div class="opl-icon"></div>
+          <div class="opl-text">
+            <div class="bar s" style="margin-bottom:4px"></div>
+            <div class="bar xs"></div>
+          </div>
+        </div>
+        <div class="opl-item">
+          <div class="opl-icon"></div>
+          <div class="opl-text">
+            <div class="bar m" style="margin-bottom:4px"></div>
+            <div class="bar xs"></div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 6. Yogastijlen gedetailleerd -->
+      <div class="sec-label">Yogastijlen</div>
+      <div class="stijl-group">
+        <div class="stijl-group-label">Rustige yoga</div>
+        <div class="tag-row">
+          <span class="tag">Yin yoga</span>
+          <span class="tag">Restorative</span>
+          <span class="tag">Yoga Nidra</span>
+        </div>
+      </div>
+      <div class="stijl-group">
+        <div class="stijl-group-label">Specialismen</div>
+        <div class="tag-row">
+          <span class="tag">Stress & herstel</span>
+          <span class="tag">Burn-out</span>
+          <span class="tag">Slaapproblemen</span>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- 7. Werkgebied -->
+      <div class="sec-label">Werkgebied</div>
+      <div class="werkgebied-map">kaart · werkgebied</div>
+      <div style="font-size:13px;color:var(--forest)">📍 Haarlem en omgeving</div>
+      <div class="werkgebied-tags">
+        <span class="tag">Haarlem</span>
+        <span class="tag">Heemstede</span>
+        <span class="tag">Aerdenhout</span>
+        <span class="tag">Bloemendaal</span>
+        <span class="tag">Zandvoort</span>
+      </div>
+      <div style="font-size:11px;color:var(--sand);margin-top:8px">Reiskosten: niet van toepassing</div>
+
+      <hr class="divider">
+
+      <!-- 8. Reviews -->
+      <div class="sec-label">Reviews</div>
+      <div class="review-score-row">
+        <span class="score-big">4.9</span>
+        <span class="stars">★★★★★</span>
+        <span class="review-count">12 reviews</span>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-name">Joyce M.</span>
+          <span class="review-stars">★★★★★</span>
+        </div>
+        <div class="bar full"></div>
+        <div class="bar m"></div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-name">Max K.</span>
+          <span class="review-stars">★★★★★</span>
+        </div>
+        <div class="bar full"></div>
+        <div class="bar s"></div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-header">
+          <span class="review-name">Suzanne V.</span>
+          <span class="review-stars">★★★★☆</span>
+        </div>
+        <div class="bar full"></div>
+        <div class="bar l"></div>
+      </div>
+
+    </div>
+
+    <!-- ═══════ RECHTER KOLOM — CTA ═══════ -->
+    <div class="side-col">
+      <div class="cta-panel">
+        <div class="cta-title">Tarieven</div>
+        <div class="price-row">
+          <span class="price-label">Introductieles 75 min.</span>
+          <span class="price-amount">€99</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Losse les 60 min.</span>
+          <span class="price-amount">€99</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Losse les 75 min.</span>
+          <span class="price-amount">€120</span>
+        </div>
+        <button class="cta-btn">Plan een kennismaking</button>
+        <div class="cta-sub">Gratis · vrijblijvend · online</div>
+
+        <div class="cta-locatie">
+          <div class="sec-label">Locatie</div>
+          <p>📍 Haarlem · 4 km van jou</p>
+          <small>Reiskosten: niet van toepassing</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var currentSingle = null;
+
+function selectThumb(idx) {
+  var main = document.getElementById('galleryMain');
+  var back = document.getElementById('thumbBack');
+  var thumbs = document.querySelectorAll('.thumb');
+
+  thumbs.forEach(function(t){ t.classList.remove('active'); });
+  thumbs[idx].classList.add('active');
+
+  if (idx === 0 && currentSingle === null) {
+    return;
+  }
+
+  var dataType = thumbs[idx].getAttribute('data-type');
+
+  if (idx === 0) {
+    resetGallery();
+    return;
+  }
+
+  currentSingle = idx;
+
+  var primary = main.querySelector('.primary-photo');
+  var secondary = main.querySelector('.secondary-hidden');
+
+  main.classList.add('full-view');
+  back.style.display = 'block';
+
+  primary.innerHTML = dataType === 'video'
+    ? '<span style="font-size:22px;color:#a66658">▶</span><span style="font-size:11px;color:#d4baad;margin-top:6px;display:block;letter-spacing:.06em;text-transform:uppercase">video</span>'
+    : '<span>foto ' + (idx + 1) + '</span>';
+
+  if (secondary) secondary.style.display = 'none';
+}
+
+function resetGallery() {
+  var main = document.getElementById('galleryMain');
+  var back = document.getElementById('thumbBack');
+  var secondary = main.querySelector('.secondary-hidden');
+  var primary = main.querySelector('.primary-photo');
+  var thumbs = document.querySelectorAll('.thumb');
+
+  currentSingle = null;
+  main.classList.remove('full-view');
+  back.style.display = 'none';
+
+  primary.innerHTML = '<span>foto 1</span><span class="photo-num">1/6</span>';
+  if (secondary) secondary.style.display = '';
+
+  thumbs.forEach(function(t){ t.classList.remove('active'); });
+  thumbs[0].classList.add('active');
+}
+</script>
+
+</body>
+</html>

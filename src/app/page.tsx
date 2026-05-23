@@ -83,7 +83,7 @@ export default function ComingSoonPage() {
             </p>
             {/* SABINE — vervang href door jouw Tally-URL, bijv. https://tally.so/r/RG06PQ */}
             <a
-              className="btn-2 on-dark"
+              className="btn-dark-b"
               href="https://tally.so/r/RG06PQ"
               target="_blank"
               rel="noopener noreferrer"
