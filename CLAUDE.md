@@ -7,6 +7,7 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.7 | 24-05-2026 | Docentgrid kolomverdeling vastgesteld: 2 mobiel / 3 tablet / 4 desktop |
 | v1.6 | 23-05-2026 | Verbod op Tailwind utilities voor typografie expliciet gedocumenteerd |
 | v1.5 | 23-05-2026 | Kleurmodifiers voor koppen gedocumenteerd: .accent-terracotta, .accent-moss, .on-dark |
 | v1.4 | 23-05-2026 | DocentCard rounded-2xl expliciet benoemd als enige uitzondering op rechte hoeken |
@@ -570,6 +571,15 @@ Alle knoppen: \`rounded-none border-none px-5 py-[7px] font-lato text-sm font-no
 \- Witte achtergrond met zachte schaduw: \`shadow-sm hover:shadow-md transition-shadow\`  
 \- Afgeronde hoeken: \`rounded-2xl\` — dit is de **enige uitzondering** op de "rechte hoeken" regel. Alle andere elementen (knoppen, inputs, containers) gebruiken \`rounded-none\`.  
 \- Subtiele hover: lichte opwaartse beweging \`hover:-translate-y-1 transition-transform\`
+
+\#\#\# Docentgrid kolomverdeling (\`/docenten\`)  
+CSS-klasse: \`.kaartjes-grid-v2\` in \`layout.css\`
+
+| Breakpoint | Kolommen |
+| :--------- | :------- |
+| Mobiel (< 768px) | 2 |
+| Tablet (≥ 768px) | 3 |
+| Desktop (≥ 1024px) | 4 |
 
 \---
 
