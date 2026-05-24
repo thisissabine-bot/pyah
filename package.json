@@ -23,6 +23,7 @@
     "react-leaflet": "^5.0.0",
     "resend": "^6.12.3",
     "stripe": "^22.1.0",
+    "yet-another-react-lightbox": "^3.32.0",
     "zod": "^4.4.2"
   },
   "devDependencies": {

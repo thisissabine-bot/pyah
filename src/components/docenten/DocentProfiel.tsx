@@ -3,216 +3,216 @@
 import { useState } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
-import { BookOpen, Award } from "lucide-react"
+import NextImage from "next/image"
+import { BookOpen, Award, LayoutGrid, MapPin } from "lucide-react"
 import type { Docent } from "@/lib/testdata"
+import type { RenderSlideProps, SlideImage } from "yet-another-react-lightbox"
+import "yet-another-react-lightbox/styles.css"
 
 const DocentKaart = dynamic(() => import("./DocentKaart"), { ssr: false })
+const Lightbox = dynamic(() => import("yet-another-react-lightbox"), { ssr: false })
 
 export default function DocentProfiel({ docent, terug = "" }: { docent: Docent, terug?: string }) {
-  const initials = docent.naam.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+
   const ervaren = docent.ervaringsniveau === "ervaren"
 
   const introductielesAltijd75 = docent.tarieven.find((t) => t.naam === "Introductieles")
   const losseMinuten60 = docent.tarieven.find((t) => t.naam === "Losse les" && t.duur_minuten === 60)
   const losseMinuten75 = docent.tarieven.find((t) => t.naam === "Losse les" && t.duur_minuten === 75)
 
-  const fotos = docent.foto_url ? [docent.foto_url] : []
-  const totalSlots = 6
-  const [photoIdx, setPhotoIdx] = useState(0)
+  const fotos = (docent.foto_url ? [docent.foto_url] : []).slice(0, 6)
+  const slides: SlideImage[] = fotos.map((src) => ({ src }))
 
-  function nextPhoto() {
-    setPhotoIdx((i) => (i + 1) % totalSlots)
+  const slot0 = fotos[0] ?? null
+  const slot1 = fotos[1] ?? null
+  const slot2 = fotos[2] ?? null
+
+  function openLightbox(index: number) {
+    setLightboxIndex(index)
+    setLightboxOpen(true)
   }
 
-  function prevPhoto() {
-    setPhotoIdx((i) => (i - 1 + totalSlots) % totalSlots)
-  }
-
-  const activeIsVideo = photoIdx === 5
+  const terugHref = terug ? `/docenten?locatie=${encodeURIComponent(terug)}` : "/docenten"
 
   return (
     <div className="max-w-5xl mx-auto px-6 sm:px-12 py-10">
 
       {/* Broodkruimel */}
-      <div className="text-xs text-pyah-zacht mb-8 tracking-wide">
-        <Link href={terug ? `/docenten?locatie=${encodeURIComponent(terug)}` : "/docenten"} className="hover:text-pyah-accent transition-colors">← Terug naar docenten</Link>
+      <div style={{ marginBottom: "20px" }}>
+        <Link href={terugHref} className="text-small" style={{ textDecoration: "none" }}>
+          ← Terug naar docenten
+        </Link>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-12 items-start [&>*:last-child]:order-first [&>*:last-child]:lg:order-last">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-12 items-start">
 
         {/* ── LINKER KOLOM ── */}
         <div>
 
-          {/* 1. Naam + locatie */}
-          <h1 className="text-3xl font-bold text-pyah-diep mb-2 leading-tight">{docent.naam}</h1>
-          <div className="flex items-center gap-3 text-sm text-pyah-donker/70">
-            <span>📍 {docent.locatie}</span>
-            <span className="text-pyah-zacht">·</span>
-            <span>reist tot {docent.reisafstand_km} km</span>
-          </div>
-
-          <hr className="border-t border-pyah-zacht my-7" />
-
-          {/* 2. Fotogalerij */}
-          <div className="grid grid-cols-2 gap-2 mb-2">
-            {[photoIdx, (photoIdx + 1) % totalSlots].map((slot, col) => {
-              const isVideo = slot === 5
-              return (
-                <div
-                  key={col}
-                  onClick={col === 0 ? prevPhoto : nextPhoto}
-                  className="relative aspect-square bg-pyah-licht overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-                >
-                  {isVideo ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-                      <span className="text-3xl text-pyah-accent">▶</span>
-                      <span className="text-xs text-pyah-zacht uppercase tracking-widest">video</span>
-                    </div>
-                  ) : fotos[slot] ? (
-                    <img src={fotos[slot]} alt={docent.naam} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-xs text-pyah-zacht uppercase tracking-wider">foto {slot + 1}</span>
-                    </div>
-                  )}
-                  <span className="absolute bottom-2 right-2.5 text-[10px] text-pyah-zacht">
-                    {slot + 1}/{totalSlots}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* Thumbnail strip */}
-          <div className="overflow-x-auto pb-1">
-            <div className="flex gap-1.5 w-max">
-              {[...Array(5)].map((_, i) => (
-                <div
-                  key={i}
-                  onClick={() => setPhotoIdx(i)}
-                  className={`w-16 h-16 flex-shrink-0 bg-pyah-licht flex items-center justify-center text-[10px] text-pyah-zacht uppercase tracking-wide cursor-pointer hover:opacity-80 transition-opacity border-[1.5px] ${photoIdx === i ? "border-pyah-accent" : "border-transparent"}`}
-                >
-                  {fotos[i]
-                    ? <img src={fotos[i]} alt="" className="w-full h-full object-cover" />
-                    : i + 1
-                  }
-                </div>
-              ))}
+          {/* 1. Fotoblok */}
+          <div style={{ aspectRatio: "5/3", display: "grid", gridTemplateColumns: "3fr 2fr", gap: "4px" }}>
+            <div
+              style={{ background: "#ebe3e0", overflow: "hidden", cursor: slot0 ? "pointer" : "default" }}
+              onClick={slot0 ? () => openLightbox(0) : undefined}
+            >
+              {slot0 && (
+                <img src={slot0} alt={docent.naam} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              )}
+            </div>
+            <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: "4px" }}>
               <div
-                onClick={() => setPhotoIdx(5)}
-                className={`w-16 h-16 flex-shrink-0 bg-[#e8e2df] flex items-center justify-center text-lg text-pyah-accent cursor-pointer hover:opacity-80 transition-opacity border-[1.5px] ${photoIdx === 5 ? "border-pyah-accent" : "border-transparent"}`}
+                style={{ background: slot1 ? "#ebe3e0" : "#d4baad", overflow: "hidden", cursor: slot1 ? "pointer" : "default" }}
+                onClick={slot1 ? () => openLightbox(1) : undefined}
               >
-                ▶
+                {slot1 && (
+                  <img src={slot1} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                )}
+              </div>
+              <div
+                style={{ background: slot2 ? "#ebe3e0" : "#d4baad", overflow: "hidden", cursor: slot2 ? "pointer" : "default" }}
+                onClick={slot2 ? () => openLightbox(2) : undefined}
+              >
+                {slot2 && (
+                  <img src={slot2} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                )}
               </div>
             </div>
           </div>
 
-          <hr className="border-t border-pyah-zacht my-7" />
+          {/* Foto's trigger — alleen bij 2+ foto's */}
+          {fotos.length > 1 && (
+            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "8px" }}>
+              <button
+                onClick={() => openLightbox(0)}
+                style={{ display: "flex", alignItems: "center", gap: "6px", background: "none", border: "none", cursor: "pointer", padding: "0", color: "#484f47" }}
+              >
+                <LayoutGrid size={14} />
+                <span className="text-small">Foto's</span>
+              </button>
+            </div>
+          )}
 
-          {/* 3. Badge + stijlen */}
-          <div className="flex flex-wrap items-center gap-2.5">
-            <span className={`text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider ${ervaren ? "bg-pyah-accent text-white" : "bg-pyah-licht text-pyah-donker"}`}>
+          {/* 2. Naam */}
+          <h1 className="heading-h2 accent-terracotta" style={{ marginTop: "24px" }}>{docent.naam}</h1>
+
+          {/* 3. Locatie */}
+          <div style={{ display: "flex", alignItems: "center", gap: "6px", marginTop: "8px" }}>
+            <MapPin size={14} color="#a66658" />
+            <span className="text-small">{docent.locatie}</span>
+            <span className="text-small">·</span>
+            <span className="text-small">reist tot {docent.reisafstand_km} km</span>
+          </div>
+
+          <div style={{ borderTop: "1px solid #d4baad", margin: "24px 0" }} />
+
+          {/* 4. Badges */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center" }}>
+            <span className={ervaren ? "badge-ervaren" : "badge-startend"}>
               {ervaren ? "Ervaren" : "Startend"}
             </span>
             {docent.yogastijlen.map((s) => (
-              <span key={s} className="text-xs px-3 py-1 bg-pyah-licht text-pyah-donker rounded-full">{s}</span>
+              <span key={s} className="badge-stijl">{s}</span>
             ))}
-            {docent.specialisaties.slice(0, 2).map((s) => (
-              <span key={s} className="text-xs px-3 py-1 bg-pyah-licht text-pyah-donker rounded-full">{s}</span>
+            {docent.specialisaties.map((s) => (
+              <span key={s} className="badge-stijl">{s}</span>
             ))}
           </div>
 
-          <hr className="border-t border-pyah-zacht my-7" />
+          <div style={{ borderTop: "1px solid #d4baad", margin: "24px 0" }} />
 
-          {/* 4. Bio */}
-          <p className="text-xs font-semibold uppercase tracking-widest text-pyah-accent mb-4">Over mij</p>
-          <div className="text-sm text-pyah-donker/80 leading-relaxed space-y-3">
-            {docent.bio.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
+          {/* 5. Bio */}
+          <p className="heading-h3 mb-action">Over mij</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            {docent.bio.split("\n\n").map((p, i) => (
+              <p key={i} className="text-body">{p}</p>
+            ))}
           </div>
 
-          <hr className="border-t border-pyah-zacht my-7" />
+          <div style={{ borderTop: "1px solid #d4baad", margin: "24px 0" }} />
 
-          {/* 5. Opleiding & certificaten */}
-          <p className="text-xs font-semibold uppercase tracking-widest text-pyah-accent mb-4">Opleidingen &amp; certificaten</p>
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-pyah-licht flex-shrink-0 flex items-center justify-center">
-                <BookOpen size={13} className="text-pyah-accent/70" aria-hidden="true" />
+          {/* 6. Opleiding & certificaten */}
+          <p className="heading-h3 mb-action">Opleidingen &amp; certificaten</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div style={{ width: "32px", height: "32px", background: "#ebe3e0", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <BookOpen size={13} color="#a66658" aria-hidden="true" />
               </div>
-              <p className="text-sm text-pyah-donker/80">{docent.opleiding}</p>
+              <p className="text-body">{docent.opleiding}</p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-pyah-licht flex-shrink-0 flex items-center justify-center">
-                <Award size={13} className="text-pyah-accent/70" aria-hidden="true" />
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <div style={{ width: "32px", height: "32px", background: "#ebe3e0", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Award size={13} color="#a66658" aria-hidden="true" />
               </div>
-              <p className="text-sm text-pyah-donker/80">{docent.certificering}</p>
+              <p className="text-body">{docent.certificering}</p>
             </div>
           </div>
 
-          <hr className="border-t border-pyah-zacht my-7" />
+          <div style={{ borderTop: "1px solid #d4baad", margin: "24px 0" }} />
 
-          {/* 6. Yogastijlen gedetailleerd */}
-          <p className="text-xs font-semibold uppercase tracking-widest text-pyah-accent mb-4">Yogastijlen</p>
-          <div className="mb-4">
-            <p className="text-xs font-medium text-pyah-donker/50 mb-2">Stijlen</p>
-            <div className="flex flex-wrap gap-2">
+          {/* 7. Yogastijlen & specialismen */}
+          <p className="heading-h3 mb-action">Yogastijlen</p>
+          <div style={{ marginBottom: "16px" }}>
+            <p className="text-small mb-text">Stijlen</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
               {docent.yogastijlen.map((s) => (
-                <span key={s} className="text-xs px-3 py-1 bg-pyah-licht text-pyah-donker rounded-full">{s}</span>
+                <span key={s} className="badge-stijl">{s}</span>
               ))}
             </div>
           </div>
           {docent.specialisaties.length > 0 && (
             <div>
-              <p className="text-xs font-medium text-pyah-donker/50 mb-2">Specialismen</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-small mb-text">Specialismen</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
                 {docent.specialisaties.map((s) => (
-                  <span key={s} className="text-xs px-3 py-1 bg-pyah-licht text-pyah-donker rounded-full">{s}</span>
+                  <span key={s} className="badge-stijl">{s}</span>
                 ))}
               </div>
             </div>
           )}
 
-          <hr className="border-t border-pyah-zacht my-7" />
+          <div style={{ borderTop: "1px solid #d4baad", margin: "24px 0" }} />
 
-          {/* 7. Werkgebied */}
-          <p className="text-xs font-semibold uppercase tracking-widest text-pyah-accent mb-4">Werkgebied</p>
+          {/* 8. Werkgebied */}
+          <p className="heading-h3 mb-action">Werkgebied</p>
           <DocentKaart locatie={docent.locatie} reisafstand_km={docent.reisafstand_km} />
-          <p className="text-sm text-pyah-donker/70 mt-3">📍 {docent.locatie} en omgeving</p>
-          <p className="text-xs text-pyah-zacht mt-1">Reiskosten: niet van toepassing</p>
+          <p className="text-body" style={{ marginTop: "12px" }}>📍 {docent.locatie} en omgeving</p>
+          <p className="text-small" style={{ marginTop: "4px" }}>Reiskosten: niet van toepassing</p>
 
-          <hr className="border-t border-pyah-zacht my-7" />
+          <div style={{ borderTop: "1px solid #d4baad", margin: "24px 0" }} />
 
-          {/* 8. Reviews */}
-          <p className="text-xs font-semibold uppercase tracking-widest text-pyah-accent mb-4">Reviews</p>
-          <p className="text-sm text-pyah-donker/50 italic">
+          {/* 9. Reviews */}
+          <p className="heading-h3 mb-action">Reviews</p>
+          <p className="text-small" style={{ fontStyle: "italic" }}>
             Na afloop van een les kunnen klanten een review achterlaten. Dit profiel heeft nog geen reviews.
           </p>
 
         </div>
 
-        {/* ── RECHTER KOLOM ── */}
+        {/* ── RECHTER KOLOM (sidebar) ── */}
         <div className="lg:sticky lg:top-24">
-          <div className="bg-pyah-licht p-6">
+          <div style={{ background: "#ebe3e0", padding: "24px" }}>
 
-            <p className="text-sm font-bold text-pyah-diep mb-4">Tarieven</p>
+            <p className="heading-h5 mb-action">Tarieven</p>
 
-            <div className="flex flex-col">
+            <div>
               {introductielesAltijd75 && (
-                <div className="flex justify-between items-baseline py-2 border-b border-pyah-zacht text-sm">
-                  <span className="text-pyah-donker/70">Introductieles 75 min.</span>
-                  <span className="font-medium text-pyah-donker">€{(introductielesAltijd75.prijs_cent / 100).toFixed(0)}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "8px 0", borderBottom: "1px solid #d4baad" }}>
+                  <span className="tarief-rij">Introductieles 75 min.</span>
+                  <span className="tarief-rij">€{(introductielesAltijd75.prijs_cent / 100).toFixed(0)}</span>
                 </div>
               )}
               {losseMinuten60 && (
-                <div className="flex justify-between items-baseline py-2 border-b border-pyah-zacht text-sm">
-                  <span className="text-pyah-donker/70">Losse les 60 min.</span>
-                  <span className="font-medium text-pyah-donker">€{(losseMinuten60.prijs_cent / 100).toFixed(0)}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "8px 0", borderBottom: "1px solid #d4baad" }}>
+                  <span className="tarief-rij">Losse les 60 min.</span>
+                  <span className="tarief-rij">€{(losseMinuten60.prijs_cent / 100).toFixed(0)}</span>
                 </div>
               )}
               {losseMinuten75 && (
-                <div className="flex justify-between items-baseline py-2 text-sm">
-                  <span className="text-pyah-donker/70">Losse les 75 min.</span>
-                  <span className="font-medium text-pyah-donker">€{(losseMinuten75.prijs_cent / 100).toFixed(0)}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "8px 0" }}>
+                  <span className="tarief-rij">Losse les 75 min.</span>
+                  <span className="tarief-rij">€{(losseMinuten75.prijs_cent / 100).toFixed(0)}</span>
                 </div>
               )}
             </div>
@@ -221,29 +221,58 @@ export default function DocentProfiel({ docent, terug = "" }: { docent: Docent, 
               href="https://calendly.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center mt-5 bg-pyah-accent text-white py-3 text-sm font-medium tracking-wide hover:opacity-90 transition-opacity"
+              className="btn-light"
+              style={{ display: "block", textAlign: "center", marginTop: "20px" }}
             >
               Plan een kennismaking
             </a>
-            <p className="text-xs text-center text-pyah-donker/50 mt-2 tracking-wide">Gratis · vrijblijvend · online</p>
+            <p className="text-small" style={{ textAlign: "center", marginTop: "8px" }}>Gratis · vrijblijvend · online</p>
 
-            <div className="border-t border-pyah-zacht mt-5 pt-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-pyah-accent mb-2">Locatie</p>
-              <p className="text-sm text-pyah-donker/70">📍 {docent.locatie} · reist tot {docent.reisafstand_km} km</p>
-              <p className="text-xs text-pyah-zacht mt-1">Reiskosten: niet van toepassing</p>
-            </div>
+            <div style={{ borderTop: "1px solid #d4baad", margin: "20px 0" }} />
+
+            <p className="heading-h5 mb-text">Locatie</p>
+            <p className="text-body">📍 {docent.locatie} · reist tot {docent.reisafstand_km} km</p>
+            <p className="text-small" style={{ marginTop: "4px" }}>Reiskosten: niet van toepassing</p>
 
           </div>
 
           <Link
-            href={terug ? `/docenten?locatie=${encodeURIComponent(terug)}` : "/docenten"}
-            className="block w-full text-center mt-3 border border-pyah-accent text-pyah-accent py-3 text-sm hover:bg-pyah-licht transition-colors"
+            href={terugHref}
+            className="btn-light"
+            style={{ display: "block", textAlign: "center", marginTop: "12px" }}
           >
             ← Terug naar overzicht
           </Link>
         </div>
 
       </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={slides}
+        render={{
+          slide: ({ slide }: RenderSlideProps<SlideImage>) => (
+            <div style={{ position: "relative", width: "100%", height: "100%" }}>
+              <NextImage
+                src={slide.src}
+                alt={slide.alt ?? docent.naam}
+                fill
+                style={{ objectFit: "contain" }}
+                sizes="(max-width: 768px) 100vw, 80vw"
+                priority
+              />
+            </div>
+          ),
+        }}
+        styles={{
+          container: { backgroundColor: "#ebe3e0" },
+          button: { color: "#260f09", filter: "none" },
+        }}
+      />
+
     </div>
   )
 }

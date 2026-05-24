@@ -1073,3 +1073,100 @@ a:hover {
   color: #260f09;
   padding: 2px 7px;
 }
+
+
+/* ----------------------------------------------------------
+   11. BADGES — PROFIELPAGINA
+   ---------------------------------------------------------- */
+
+.badge-ervaren {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #484f47;
+  color: #ebe3e0;
+  padding: 5px 12px;
+  border-radius: 0;
+  display: inline-block;
+}
+
+.badge-startend {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #d4baad;
+  color: #260f09;
+  padding: 5px 12px;
+  border-radius: 0;
+  display: inline-block;
+}
+
+.badge-stijl {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  background: #ebe3e0;
+  color: #260f09;
+  padding: 5px 12px;
+  border-radius: 0;
+  display: inline-block;
+}
+
+
+/* ----------------------------------------------------------
+   12. TARIEVEN SIDEBAR
+   ---------------------------------------------------------- */
+
+.tarief-rij {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #484f47;
+  line-height: 1.6;
+}
+
+
+/* ----------------------------------------------------------
+   11. BADGES — PROFIELPAGINA
+   ---------------------------------------------------------- */
+
+.badge-ervaren {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #484f47;
+  color: #ebe3e0;
+  padding: 5px 12px;
+  border-radius: 0;
+  display: inline-block;
+}
+
+.badge-startend {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #d4baad;
+  color: #260f09;
+  padding: 5px 12px;
+  border-radius: 0;
+  display: inline-block;
+}
+
+.badge-stijl {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  background: #ebe3e0;
+  color: #260f09;
+  padding: 5px 12px;
+  border-radius: 0;
+  display: inline-block;
+}

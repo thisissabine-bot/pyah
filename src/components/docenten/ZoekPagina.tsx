@@ -267,7 +267,7 @@ export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { do
                     )}
                   </div>
                   <div className="kaartje-body">
-                    <p className="kaartje-naam" style={{ fontFamily: '"arsenica-variable", serif', fontSize: "15px", color: "#a66658" }}>{docent.naam}</p>
+                    <p className="kaartje-naam">{docent.naam}</p>
                     <p className="kaartje-stijl">{docent.yogastijlen.slice(0, 2).join(" · ")}</p>
                     <div className="kaartje-footer">
                       <span className="kaartje-prijs">

@@ -35,7 +35,7 @@ export default function DocentKaart({ locatie, reisafstand_km }: Props) {
       zoom={11}
       scrollWheelZoom={false}
       zoomControl={false}
-      className="h-52 w-full rounded-xl"
+      className="h-52 w-full rounded-none"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'

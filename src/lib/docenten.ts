@@ -18,7 +18,7 @@ export async function getAllDocenten(): Promise<Docent[]> {
     .order("naam");
 
   if (error || !docenten) {
-    console.error("[docenten] Supabase error, fallback op testdata:", error);
+    console.error("[docenten] Supabase error, fallback op testdata:", error?.message ?? error?.code ?? JSON.stringify(error));
     return DOCENTEN_TESTDATA;
   }
 
@@ -41,7 +41,7 @@ export async function getDocent(slug: string): Promise<Docent | null> {
     .single();
 
   if (error || !data) {
-    console.error("[docenten] Supabase error voor slug", slug, error);
+    console.error("[docenten] Supabase error voor slug", slug, error?.message ?? error?.code ?? JSON.stringify(error));
     return getDocentBySlugFromTestdata(slug) ?? null;
   }
 

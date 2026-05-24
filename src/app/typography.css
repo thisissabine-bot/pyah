@@ -87,9 +87,9 @@
 /* --- SMALL — Labels, badges, meta ----------------------- */
 .text-small {
   font-family: 'Lato', sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
-  color: #260f09;
+  color: #484f47;
   line-height: 1.5;
 }
 
@@ -152,6 +152,9 @@
    ============================================================ */
 .accent-moss {
   color: #484f47;
+}
+.accent-terracotta {
+  color: #a66658;
 }
 
 /* ============================================================
