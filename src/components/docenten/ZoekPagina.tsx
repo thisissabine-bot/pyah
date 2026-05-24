@@ -1,22 +1,24 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { MapPin } from "lucide-react";
+import { MapPin, ChevronDown } from "lucide-react";
 
 const ZoekKaart = dynamic(() => import("./ZoekKaart"), { ssr: false });
 import type { Docent } from "@/lib/testdata";
 import { getStartprijs } from "@/lib/testdata";
 
 const RUSTIGE_STIJLEN = ["Yin yoga", "Restorative", "Yoga Nidra", "Hatha"];
-const ACTIEVE_STIJLEN = ["Vinyasa", "Slow Flow"];
-const MEER_STIJLEN = ["Ashtanga", "Power yoga", "Iyengar", "Kundalini"];
-const BASIS_SPECIALISMEN = ["Stress & herstel", "Burn-out", "Blessures", "Zwangerschap"];
-const MEER_SPECIALISMEN = ["Postnataal", "Menopauze", "Senioren", "Nek- & rugklachten", "HSP", "Beginners"];
+const ACTIEVE_STIJLEN = ["Vinyasa", "Slow Flow", "Ashtanga", "Power yoga", "Iyengar", "Kundalini"];
+const ALLE_SPECIALISMEN = [
+  "Stress & herstel", "Burn-out", "Blessures", "Zwangerschap",
+  "Postnataal", "Menopauze", "Senioren", "Nek- & rugklachten", "HSP", "Beginners",
+];
 
 type ActiveFilter = { label: string; type: "stijl" | "specialisme" | "niveau" };
+type OpenDropdown = null | "niveau" | "rustig" | "actief" | "specialisme";
 
 export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { docenten: Docent[], locatie?: string }) {
   const router = useRouter();
@@ -26,21 +28,17 @@ export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { do
   const [niveau, setNiveau] = useState<"" | "startend" | "ervaren">("");
   const [stijlFilter, setStijlFilter] = useState<Set<string>>(new Set());
   const [specialismeFilter, setSpecialismeFilter] = useState<Set<string>>(new Set());
-  const [meerStijlen, setMeerStijlen] = useState(false);
-  const [meerSpecialismen, setMeerSpecialismen] = useState(false);
-  const [filterPanelOpen, setFilterPanelOpen] = useState(false);
-  const [gridCols, setGridCols] = useState(5);
+  const [openDropdown, setOpenDropdown] = useState<OpenDropdown>(null);
+  const filterBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function updateCols() {
-      const w = window.innerWidth;
-      if (w < 640) setGridCols(2);
-      else if (w < 1280) setGridCols(3);
-      else setGridCols(5);
+    function handleClickOutside(e: MouseEvent) {
+      if (filterBarRef.current && !filterBarRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
     }
-    updateCols();
-    window.addEventListener("resize", updateCols);
-    return () => window.removeEventListener("resize", updateCols);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   function applyLocatie(value: string) {
@@ -74,6 +72,10 @@ export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { do
     setNiveau("");
   }
 
+  function toggleDropdown(name: OpenDropdown) {
+    setOpenDropdown(prev => prev === name ? null : name);
+  }
+
   const actieveFilters = useMemo<ActiveFilter[]>(() => {
     const tags: ActiveFilter[] = [];
     stijlFilter.forEach(s => tags.push({ label: s, type: "stijl" }));
@@ -96,39 +98,41 @@ export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { do
     );
   }, [docenten, locatie, niveau, stijlFilter, specialismeFilter]);
 
+  const rustigActief = Array.from(stijlFilter).some(s => RUSTIGE_STIJLEN.includes(s));
+  const actiefActief = Array.from(stijlFilter).some(s => ACTIEVE_STIJLEN.includes(s));
+
   return (
     <div className="zoek-pagina-wrapper">
 
       {/* Titel */}
-      <div className="text-center px-4 sm:px-8 xl:px-16" style={{ paddingTop: "32px", paddingBottom: "32px" }}>
-        <h1 className="heading-h1">
-          {locatie ? `Docenten in ${locatie}` : "Alle docenten in regio Haarlem"}
-        </h1>
+      <div className="zoek-titel-sectie">
+        <div className="container">
+          <h1 className="heading-h1">
+            {locatie ? `Docenten in ${locatie}` : "Alle docenten in regio Haarlem"}
+          </h1>
+        </div>
       </div>
 
-      {/* Balk: locatie + filters + kaart-toggle */}
-      <div className="zoek-topbar px-4 sm:px-8 xl:px-16" style={{ borderTop: "1px solid #d4baad", borderBottom: "1px solid #d4baad", paddingTop: "10px", paddingBottom: "10px" }}>
-
-        {/* Links: Locatie-invoer + actieve filters */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px", justifyContent: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-              <input
-                className="pc-invoer"
-                type="text"
-                placeholder="Stad of postcode"
-                value={locatieInput}
-                onChange={e => setLocatieInput(e.target.value)}
-                onKeyDown={e => e.key === "Enter" && applyLocatie(locatieInput)}
-                style={{ width: "140px" }}
-              />
-              <button
-                className={`pc-knop${locatieInput ? " gereed" : ""}`}
-                onClick={() => applyLocatie(locatieInput)}
-              >
-                Zoek
-              </button>
-            </div>
+      {/* Topbar: postcode + zoek + toon kaart */}
+      <div className="zoek-topbar-v2">
+        <div className="container">
+          <div className="zoek-topbar-inner">
+            {/* Postcode + zoek + locatie-pill */}
+            <input
+              className="pc-invoer"
+              type="text"
+              placeholder="Stad of postcode"
+              value={locatieInput}
+              onChange={e => setLocatieInput(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && applyLocatie(locatieInput)}
+              style={{ width: "140px" }}
+            />
+            <button
+              className={`pc-knop${locatieInput ? " gereed" : ""}`}
+              onClick={() => applyLocatie(locatieInput)}
+            >
+              Zoek
+            </button>
             {locatie && (
               <div className="loc-pill" onClick={clearLocatie}>
                 <MapPin size={13} />
@@ -136,104 +140,127 @@ export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { do
                 <span>×</span>
               </div>
             )}
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-            <button className="btn-light" onClick={() => setFilterPanelOpen(!filterPanelOpen)}>
-              {filterPanelOpen ? "Minder filters" : "Filters"}
+
+            <div className="zoek-topbar-scheiding" />
+
+            {/* Toon kaart — zelfde stijl als Zoek-knop */}
+            <button
+              className={`pc-knop${kaartOpen ? " gereed" : ""}`}
+              onClick={() => setKaartOpen(!kaartOpen)}
+            >
+              {kaartOpen ? "Verberg kaart" : "Toon kaart"}
             </button>
-            {actieveFilters.map(f => (
-              <span key={f.label} className="actieve-chip">
-                {f.label}
-                <button onClick={() => removeFilter(f)}>×</button>
-              </span>
-            ))}
-            {actieveFilters.length > 0 && (
-              <button className="meer-knop" style={{ marginTop: 0 }} onClick={clearAll}>Wis alles</button>
-            )}
           </div>
         </div>
-
-        {/* Midden: intro-tekst (tablet/desktop) */}
-        {gridCols > 2 && (
-          <p className="heading-h3 accent-moss" style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}>
-            Zoek op de yogastijl of specialisme die jij op dit moment nodig hebt en vind jouw docent.
-          </p>
-        )}
-        {gridCols <= 2 && <div />}
-
-        {/* Rechts: Toon kaart */}
-        <label className="kaart-toggle">
-          <div
-            className={`toggle-track${kaartOpen ? " aan" : ""}`}
-            onClick={() => setKaartOpen(!kaartOpen)}
-          >
-            <div className="toggle-knop" />
-          </div>
-          Toon kaart
-        </label>
       </div>
 
-      {/* Uitklapbaar filterpaneel */}
-      {filterPanelOpen && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px", marginTop: "20px", paddingTop: "16px", borderTop: "1px solid #ebe3e0" }}>
-          <div>
-            <p className="sb-titel">Ervaringsniveau</p>
-            <label className="filter-rij">
-              <input type="checkbox" checked={niveau === "startend"} onChange={() => setNiveau(niveau === "startend" ? "" : "startend")} />
-              Startend
-            </label>
-            <label className="filter-rij">
-              <input type="checkbox" checked={niveau === "ervaren"} onChange={() => setNiveau(niveau === "ervaren" ? "" : "ervaren")} />
-              Ervaren
-            </label>
-          </div>
-          <div>
-            <p className="sb-titel">Yogastijl — rustig</p>
-            {RUSTIGE_STIJLEN.map(s => (
-              <label key={s} className="filter-rij">
-                <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
-                {s}
-              </label>
-            ))}
-          </div>
-          <div>
-            <p className="sb-titel">Yogastijl — actief</p>
-            {ACTIEVE_STIJLEN.map(s => (
-              <label key={s} className="filter-rij">
-                <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
-                {s}
-              </label>
-            ))}
-            {meerStijlen && MEER_STIJLEN.map(s => (
-              <label key={s} className="filter-rij">
-                <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
-                {s}
-              </label>
-            ))}
-            <button className="meer-knop" onClick={() => setMeerStijlen(!meerStijlen)}>
-              {meerStijlen ? "– minder" : "+ meer stijlen"}
-            </button>
-          </div>
-          <div>
-            <p className="sb-titel">Specialisme</p>
-            {BASIS_SPECIALISMEN.map(s => (
-              <label key={s} className="filter-rij">
-                <input type="checkbox" checked={specialismeFilter.has(s)} onChange={() => toggleSpecialisme(s)} />
-                {s}
-              </label>
-            ))}
-            {meerSpecialismen && MEER_SPECIALISMEN.map(s => (
-              <label key={s} className="filter-rij">
-                <input type="checkbox" checked={specialismeFilter.has(s)} onChange={() => toggleSpecialisme(s)} />
-                {s}
-              </label>
-            ))}
-            <button className="meer-knop" onClick={() => setMeerSpecialismen(!meerSpecialismen)}>
-              {meerSpecialismen ? "– minder" : "+ meer specialismen"}
-            </button>
+      {/* Filter bar: 4 dropdowns gecentreerd */}
+      <div className="filter-bar-sectie" ref={filterBarRef}>
+        <div className="container">
+          <div className="filter-bar-inner">
+
+            {/* ERVARINGSNIVEAU */}
+            <div className="filter-dd-wrapper">
+              <button
+                className={`filter-dd-trigger${niveau ? " filter-dd-actief" : ""}`}
+                onClick={() => toggleDropdown("niveau")}
+              >
+                Ervaringsniveau
+                <ChevronDown
+                  size={13}
+                  className={`filter-dd-chevron${openDropdown === "niveau" ? " open" : ""}`}
+                />
+              </button>
+              {openDropdown === "niveau" && (
+                <div className="filter-dd-menu">
+                  {(["startend", "ervaren"] as const).map(n => (
+                    <button
+                      key={n}
+                      className={`filter-dd-optie${niveau === n ? " actief" : ""}`}
+                      onClick={() => setNiveau(niveau === n ? "" : n)}
+                    >
+                      {n === "startend" ? "Startend" : "Ervaren"}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* YOGASTIJL – RUSTIG */}
+            <div className="filter-dd-wrapper">
+              <button
+                className={`filter-dd-trigger${rustigActief ? " filter-dd-actief" : ""}`}
+                onClick={() => toggleDropdown("rustig")}
+              >
+                Yogastijl – Rustig
+                <ChevronDown
+                  size={13}
+                  className={`filter-dd-chevron${openDropdown === "rustig" ? " open" : ""}`}
+                />
+              </button>
+              {openDropdown === "rustig" && (
+                <div className="filter-dd-menu">
+                  {RUSTIGE_STIJLEN.map(s => (
+                    <label key={s} className="filter-dd-check">
+                      <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
+                      {s}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* YOGASTIJL – ACTIEF */}
+            <div className="filter-dd-wrapper">
+              <button
+                className={`filter-dd-trigger${actiefActief ? " filter-dd-actief" : ""}`}
+                onClick={() => toggleDropdown("actief")}
+              >
+                Yogastijl – Actief
+                <ChevronDown
+                  size={13}
+                  className={`filter-dd-chevron${openDropdown === "actief" ? " open" : ""}`}
+                />
+              </button>
+              {openDropdown === "actief" && (
+                <div className="filter-dd-menu">
+                  {ACTIEVE_STIJLEN.map(s => (
+                    <label key={s} className="filter-dd-check">
+                      <input type="checkbox" checked={stijlFilter.has(s)} onChange={() => toggleStijl(s)} />
+                      {s}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* SPECIALISME */}
+            <div className="filter-dd-wrapper">
+              <button
+                className={`filter-dd-trigger${specialismeFilter.size > 0 ? " filter-dd-actief" : ""}`}
+                onClick={() => toggleDropdown("specialisme")}
+              >
+                Specialisme
+                <ChevronDown
+                  size={13}
+                  className={`filter-dd-chevron${openDropdown === "specialisme" ? " open" : ""}`}
+                />
+              </button>
+              {openDropdown === "specialisme" && (
+                <div className="filter-dd-menu">
+                  {ALLE_SPECIALISMEN.map(s => (
+                    <label key={s} className="filter-dd-check">
+                      <input type="checkbox" checked={specialismeFilter.has(s)} onChange={() => toggleSpecialisme(s)} />
+                      {s}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+
           </div>
         </div>
-      )}
+      </div>
 
       {/* Kaartpaneel */}
       <div className={`kaart-paneel${kaartOpen ? " open" : ""}`}>
@@ -241,54 +268,72 @@ export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { do
       </div>
 
       {/* Resultaten */}
-      <div className="px-4 py-6 sm:px-8 sm:py-8 xl:px-16 xl:py-12">
-        <div className="resultaten-kop">
-          <span className="text-small">{resultaten.length} gevonden</span>
-        </div>
+      <div className="zoek-resultaten-wrapper">
+        <div className="container">
 
-        {resultaten.length > 0 ? (
-          <div className="kaartjes-grid">
-            {resultaten.map(docent => {
-              const initials = docent.naam.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
-              const ervaren = docent.ervaringsniveau === "ervaren";
-              return (
-                <Link
-                  key={docent.id}
-                  href={`/docenten/${docent.slug}?terug=${encodeURIComponent(locatie)}`}
-                  className={`kaartje${ervaren ? " kaartje-ervaren" : ""}`}
-                >
-                  <div className="kaartje-foto">
-                    {docent.foto_url
-                      ? <img src={docent.foto_url} alt={docent.naam} />
-                      : <div className="kaartje-initialen">{initials}</div>
-                    }
-                    {ervaren && (
-                      <div className="kaartje-badge">Ervaren</div>
-                    )}
-                  </div>
-                  <div className="kaartje-body">
-                    <p className="kaartje-naam">{docent.naam}</p>
-                    <p className="kaartje-stijl">{docent.yogastijlen.slice(0, 2).join(" · ")}</p>
-                    <div className="kaartje-footer">
-                      <span className="kaartje-prijs">
-                        v.a. <strong>€{(getStartprijs(docent) / 100).toFixed(0)}</strong>
-                      </span>
-                      <span className={docent.reisafstand_km <= 10 ? "afstand-ok" : "afstand-ver"}>
-                        {docent.reisafstand_km} km
-                      </span>
+          {/* Actieve filter chips */}
+          {actieveFilters.length > 0 && (
+            <div className="actieve-filters-rij">
+              {actieveFilters.map(f => (
+                <span key={f.label} className="actieve-chip-v2">
+                  {f.label}
+                  <button onClick={() => removeFilter(f)}>×</button>
+                </span>
+              ))}
+              <button className="wis-filters-knop" onClick={clearAll}>Wis filters</button>
+            </div>
+          )}
+
+          {/* Resultaattelling */}
+          <p className="text-small" style={{ marginBottom: "16px", color: "#484f47" }}>
+            {resultaten.length} gevonden
+          </p>
+
+          {resultaten.length > 0 ? (
+            <div className="kaartjes-grid-v2">
+              {resultaten.map(docent => {
+                const initials = docent.naam.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+                const ervaren = docent.ervaringsniveau === "ervaren";
+                return (
+                  <Link
+                    key={docent.id}
+                    href={`/docenten/${docent.slug}?terug=${encodeURIComponent(locatie)}`}
+                    className={`kaartje${ervaren ? " kaartje-ervaren" : ""}`}
+                  >
+                    <div className="kaartje-foto">
+                      {docent.foto_url
+                        ? <img src={docent.foto_url} alt={docent.naam} />
+                        : <div className="kaartje-initialen">{initials}</div>
+                      }
+                      {ervaren && (
+                        <div className="kaartje-badge">Ervaren</div>
+                      )}
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        ) : (
-          <div style={{ paddingTop: "32px" }}>
-            <p className="heading-h3 mb-text">Geen resultaten</p>
-            <p className="text-body mb-cta">Probeer andere filters.</p>
-            <button className="btn-light" onClick={clearAll}>Filters wissen</button>
-          </div>
-        )}
+                    <div className="kaartje-body">
+                      <p className="kaartje-naam">{docent.naam}</p>
+                      <p className="kaartje-stijl">{docent.yogastijlen.slice(0, 2).join(" · ")}</p>
+                      <div className="kaartje-footer">
+                        <span className="kaartje-prijs">
+                          v.a. <strong>€{(getStartprijs(docent) / 100).toFixed(0)}</strong>
+                        </span>
+                        <span className={docent.reisafstand_km <= 10 ? "afstand-ok" : "afstand-ver"}>
+                          {docent.reisafstand_km} km
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+            <div style={{ paddingTop: "32px" }}>
+              <p className="heading-h3 mb-text">Geen resultaten</p>
+              <p className="text-body mb-cta">Probeer andere filters.</p>
+              <button className="btn-light" onClick={clearAll}>Filters wissen</button>
+            </div>
+          )}
+
+        </div>
       </div>
     </div>
   );

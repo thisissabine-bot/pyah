@@ -576,7 +576,7 @@ a:hover {
 }
 
 .zoek-pagina-wrapper {
-  background-color: rgba(235, 227, 224, 0.5);
+  background-color: #ffffff;
   min-height: calc(100vh - 72px);
 }
 
@@ -1169,4 +1169,241 @@ a:hover {
   padding: 5px 12px;
   border-radius: 0;
   display: inline-block;
+}
+
+
+/* ----------------------------------------------------------
+   13. ZOEKPAGINA V3 — Dropdown filterbar
+   ---------------------------------------------------------- */
+
+/* Titel sectie */
+.zoek-titel-sectie {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  text-align: center;
+}
+
+/* Topbar v2 */
+.zoek-topbar-v2 {
+  /* border op inner element zodat lijn stopt bij containerbreedte */
+}
+
+.zoek-topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  min-height: 54px;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-top: 1px solid #d4baad;
+  border-bottom: 1px solid #d4baad;
+}
+
+.zoek-topbar-scheiding {
+  width: 1px;
+  height: 24px;
+  background: #d4baad;
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* Filter bar: 4 dropdowns gecentreerd */
+.filter-bar-sectie {
+  /* border op inner element zodat lijn stopt bij containerbreedte */
+}
+
+.filter-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #d4baad;
+}
+
+/* Dropdown wrapper */
+.filter-dd-wrapper {
+  position: relative;
+}
+
+/* Dropdown trigger knop */
+.filter-dd-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #a66658;
+  cursor: pointer;
+  padding: 14px 20px;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.filter-dd-trigger:hover {
+  opacity: 0.75;
+}
+
+.filter-dd-trigger.filter-dd-actief {
+  font-weight: 700;
+}
+
+/* Chevron rotatie */
+.filter-dd-chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.filter-dd-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu — zweeft over content */
+.filter-dd-menu {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(38, 15, 9, 0.12);
+  z-index: 50;
+  min-width: 190px;
+  padding: 6px 0;
+}
+
+/* Dropdown optie (enkelvoudig: niveau) */
+.filter-dd-optie {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #260f09;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.filter-dd-optie:hover {
+  background: #ebe3e0;
+}
+
+.filter-dd-optie.actief {
+  color: #a66658;
+  font-weight: 700;
+}
+
+/* Dropdown checkboxrij */
+.filter-dd-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: #260f09;
+  padding: 9px 16px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+  user-select: none;
+}
+
+.filter-dd-check:hover {
+  background: #ebe3e0;
+}
+
+.filter-dd-check input[type="checkbox"] {
+  accent-color: #a66658;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* Actieve filter chips */
+.actieve-filters-rij {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.actieve-chip-v2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  color: #260f09;
+  background-color: #d4baad;
+  padding: 4px 10px;
+}
+
+.actieve-chip-v2 button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #260f09;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Wis filters tekstknop */
+.wis-filters-knop {
+  background: none;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #a66658;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.wis-filters-knop:hover {
+  text-decoration: underline;
+}
+
+/* Resultaten wrapper */
+.zoek-resultaten-wrapper {
+  padding-top: 28px;
+  padding-bottom: 56px;
+}
+
+/* Kaartjes grid v2: 3 kolommen op desktop */
+.kaartjes-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .kaartjes-grid-v2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .kaartjes-grid-v2 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .filter-bar-inner {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .filter-dd-trigger {
+    padding: 10px 14px;
+    font-size: 10px;
+  }
 }
