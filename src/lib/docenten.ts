@@ -102,7 +102,7 @@ function mapSupabaseDocent(row: {
     slug: row.slug,
     naam: row.naam,
     bio: row.bio ?? "",
-    foto_url: row.foto_url,
+    foto_urls: row.foto_url ? [row.foto_url] : [],
     video_url: row.video_url,
     locatie: row.locatie,
     reisafstand_km: row.reisafstand_km,
