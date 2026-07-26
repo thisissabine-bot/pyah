@@ -44,6 +44,13 @@
   object-position: center;
 }
 
+/* Placeholder voor hero-foto (volgt later via Cloudinary) */
+.hero-placeholder {
+  position: absolute;
+  inset: 0;
+  background-color: #d4baad;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;

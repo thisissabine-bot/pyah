@@ -195,3 +195,71 @@
     margin-top: 16px;
   }
 }
+
+
+/* ============================================================
+   DOCENTZONE — HEADER
+   Zie CLAUDE.md sectie "Docentzone — navigatie & structuur".
+   Volledig gescheiden van de klantzijde: eigen achtergrondkleur
+   (#a66658), eigen navigatielinks. Hergebruikt de structurele
+   klassen hierboven (.nav-container, .nav-logo, .nav-menu,
+   .nav-actions, .nav-toggle, .nav-overlay) — alleen de
+   achtergrond- en linkkleur wijken af.
+   ============================================================ */
+
+.docent-header {
+  background-color: #a66658;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.docent-nav-link {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.docent-nav-link:hover {
+  color: #260f09;
+  text-decoration: none;
+}
+
+.docent-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 280px;
+  background-color: #a66658;
+  display: flex;
+  flex-direction: column;
+  padding: 80px 32px 40px;
+  gap: 24px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 200;
+}
+
+.docent-nav-drawer.nav-drawer-open {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .docent-nav-drawer .docent-nav-link {
+    font-size: 18px;
+  }
+
+  .docent-nav-drawer .nav-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 16px;
+  }
+}

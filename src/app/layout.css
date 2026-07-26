@@ -38,6 +38,7 @@
 }
 
 .page-section-hero {
+  min-height: 480px;
   padding-top: 80px;
   padding-bottom: 80px;
 }
@@ -1406,4 +1407,195 @@ a:hover {
     padding: 10px 14px;
     font-size: 10px;
   }
+}
+
+
+/* ----------------------------------------------------------
+   14. HOE-WERKT-HET — Beeldplaceholders
+   ---------------------------------------------------------- */
+
+.image-placeholder-liggend {
+  width: 100%;
+  height: 400px;
+  aspect-ratio: 16 / 9;
+  background-color: #d4baad;
+}
+
+.drieluik-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .drieluik-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.drieluik-blok {
+  aspect-ratio: 3 / 2;
+  background-color: #d4baad;
+}
+
+
+/* ----------------------------------------------------------
+   15. HOE-WERKT-HET — Voor-wie blokken
+   ---------------------------------------------------------- */
+
+.voor-wie-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  text-align: center;
+}
+
+
+/* ----------------------------------------------------------
+   16. HOE-WERKT-HET — Stappenlijst
+   ---------------------------------------------------------- */
+
+.stappen-lijst {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stap-item {
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+}
+
+.stap-divider {
+  width: 1px;
+  height: 40px;
+  background-color: #d4baad;
+  margin: 32px auto;
+}
+
+@media (max-width: 767px) {
+  .stap-item {
+    text-align: left;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   17. HOE-WERKT-HET — FAQ accordion
+   ---------------------------------------------------------- */
+
+.faq-lijst {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.faq-item {
+  border-bottom: 1px solid #d4baad;
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-chevron {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+  color: #a66658;
+}
+
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding-bottom: 20px;
+}
+
+
+/* ----------------------------------------------------------
+   18. OVER PYAH — 2-koloms 40/60 varianten
+   ---------------------------------------------------------- */
+
+/* Variant: tekst links (60%) / foto rechts (40%) */
+.grid-2col-40-60-foto-rechts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .grid-2col-40-60-foto-rechts {
+    grid-template-columns: 3fr 2fr;
+    gap: 64px;
+  }
+}
+
+/* Variant: foto links (40%) / tekst rechts (60%) */
+.grid-2col-40-60-foto-links {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* Mobiel: tekst altijd eerst, ongeacht desktop-volgorde */
+.grid-2col-40-60-foto-links .text-intro {
+  order: 1;
+}
+
+.grid-2col-40-60-foto-links .image-col-inner {
+  order: 2;
+}
+
+@media (min-width: 768px) {
+  .grid-2col-40-60-foto-links {
+    grid-template-columns: 2fr 3fr;
+    gap: 64px;
+  }
+
+  /* Desktop: foto weer visueel links, tekst rechts */
+  .grid-2col-40-60-foto-links .image-col-inner {
+    order: 1;
+  }
+
+  .grid-2col-40-60-foto-links .text-intro {
+    order: 2;
+  }
+}
+
+
+/* ----------------------------------------------------------
+   19. OVER PYAH — Divider (Visie / Missie)
+   ---------------------------------------------------------- */
+
+.divider-accent {
+  width: 100%;
+  max-width: 950px; /* zelfde breedte als .container-narrow */
+  height: 1px;
+  background-color: #a66658;
+  margin: 48px auto;
+}
+
+
+/* ----------------------------------------------------------
+   20. TARIEVEN — Niveaublokken gestapeld (Startend/Ervaren)
+   ---------------------------------------------------------- */
+
+.niveau-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
