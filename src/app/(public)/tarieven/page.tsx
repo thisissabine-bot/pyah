@@ -1,0 +1,211 @@
+import Link from "next/link";
+import { ChevronDown } from "lucide-react";
+
+export default function TarievenPage() {
+  return (
+    <>
+      {/* HERO */}
+      <section className="page-section-hero hero-with-image">
+        <div className="hero-placeholder" />
+        <div className="container hero-content">
+          <h1 className="heading-h1 on-dark">Tarieven privé yoga aan huis</h1>
+        </div>
+      </section>
+
+      {/* SECTIE: Persoonlijke begeleiding */}
+      <section className="page-section section-white section-centered">
+        <div className="container-narrow">
+          <p className="heading-overline mb-text">Persoonlijke begeleiding</p>
+          <h2 className="heading-h2 accent-moss mb-heading">
+            Persoonlijke begeleiding, afgestemd op jouw wensen
+          </h2>
+          <p className="text-body mb-text">
+            Bij Private Yoga at Home geloven we dat privé yoga toegankelijk moet zijn voor zoveel mogelijk mensen. Daarom werken we met twee ervaringsniveaus: Startende yogadocenten en Ervaren yogadocenten.
+          </p>
+          <p className="text-body mb-text">
+            Welke docent je ook kiest, je kunt rekenen op persoonlijke aandacht, professionele begeleiding en lessen die volledig worden afgestemd op jouw lichaam, wensen en doelen.
+          </p>
+          <p className="text-body mb-text">
+            Voordat een docent wordt toegelaten tot het platform, doorloopt hij of zij een zorgvuldige selectie. Iedere docent heeft een erkende yogaopleiding afgerond, beschikt over praktijkervaring en voldoet aan de kwaliteitsrichtlijnen van Private Yoga at Home.
+          </p>
+          <p className="text-body">
+            Het verschil zit dan ook niet in de kwaliteit, maar in de hoeveelheid ervaring en eventuele specialisaties.
+          </p>
+        </div>
+      </section>
+
+      {/* SECTIE: Onze docenten */}
+      <section className="page-section section-pearl section-centered">
+        <div className="container-narrow">
+          <p className="heading-overline mb-text">Onze docenten</p>
+          <h2 className="heading-h2 accent-terracotta mb-heading">
+            Kies de docent die bij jou past
+          </h2>
+          <p className="text-body mb-text">
+            Iedereen heeft andere wensen. Misschien zoek je een toegankelijke manier om kennis te maken met privé yoga. Of misschien heb je juist specifieke klachten of doelen waarbij je graag begeleid wordt door iemand met veel praktijkervaring.
+          </p>
+          <p className="text-body">
+            Door te werken met twee ervaringsniveaus kun je een keuze maken die past bij jouw persoonlijke situatie én budget.
+          </p>
+
+          <div className="divider-accent" />
+
+          <div className="niveau-stack">
+            <div>
+              <h3 className="heading-h3 accent-moss mb-text">Startende yogadocent</h3>
+              <p className="text-body mb-text">
+                Een startende yogadocent heeft een erkende yogaopleiding afgerond en beschikt over praktijkervaring. Hij of zij bouwt de lessenpraktijk verder uit en begeleidt je met veel aandacht, enthousiasme en persoonlijke betrokkenheid.
+              </p>
+              <p className="text-body">
+                Ben je op zoek naar privé yoga aan huis tegen een toegankelijker tarief? Dan kan een startende yogadocent een mooie keuze zijn.
+              </p>
+            </div>
+            <div>
+              <h3 className="heading-h3 accent-moss mb-text">Ervaren yogadocent</h3>
+              <p className="text-body mb-text">
+                Een ervaren yogadocent heeft meerdere jaren leservaring en begeleidt al langere tijd uiteenlopende mensen met verschillende wensen en behoeften.
+              </p>
+              <p className="text-body mb-text">
+                Veel ervaren docenten hebben zich daarnaast verder gespecialiseerd, bijvoorbeeld in yin yoga, ademwerk, ontspanning, zwangerschap of rug- en nekklachten. Door hun ervaring kunnen zij lessen snel afstemmen op wat jij op dat moment nodig hebt.
+              </p>
+              <p className="text-body">
+                Heb je een specifieke hulpvraag of vind je het prettig om begeleid te worden door een docent met veel praktijkervaring? Dan past een ervaren yogadocent mogelijk beter bij jou.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTIE: Tarieven (kopje — tabel volgt later) */}
+      <section className="page-section section-white section-centered">
+        <div className="container-narrow">
+          <h2 className="heading-h2 accent-moss">Tarieven</h2>
+        </div>
+      </section>
+
+      {/* SECTIE: Benieuwd welke docent bij jou past? */}
+      <section className="page-section section-moss section-centered">
+        <div className="container">
+          <h2 className="heading-h2 on-dark mb-subtitle">
+            Benieuwd welke docent bij jou past?
+          </h2>
+          <p className="text-body on-dark mb-cta">
+            Iedere yogadocent heeft een eigen achtergrond, stijl en specialisaties. Op de docentenpagina ontdek je meer over hun ervaring en expertise, zodat je rustig kunt bekijken wie het beste bij jou past.
+          </p>
+          <Link className="btn-dark-a" href="/docenten">Bekijk onze docenten →</Link>
+
+          <div className="drieluik-grid mt-section">
+            <div className="drieluik-blok" />
+            <div className="drieluik-blok" />
+            <div className="drieluik-blok" />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTIE: FAQ */}
+      <section className="page-section section-white section-centered">
+        <div className="container-narrow">
+          <p className="heading-overline mb-text">Veelgestelde vragen</p>
+          <h2 className="heading-h2 accent-terracotta mb-heading">Nog vragen?</h2>
+          <div className="faq-lijst">
+
+            <details className="faq-item">
+              <summary>
+                <h4 className="heading-h4">Waarom zijn er twee verschillende tarieven?</h4>
+                <ChevronDown className="faq-chevron" size={20} aria-hidden="true" />
+              </summary>
+              <div className="faq-answer">
+                <p className="text-body mb-text">
+                  Bij Private Yoga at Home werken we met twee ervaringsniveaus: Startende yogadocenten en Ervaren yogadocenten. Zo kun je een docent kiezen die past bij jouw wensen én budget.
+                </p>
+                <p className="text-body">
+                  Welke docent je ook kiest, iedere docent op Private Yoga at Home voldoet aan dezelfde kwaliteitseisen. Het verschil zit niet in de kwaliteit, maar in de hoeveelheid ervaring en eventuele specialisaties.
+                </p>
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>
+                <h4 className="heading-h4">Wat is het verschil tussen een startende en een ervaren yogadocent?</h4>
+                <ChevronDown className="faq-chevron" size={20} aria-hidden="true" />
+              </summary>
+              <div className="faq-answer">
+                <p className="text-body mb-text">
+                  Een startende yogadocent heeft een erkende yogaopleiding afgerond, beschikt over praktijkervaring en bouwt zijn of haar lessenpraktijk verder uit.
+                </p>
+                <p className="text-body">
+                  Een ervaren yogadocent heeft meerdere jaren leservaring en heeft zich vaak verder gespecialiseerd, bijvoorbeeld in yin yoga, ademwerk, zwangerschap of rug- en nekklachten. Door die ervaring kan de docent lessen nog sneller afstemmen op jouw persoonlijke situatie.
+                </p>
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>
+                <h4 className="heading-h4">Hoe weet ik dat een startende yogadocent goed genoeg is?</h4>
+                <ChevronDown className="faq-chevron" size={20} aria-hidden="true" />
+              </summary>
+              <div className="faq-answer">
+                <p className="text-body mb-text">
+                  Alle docenten op Private Yoga at Home worden zorgvuldig geselecteerd voordat zij zich bij het platform kunnen aansluiten.
+                </p>
+                <p className="text-body mb-text">
+                  Iedere docent heeft een erkende yogaopleiding afgerond, beschikt over praktijkervaring en voldoet aan onze kwaliteitsrichtlijnen. Daarnaast beoordelen we iedere docent op professionaliteit, persoonlijke begeleiding en de manier waarop hij of zij lesgeeft.
+                </p>
+                <p className="text-body">
+                  Zo kun je erop vertrouwen dat je altijd les krijgt van een gekwalificeerde yogadocent.
+                </p>
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>
+                <h4 className="heading-h4">Waarom kost privé yoga aan huis meer dan een groepsles?</h4>
+                <ChevronDown className="faq-chevron" size={20} aria-hidden="true" />
+              </summary>
+              <div className="faq-answer">
+                <p className="text-body mb-text">
+                  Bij een privé yogales betaal je niet alleen voor het uur waarin de les plaatsvindt. Iedere les wordt afgestemd op jouw lichaam, ervaring en persoonlijke doelen, zodat je begeleiding krijgt die echt bij je past.
+                </p>
+                <p className="text-body mb-text">
+                  Daarnaast reist de docent naar jouw huis, wordt er tijd besteed aan de voorbereiding van de les en krijg je tijdens de les de volledige aandacht van één docent. Je hoeft zelf de deur niet uit en kunt yoga beoefenen in je eigen vertrouwde omgeving.
+                </p>
+                <p className="text-body">
+                  Alle genoemde tarieven zijn inclusief 21% btw.
+                </p>
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>
+                <h4 className="heading-h4">Zijn de tarieven inclusief btw?</h4>
+                <ChevronDown className="faq-chevron" size={20} aria-hidden="true" />
+              </summary>
+              <p className="text-body faq-answer">
+                Ja. Alle tarieven op onze website zijn inclusief 21% btw. Zo weet je vooraf precies waar je aan toe bent.
+              </p>
+            </details>
+
+            <details className="faq-item">
+              <summary>
+                <h4 className="heading-h4">Welke yogadocent past het beste bij mij?</h4>
+                <ChevronDown className="faq-chevron" size={20} aria-hidden="true" />
+              </summary>
+              <div className="faq-answer">
+                <p className="text-body mb-text">
+                  Dat hangt af van jouw wensen en voorkeuren. Zoek je een toegankelijke manier om kennis te maken met privé yoga? Dan kan een startende yogadocent een mooie keuze zijn.
+                </p>
+                <p className="text-body mb-text">
+                  Heb je een specifieke hulpvraag of geef je de voorkeur aan iemand met veel praktijkervaring en aanvullende specialisaties? Dan past een ervaren yogadocent mogelijk beter bij jou.
+                </p>
+                <p className="text-body">
+                  Op de pagina De Docenten lees je meer over de achtergrond, ervaring en specialisaties van iedere docent, zodat je een keuze kunt maken die bij jou past.
+                </p>
+              </div>
+            </details>
+
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
