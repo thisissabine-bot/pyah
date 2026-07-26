@@ -301,8 +301,8 @@ export default function ZoekPagina({ docenten, locatie: initLocatie = "" }: { do
                     className={`kaartje${ervaren ? " kaartje-ervaren" : ""}`}
                   >
                     <div className="kaartje-foto">
-                      {docent.foto_url
-                        ? <img src={docent.foto_url} alt={docent.naam} />
+                      {(docent.foto_urls?.[0] ?? (docent as any).foto_url)
+                        ? <img src={docent.foto_urls?.[0] ?? (docent as any).foto_url} alt={docent.naam} />
                         : <div className="kaartje-initialen">{initials}</div>
                       }
                       {ervaren && (

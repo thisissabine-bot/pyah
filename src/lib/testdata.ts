@@ -20,7 +20,7 @@ export interface Docent {
   opleiding: string;
   certificering: string;
   bio: string;
-  foto_url: string | null;
+  foto_urls: string[];
   video_url: string | null;
   tarieven: Tarief[];
 }
@@ -39,7 +39,7 @@ export const DOCENTEN_TESTDATA: Docent[] = [
     opleiding: "Yoga Alliance 500-uur opleiding, Yin Yoga Teacher Training",
     certificering: "E-RYT 500, Yoga Alliance",
     bio: "Met meer dan tien jaar ervaring als yogadocent begeleid ik je graag naar meer rust en balans in je dagelijks leven. Ik werk veel met mensen die last hebben van stress of chronische klachten — yoga helpt het zenuwstelsel te kalmeren en het lichaam te herstellen. Mijn lessen zijn rustig maar bewust: aandacht voor ademhaling, beweging en aanwezig zijn in het moment.\n\nIk kom bij je thuis in Amsterdam en omstreken. Zo heb jij geen reistijd en kun je na de les gewoon ontspannen in je eigen ruimte.",
-    foto_url: "/Docentprofielen_01.jpg",
+    foto_urls: ["/Docentprofielen_01.jpg", "/Docentprofielen_01a.jpg", "/Docentprofielen_01b.jpg"],
     video_url: null,
     tarieven: [
       { id: "1a", naam: "Introductieles", duur_minuten: 75, prijs_cent: 9000 },

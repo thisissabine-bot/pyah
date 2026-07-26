@@ -22,7 +22,7 @@ export default function DocentProfiel({ docent, terug = "" }: { docent: Docent, 
   const losseMinuten60 = docent.tarieven.find((t) => t.naam === "Losse les" && t.duur_minuten === 60)
   const losseMinuten75 = docent.tarieven.find((t) => t.naam === "Losse les" && t.duur_minuten === 75)
 
-  const fotos = (docent.foto_url ? [docent.foto_url] : []).slice(0, 6)
+  const fotos = (docent.foto_urls ?? []).slice(0, 6)
   const slides: SlideImage[] = fotos.map((src) => ({ src }))
 
   const slot0 = fotos[0] ?? null
