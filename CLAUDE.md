@@ -7,6 +7,9 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.10 | 24-07-2026 | Verouderde sectie "5. Voor docenten" verwijderd; Mappenstructuur bijgewerkt met geneste docentzone-pagina's (hoe-werkt-het, over, abonnement, aanmelden) en DocentHeader.tsx/DocentFooter.tsx toegevoegd aan components/layout — bracht de bestandsstructuur in lijn met de eerder vastgelegde Docentzone-navigatie |
+| v1.9 | 23-07-2026 | Nieuwe sectie "Docentzone — navigatie & structuur" toegevoegd na "Pagina voor pagina: wat moet er op staan": docentzijde is een volledig gescheiden zone onder \`/voor-docenten\` met eigen navigatie, eigen header-styling (\`\#a66658\`, witte tekst/logo) en een aparte docent-versie van "Over PYAH" (\`/voor-docenten/over\`, los van klant-\`/over\`); oude sectie "5. Voor docenten" gemarkeerd als verouderd/te vervangen door de nieuwe structuur |
+| v1.8 | 22-07-2026 | Facturatie/lesregistratie-sectie (v2) toegevoegd na "Commissie- en tarieflogica", inclusief escape-opmaak gelijkgetrokken met de rest van het document; verouderde sectie "BTW-logica — raadpleeg je boekhouder" en bijbehorende \`uitbetalingen\`-tabel verwijderd (vervangen door \`facturen\`-tabel en herijkte btw-logica in nieuwe sectie); tegenstrijdige zin over uitbetalingsfrequentie in "Betalingsflow" gecorrigeerd (was: einde van de maand, is: tweewekelijks rond de 1e en 15e); verouderd voorbeeldprijzenblok bij \`CREATE TABLE tarieven\` verwijderd (niet-herijkte bedragen, geen toegevoegde waarde op die plek) |
 | v1.7 | 24-05-2026 | Docentgrid kolomverdeling vastgesteld: 2 mobiel / 3 tablet / 4 desktop |
 | v1.6 | 23-05-2026 | Verbod op Tailwind utilities voor typografie expliciet gedocumenteerd |
 | v1.5 | 23-05-2026 | Kleurmodifiers voor koppen gedocumenteerd: .accent-terracotta, .accent-moss, .on-dark |
@@ -144,8 +147,16 @@ page.tsx            \# Zoekpagina docenten
 page.tsx          \# Docentprofiel (openbaar)  
 over/  
 page.tsx            \# Over PYAH  
-voor-docenten/  
-page.tsx            \# Landingspagina voor docenten  
+voor-docenten/
+page.tsx            # Landingspagina voor docenten (docentzone-homepage)
+hoe-werkt-het/
+page.tsx          # Hoe werkt het? (docentzone)
+over/
+page.tsx          # Over PYAH (docent-versie, los van klant-/over)
+abonnement/
+page.tsx          # Abonnement
+aanmelden/
+page.tsx          # Aanmelden 
 (auth)/                 \# Login/registratie  
 login/page.tsx  
 registreer/page.tsx  
@@ -169,11 +180,13 @@ reviews/page.tsx    \# Beoordeel docent
 api/  
 webhooks/  
 mollie/route.ts     \# Mollie webhook handler  
-components/  
-layout/  
-Header.tsx  
-Footer.tsx  
-Navigation.tsx  
+components/
+layout/
+Header.tsx
+Footer.tsx
+Navigation.tsx
+DocentHeader.tsx     # Docentzone-header — achtergrond #a66658, witte tekst/logo
+DocentFooter.tsx     # Docentzone-footer, los van de klant-footer 
 ui/  
 Button.tsx  
 Card.tsx  
@@ -243,16 +256,6 @@ actief BOOLEAN DEFAULT true
 );  
 \-- Introductieles: altijd 75 minuten, eenmalig per klant-docent combinatie  
 \-- Losse les: klant kiest 60 of 75 minuten, elk eigen prijs  
-\--  
-\-- Voorbeeld ervaren docent:  
-\-- Introductieles  75 min → €90   (docent ontvangt €72 na 20% commissie)  
-\-- Losse les       60 min → €85   (docent ontvangt €68 na 20% commissie)  
-\-- Losse les       75 min → €95   (docent ontvangt €76 na 20% commissie)  
-\--  
-\-- Voorbeeld startend docent:  
-\-- Introductieles  75 min → €70   (docent ontvangt €63 na 10% commissie)  
-\-- Losse les       60 min → €65   (docent ontvangt €58,50 na 10% commissie)  
-\-- Losse les       75 min → €75   (docent ontvangt €67,50 na 10% commissie)
 
 \-- Boekingen (losse lessen)  
 CREATE TABLE boekingen (  
@@ -348,13 +351,44 @@ USING (auth.uid() \= user\_id);
 \- Missie en visie  
 \- Hoe docenten worden geselecteerd (kwaliteitsgarantie)
 
-\#\#\# 5\. Voor docenten (\`/voor-docenten\`)  
-\- Wie is PYAH? (korte intro)  
-\- Wat voor docenten zoeken we? (profiel \+ persoonlijkheid)  
-\- Ervaringsniveaus uitgelegd (startend vs ervaren)  
-\- Abonnement vergelijkingstabel (startend vs ervaren, incl. introductiekorting)  
-\- Tarieven en commissies (10% en 20%)  
-\- Aanmeldformulier (gaat naar \`aanmeldingen\` tabel) — CTA: "Interesse? Meld je aan"
+\#\#\# 5\. Docentzone — navigatie & structuur
+
+De docentzijde is een \*\*volledig gescheiden zone\*\* van de klantzijde, met eigen navigatie, eigen header-styling en een eigen URL-structuur onder \`/voor-docenten\`.
+
+\#\#\# URL-structuur (genest)
+
+| Pagina | URL |
+| :----- | :-- |
+| Docentzone-homepage | \`/voor-docenten\` |
+| Hoe werkt het? | \`/voor-docenten/hoe-werkt-het\` |
+| Over PYAH (docent-versie) | \`/voor-docenten/over\` |
+| Abonnement | \`/voor-docenten/abonnement\` |
+| Aanmelden | \`/voor-docenten/aanmelden\` |
+
+\*\*Let op:\*\* \`/voor-docenten/over\` is een \*\*aparte pagina\*\*, los van de klant-versie op \`/over\`. Andere invalshoek: autonomie, professionaliteit en community voor de docent (zie Merkessentie, "Missie docentzijde"), niet het klantperspectief van rust/vertrouwen.
+
+\#\#\# Navigatie klantzijde (bevestigd)
+
+Docenten zoeken · Hoe werkt het? · Over PYAH · Tarieven · Inloggen · Docent worden
+
+\#\#\# Navigatie docentzone (bevestigd)
+
+Hoe werkt het? · Over PYAH · Abonnement · Aanmelden/Inloggen · [knop] Op zoek naar een yogadocent?
+
+De link "Docent worden" uit de klant-nav staat niet in het docentmenu zelf — dat is de pagina waar je al op staat (\`/voor-docenten\`), dus deze linkt niet naar zichzelf.
+
+\#\#\# Wisselpunt tussen de twee zones
+
+\- \*\*Logo in de docentzone linkt naar \`/voor-docenten\`\*\* (niet naar de klant-homepage \`/\`) — een bezoeker die via Google op \`/voor-docenten\` landt, blijft zo binnen de docentzone.  
+\- \*\*Knop rechts in de docent-header: "Op zoek naar een yogadocent?"\*\* — link terug naar de klantzijde, voor klanten die per ongeluk op een docentpagina belanden.  
+\- De klant-nav is \*\*volledig afwezig\*\* in de docentzone (geen gedeeld menu).
+
+\#\#\# Styling docentzone
+
+\- Headerkleur: \*\*\`\#a66658\`\*\* (accent/terracotta), met \*\*witte tekst en wit logo\*\*  
+\- Aparte header-/footercomponenten aangeraden: \`DocentHeader.tsx\` / \`DocentFooter.tsx\`, los van de bestaande \`Header.tsx\` / \`Footer.tsx\`
+
+\---
 
 \#\#\# 6\. Docentprofiel aanmaken (ingelogd, na goedkeuring Sabine)
 \- **AVB-upload is een verplicht veld** — het profiel kan niet worden ingediend ter goedkeuring zonder geüpload verzekeringsbewijs  
@@ -390,7 +424,7 @@ WHERE tarief\_naam \= 'Introductieles';
 \#\#\# Betalingsflow — geld loopt via PYAH
 
 \*\*Belangrijk:\*\* de klant betaalt altijd het volledige lesbedrag aan PYAH.  
-PYAH betaalt de docent aan het einde van elke maand uit, minus de commissie.
+PYAH betaalt de docent tweewekelijks uit (rond de 1e en 15e van de maand), minus de commissie.
 
 Technisch via Mollie:  
 \- Gebruik de \*\*Mollie Payments API\*\* — klant betaalt via een betaallink (iDEAL, creditcard, etc.)  
@@ -420,41 +454,641 @@ const commissie\_cent    \= Math.round(bedrag\_cent \* commissie\_procent)
 const uitbetaling\_cent  \= bedrag\_cent \- commissie\_cent  
 \`\`\`
 
-\#\#\# BTW-logica — ⚠️ raadpleeg je boekhouder
+\#\# Facturatie, lesregistratie & uitbetaling
 
-\> \*\*Let op:\*\* de BTW-behandeling hieronder is gebaseerd op het commissionairsmodel  
-\> (PYAH int namens de docent, betaalt door, en draagt BTW af over de commissie).  
-\> Bespreek dit met een belastingadviseur om te bevestigen dat dit klopt voor jouw situatie  
-\> vóórdat het platform live gaat.
 
-Verwachte logica op basis van jouw beschrijving:  
-\- \*\*Over het uitbetalingsdeel aan de docent:\*\* geen BTW — dit is doorbetalend  
-\- \*\*Over de commissie van PYAH:\*\* 21% BTW afdragen  
-\- Voorbeeld (ervaren docent, les van €90):  
-\- Commissie: €18,00 (20%)  
-\- BTW over commissie: €3,78 (21% van €18)  
-\- Netto commissie PYAH: €14,22  
-\- Uitbetaling aan docent: €72,00
+\---
 
-Voeg een \`maandoverzicht\` tabel toe voor de maandelijkse uitbetalingen:
+\#\#\# Beschikbaarheid — Desktop & Tablet only
 
-\`\`\`sql  
-CREATE TABLE uitbetalingen (  
-id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),  
-docent\_id UUID REFERENCES docenten(id),  
-periode TEXT NOT NULL,              \-- bijv. '2026-05'  
-aantal\_lessen INTEGER,  
-bruto\_cent INTEGER,                 \-- totaal ontvangen van klanten  
-commissie\_cent INTEGER,             \-- PYAH's deel  
-btw\_over\_commissie\_cent INTEGER,    \-- 21% over commissie  
-uitbetaling\_cent INTEGER,           \-- naar docent  
-uitbetaald\_op TIMESTAMPTZ,  
-mollie\_transfer\_id TEXT,  
-created\_at TIMESTAMPTZ DEFAULT NOW()  
-);  
+De volgende pagina's zijn uitsluitend beschikbaar op schermen van 768px en breder:
+
+\- Factuur aanmaken (docent dashboard)
+\- Factuuroverzicht (docent dashboard)
+\- Uitbetalingsoverzicht (docent dashboard)
+\- Factuurbeheer (admin dashboard)
+
+Op smallere schermen toont de pagina een melding:
+> "Deze functie is beschikbaar op tablet en desktop. Open het platform op een groter scherm om verder te gaan."
+
+Implementeer via een \`useDeviceGuard\`-hook die de viewport controleert en de pagina vervangt door een vriendelijke melding onder 768px.
+
+\---
+
+\#\#\# Tarieven & toeslag
+
+\#\#\#\# Vaste lestarieven (klantprijs incl. 21% BTW)
+
+| Lestype            | Duur      | Startend  | Ervaren   |
+|--------------------|-----------|-----------|-----------|
+| Introductieles     | 75 min.   | € 80      | € 99      |
+| Losse les          | 60 min.   | € 80      | € 99      |
+| Losse les          | 75 min.   | € 97      | € 120     |
+
+De introductieles duurt altijd 75 minuten en is eenmalig per klant-docent combinatie.
+De prijs is gelijkgesteld aan de losse les van 60 minuten om de drempel te verlagen.
+
+\#\#\#\# Toeslag extra persoon
+
+Per extra persoon wordt \*\*25% toeslag\*\* berekend over de basislesprijs.
+
+\`\`\`ts
+// Toeslag extra persoon
+const toeslag\_factor = 1 + (0.25 \* (aantal\_personen - 1))
+const lesprijs\_met\_toeslag\_cent = Math.round(basisprijs\_cent \* toeslag\_factor)
+
+// Voorbeelden (Ervaren docent, losse les 75 min. = €120):
+// 1 persoon: €120 × 1.00 = €120
+// 2 personen: €120 × 1.25 = €150
+// 3 personen: €120 × 1.50 = €180
 \`\`\`
 
-—
+De docent voert het aantal personen in bij het registreren van de les.
+Het systeem berekent de toeslag automatisch en toont de totaalprijs vóór het aanmaken van de factuur.
+
+\#\#\#\# Commissie per niveau
+
+| Niveau   | Commissie PYAH | Docent ontvangt |
+|----------|---------------|-----------------|
+| Startend | 10%           | 90% van lesprijs (incl. toeslag) |
+| Ervaren  | 20%           | 80% van lesprijs (incl. toeslag) |
+
+Commissie wordt berekend over de lesprijs inclusief toeslag, exclusief reiskosten.
+
+\#\#\#\# Reiskosten
+
+\- Tarief: \*\*€ 0,25 per kilometer, exclusief btw\*\*
+\- Alleen berekend voor afstand \*\*boven 10 km\*\* van de klantlocatie
+\- \*\*De docent bepaalt zelf\*\* of, en voor hoeveel kilometer, reiskosten worden doorberekend aan de klant — dit is geen verplichting. De docent voert het aantal te factureren kilometers zelf in bij het aanmaken van de factuur (mag lager zijn dan de werkelijke afstand)
+\- Reiskosten vallen \*\*buiten de PYAH-commissie\*\*: het volledige nettobedrag (€ 0,25/km) gaat naar de docent, \*\*ongeacht\*\* of de docent btw-plichtig is of de KOR toepast
+\- Het systeem berekent automatisch: \`(opgegeven\_km - 10) \* 0.25\` als opgegeven\_km > 10
+
+\`\`\`ts
+const reiskosten\_cent = opgegeven\_km > 10
+  ? Math.round((opgegeven\_km - 10) \* 0.25 \* 100)
+  : 0
+\`\`\`
+
+\*\*BTW op reiskosten (bevestigd door belastingadviseur, zie Jan de Belastingman-rapport JDB-8066-EA46, sectie 4.5 en 6.6):\*\*
+\- PYAH is in het commissionairsmodel de verkoper richting de klant. Reiskosten zijn onderdeel van de vergoeding die PYAH aan de klant in rekening brengt, dus PYAH berekent \*\*altijd 21% btw\*\* over de reiskosten aan de klant — \*\*ongeacht de btw-status van de docent\*\*.
+\- De btw-status van de docent bepaalt alleen of PYAH deze btw als voorbelasting kan verrekenen (bij een btw-plichtige docent: ja, via de self-billing factuur met btw-vermelding. Bij een KOR-docent: nee — de docent brengt geen btw in rekening, dus er is geen voorbelasting op dit deel. Dit is een bewust geaccepteerd fiscaal effect, geen fout).
+\- De docent ontvangt in beide gevallen hetzelfde: € 0,25/km netto, exclusief btw. Dit bedrag verandert niet op basis van de btw-status van de docent.
+\- Rekenvoorbeeld (5 km boven de grens, KOR-docent): netto reiskosten € 1,25 → klant betaalt € 1,25 + 21% btw = € 1,51 → PYAH draagt € 0,26 btw af aan de Belastingdienst → docent ontvangt € 1,25. Resultaat voor PYAH: € 0,00 (neutraal, geen commissie op reiskosten).
+\- \~\~Het systeem past dit automatisch toe op basis van de BTW-status in het docentprofiel\~\~ — vervallen; de btw op reiskosten aan de klant is niet langer afhankelijk van de btw-status van de docent.
+
+\---
+
+\#\#\# Lesregistratie — docent boekt lessen in het systeem
+
+De docent is verantwoordelijk voor het invoeren van alle afgesproken lessen in het dashboard.
+Dit is de basis voor facturatie én voor uitbetaling. Zonder geregistreerde les: geen factuur, geen uitbetaling.
+
+\#\#\#\# Lestypes
+
+| Lestype | Toelichting |
+|---|---|
+| Introductieles | Altijd 75 min., eenmalig per klant-docent combinatie, directe betaling |
+| Losse les | 60 of 75 min., klant kiest; betaalterm 7 dagen |
+| 4-lessenpakket | 4 lessen vooraf gefactureerd en betaald; klant kiest 60 of 75 min. per les |
+
+\#\#\#\# Wat de docent invoert per les
+
+\- Klant (naam + e-mail — verplicht)
+\- Lestype: Introductieles / Losse les / 4-lessenpakket
+\- Duur: 60 of 75 minuten (bij losse les; introductieles is altijd 75 min.)
+\- Aantal personen (standaard 1; bij meer dan 1 wordt toeslag berekend)
+\- Datum en tijdstip
+\- Locatie klant (adres — voor reiskostenberekening)
+\- Reisafstand in km (optioneel; systeem berekent reiskosten automatisch als > 10 km)
+\- Notities (optioneel)
+
+\#\#\#\# Statusreeks boekingen
+
+\`\`\`
+ingepland → bevestigd → voltooid
+                ↓
+           geannuleerd (buiten 24h — les schuift door)
+           niet\_gegeven (docent rapporteert; admin handelt af)
+\`\`\`
+
+| Status | Betekenis |
+|---|---|
+| \`ingepland\` | Docent heeft les geregistreerd; factuur nog niet verstuurd of betaling nog open |
+| \`bevestigd\` | Betaling ontvangen; les staat vast |
+| \`voltooid\` | Les bevestigd als gegeven (door docent of automatisch na 24h) |
+| \`geannuleerd\` | Les afgebeld buiten 24h; geen uitbetaling nu — les schuift door |
+| \`niet\_gegeven\` | Docent rapporteert dat les niet heeft plaatsgevonden; admin ontvangt notificatie |
+
+\*\*Annulering binnen 24 uur:\*\* de les telt als gegeven. Status wordt \`voltooid\` met vlag \`annulering\_binnen\_24u = true\`. Docent ontvangt volledige uitbetaling.
+
+\---
+
+\#\#\# Facturatie — docent maakt factuur aan
+
+\#\#\#\# Factuurstroom
+
+De factuur wordt aangemaakt door de docent in het dashboard, maar gaat uit onder naam en KvK van \*\*PYAH\*\* (commissionairmodel). De docent initieert; PYAH is de facturerende partij richting de klant.
+
+\#\#\#\# Stap-voor-stap
+
+1\. Docent registreert les (zie boven)
+2\. Docent opent les in dashboard → klikt "Factuur aanmaken"
+3\. Systeem vult automatisch in:
+   \- Klantgegevens
+   \- Lestype, duur, aantal personen, datum
+   \- Lesprijs inclusief eventuele toeslag
+   \- Reiskosten (indien van toepassing)
+   \- BTW-uitsplitsing (21%)
+   \- PYAH-factuurgegevens (naam, KvK, BTW-nummer)
+   \- Uniek factuurnummer (gegenereerd door systeem)
+   \- Betalingstermijn (standaard 7 dagen; introductieles: directe betaling)
+4\. Docent controleert en bevestigt
+5\. Systeem genereert factuur als PDF + Mollie betaallink
+6\. Factuur + betaallink worden automatisch per e-mail verstuurd naar de klant
+7\. Betaallink is ook zichtbaar in het docent-dashboard zodat de docent hem handmatig kan kopiëren en via WhatsApp kan sturen
+
+\#\#\#\# Introductieles — directe betaling
+
+\- Betalingstermijn is \*\*direct\*\* (niet 7 dagen)
+\- Mollie genereert een iDEAL-betaallink die direct actief is
+\- Les gaat gewoon door, ook als betaling nog niet is afgerond
+\- Betaallink verloopt na 48 uur als niet betaald → systeem stuurt automatisch een nieuwe link
+
+\#\#\#\# 4-lessenpakket
+
+\- Één factuur voor het volledige pakket (4 lessen)
+\- Klant betaalt het totaalbedrag vooraf in één keer
+\- Het systeem registreert 4 afzonderlijke lessen en houdt tegoed bij
+\- Status per les in het pakket: \`ingepland\` → \`bevestigd\` → \`voltooid\`
+\- Dashboard toont docent én klant het resterende tegoed: "2 van 4 lessen gebruikt"
+\- \*\*Geldigheid pakket: 6 weken vanaf de datum van de eerste les\*\*
+  \- Systeem berekent: \`geldig\_tot = datum\_eerste\_les + 42 dagen\`
+  \- Verlopen pakketten worden automatisch op \`actief = false\` gezet via dagelijkse cron job
+  \- Alleen de admin (Sabine) kan de vervaldatum verlengen (bijv. bij blessure of vakantie)
+  \- Verlenging via admin-dashboard → Pakketten → [pakket selecteren] → "Vervaldatum aanpassen"
+  \- Elke verlenging wordt gelogd in \`admin\_acties\`
+
+\#\#\#\# Losse les — annulering buiten 24 uur
+
+Als een losse les buiten 24 uur voor aanvang wordt geannuleerd:
+
+\- Boeking krijgt status \`geannuleerd\`
+\- Klant ontvangt automatisch een \*\*tegoed\*\* van het volledige lesbedrag
+\- Tegoed is geldig voor \*\*4 weken\*\* vanaf de annuleringsdatum
+\- Tegoed is gekoppeld aan dezelfde docent
+\- Op dag 21 ontvangt de klant een automatische herinnering: "Je tegoed verloopt over een week."
+\- Na 4 weken vervalt het tegoed — geen terugbetaling (vastgelegd in de AV)
+\- Alleen de admin kan een tegoed verlengen
+
+Het admin-dashboard toont een overzicht van alle openstaande tegoeden: per docent, per klant, met vervaldatum en bedrag.
+
+\#\#\#\# Factuuropbouw (velden op de PDF)
+
+\`\`\`
+FACTUUR
+
+Van:        Private Yoga at Home (PYAH)
+            KvK: [invullen]
+            BTW: [invullen]
+            support@privateyogaathome.nl
+
+Aan:        [Naam klant]
+            [E-mailadres klant]
+            [Bedrijfsnaam + KvK indien B2B]
+
+Factuurnummer:   PYAH-2026-0001
+Factuurdatum:    [datum aanmaken]
+Vervaldatum:     [factuurdatum + 7 dagen] / Directe betaling (introductieles)
+
+Omschrijving                         Aantal   Prijs excl. BTW   BTW (21%)   Totaal
+─────────────────────────────────────────────────────────────────────────────────────
+[Lestype] - [duur] min. ([x] pers.)   1        € xx,xx           € xx,xx     € xx,xx
+Toeslag extra persoon (x pers.)       1        € xx,xx           € xx,xx     € xx,xx
+Reiskosten ([x] km à €0,25)           1        € xx,xx           € xx,xx     € xx,xx
+
+                                                       Totaal incl. BTW:   € xx,xx
+
+Betalen via: [Mollie betaallink]
+\`\`\`
+
+\---
+
+\#\#\# Betalingsherinneringen
+
+Automatisch verstuurd via Supabase Edge Function + e-mail (Resend).
+
+| Moment  | Actie |
+|---------|-------|
+| Dag 8   | Eerste herinnering — vriendelijk, betaallink opnieuw |
+| Dag 14  | Tweede herinnering — iets urgenter, betaallink opnieuw |
+
+De admin (Sabine) kan altijd handmatig een herinnering sturen via admin-dashboard → klantoverzicht → "Herinnering sturen".
+
+Herinneringen worden niet verstuurd als de factuur al betaald is. Het systeem controleert betaalstatus via Mollie webhook vóór verzending.
+
+\#\#\#\# E-mailtekst eerste herinnering (dag 8)
+
+\`\`\`
+Onderwerp: Herinnering: factuur [factuurnummer] — Private Yoga at Home
+
+Hoi [naam klant],
+
+Fijn dat je een les hebt gepland via Private Yoga at Home.
+
+We zagen dat de betaling voor factuur [factuurnummer] (€ [bedrag]) nog openstaat.
+Misschien is de mail tussendoor binnengekomen — geen probleem.
+
+Je kunt veilig betalen via onderstaande link:
+→ [Mollie betaallink]
+
+Heb je vragen? Stuur een e-mail naar support@privateyogaathome.nl.
+
+Fijne dag,
+Team Private Yoga at Home
+\`\`\`
+
+\---
+
+\#\#\# Lesbevestiging na afloop
+
+Na elke les ontvangt de docent een automatische bevestigingsmail:
+
+\`\`\`
+Onderwerp: Bevestig je les van [datum] — [naam klant]
+
+Hoi [naam docent],
+
+Kun je bevestigen dat de les van [datum] met [naam klant] heeft plaatsgevonden?
+
+→ [Knop: Ja, les heeft plaatsgevonden]
+→ [Knop: Nee, les heeft niet plaatsgevonden]
+
+Als je niet reageert, wordt de les automatisch als bevestigd geregistreerd na 24 uur.
+
+Fijne dag,
+Team Private Yoga at Home
+\`\`\`
+
+\#\#\#\# Bij "Nee, les heeft niet plaatsgevonden"
+
+De docent wordt gevraagd een reden op te geven (vrij tekstveld, verplicht):
+
+\`\`\`
+Geef een korte toelichting:
+[\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_]
+
+→ [Versturen]
+\`\`\`
+
+Na verzenden:
+\- Boeking krijgt status \`niet\_gegeven\`
+\- Reden wordt opgeslagen in de database (\`boekingen.niet\_gegeven\_reden\`)
+\- Admin (Sabine) ontvangt een notificatie: "Les niet gegeven — [naam docent] / [naam klant] / [datum]"
+\- De boeking is zichtbaar in het docent-dashboard met status "Niet gegeven" en de opgegeven reden
+\- Sabine handelt de situatie handmatig af (buiten het systeem om of via admin-dashboard)
+
+\#\#\#\# Bevestigingslogica
+
+\- Docent klikt "Ja" → status \`voltooid\`
+\- Docent reageert niet binnen 24 uur → systeem zet status automatisch op \`voltooid\` + \`auto\_bevestigd = true\`
+\- Alleen de admin (Sabine) kan een bevestiging terugdraaien via het admin-dashboard
+
+\---
+
+\#\#\# Uitbetaling docent — self-billing
+
+PYAH genereert automatisch een \*\*uitbetalingsspecificatie\*\* per docent per uitbetalingsperiode.
+Dit document telt als factuur (self-billing). De docent hoeft zelf niets te sturen.
+Self-billing is vastgelegd als akkoordpunt bij profielaanmaak (zie sectie Docentprofiel).
+
+\#\#\#\# Uitbetalingsmoment
+
+\- Rond de \*\*1e van de maand\*\* (lessen uit tweede helft vorige maand)
+\- Rond de \*\*15e van de maand\*\* (lessen uit eerste helft lopende maand)
+
+\#\#\#\# Berekening per uitbetaling
+
+\`\`\`ts
+const commissie\_cent    = Math.round(lesprijs\_cent \* (niveau === 'ervaren' ? 0.20 : 0.10))
+const uitbetaling\_cent  = lesprijs\_cent - commissie\_cent + reiskosten\_cent
+// Reiskosten worden altijd 100% uitbetaald — vallen buiten commissie
+\`\`\`
+
+\#\#\#\# Uitbetalingsspecificatie (PDF inhoud)
+
+\`\`\`
+UITBETALINGSSPECIFICATIE
+
+Private Yoga at Home (PYAH) — ten behoeve van [naam docent]
+Periode: [bijv. 1–15 mei 2026]
+Uitbetalingsdatum: [datum]
+
+Datum        Klant         Lestype           Pers.  Lesprijs   Commissie   Reiskosten  Uitbetaling
+──────────────────────────────────────────────────────────────────────────────────────────────────
+01-05-2026   [naam]        Losse les 75 min.  1      € 120,00   -€ 24,00    € 5,00      € 101,00
+...
+
+                                                        Totaal deze periode:             € xxx,xx
+
+Overgemaakt naar IBAN: [IBAN docent]
+\`\`\`
+
+\- Docent ontvangt de specificatie per e-mail op de uitbetalingsdatum
+\- Downloadbaar als PDF in docent-dashboard → "Uitbetalingen"
+\- Dit document dient als administratief bewijs voor de docent (boekhouding)
+
+\---
+
+\#\#\# Docentprofiel — aanmaken, opslaan en indienen
+
+\#\#\#\# Welkomstmail na kennismakingsgesprek
+
+Na goedkeuring door Sabine ontvangt de docent een welkomstmail met:
+\- Een \*\*persoonlijke registratielink\*\* (unieke token, 7 dagen geldig)
+\- Bijlagen: Platformovereenkomst (PDF), Kwaliteits- en veiligheidsrichtlijnen (PDF), AV Docenten (PDF)
+\- Uitleg over de vervolgstappen
+
+De docent wordt gevraagd deze documenten door te lezen vóór het aanmaken van het profiel.
+
+\#\#\#\# Profielstatussen
+
+| Status | Betekenis | Notificatie aan Sabine |
+|---|---|---|
+| \`concept\` | Docent is bezig, tussentijds opgeslagen | Nee |
+| \`ingediend\` | Klaar voor beoordeling | Ja |
+| \`actief\` | Goedgekeurd en live | Ja |
+| \`teruggestuurd\` | Sabine heeft het profiel teruggestuurd | — (Sabine mailt zelf) |
+
+\#\#\#\# Tussentijds opslaan
+
+\- Knop: \*\*"Opslaan als concept"\*\* — altijd zichtbaar tijdens het aanmaakproces
+\- Status blijft \`concept\`; Sabine ontvangt geen notificatie
+\- Docent kan later opnieuw inloggen en verder werken
+
+\#\#\#\# Profielaanpassingen na goedkeuring
+
+Een goedgekeurd profiel (\`actief\`) mag de docent \*\*vrij aanpassen\*\* zonder hergoedkeuring.
+
+\- Bij elke opgeslagen wijziging ontvangt Sabine een notificatie: "Profiel bijgewerkt — [naam docent]"
+\- Sabine kan het profiel altijd inzien en indien nodig contact opnemen met de docent
+\- Er is geen automatische hergoedkeuring vereist
+
+\#\#\#\# Indienen ter goedkeuring
+
+Als het profiel klaar is, klikt de docent op \*\*"Profiel indienen ter goedkeuring"\*\*.
+
+Een overzichtspagina toont de akkoord-punten. Het profiel kan pas worden ingediend als alle vinkjes zijn aangevinkt, de BTW-status is gekozen en de handtekening is ingevuld.
+
+\#\#\#\# Akkoord-punten bij indiening
+
+\`\`\`
+☐  Ik heb de Platformovereenkomst gelezen en ga hiermee akkoord.
+     → [Platformovereenkomst downloaden (PDF)]
+
+☐  Ik heb de Kwaliteits- en veiligheidsrichtlijnen gelezen en ga hiermee akkoord.
+     → [Richtlijnen downloaden (PDF)]
+
+☐  Ik heb de Algemene Voorwaarden Docenten gelezen en ga hiermee akkoord.
+     → [AV Docenten downloaden (PDF)]
+
+☐  Ik geef Private Yoga at Home toestemming om uitbetalingsspecificaties op mijn naam
+     op te stellen. Ik hoef zelf geen factuur te sturen voor mijn uitbetalingen (self-billing).
+
+BTW-status (verplichte keuze):
+  ○  Ik ben BTW-plichtig  |  BTW-nummer: [invulveld — verplicht bij deze keuze]
+  ○  Ik val onder de KOR-regeling (geen BTW)
+
+Digitale handtekening:
+  "Door mijn naam in te vullen bevestig ik dat ik bovenstaande akkoordpunten heb
+   gelezen en hiermee instem."
+
+  Naam: [\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_]   Datum: [automatisch ingevuld]
+\`\`\`
+
+Na indiening:
+\- Status wordt \`ingediend\`
+\- Sabine ontvangt notificatie: "Nieuw profiel klaar voor beoordeling — [naam docent]"
+\- Akkoorddata (tijdstip, naam, IP-adres) worden opgeslagen in de database
+
+\#\#\#\# Terugsturen
+
+\- Status wordt \`teruggestuurd\`
+\- Docent ontvangt automatische e-mail: "Je profiel is teruggestuurd. Je ontvangt binnenkort een bericht van Sabine met uitleg."
+\- Sabine stuurt zelf een e-mail met toelichting (buiten het systeem om)
+\- Docent past profiel aan en dient opnieuw in
+
+\---
+
+\#\#\# Klantaccount — optioneel
+
+Het aanmaken van een account is \*\*niet verplicht\*\*. Betaling, facturatie en lesbevestiging werken volledig op basis van e-mailadres.
+
+| Functie | Zonder account | Met account |
+|---|---|---|
+| Factuur ontvangen (e-mail) | ✓ | ✓ |
+| Betalen via Mollie | ✓ | ✓ |
+| Review schrijven (via e-maillink) | ✓ | ✓ |
+| Tegoed-herinnering ontvangen (e-mail) | ✓ | ✓ |
+| Aankomende lessen zien | — | ✓ |
+| Lesgeschiedenis | — | ✓ |
+| Pakketstatus ("2 van 4 lessen gebruikt") | — | ✓ |
+| Tegoed inzien | — | ✓ |
+| Facturen downloaden (PDF) | — | ✓ |
+| Facturatieoverzicht | — | ✓ |
+
+\#\#\#\# Klantaccount — velden bij registratie
+
+\- Voornaam + achternaam
+\- E-mailadres
+\- Wachtwoord
+\- Optioneel: bedrijfsnaam + KvK-nummer (voor B2B-facturen)
+
+\#\#\#\# Klantdashboard — navigatie
+
+\`\`\`
+Mijn lessen     — aankomende lessen + geschiedenis
+Mijn pakket     — resterende lessen (alleen zichtbaar bij actief pakket)
+Mijn tegoed     — openstaand tegoed + vervaldatum (alleen zichtbaar indien actief tegoed)
+Facturen        — overzicht + downloadbare PDF's
+Reviews         — schrijven en bekijken
+\`\`\`
+
+Geen berichtenbox. Klanten communiceren via eigen e-mail of WhatsApp.
+
+\#\#\#\# Reviews zonder account
+
+Na elke bevestigde les ontvangt de klant een automatische e-mail met een \*\*magic link\*\* (14 dagen geldig):
+
+\`\`\`
+Onderwerp: Hoe was je les met [naam docent]? — Private Yoga at Home
+
+Hoi [naam klant],
+
+Fijn dat je een les hebt gehad met [naam docent].
+We zijn benieuwd hoe het was.
+
+→ [Knop: Schrijf een review]  (magic link, 14 dagen geldig)
+
+Dank je wel,
+Team Private Yoga at Home
+\`\`\`
+
+\---
+
+\#\#\# Admin impersonatie — inloggen als docent
+
+Admin-dashboard → Docenten → [docent selecteren] → "Inloggen als deze docent"
+
+\#\#\#\# Wat de admin kan als docent
+
+\- Volledige docentweergave zien (profiel, agenda, aanvragen, facturen)
+\- Factuur aanmaken en versturen namens de docent
+\- Lesregistratie bekijken en controleren
+\- Factuur doorsturen als deze klaar staat maar nog niet verstuurd is
+
+\#\#\#\# Vereisten
+
+\- Alle acties worden gelogd in \`admin\_acties\`
+\- Zichtbare balk in de interface: \*\*"Je bekijkt het account van [naam docent] — Terug naar admin"\*\*
+\- Impersonatie via tijdelijk sessietoken (30 minuten, daarna automatisch verlopen)
+
+\---
+
+\#\#\# Database-uitbreidingen
+
+\`\`\`sql
+-- Facturen
+CREATE TABLE facturen (
+  id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),
+  factuurnummer TEXT UNIQUE NOT NULL,
+  docent\_id UUID REFERENCES docenten(id),
+  boeking\_id UUID REFERENCES boekingen(id),
+  pakket\_id UUID REFERENCES lessenpakketten(id),
+  klant\_naam TEXT NOT NULL,
+  klant\_email TEXT NOT NULL,
+  klant\_bedrijfsnaam TEXT,
+  klant\_kvk TEXT,
+  lesprijs\_cent INTEGER NOT NULL,
+  toeslag\_cent INTEGER DEFAULT 0,        -- 25% per extra persoon
+  aantal\_personen INTEGER DEFAULT 1,
+  reiskosten\_cent INTEGER DEFAULT 0,
+  reisafstand\_km INTEGER DEFAULT 0,
+  btw\_cent INTEGER NOT NULL,
+  totaal\_cent INTEGER NOT NULL,
+  directe\_betaling BOOLEAN DEFAULT false,
+  betalingstermijn\_dagen INTEGER DEFAULT 7,
+  mollie\_payment\_id TEXT,
+  betaald BOOLEAN DEFAULT false,
+  betaald\_op TIMESTAMPTZ,
+  verstuurd\_op TIMESTAMPTZ,
+  pdf\_url TEXT,
+  herinnering\_1\_verstuurd BOOLEAN DEFAULT false,
+  herinnering\_2\_verstuurd BOOLEAN DEFAULT false,
+  created\_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Lessenpakketten
+CREATE TABLE lessenpakketten (
+  id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),
+  klant\_email TEXT NOT NULL,
+  klant\_naam TEXT NOT NULL,
+  docent\_id UUID REFERENCES docenten(id),
+  aantal\_lessen INTEGER DEFAULT 4,
+  lessen\_gebruikt INTEGER DEFAULT 0,
+  datum\_eerste\_les DATE,                              -- geldigheid berekend vanaf hier
+  geldig\_tot TIMESTAMPTZ,                             -- datum\_eerste\_les + 42 dagen; alleen admin kan aanpassen
+  factuur\_id UUID REFERENCES facturen(id),
+  actief BOOLEAN DEFAULT true,
+  created\_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Tegoeden (losse les geannuleerd buiten 24h)
+CREATE TABLE tegoeden (
+  id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),
+  klant\_email TEXT NOT NULL,
+  klant\_naam TEXT NOT NULL,
+  docent\_id UUID REFERENCES docenten(id),
+  boeking\_id UUID REFERENCES boekingen(id),
+  bedrag\_cent INTEGER NOT NULL,
+  geldig\_tot TIMESTAMPTZ NOT NULL,                    -- annulering\_datum + 28 dagen
+  gebruikt BOOLEAN DEFAULT false,
+  gebruikt\_op TIMESTAMPTZ,
+  herinnering\_verstuurd BOOLEAN DEFAULT false,        -- dag 21 herinnering
+  vervallen BOOLEAN DEFAULT false,
+  created\_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Admin actie log
+CREATE TABLE admin\_acties (
+  id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),
+  admin\_id UUID REFERENCES auth.users(id),
+  docent\_id UUID REFERENCES docenten(id),
+  actie TEXT NOT NULL,
+  context JSONB,
+  tijdstip TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Factuurnummer sequence
+CREATE SEQUENCE factuur\_nummer\_seq START 1;
+CREATE OR REPLACE FUNCTION genereer\_factuurnummer()
+RETURNS TEXT AS $$
+  SELECT 'PYAH-' || EXTRACT(YEAR FROM NOW())::TEXT || '-' || LPAD(nextval('factuur\_nummer\_seq')::TEXT, 4, '0');
+$$ LANGUAGE SQL;
+\`\`\`
+
+\#\#\#\# Aanpassingen bestaande tabellen
+
+\`\`\`sql
+-- boekingen
+ALTER TABLE boekingen
+  ADD COLUMN pakket\_id UUID REFERENCES lessenpakketten(id),
+  ADD COLUMN aantal\_personen INTEGER DEFAULT 1,
+  ADD COLUMN bevestigd\_door\_docent BOOLEAN DEFAULT false,
+  ADD COLUMN bevestigd\_op TIMESTAMPTZ,
+  ADD COLUMN auto\_bevestigd BOOLEAN DEFAULT false,
+  ADD COLUMN annulering\_binnen\_24u BOOLEAN DEFAULT false,
+  ADD COLUMN niet\_gegeven\_reden TEXT;
+
+-- docenten
+ALTER TABLE docenten
+  ADD COLUMN profiel\_status TEXT
+    CHECK (profiel\_status IN ('concept', 'ingediend', 'actief', 'teruggestuurd'))
+    DEFAULT 'concept',
+  ADD COLUMN akkoord\_platformovereenkomst BOOLEAN DEFAULT false,
+  ADD COLUMN akkoord\_richtlijnen BOOLEAN DEFAULT false,
+  ADD COLUMN akkoord\_av\_docenten BOOLEAN DEFAULT false,
+  ADD COLUMN akkoord\_selfbilling BOOLEAN DEFAULT false,
+  ADD COLUMN akkoord\_naam TEXT,
+  ADD COLUMN akkoord\_tijdstip TIMESTAMPTZ,
+  ADD COLUMN akkoord\_ip TEXT,
+  ADD COLUMN btw\_status TEXT CHECK (btw\_status IN ('btw\_plichtig', 'kor')),
+  ADD COLUMN btw\_nummer TEXT,
+  ADD COLUMN ingediend\_op TIMESTAMPTZ;
+\`\`\`
+
+\---
+
+\#\#\# Cron jobs (Supabase Edge Functions)
+
+| Functie | Frequentie | Wat het doet |
+|---|---|---|
+| \`check\_lesbevestiging\` | Elk uur | Zet boekingen ouder dan 24h na lesdatum automatisch op \`voltooid\` als docent niet heeft bevestigd |
+| \`check\_betalingsherinnering\` | Elke dag 9:00 | Stuurt herinnering op dag 8 en dag 14 na factuurdatum als niet betaald |
+| \`check\_pakket\_vervaldatum\` | Elke dag 6:00 | Zet pakketten met verlopen \`geldig\_tot\` op \`actief = false\` |
+| \`check\_tegoed\_herinnering\` | Elke dag 9:00 | Stuurt herinnering aan klant op dag 21 als tegoed nog niet gebruikt is |
+| \`check\_tegoed\_vervaldatum\` | Elke dag 6:00 | Zet tegoeden met verlopen \`geldig\_tot\` op \`vervallen = true\` |
+| \`bereken\_uitbetaling\` | 1e en 15e maand | Genereert uitbetalingsspecificaties voor alle docenten met bevestigde lessen in de periode |
+
+\---
+
+\#\#\# Toekomstige uitbreiding — Ervaren docenten
+
+In een latere fase kunnen Ervaren docenten zelf facturen aanmaken voor workshops, trainingen en trajecten buiten de vaste tariefstructuur. De \`facturen\`-tabel ondersteunt dit al. Voeg bij uitbreiding een veld \`type\` toe aan facturen: \`'les' | 'workshop' | 'traject'\`.
+
+Voor de pilotfase is deze functionaliteit \*\*niet actief\*\*.
+
+\---
+
 
 Betalingsinfrastructuur
 
