@@ -17,13 +17,13 @@ export default function VoorDocentenPage() {
         <div className="container hero-content">
           <p className="heading-overline on-dark mb-text">Ruimte om te groeien op jouw manier</p>
           <h1 className="heading-h1 on-dark mb-subtitle">
-            Geef les op een manier die bij jou past.
+            Geef les op een manier<br />die bij jou past.
           </h1>
           <p className="heading-h2 on-dark mb-heading">
-            Voor yogadocenten die willen groeien, samenwerken en met aandacht privélessen aan huis willen geven.
+            Voor yogadocenten die willen groeien,<br />samenwerken en met aandacht privélessen<br />aan huis willen geven.
           </p>
           <p className="text-intro on-dark mb-cta">
-            Of je nu net bent gestart of al jarenlang lesgeeft: bij Private Yoga at Home krijg je de ruimte om jezelf verder te ontwikkelen en onderdeel te worden van een nieuw platform waar jouw eigen stijl als docent centraal staat.
+            Of je nu net bent gestart of al jarenlang lesgeeft:<br />bij Private Yoga at Home krijg je de ruimte om jezelf verder te ontwikkelen en<br />onderdeel te worden van een nieuw platform<br />waar jouw eigen stijl als docent centraal staat.
           </p>
           <Link className="btn-light" href="/voor-docenten/aanmelden">
             Meld je aan voor de pilot in Haarlem

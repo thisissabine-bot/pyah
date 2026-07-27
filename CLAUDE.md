@@ -7,7 +7,10 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
-| v1.10 | 24-07-2026 | Verouderde sectie "5. Voor docenten" verwijderd; Mappenstructuur bijgewerkt met geneste docentzone-pagina's (hoe-werkt-het, over, abonnement, aanmelden) en DocentHeader.tsx/DocentFooter.tsx toegevoegd aan components/layout — bracht de bestandsstructuur in lijn met de eerder vastgelegde Docentzone-navigatie |
+| 
+v1.12	27-07-2026	Regel toegevoegd aan "Pagina-layout — patroon": opsommingen binnen gecentreerde secties (sectietype 1) gebruiken geen bullets maar losse gecentreerde regels, om links uitgelijnde bullets binnen gecentreerde tekst te voorkomen
+v1.11	27-07-2026	Sectie "Pagina-layout — patroon" toegevoegd: drie sectietypes vastgelegd (1-koloms gecentreerd, 2-koloms wisselend, gekleurd blok gecentreerd)
+v1.10 | 24-07-2026 | Verouderde sectie "5. Voor docenten" verwijderd; Mappenstructuur bijgewerkt met geneste docentzone-pagina's (hoe-werkt-het, over, abonnement, aanmelden) en DocentHeader.tsx/DocentFooter.tsx toegevoegd aan components/layout — bracht de bestandsstructuur in lijn met de eerder vastgelegde Docentzone-navigatie |
 | v1.9 | 23-07-2026 | Nieuwe sectie "Docentzone — navigatie & structuur" toegevoegd na "Pagina voor pagina: wat moet er op staan": docentzijde is een volledig gescheiden zone onder \`/voor-docenten\` met eigen navigatie, eigen header-styling (\`\#a66658\`, witte tekst/logo) en een aparte docent-versie van "Over PYAH" (\`/voor-docenten/over\`, los van klant-\`/over\`); oude sectie "5. Voor docenten" gemarkeerd als verouderd/te vervangen door de nieuwe structuur |
 | v1.8 | 22-07-2026 | Facturatie/lesregistratie-sectie (v2) toegevoegd na "Commissie- en tarieflogica", inclusief escape-opmaak gelijkgetrokken met de rest van het document; verouderde sectie "BTW-logica — raadpleeg je boekhouder" en bijbehorende \`uitbetalingen\`-tabel verwijderd (vervangen door \`facturen\`-tabel en herijkte btw-logica in nieuwe sectie); tegenstrijdige zin over uitbetalingsfrequentie in "Betalingsflow" gecorrigeerd (was: einde van de maand, is: tweewekelijks rond de 1e en 15e); verouderd voorbeeldprijzenblok bij \`CREATE TABLE tarieven\` verwijderd (niet-herijkte bedragen, geen toegevoegde waarde op die plek) |
 | v1.7 | 24-05-2026 | Docentgrid kolomverdeling vastgesteld: 2 mobiel / 3 tablet / 4 desktop |
@@ -1216,7 +1219,43 @@ CSS-klasse: \`.kaartjes-grid-v2\` in \`layout.css\`
 | Desktop (≥ 1024px) | 4 |
 
 \---
+## Pagina-layout — patroon
 
+Pagina's volgen een vast opbouwpatroon van sectietypes. Dit patroon geldt als leidraad voor nieuwe pagina's, tenzij Sabine expliciet iets anders aangeeft voor een specifieke sectie.
+
+### Sectietype 1 — Gecentreerd, 1-koloms
+Gebruikt voor de hero/intro (altijd sectie 1 van een pagina) en voor secties die zich niet lenen voor 2 kolommen (lange lijsten, tabellen, FAQ).
+
+### Sectietype 2 — 2-koloms, wisselend
+Vanaf sectie 2: waar de inhoud zich leent voor 2 kolommen (bijv. foto + tekst), wissel de kant per sectie:
+- Eerste 2-koloms sectie: foto rechts, tekst links
+- Volgende 2-koloms sectie: foto links, tekst rechts
+- Enzovoort, per sectie wisselend
+
+Bij twijfel of een sectie zich leent voor 2 kolommen: volg het patroon van eerder gebouwde pagina's (bijv. Homepage). Vraag alleen als het echt niet duidelijk is.
+
+### Sectietype 3 — Gekleurd blok, gecentreerd
+Gebruikt voor uitgelichte tussenstukken of CTA-secties (zie referentie `/voor-docenten`). Tekst altijd gecentreerd, volledige achtergrondkleur op sectieniveau.
+
+Kleur wordt per sectie **expliciet door Sabine aangegeven** — CC kiest deze niet zelf. Toegestane combinaties:
+
+| Achtergrondkleur | Tekstkleur |
+|---|---|
+| `#d4baad` (zacht) | zwart (`#260f09`) |
+| `#484f47` (donker) | wit |
+| `#a66658` (accent) | wit |
+| `#260f09` (diep) | wit |
+
+Dit sectietype telt niet mee in de links/rechts-wisseling van sectietype 2 — het is een onderbreking van dat patroon, geen onderdeel ervan.
+
+Knoppen binnen dit sectietype volgen de bestaande knoppenlogica (`btn-dark-a` / `btn-dark-b` / `btn-light`) op basis van de achtergrondkleur van het blok — geen aparte knopstijl.
+
+### Bij twijfel
+Als niet duidelijk is welk sectietype of welke kleur van toepassing is: altijd eerst aan Sabine vragen, nooit zelf invullen (conform de algemene regel "bronbestanden zijn leidend").
+
+Opsommingen binnen gecentreerde secties (sectietype 1): gebruik geen bullets — bullets zijn altijd links uitgelijnd, ook binnen gecentreerde tekst, wat een rommelig effect geeft. Gebruik in plaats daarvan losse, gecentreerde regels zonder opsommingsteken.
+
+\---
 \#\# Notities voor de pilotfase
 
 \- Start met \*\*statische testdata\*\* voor 2–3 docentprofielen zodat het platform er meteen vol uitziet  
