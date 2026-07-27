@@ -135,10 +135,11 @@ export default function VoorDocentenPage() {
           {/* Blok 3 — tekst links / foto rechts — vinkjeslijst */}
           <div className="grid-2col-40-60-foto-rechts">
             <div className="text-intro">
+              <h2 className="heading-h2 accent-moss mb-heading">Waarom docenten kiezen voor Private Yoga at Home:</h2>
               <ul className="check-list">
                 <li>Meer vrijheid om op jouw eigen manier les te geven.</li>
-                <li>Een professionele profielpagina die vertrouwen uitstraalt.</li>
-                <li>Passende privéklanten die bewust kiezen voor yoga aan huis.</li>
+                <li>Een professionele profielpagina waarmee klanten jou leren kennen.</li>
+                <li>Aanvragen van klanten die bewust kiezen voor privé yoga aan huis.</li>
                 <li>Onderdeel van een groeiend netwerk van yogadocenten.</li>
                 <li>Ruimte om jezelf verder te ontwikkelen.</li>
                 <li>Samenwerken in plaats van alles alleen doen.</li>
@@ -183,7 +184,7 @@ export default function VoorDocentenPage() {
             <div className="stap-item">
               <h3 className="heading-h3 on-dark mb-text">4. Onderdeel van het platform</h3>
               <p className="text-body on-dark">
-                Je bent onderdeel van een platform waarin kwaliteit, samenwerking en persoonlijke ontwikkeling centraal staan. Samen bouwen we stap voor stap aan Private Yoga at Home.
+                Je bent onderdeel van een platform waarin kwaliteit, samenwerking en persoonlijke ontwikkeling centraal staan.
               </p>
             </div>
           </div>
@@ -200,7 +201,7 @@ export default function VoorDocentenPage() {
             <div className="text-intro">
               <p className="heading-overline mb-text">Klein beginnen, samen groeien</p>
               <h2 className="heading-h2 accent-moss mb-heading">
-                Samen bouwen aan de toekomst van privé yoga aan huis
+                Waarom we bewust klein beginnen
               </h2>
               <p className="text-body mb-text">
                 Private Yoga at Home staat nog aan het begin van een bijzonder avontuur.
