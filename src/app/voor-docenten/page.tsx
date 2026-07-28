@@ -276,11 +276,11 @@ export default function VoorDocentenPage() {
 
             <details className="faq-item">
               <summary>
-                <h4 className="heading-h4">Wat heb ik nodig om je aan te melden?</h4>
+                <h4 className="heading-h4">Wat heb je nodig om je aan te melden?</h4>
                 <ChevronDown className="faq-chevron" size={20} aria-hidden="true" />
               </summary>
               <p className="text-body faq-answer">
-                Een erkende yoga-opleiding (minimaal 200-urige Yoga Teacher Training), recente leservaring, een inschrijving bij de KvK en een verzekering als zzp&apos;er.
+                Een erkende yoga-opleiding (minimaal 200-urige Yoga Teacher Training), recente leservaring, een inschrijving bij de KvK en een AVB-verzekering (aansprakelijkheidsverzekering bedrijven).
               </p>
             </details>
 

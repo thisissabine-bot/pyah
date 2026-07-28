@@ -173,7 +173,8 @@ export default function HomePage() {
           <ul className="mb-section">
             <li className="text-body">Aantoonbare opleiding: minimaal een erkende 200-urige Yoga Teacher Training</li>
             <li className="text-body">Recente leservaring en een duidelijk specialisme</li>
-            <li className="text-body">Ingeschreven bij de Kamer van Koophandel en verzekerd als zzp'er</li>
+            <li className="text-body">Ingeschreven bij de Kamer van Koophandel</li>
+            <li className="text-body">Aansprakelijkheidsverzekering afgesloten</li>
             <li className="text-body">Persoonlijk gescreend — want kwaliteit staat boven schaal</li>
           </ul>
           <p className="text-body">

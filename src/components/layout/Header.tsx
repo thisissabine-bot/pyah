@@ -1,10 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+
+const NAV_ITEMS = [
+  { href: "/docenten", label: "Docent zoeken" },
+  { href: "/hoe-werkt-het", label: "Hoe werkt het?" },
+  { href: "/over", label: "Over PYAH" },
+  { href: "/tarieven", label: "Tarieven" },
+];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <>
@@ -19,10 +30,13 @@ export default function Header() {
 
           <nav>
             <ul className="nav-menu">
-              <li><Link href="/docenten" className="nav-link">Docent zoeken</Link></li>
-              <li><Link href="/hoe-werkt-het" className="nav-link">Hoe werkt het?</Link></li>
-              <li><Link href="/over" className="nav-link">Over PYAH</Link></li>
-              <li><Link href="/tarieven" className="nav-link">Tarieven</Link></li>
+              {NAV_ITEMS.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={isActive(item.href) ? "nav-link-active" : "nav-link"}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
 
@@ -51,10 +65,16 @@ export default function Header() {
         onClick={() => setMenuOpen(false)}
       />
       <div className={`nav-drawer${menuOpen ? " nav-drawer-open" : ""}`}>
-        <Link href="/docenten" className="nav-link" onClick={() => setMenuOpen(false)}>Docent zoeken</Link>
-        <Link href="/hoe-werkt-het" className="nav-link" onClick={() => setMenuOpen(false)}>Hoe werkt het?</Link>
-        <Link href="/over" className="nav-link" onClick={() => setMenuOpen(false)}>Over PYAH</Link>
-        <Link href="/tarieven" className="nav-link" onClick={() => setMenuOpen(false)}>Tarieven</Link>
+        {NAV_ITEMS.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={isActive(item.href) ? "nav-link-active" : "nav-link"}
+            onClick={() => setMenuOpen(false)}
+          >
+            {item.label}
+          </Link>
+        ))}
         <div className="nav-actions">
           <Link href="/auth/login" className="nav-link-secondary" onClick={() => setMenuOpen(false)}>Inloggen</Link>
           <Link href="/voor-docenten" className="btn-1 on-dark" onClick={() => setMenuOpen(false)}>Docent worden</Link>

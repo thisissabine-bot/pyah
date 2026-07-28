@@ -147,7 +147,7 @@ export default function DocentzoneHoeWerktHetPage() {
       </section>
 
       {/* SECTIE 3A — Twee ervaringsniveaus: intro (sectietype 3: gekleurd blok, gecentreerd) */}
-      <section className="page-section section-terracotta section-centered">
+      <section id="ervaringsniveaus" className="page-section section-terracotta section-centered">
         <div className="container-narrow">
           <p className="heading-overline on-dark mb-text">Startend of ervaren</p>
           <h2 className="heading-h2 on-dark mb-heading">Twee ervaringsniveaus: Startend &amp; Ervaren</h2>

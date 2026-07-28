@@ -231,6 +231,19 @@
   text-decoration: none;
 }
 
+.docent-nav-link-active {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #484f47;
+  text-decoration: none;
+}
+
+.docent-nav-link-active:hover {
+  color: #260f09;
+  text-decoration: none;
+}
+
 .docent-nav-drawer {
   position: fixed;
   top: 0;
@@ -252,7 +265,8 @@
 }
 
 @media (max-width: 768px) {
-  .docent-nav-drawer .docent-nav-link {
+  .docent-nav-drawer .docent-nav-link,
+  .docent-nav-drawer .docent-nav-link-active {
     font-size: 18px;
   }
 

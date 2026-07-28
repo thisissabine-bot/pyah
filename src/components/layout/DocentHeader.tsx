@@ -1,10 +1,21 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+
+const NAV_ITEMS = [
+  { href: "/voor-docenten/hoe-werkt-het", label: "Hoe werkt het?" },
+  { href: "/voor-docenten/over", label: "Over PYAH" },
+  { href: "/voor-docenten/abonnement", label: "Abonnement" },
+  { href: "/voor-docenten/aanmelden", label: "Aanmelden/Inloggen" },
+];
 
 export default function DocentHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <>
@@ -19,10 +30,13 @@ export default function DocentHeader() {
 
           <nav>
             <ul className="nav-menu">
-              <li><Link href="/voor-docenten/hoe-werkt-het" className="docent-nav-link">Hoe werkt het?</Link></li>
-              <li><Link href="/voor-docenten/over" className="docent-nav-link">Over PYAH</Link></li>
-              <li><Link href="/voor-docenten/abonnement" className="docent-nav-link">Abonnement</Link></li>
-              <li><Link href="/voor-docenten/aanmelden" className="docent-nav-link">Aanmelden/Inloggen</Link></li>
+              {NAV_ITEMS.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={isActive(item.href) ? "docent-nav-link-active" : "docent-nav-link"}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
 
@@ -49,10 +63,16 @@ export default function DocentHeader() {
         onClick={() => setMenuOpen(false)}
       />
       <div className={`docent-nav-drawer${menuOpen ? " nav-drawer-open" : ""}`}>
-        <Link href="/voor-docenten/hoe-werkt-het" className="docent-nav-link" onClick={() => setMenuOpen(false)}>Hoe werkt het?</Link>
-        <Link href="/voor-docenten/over" className="docent-nav-link" onClick={() => setMenuOpen(false)}>Over PYAH</Link>
-        <Link href="/voor-docenten/abonnement" className="docent-nav-link" onClick={() => setMenuOpen(false)}>Abonnement</Link>
-        <Link href="/voor-docenten/aanmelden" className="docent-nav-link" onClick={() => setMenuOpen(false)}>Aanmelden/Inloggen</Link>
+        {NAV_ITEMS.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className={isActive(item.href) ? "docent-nav-link-active" : "docent-nav-link"}
+            onClick={() => setMenuOpen(false)}
+          >
+            {item.label}
+          </Link>
+        ))}
         <div className="nav-actions">
           <Link href="/" className="btn-dark-a" onClick={() => setMenuOpen(false)}>Op zoek naar een yogadocent?</Link>
         </div>

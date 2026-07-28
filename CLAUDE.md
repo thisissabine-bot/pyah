@@ -7,6 +7,7 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.13 | 28-07-2026 | Open bouwpunt toegevoegd na \`CREATE TABLE aanmeldingen\`: schema mist kolommen voor yogastijlen, andere disciplines, motivatie, toelichting en de verklaringen/akkoordpunten (incl. AVB-checkbox) uit de definitieve Aanmeldformulier-paginatekst; pagina wordt vooralsnog als statische UI gebouwd, schema-uitbreiding + functioneel maken volgt in de backend-fase |
 | 
 v1.12	27-07-2026	Regel toegevoegd aan "Pagina-layout — patroon": opsommingen binnen gecentreerde secties (sectietype 1) gebruiken geen bullets maar losse gecentreerde regels, om links uitgelijnde bullets binnen gecentreerde tekst te voorkomen
 v1.11	27-07-2026	Sectie "Pagina-layout — patroon" toegevoegd: drie sectietypes vastgelegd (1-koloms gecentreerd, 2-koloms wisselend, gekleurd blok gecentreerd)
@@ -305,6 +306,20 @@ type TEXT CHECK (type IN ('docent', 'klant')) DEFAULT 'docent',
 verwerkt BOOLEAN DEFAULT false,         \-- false \= nog niet beoordeeld door Sabine  
 created\_at TIMESTAMPTZ DEFAULT NOW()  
 );
+
+\-- ⚠️ OPEN BOUWPUNT — schema-uitbreiding \`aanmeldingen\` (nog niet gebouwd)  
+\-- De definitieve paginatekst van /voor-docenten/aanmelden (PYAH\_Aanmeldformulier\_definitief.docx)  
+\-- bevat een aantal velden en verklaringen die nog niet in dit schema staan:  
+\--   \- yogastijlen (welke yogastijlen geef je?)  
+\--   \- andere\_disciplines (ademwerk, meditatie, sound healing, coaching, workshops)  
+\--   \- motivatie (waarom wil je je aansluiten bij Private Yoga at Home?)  
+\--   \- toelichting (vrij tekstveld — "is er nog iets dat je met ons wilt delen?")  
+\--   \- akkoord\_erkende\_opleiding, akkoord\_regio\_pilot, akkoord\_wachtlijst,  
+\--     akkoord\_geen\_garantie, akkoord\_avb, akkoord\_privacyverklaring (verklaringen-checkboxes)  
+\-- De pagina zelf wordt vooralsnog als statische/visuele UI gebouwd (geen submit-logica),  
+\-- omdat livegang nog niet aan de orde is. Deze schema-uitbreiding \+ het functioneel maken  
+\-- van het formulier (submit-verwerking) volgt pas zodra de backend-fase (Supabase/Mollie)  
+\-- weer opgepakt wordt, na afronding van het traject met de belastingadviseur.
 
 \-- Row Level Security inschakelen  
 ALTER TABLE docenten ENABLE ROW LEVEL SECURITY;  

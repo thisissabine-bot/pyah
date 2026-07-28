@@ -1599,3 +1599,82 @@ a:hover {
   flex-direction: column;
   gap: 40px;
 }
+
+
+/* ----------------------------------------------------------
+   21. AANMELDFORMULIER — Formuliervelden
+   ---------------------------------------------------------- */
+
+.form-body {
+  text-align: left;
+}
+
+.form-fieldset {
+  margin-bottom: 40px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #260f09;
+  margin-bottom: 6px;
+}
+
+.form-required {
+  color: #a66658;
+}
+
+.form-hint {
+  font-family: 'Lato', sans-serif;
+  font-size: 13px;
+  color: #484f47;
+  margin-top: 4px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #d4baad;
+  background-color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  color: #260f09;
+  text-align: left;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: #a66658;
+}
+
+.form-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.form-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.form-checkbox-row input[type="checkbox"] {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: #a66658;
+  cursor: pointer;
+}
