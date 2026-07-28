@@ -43,6 +43,14 @@
   padding-bottom: 80px;
 }
 
+/* Variant zonder bottom-padding — voor een tussenblok dat direct grenst
+   aan een volgende sectie met dezelfde achtergrondkleur, zodat de
+   witruimte niet dubbel optelt. */
+.page-section-top {
+  padding-top: 64px;
+  padding-bottom: 0;
+}
+
 .footer-inner {
   padding-top: 48px;
   padding-bottom: 48px;
@@ -58,6 +66,10 @@
     min-height: 640px;
     padding-top: 112px;
     padding-bottom: 112px;
+  }
+
+  .page-section-top {
+    padding-top: 80px;
   }
 }
 
@@ -118,6 +130,7 @@
   .mt-section { margin-top: 80px; }
 }
 .mb-heading  { margin-bottom: 40px; }
+.mt-heading  { margin-top: 40px; }
 .mb-subtitle { margin-bottom: 24px; }
 .mb-cta      { margin-bottom: 32px; }
 .mb-icon     { margin-bottom: 20px; }

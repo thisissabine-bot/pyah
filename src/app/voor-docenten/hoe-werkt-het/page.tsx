@@ -81,12 +81,12 @@ export default function DocentzoneHoeWerktHetPage() {
                 Tijdens een online gesprek maken we graag persoonlijk kennis met je.
               </p>
               <p className="text-body mb-text">We bespreken onder andere:</p>
-              <p className="text-body mb-text">jouw ervaring als docent</p>
-              <p className="text-body mb-text">jouw manier van lesgeven</p>
-              <p className="text-body mb-text">hoe samenwerken via Private Yoga at Home werkt</p>
-              <p className="text-body mb-text">welk ervaringsniveau (Startend of Ervaren docent) je krijgt toegewezen</p>
-              <p className="text-body mb-text">welk abonnement daarbij hoort</p>
-              <p className="text-body mb-text">en natuurlijk is er alle ruimte om vragen te stellen</p>
+              <p className="text-body mb-text">- jouw ervaring als docent</p>
+              <p className="text-body mb-text">- jouw manier van lesgeven</p>
+              <p className="text-body mb-text">- hoe samenwerken via Private Yoga at Home werkt</p>
+              <p className="text-body mb-text">- welk ervaringsniveau (Startend of Ervaren docent) je krijgt toegewezen</p>
+              <p className="text-body mb-text">- welk abonnement daarbij hoort</p>
+              <p className="text-body mb-text">- en natuurlijk is er alle ruimte om vragen te stellen</p>
             </div>
 
             <div className="stap-divider" />
@@ -98,11 +98,11 @@ export default function DocentzoneHoeWerktHetPage() {
                 Is er een goede match? Dan ontvang je een mail met de vervolgstappen én een welkomstpakket met de benodigde documenten, zoals de Platformovereenkomst, de Algemene Voorwaarden voor Docenten en de Kwaliteits- en veiligheidsrichtlijnen.
               </p>
               <p className="text-body mb-text">Je maakt vervolgens je profiel aan op het platform en vult dit aan met onder andere:</p>
-              <p className="text-body mb-text">een profielfoto</p>
-              <p className="text-body mb-text">een persoonlijke introductie</p>
-              <p className="text-body mb-text">jouw yogastijl(en)</p>
-              <p className="text-body mb-text">eventuele specialisaties</p>
-              <p className="text-body mb-text">je werkgebied (tijdens de pilotfase is dit Haarlem en omgeving)</p>
+              <p className="text-body mb-text">- een profielfoto</p>
+              <p className="text-body mb-text">- een persoonlijke introductie</p>
+              <p className="text-body mb-text">- jouw yogastijl(en)</p>
+              <p className="text-body mb-text">- eventuele specialisaties</p>
+              <p className="text-body mb-text">- je werkgebied (tijdens de pilotfase is dit Haarlem en omgeving)</p>
               <p className="text-body">
                 Zo kunnen toekomstige klanten een goed beeld krijgen van wie jij bent en hoe je lesgeeft.
               </p>
@@ -138,7 +138,7 @@ export default function DocentzoneHoeWerktHetPage() {
             </div>
           </div>
 
-          <p className="text-intro mt-section mb-text">Zie jij jezelf al lesgeven via Private Yoga at Home?</p>
+          <h3 className="heading-h3 mt-section mb-text">Zie jij jezelf al lesgeven via Private Yoga at Home?</h3>
           <p className="text-body mb-cta">
             We maken graag kennis met je. Vul het aanmeldformulier in en wie weet verwelkomen we je binnenkort als docent op ons platform.
           </p>
@@ -150,15 +150,31 @@ export default function DocentzoneHoeWerktHetPage() {
       <section id="ervaringsniveaus" className="page-section section-terracotta section-centered">
         <div className="container-narrow">
           <p className="heading-overline on-dark mb-text">Startend of ervaren</p>
-          <h2 className="heading-h2 on-dark mb-heading">Twee ervaringsniveaus: Startend &amp; Ervaren</h2>
+          <h2 className="heading-h2 on-dark mb-heading">
+            Twee ervaringsniveaus:<br />
+            Startend &amp; Ervaren
+          </h2>
           <p className="text-body on-dark mb-text">
-            Private Yoga at Home werkt met twee ervaringsniveaus: Startend en Ervaren.
+            Private Yoga at Home werkt met twee ervaringsniveaus: Startend en Ervaren.<br />
           </p>
           <p className="text-body on-dark mb-text">
-            Zo kunnen we beter aansluiten bij de ervaring van iedere docent én zorgen we voor een eerlijk systeem voor tarieven, commissies en doorgroeimogelijkheden.
+            Zo kunnen we beter aansluiten bij de ervaring van iedere docent én zorgen we voor een eerlijk systeem<br />
+            voor tarieven, commissies en doorgroeimogelijkheden.<br />
           </p>
           <p className="text-body on-dark">
-            De twee ervaringsniveaus helpen niet alleen docenten, maar geven ook klanten een duidelijk beeld van de ervaring en expertise die zij kunnen verwachten.
+            De twee ervaringsniveaus helpen niet alleen docenten, maar geven ook klanten<br />
+            een duidelijk beeld van de ervaring en expertise die zij kunnen verwachten.
+          </p>
+        </div>
+      </section>
+
+      {/* Tussenblok — gecentreerd (tussen intro en de 2-koloms blokken) */}
+      <section className="page-section-top section-white section-centered">
+        <div className="container-narrow">
+          <p className="text-body">
+            Tijdens de kennismaking beoordelen we op basis van je opleiding,<br />
+            leservaring en eventuele specialisaties welk ervaringsniveau het beste aansluit bij jouw achtergrond.<br />
+            Daarna bespreken we samen de vervolgstappen.
           </p>
         </div>
       </section>
@@ -168,26 +184,22 @@ export default function DocentzoneHoeWerktHetPage() {
         <div className="container">
           <div className="grid-2col-40-60-foto-links">
             <div className="text-intro">
-              <p className="text-body mb-section">
-                Tijdens de kennismaking beoordelen we op basis van je opleiding, leservaring en eventuele specialisaties welk ervaringsniveau het beste aansluit bij jouw achtergrond. Daarna bespreken we samen de vervolgstappen.
-              </p>
-
-              <h3 className="heading-h3 mb-text">Startend docent</h3>
-              <p className="heading-h5 mb-text">Dit past bij jou als je:</p>
+              <h3 className="heading-h3 mb-text">Startend docent:</h3>
+              <p className="heading-h5 mb-text">Toelatingsvoorwaarden — dit past bij jou als je:</p>
               <ul className="mb-text">
                 <li className="text-body">een erkende yogaopleiding hebt afgerond en nog relatief weinig vlieguren hebt als docent</li>
                 <li className="text-body">minimaal 1 jaar leservaring óf minimaal 50 uur aantoonbare leservaring hebt</li>
                 <li className="text-body">je lessenpraktijk nog aan het opbouwen bent</li>
                 <li className="text-body">graag meer ervaring wilt opdoen met privélessen aan huis</li>
               </ul>
-              <p className="heading-h5 mb-text">Wat betekent dit:</p>
+              <p className="heading-h5 mb-text mt-heading">Wat betekent dit:</p>
               <ul className="mb-text">
                 <li className="text-body">je werkt met een toegankelijk tarief voor klanten</li>
                 <li className="text-body">je betaalt een lagere platformcommissie</li>
                 <li className="text-body">je bouwt praktijkervaring en reviews op</li>
                 <li className="text-body">je krijgt de ruimte om stap voor stap door te groeien binnen het platform</li>
               </ul>
-              <p className="heading-h5 mb-text">We helpen je groeien door:</p>
+              <p className="heading-h5 mb-text mt-heading">We helpen je groeien door:</p>
               <ul>
                 <li className="text-body">een professioneel profiel op het platform</li>
                 <li className="text-body">zichtbaarheid voor potentiële klanten</li>
@@ -208,8 +220,8 @@ export default function DocentzoneHoeWerktHetPage() {
         <div className="container">
           <div className="grid-2col-40-60-foto-rechts">
             <div className="text-intro">
-              <h3 className="heading-h3 mb-text">Ervaren docent</h3>
-              <p className="heading-h5 mb-text">Dit past bij jou als je:</p>
+              <h3 className="heading-h3 mb-text">Ervaren docent:</h3>
+              <p className="heading-h5 mb-text">Toelatingsvoorwaarden — dit past bij jou als je:</p>
               <ul className="mb-text">
                 <li className="text-body">minimaal 2 jaar actieve leservaring hebt als yogadocent (studio, privé of bedrijven)</li>
                 <li className="text-body">aantoonbaar zelfstandig en professioneel privélessen kunt verzorgen</li>
@@ -218,7 +230,7 @@ export default function DocentzoneHoeWerktHetPage() {
                 <li className="text-body">zelfstandig privétrajecten kunt begeleiden</li>
                 <li className="text-body">klaar bent om trajecten op maat te bieden aan klanten met specifieke wensen</li>
               </ul>
-              <p className="heading-h5 mb-text">Wat dit voor jou betekent:</p>
+              <p className="heading-h5 mb-text mt-heading">Wat dit voor jou betekent:</p>
               <ul className="mb-text">
                 <li className="text-body">je werkt met de vaste tarieven die horen bij het Ervaren-niveau</li>
                 <li className="text-body">het platform rekent een vaste commissie van 20% per les</li>
@@ -227,7 +239,7 @@ export default function DocentzoneHoeWerktHetPage() {
               <p className="text-body mb-text">
                 In een latere fase willen we Ervaren docenten ook de mogelijkheid bieden om workshops en trajecten op maat aan te bieden, met een eigen prijsstelling. Tijdens de pilotfase werken we uitsluitend met de vaste tarieven hierboven.
               </p>
-              <p className="heading-h5 mb-text">Een ervaren docent past vaak goed bij klanten die:</p>
+              <p className="heading-h5 mb-text mt-heading">Een ervaren docent past vaak goed bij klanten die:</p>
               <ul>
                 <li className="text-body">duidelijke doelen of klachten hebben (zonder medische claim)</li>
                 <li className="text-body">weinig tijd hebben en snel resultaat willen behalen</li>
@@ -249,11 +261,11 @@ export default function DocentzoneHoeWerktHetPage() {
           <p className="text-body on-dark mb-text">
             We kijken naar het totaalplaatje. Daarbij nemen we onder andere mee:
           </p>
-          <p className="text-body on-dark mb-text">je opleiding</p>
-          <p className="text-body on-dark mb-text">je leservaring</p>
-          <p className="text-body on-dark mb-text">ervaring met privélessen</p>
-          <p className="text-body on-dark mb-text">eventuele specialisaties</p>
-          <p className="text-body on-dark mb-text">de indruk uit onze kennismaking</p>
+          <p className="text-body on-dark mb-text">- je opleiding</p>
+          <p className="text-body on-dark mb-text">- je leservaring</p>
+          <p className="text-body on-dark mb-text">- ervaring met privélessen</p>
+          <p className="text-body on-dark mb-text">- eventuele specialisaties</p>
+          <p className="text-body on-dark mb-text">- de indruk uit onze kennismaking</p>
           <p className="text-body on-dark">
             Op basis hiervan delen we je in als Startend of Ervaren docent.
           </p>
@@ -295,27 +307,38 @@ export default function DocentzoneHoeWerktHetPage() {
       <section className="page-section section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Eerlijk en transparant</p>
-          <h2 className="heading-h2 mb-heading">Waarom werken we met verschillende commissies?</h2>
+          <h2 className="heading-h2 mb-heading">
+            Waarom werken we<br />
+            met verschillende commissies?
+          </h2>
           <p className="text-body mb-text">
-            De commissie stelt ons in staat om te investeren in de verdere ontwikkeling van het platform, marketing en de zichtbaarheid van onze docenten. Zo kun jij je focussen op het geven van persoonlijke yogalessen.
+            De commissie stelt ons in staat om te investeren in de verdere ontwikkeling van het platform, marketing en<br />
+            de zichtbaarheid van onze docenten.<br />
+            Zo kun jij je focussen op het geven van persoonlijke yogalessen.
           </p>
           <p className="text-body mb-text">We willen een eerlijk model voor alle partijen:</p>
 
-          <p className="heading-h5 mb-text">Startend docent:</p>
-          <p className="text-body mb-text">lager tarief voor de klant</p>
-          <p className="text-body mb-text">lagere commissie voor jou</p>
-          <p className="text-body mb-text">een toegankelijke manier om ervaring op te bouwen via het platform</p>
+          <p className="heading-h5 mb-text mt-heading">Startend docent:</p>
+          <p className="text-body mb-text">- lager tarief voor de klant</p>
+          <p className="text-body mb-text">- lagere commissie voor jou</p>
+          <p className="text-body mb-text">- een toegankelijke manier om ervaring op te bouwen via het platform</p>
 
-          <p className="heading-h5 mb-text">Ervaren docent:</p>
-          <p className="text-body mb-text">hoger tarief, passend bij jouw expertise</p>
-          <p className="text-body mb-text">hogere commissie, omdat je meer profiteert van het merk, de marketing en het vertrouwen van het platform</p>
-          <p className="text-body mb-text">klanten die bewust voor jouw ervaring en verdieping kiezen</p>
-
+          <p className="heading-h5 mb-text mt-heading">Ervaren docent:</p>
+          <p className="text-body mb-text">- hoger tarief, passend bij jouw expertise</p>
           <p className="text-body mb-text">
-            We communiceren altijd transparant over de tarieven en de commissie, zodat je vooraf precies weet welk bedrag je per les ontvangt.
+            - hogere commissie, omdat je meer profiteert van het merk,<br />
+            de marketing en het vertrouwen van het platform
+          </p>
+          <p className="text-body mb-text">- klanten die bewust voor jouw ervaring en verdieping kiezen</p>
+
+          <p className="text-body mb-text mt-heading">
+            We communiceren altijd transparant over de tarieven en de commissie,<br />
+            zodat je vooraf precies weet welk bedrag je per les ontvangt.
           </p>
           <p className="text-body mb-cta">
-            Naast de commissie werk je als docent met een maandelijks abonnement. Welk abonnement bij jouw ervaringsniveau hoort en wat daarbij is inbegrepen, lees je op de pagina <Link href="/voor-docenten/abonnement">Abonnementen</Link>.
+            Naast de commissie werk je als docent met een maandelijks abonnement.<br />
+            Welk abonnement bij jouw ervaringsniveau hoort en wat daarbij is inbegrepen,<br />
+            lees je op de pagina <Link href="/voor-docenten/abonnement">Abonnementen</Link>.
           </p>
           <Link className="btn-light" href="/voor-docenten/abonnement">Ja, ik ben benieuwd naar de abonnementen</Link>
         </div>
