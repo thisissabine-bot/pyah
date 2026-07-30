@@ -17,50 +17,69 @@ export default function VoorDocentenPage() {
         <div className="container hero-content">
           <p className="heading-overline on-dark mb-text">Ruimte om te groeien op jouw manier</p>
           <h1 className="heading-h1 on-dark mb-subtitle">
-            Geef les op een manier<br />die bij jou past.
+            Geef les op een manier die bij jou past.
           </h1>
-          <p className="heading-h2 on-dark mb-heading">
+          <p className="heading-h2 on-dark">
             Voor yogadocenten die willen groeien,<br />samenwerken en met aandacht privélessen<br />aan huis willen geven.
           </p>
-          <p className="text-intro on-dark mb-cta">
-            Of je nu net bent gestart of al jarenlang lesgeeft:<br />bij Private Yoga at Home krijg je de ruimte om jezelf verder te ontwikkelen en<br />onderdeel te worden van een nieuw platform<br />waar jouw eigen stijl als docent centraal staat.
+        </div>
+      </section>
+
+      {/* SECTIE — Aanmelden CTA (sectietype 1: gecentreerd) */}
+      <section className="page-section section-white section-centered">
+        <div className="container-narrow">
+          <p className="text-body mb-cta">
+            Of je nu net bent gestart of al jarenlang lesgeeft:<br />
+            bij Private Yoga at Home krijg je de ruimte om jezelf verder te ontwikkelen en<br />
+            onderdeel te worden van een nieuw platform waar jouw eigen stijl als docent centraal staat.
           </p>
-          <Link className="btn-light" href="/voor-docenten/aanmelden">
+          <Link className="btn-dark-a" href="/voor-docenten/aanmelden">
             Meld je aan voor de pilot in Haarlem
           </Link>
         </div>
       </section>
 
-      {/* SECTIE 2 — Misschien herken je dit... */}
-      <section className="page-section section-white section-centered">
-        <div className="container-narrow">
-          <p className="heading-overline mb-text">Herkenning van twijfel en werkdruk</p>
-          <h2 className="heading-h2 accent-moss mb-heading">Misschien herken je dit...</h2>
-          <p className="text-body mb-text">
-            Je bent yogadocent geworden omdat je zelf hebt ervaren wat yoga kan betekenen. Die ervaring gun je ook anderen.
-          </p>
-          <p className="text-body mb-text">
-            De rust die ontstaat na een les. Het vertrouwen dat langzaam groeit. De glimlach van iemand die zich weer vrijer kan bewegen of eindelijk weer even adem kan halen.
-          </p>
-          <p className="text-body mb-text">
-            Maar misschien merk je ook dat de manier waarop je nu werkt niet helemaal meer past.
-          </p>
-          <p className="text-body mb-text">
-            Je geeft les bij één of meerdere studio&apos;s, maar voelt weinig ruimte om echt je eigen stijl te ontwikkelen. Je past je aan aan het rooster, het tempo of de verwachtingen van anderen. Of je bent net gestart en vraagt je af hoe je ervaring kunt opbouwen zonder alles zelf vanaf het begin te hoeven uitzoeken.
-          </p>
-          <p className="text-body mb-text">
-            Misschien twijfel je soms aan jezelf.
-          </p>
-          <p className="text-body mb-text">
-            Hoe kom ik aan mijn eigen klanten?<br />
-            Ben ik wel goed genoeg?<br />
-            Wat is een eerlijk tarief?<br />
-            Hoe bouw ik dit op zonder mezelf voorbij te lopen?
-          </p>
-          <p className="text-body mb-text">Je bent niet de enige.</p>
-          <p className="text-body">
-            Wat je ervaring ook is — net gestart, of alweer jaren actief en toe aan meer vrijheid en diepgang — als je met aandacht werkt en gelooft in de kracht van persoonlijke begeleiding, dan voel je je waarschijnlijk thuis bij Private Yoga at Home.
-          </p>
+      {/* SECTIE 2 — Misschien herken je dit... (sectietype 2: foto links, tekst rechts) */}
+      <section className="page-section section-pearl">
+        <div className="container">
+          <div className="grid-2col-40-60-foto-links">
+            <div className="text-intro">
+              <p className="heading-overline mb-text">Herkenning van twijfel en werkdruk</p>
+              <h2 className="heading-h2 accent-moss mb-heading">Misschien herken je dit...</h2>
+              <p className="text-body mb-text">
+                Je bent yogadocent geworden omdat je zelf hebt ervaren wat yoga kan betekenen.<br />
+                Die ervaring gun je ook anderen.
+              </p>
+              <p className="text-body mb-text">
+                De rust die ontstaat na een les. Het vertrouwen dat langzaam groeit.<br />
+                De glimlach van iemand die zich weer vrijer kan bewegen of eindelijk weer even adem kan halen.
+              </p>
+              <p className="text-body mb-text">
+                Maar misschien merk je ook dat de manier waarop je nu werkt niet helemaal meer past.
+              </p>
+              <p className="text-body mb-text">
+                Je geeft les bij één of meerdere studio&apos;s, maar voelt weinig ruimte om echt je eigen stijl te ontwikkelen.<br />
+                Je past je aan aan het rooster, het tempo of de verwachtingen van anderen. Of je bent net gestart en<br />
+                vraagt je af hoe je ervaring kunt opbouwen zonder alles zelf vanaf het begin te hoeven uitzoeken.
+              </p>
+              <p className="text-body mb-text">
+                Misschien twijfel je soms aan jezelf.
+              </p>
+              <ul className="mb-text">
+                <li className="text-body">Hoe kom ik aan mijn eigen klanten?</li>
+                <li className="text-body">Ben ik wel goed genoeg?</li>
+                <li className="text-body">Wat is een eerlijk tarief?</li>
+                <li className="text-body">Hoe bouw ik dit op zonder mezelf voorbij te lopen?</li>
+              </ul>
+              <p className="text-body mb-text">Je bent niet de enige.</p>
+              <p className="text-body">
+                Wat je ervaring ook is — net gestart, of alweer jaren actief en toe aan meer vrijheid en diepgang — als je met aandacht werkt en gelooft in de kracht van persoonlijke begeleiding, dan voel je je waarschijnlijk thuis bij Private Yoga at Home.
+              </p>
+            </div>
+            <div className="image-col-inner">
+              <div className="hero-placeholder" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -105,21 +124,21 @@ export default function VoorDocentenPage() {
               <p className="heading-overline mb-text">Steun bij alles rondom het lesgeven</p>
               <h2 className="heading-h2 accent-moss mb-heading">Je staat er niet alleen voor</h2>
               <p className="text-body mb-text">
-                Veel yogadocenten vinden het heerlijk om les te geven.
+                Yogadocenten vinden het heerlijk om les te geven,<br />
+                maar soms voelt alles daaromheen als een tweede baan.
               </p>
-              <p className="text-body mb-text">
-                Maar alles daaromheen voelt soms als een tweede baan.
-              </p>
-              <p className="text-body mb-text">
-                Klanten vinden.<br />
-                Zichtbaar zijn.<br />
-                Jezelf presenteren.<br />
-                Tarieven bepalen.<br />
-                Administratie regelen.<br />
-                Twijfelen of je wel de juiste keuzes maakt.
-              </p>
-              <p className="text-body">
-                Wij geloven dat je niet alles alleen hoeft te doen.
+              <ul className="mb-text">
+                <li className="text-body">Klanten vinden.</li>
+                <li className="text-body">Zichtbaar zijn.</li>
+                <li className="text-body">Jezelf presenteren.</li>
+                <li className="text-body">Tarieven bepalen.</li>
+                <li className="text-body">Administratie regelen.</li>
+                <li className="text-body">Twijfelen of je wel de juiste keuzes maakt.</li>
+              </ul>
+              <p className="text-body mt-heading">
+                Wij geloven dat je niet alles alleen hoeft te doen.<br />
+                Niet als concurrent van andere docenten,<br />
+                maar als concullega, in een groep die samen bouwt.
               </p>
             </div>
             <div className="image-col-inner">
@@ -129,7 +148,8 @@ export default function VoorDocentenPage() {
 
           {/* Blok 2 — volle breedte, gecentreerd */}
           <blockquote className="text-quote mt-section mb-section">
-            We ondersteunen je bij een professionele uitstraling en zorgen ervoor dat klanten een docent vinden die echt bij hen past.
+            We ondersteunen je bij een professionele uitstraling en<br />
+            zorgen ervoor dat klanten een docent vinden die echt bij hen past.
           </blockquote>
 
           {/* Blok 3 — tekst links / foto rechts — vinkjeslijst */}

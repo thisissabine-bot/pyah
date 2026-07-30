@@ -7,6 +7,7 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.14 | 30-07-2026 | Sectie "Pagina-layout — patroon" uitgebreid met nieuw sectietype 2b (tekst/tekst naast elkaar, voor Startend/Ervaren-vergelijkingen) en met een paragraaf over gestripete tabelachtergronden met hover-state (referentie: Abonnementen-pagina); toekomstig punt toegevoegd bij "Toekomstige uitbreiding": "Delen van eigen workshops & trainingen binnen de docenten-community" is geparkeerd voor de pilotfase, zelfde patroon als het 4-lessenpakket |
 | v1.13 | 28-07-2026 | Open bouwpunt toegevoegd na \`CREATE TABLE aanmeldingen\`: schema mist kolommen voor yogastijlen, andere disciplines, motivatie, toelichting en de verklaringen/akkoordpunten (incl. AVB-checkbox) uit de definitieve Aanmeldformulier-paginatekst; pagina wordt vooralsnog als statische UI gebouwd, schema-uitbreiding + functioneel maken volgt in de backend-fase |
 | 
 v1.12	27-07-2026	Regel toegevoegd aan "Pagina-layout — patroon": opsommingen binnen gecentreerde secties (sectietype 1) gebruiken geen bullets maar losse gecentreerde regels, om links uitgelijnde bullets binnen gecentreerde tekst te voorkomen
@@ -1105,6 +1106,10 @@ In een latere fase kunnen Ervaren docenten zelf facturen aanmaken voor workshops
 
 Voor de pilotfase is deze functionaliteit \*\*niet actief\*\*.
 
+\#\#\# Toekomstige uitbreiding — Community: delen van workshops/trainingen
+
+"Delen van eigen workshops & trainingen binnen de docenten-community" is voor de pilotfase geparkeerd, zelfde reden als het 4-lessenpakket — nog niet actief. Verwijderd uit de Abonnementen-pagina (vergelijkingstabel + toelichting). Toe te voegen zodra de community-functionaliteit actief wordt.
+
 \---
 
 
@@ -1249,6 +1254,13 @@ Vanaf sectie 2: waar de inhoud zich leent voor 2 kolommen (bijv. foto + tekst), 
 
 Bij twijfel of een sectie zich leent voor 2 kolommen: volg het patroon van eerder gebouwde pagina's (bijv. Homepage). Vraag alleen als het echt niet duidelijk is.
 
+### Sectietype 2b — Tekst/tekst naast elkaar (vergelijking)
+Gebruikt wanneer twee korte tekstblokken direct met elkaar vergeleken moeten worden binnen één sectie — bijvoorbeeld Startend versus Ervaren. Dit verschilt van sectietype 2, waar het gaat om foto/tekst die per sectie van kant wisselt: bij 2b staan twee tekstblokken naast elkaar binnen dezelfde sectie, niet wisselend over meerdere secties.
+
+Op mobiel worden de kolommen gestapeld (eerste kolom boven, tweede kolom onder).
+
+Referentie: Abonnementen-pagina (`/voor-docenten/abonnement`), sectie 2 (Startend/Ervaren-intro).
+
 ### Sectietype 3 — Gekleurd blok, gecentreerd
 Gebruikt voor uitgelichte tussenstukken of CTA-secties (zie referentie `/voor-docenten`). Tekst altijd gecentreerd, volledige achtergrondkleur op sectieniveau.
 
@@ -1269,6 +1281,13 @@ Knoppen binnen dit sectietype volgen de bestaande knoppenlogica (`btn-dark-a` / 
 Als niet duidelijk is welk sectietype of welke kleur van toepassing is: altijd eerst aan Sabine vragen, nooit zelf invullen (conform de algemene regel "bronbestanden zijn leidend").
 
 Opsommingen binnen gecentreerde secties (sectietype 1): gebruik geen bullets — bullets zijn altijd links uitgelijnd, ook binnen gecentreerde tekst, wat een rommelig effect geeft. Gebruik in plaats daarvan losse, gecentreerde regels zonder opsommingsteken.
+
+### Tabellen met veel rijen — striping & hover
+Voor tabellen met meerdere rijen (zoals de abonnement-vergelijkingstabel) geen horizontale lijntjes tussen rijen gebruiken. In plaats daarvan: rijen wisselen doorlopend (rij voor rij, niet per categorie herstart) tussen `#ebe3e0` (100%) en `#ebe3e0` op 60% dekking. Categoriekoppen krijgen een eigen onderscheidende stijl (vetgedrukt) en tellen niet mee in de rij-telling voor de striping.
+
+Bij hover over een rij: achtergrond wordt `#d4baad` met een zachte `transition-colors`.
+
+Referentie: Abonnementen-pagina, sectie 3 (vergelijkingstabel).
 
 \---
 \#\# Notities voor de pilotfase
