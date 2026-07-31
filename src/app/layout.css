@@ -1762,6 +1762,15 @@ a:hover {
   padding-bottom: 6px;
 }
 
+.abonnement-tabel-categorie-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.abonnement-tabel-categorie-link:hover {
+  text-decoration: underline;
+}
+
 .abonnement-tabel-rij {
   transition: background-color 0.2s ease;
 }
@@ -1770,8 +1779,8 @@ a:hover {
   background-color: #d4baad;
 }
 
-.abonnement-rij-a { background-color: #ebe3e0; }
-.abonnement-rij-b { background-color: rgba(235, 227, 224, 0.6); }
+.abonnement-rij-a { background-color: rgba(255, 255, 255, 0.5); }
+.abonnement-rij-b { background-color: #ebe3e0; }
 
 .abonnement-tabel .icon-check {
   display: flex;
@@ -1793,4 +1802,8 @@ a:hover {
   max-width: 680px;
   margin: 0 auto;
   text-align: left;
+}
+
+.toelichting-anker {
+  scroll-margin-top: 96px;
 }

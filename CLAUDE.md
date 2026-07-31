@@ -7,6 +7,8 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.16 | 31-07-2026 | Sectie "Tabellen met veel rijen — striping & hover" gecorrigeerd: de eerder vastgelegde striping (\`#ebe3e0\` 100%/60%) bleek onzichtbaar op een \`section-pearl\`-achtergrond (zelfde kleur als de sectie zelf) — ontdekt bij livegang van de Abonnementen-pagina. Vervangen door een vaste, sectie-onafhankelijke combinatie (\`rgba(255,255,255,0.5)\` + \`#ebe3e0\`) die op zowel witte als pearl-secties werkt |
+| v1.15 | 31-07-2026 | Kleurmodifiers (.accent-terracotta / .accent-moss / .on-dark) uitgebreid naar H4 en H5, die dit voorheen niet hadden; default-kleur van H4 en H5 in typography.css gewijzigd van terracotta naar mosgroen (H4 daarnaast 20px → 18px); FAQ-pagina (Abonnement) H4's krijgen hierdoor mosgroen i.p.v. terracotta; Abonnementen-pagina toelichting-sectie: item-titels worden H5 i.p.v. losse alinea-stijl, zodat ze visueel linken met de categoriekoppen in de vergelijkingstabel |
 | v1.14 | 30-07-2026 | Sectie "Pagina-layout — patroon" uitgebreid met nieuw sectietype 2b (tekst/tekst naast elkaar, voor Startend/Ervaren-vergelijkingen) en met een paragraaf over gestripete tabelachtergronden met hover-state (referentie: Abonnementen-pagina); toekomstig punt toegevoegd bij "Toekomstige uitbreiding": "Delen van eigen workshops & trainingen binnen de docenten-community" is geparkeerd voor de pilotfase, zelfde patroon als het 4-lessenpakket |
 | v1.13 | 28-07-2026 | Open bouwpunt toegevoegd na \`CREATE TABLE aanmeldingen\`: schema mist kolommen voor yogastijlen, andere disciplines, motivatie, toelichting en de verklaringen/akkoordpunten (incl. AVB-checkbox) uit de definitieve Aanmeldformulier-paginatekst; pagina wordt vooralsnog als statische UI gebouwd, schema-uitbreiding + functioneel maken volgt in de backend-fase |
 | 
@@ -99,7 +101,7 @@ const lato \= Lato({ weight: \['300', '400', '700'\], subsets: \['latin'\], vari
 \`typography.css\` is het enige bronbestand voor typografie. Dit bestand wordt nooit aangepast. Als iets visueel niet klopt, pas dan altijd de klassen in de component aan — niet het CSS-systeem.
 
 \*\*Kleurmodifiers voor koppen\*\*  
-Koppen H1, H2 en H3 kunnen wisselen tussen terracotta en mosgroen afhankelijk van de pagina en sectie. Gebruik daarvoor altijd een modifier class in combinatie met de heading class:
+Koppen H1 t/m H5 kunnen wisselen tussen terracotta en mosgroen afhankelijk van de pagina en sectie. Gebruik daarvoor altijd een modifier class in combinatie met de heading class:
 \- \`.accent-terracotta\` — zet een kop naar \`#a66658\`
 \- \`.accent-moss\` — zet een kop naar \`#484f47\`
 \- \`.on-dark\` — zet een kop naar \`#ffffff\` op een donkere achtergrond
@@ -107,6 +109,9 @@ Koppen H1, H2 en H3 kunnen wisselen tussen terracotta en mosgroen afhankelijk va
 Voorbeeld: \`<h2 class="heading-h2 accent-terracotta">Titel</h2>\`
 
 Kies nooit zelf een kleur — vraag Sabine welke modifier van toepassing is als dit niet expliciet is aangegeven.
+
+\*\*H4 en H5 — default-kleur gewijzigd (v1.15)\*\*  
+H4 en H5 hadden voorheen geen kleurmodifiers en stonden vast op terracotta (\`#a66658\`). Sinds v1.15 gebruiken ook H4 en H5 het modifier-systeem hierboven, en is de \*\*default-kleur van beide gewijzigd naar mosgroen\*\* (\`#484f47\`) — terracotta blijft beschikbaar via \`.accent-terracotta\` waar dat expliciet gewenst is. H4 is daarnaast verkleind van 20px naar 18px. Reden: bij herhaald gebruik van H4/H5 binnen één pagina (bijv. FAQ-items, of een lange lijst met item-titels) werd terracotta al snel een "brei" van dezelfde kleur; mosgroen is rustiger bij herhaling en houdt terracotta beschikbaar voor de koppen die er echt uit moeten springen (H1-H3).
 
 \*\*Geen Tailwind op tekstelementen\*\*  
 Gebruik nooit Tailwind utilities zoals \`text-sm\`, \`text-xl\`, \`font-bold\`, \`text-pyah-\*\`, \`leading-relaxed\` etc. op tekstelementen. Gebruik uitsluitend de classes uit \`typography.css\` en \`layout.css\`. Als een passende class ontbreekt, meld dit dan aan Sabine — voeg geen Tailwind toe als vervanging en verzin geen nieuwe class zelf.
@@ -1283,7 +1288,15 @@ Als niet duidelijk is welk sectietype of welke kleur van toepassing is: altijd e
 Opsommingen binnen gecentreerde secties (sectietype 1): gebruik geen bullets — bullets zijn altijd links uitgelijnd, ook binnen gecentreerde tekst, wat een rommelig effect geeft. Gebruik in plaats daarvan losse, gecentreerde regels zonder opsommingsteken.
 
 ### Tabellen met veel rijen — striping & hover
-Voor tabellen met meerdere rijen (zoals de abonnement-vergelijkingstabel) geen horizontale lijntjes tussen rijen gebruiken. In plaats daarvan: rijen wisselen doorlopend (rij voor rij, niet per categorie herstart) tussen `#ebe3e0` (100%) en `#ebe3e0` op 60% dekking. Categoriekoppen krijgen een eigen onderscheidende stijl (vetgedrukt) en tellen niet mee in de rij-telling voor de striping.
+Voor tabellen met meerdere rijen (zoals de abonnement-vergelijkingstabel) geen horizontale lijntjes tussen rijen gebruiken. In plaats daarvan wisselen de rijen doorlopend (rij voor rij, niet per categorie herstart) tussen twee vaste kleuren, **ongeacht de achtergrondkleur van de sectie eromheen**:
+- Rij-type A: `rgba(255, 255, 255, 0.5)` (wit, 50% dekking)
+- Rij-type B: `#ebe3e0`
+
+Deze combinatie werkt op zowel een witte sectie-achtergrond (`section-white`) als een pearl-achtergrond (`section-pearl`, ook `#ebe3e0`): op een pearl-sectie versmelt rij B met de achtergrond en steekt rij A (wit) af; op een witte sectie versmelt rij A met de achtergrond en steekt rij B (`#ebe3e0`) af. In beide gevallen blijft het afwisselende patroon zichtbaar, zonder dat er onderscheid gemaakt hoeft te worden per sectie-achtergrond. Gebruik deze vaste combinatie dus altijd, niet `#ebe3e0` op 100%/60% dekking (dat werkt alleen op een witte achtergrond en is onzichtbaar op pearl).
+
+Let op: dit werkt niet op een donkere sectie-achtergrond (`#484f47` of `#260f09`) — kom je die situatie tegen, vraag dan eerst aan Sabine.
+
+Categoriekoppen krijgen een eigen onderscheidende stijl (vetgedrukt) en tellen niet mee in de rij-telling voor de striping.
 
 Bij hover over een rij: achtergrond wordt `#d4baad` met een zachte `transition-colors`.
 

@@ -68,6 +68,14 @@ const TABEL: TabelCategorie[] = [
   },
 ];
 
+function slugify(titel: string): string {
+  return titel
+    .toLowerCase()
+    .replace(/&/g, "en")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 type TabelRij =
   | { type: "categorie"; key: string; titel: string }
   | { type: "item"; key: string; item: TabelItem; rijClass: "abonnement-rij-a" | "abonnement-rij-b" };
@@ -230,7 +238,8 @@ export default function AbonnementPage() {
           <p className="heading-overline on-dark mb-text">Voor yogadocenten</p>
           <h1 className="heading-h1 on-dark">
             Startend of Ervaren<br />
-            jouw abonnement bij PYAH
+            jouw abonnement bij<br />
+            Private Yoga at Home
           </h1>
         </div>
       </section>
@@ -239,22 +248,27 @@ export default function AbonnementPage() {
       <section className="page-section section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Twee niveaus, één heldere structuur</p>
-          <h2 className="heading-h2 accent-moss mb-heading">Waarom PYAH werkt met Startend en Ervaren</h2>
+          <h2 className="heading-h2 accent-moss mb-heading">
+            Waarom Private Yoga at Home<br />
+            werkt met Startend en Ervaren
+          </h2>
           <p className="text-body mb-section">
-            Binnen Private Yoga at Home werken we met twee niveaus: Startend en Ervaren. Deze indeling zorgt voor duidelijkheid — voor jou als docent, én voor de klant die een passende docent zoekt.
+            Binnen Private Yoga at Home werken we met twee niveaus: Startend en Ervaren.<br />
+            Deze indeling zorgt voor duidelijkheid voor jou als docent,<br />
+            én voor de klant die een passende docent zoekt.
           </p>
 
           <div className="grid-2col-equal">
             <div className="text-intro">
               <h3 className="heading-h3 mb-text">Startend</h3>
               <p className="text-body">
-                Startend geeft je de ruimte om ervaring op te bouwen met privélessen, in een professionele en veilige setting, tegen een lager tarief, een lagere fee en een lager maandabonnement.
+                Startend geeft je de ruimte om ervaring op te bouwen met privélessen, in een professionele en veilige setting, tegen een lager tarief, een lagere commissie en een lager maandabonnement.
               </p>
             </div>
             <div className="text-intro">
               <h3 className="heading-h3 mb-text">Ervaren</h3>
               <p className="text-body">
-                Ervaren past bij docenten die al steviger in hun werk staan. Met dat niveau groeit ook de zichtbaarheid, de mogelijkheden binnen het platform — en de fee.
+                Ervaren past bij docenten die al steviger in hun werk staan. Met dat niveau groeit ook de zichtbaarheid, de mogelijkheden binnen het platform en de commissie.
               </p>
             </div>
           </div>
@@ -289,7 +303,11 @@ export default function AbonnementPage() {
                 {TABEL_RIJEN.map((rij) =>
                   rij.type === "categorie" ? (
                     <tr key={rij.key} className="abonnement-tabel-categorie">
-                      <td colSpan={3}>{rij.titel}</td>
+                      <td colSpan={3}>
+                        <a href={`#${slugify(rij.titel)}`} className="abonnement-tabel-categorie-link">
+                          {rij.titel}
+                        </a>
+                      </td>
                     </tr>
                   ) : (
                     <tr key={rij.key} className={`abonnement-tabel-rij ${rij.rijClass}`}>
@@ -304,7 +322,8 @@ export default function AbonnementPage() {
           </div>
 
           <p className="text-body mt-section mb-cta">
-            De fee en het abonnementsbedrag verschillen per niveau. Bekijk de tarieven op de pagina Tarieven.
+            De commissie en het abonnementsbedrag verschillen per niveau. <br />
+            Bekijk de tarieven op de pagina Tarieven.
           </p>
           <Link className="btn-light" href="/voor-docenten/tarieven">
             Bekijk de tarieven
@@ -320,11 +339,11 @@ export default function AbonnementPage() {
 
           <div className="toelichting-blok">
             {TOELICHTING.map((categorie) => (
-              <div key={categorie.titel} className="mb-section">
+              <div key={categorie.titel} id={slugify(categorie.titel)} className="mb-section toelichting-anker">
                 <h3 className="heading-h3 mb-heading">{categorie.titel}</h3>
                 {categorie.items.map((item) => (
                   <div key={item.naam} className="mb-heading">
-                    <h4 className="heading-h4 mb-text">{item.naam}</h4>
+                    <h5 className="heading-h5 mb-text">{item.naam}</h5>
                     <p className="text-body">{item.tekst}</p>
                   </div>
                 ))}
@@ -340,7 +359,8 @@ export default function AbonnementPage() {
           <p className="heading-overline on-dark mb-text">Klaar om aan te sluiten?</p>
           <h2 className="heading-h2 on-dark mb-heading">Meld je aan als privé yogadocent</h2>
           <p className="text-body on-dark mb-cta">
-            Ben je benieuwd of Startend of Ervaren bij jou past? Meld je aan en we nemen snel contact met je op voor een kennismakingsgesprek.
+            Ben je benieuwd of Startend of Ervaren bij jou past? <br />
+            Meld je aan en we nemen snel contact met je op voor een kennismakingsgesprek.
           </p>
           <div className="btn-row">
             <Link className="btn-dark-a" href="/voor-docenten/aanmelden">Meld je aan</Link>
