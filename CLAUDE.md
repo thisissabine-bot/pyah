@@ -7,6 +7,7 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.17 | 06-08-2026 | Nieuwe sectie "Footer-marge" toegevoegd aan "Pagina-layout — patroon": vaste standaard van 128px (<640px) / 160px (≥640px) ruimte boven de footer op alle pagina's, geverifieerd tegen de daadwerkelijk gerenderde output i.p.v. alleen de CSS-bron; toegepast via nieuwe klasse \`footer-margin\` (\`layout.css\`) als losse toevoeging op de laatste sectie van een pagina, zonder \`Footer.tsx\`/\`DocentFooter.tsx\` of \`.page-section\` zelf aan te passen; \`/docenten\` en de live coming-soon pagina op \`/\` hebben een eigen losse aanpassing omdat ze niet het standaard \`.page-section\`-patroon voor de laatste sectie volgen |
 | v1.16 | 31-07-2026 | Sectie "Tabellen met veel rijen — striping & hover" gecorrigeerd: de eerder vastgelegde striping (\`#ebe3e0\` 100%/60%) bleek onzichtbaar op een \`section-pearl\`-achtergrond (zelfde kleur als de sectie zelf) — ontdekt bij livegang van de Abonnementen-pagina. Vervangen door een vaste, sectie-onafhankelijke combinatie (\`rgba(255,255,255,0.5)\` + \`#ebe3e0\`) die op zowel witte als pearl-secties werkt |
 | v1.15 | 31-07-2026 | Kleurmodifiers (.accent-terracotta / .accent-moss / .on-dark) uitgebreid naar H4 en H5, die dit voorheen niet hadden; default-kleur van H4 en H5 in typography.css gewijzigd van terracotta naar mosgroen (H4 daarnaast 20px → 18px); FAQ-pagina (Abonnement) H4's krijgen hierdoor mosgroen i.p.v. terracotta; Abonnementen-pagina toelichting-sectie: item-titels worden H5 i.p.v. losse alinea-stijl, zodat ze visueel linken met de categoriekoppen in de vergelijkingstabel |
 | v1.14 | 30-07-2026 | Sectie "Pagina-layout — patroon" uitgebreid met nieuw sectietype 2b (tekst/tekst naast elkaar, voor Startend/Ervaren-vergelijkingen) en met een paragraaf over gestripete tabelachtergronden met hover-state (referentie: Abonnementen-pagina); toekomstig punt toegevoegd bij "Toekomstige uitbreiding": "Delen van eigen workshops & trainingen binnen de docenten-community" is geparkeerd voor de pilotfase, zelfde patroon als het 4-lessenpakket |
@@ -1301,6 +1302,19 @@ Categoriekoppen krijgen een eigen onderscheidende stijl (vetgedrukt) en tellen n
 Bij hover over een rij: achtergrond wordt `#d4baad` met een zachte `transition-colors`.
 
 Referentie: Abonnementen-pagina, sectie 3 (vergelijkingstabel).
+
+### Footer-marge
+Alle pagina's gebruiken een vaste marge tussen de laatste sectie en de footer: 128px (<640px) / 160px (≥640px) — gelijk aan een standaard sectie-overgang (page-section × 2).
+
+CSS-klasse: `.footer-margin` (in `layout.css`), toegepast als extra klasse op de laatste sectie vóór de footer. Let op: de klasse zelf zet 80px/112px, niet 128px/160px — `Footer.tsx`/`DocentFooter.tsx` dragen via hun `py-12` al 48px eigen ruimte bij (80+48=128, 112+48=160).
+
+Niet toepassen als wijziging aan `Footer.tsx` of `DocentFooter.tsx` zelf — dat zou ook niet-gerelateerde pagina's raken (zoals `/docenten/[slug]`).
+
+Twee pagina's wijken af en gebruiken geen `.footer-margin`:
+- `/docenten` (zoekpagina): laatste blok is `.zoek-resultaten-wrapper`, padding-bottom direct op 80px/112px gezet.
+- `/` (live coming-soon pagina): eigen footer los van `Footer.tsx`, met vaste 32px eigen padding-top — `.aanmeldenSection` staat daarom op 96px/128px.
+
+Referentie: doorgevoerd op alle bestaande klant- en docentzijde-pagina's, augustus 2026.
 
 \---
 \#\# Notities voor de pilotfase
