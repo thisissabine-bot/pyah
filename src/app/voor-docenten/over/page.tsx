@@ -151,7 +151,7 @@ export default function DocentzoneOverPage() {
       </section>
 
       {/* SECTIE: Onze toekomst — Visie & Missie */}
-      <section className="page-section section-white">
+      <section className="page-section footer-margin section-white">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Onze toekomst</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">Visie</h2>

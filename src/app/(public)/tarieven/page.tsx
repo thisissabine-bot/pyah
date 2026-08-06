@@ -103,7 +103,7 @@ export default function TarievenPage() {
       </section>
 
       {/* SECTIE: FAQ */}
-      <section className="page-section section-white section-centered">
+      <section className="page-section footer-margin section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Veelgestelde vragen</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">Nog vragen?</h2>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 export default function HoeWerktHetPage() {
@@ -6,15 +7,21 @@ export default function HoeWerktHetPage() {
     <>
       {/* HERO */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/hoe-werkt-het/hero-sophie-voor-de-deur-02.png"
+          alt="Yogadocent aan de voordeur bij een klant thuis, klaar voor de les"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
           <p className="heading-overline on-dark mb-text">Haarlem &amp; omgeving</p>
           <h1 className="heading-h1 on-dark mb-subtitle">
             Hoe werkt privé yoga aan huis?
           </h1>
           <p className="text-intro on-dark">
-            Je bent benieuwd naar yoga aan huis, maar hoe gaat dat precies in zijn werk? 
-            Op deze pagina leggen we je stap voor stap uit wat je kunt verwachten. 
+            Je bent benieuwd naar yoga aan huis, maar hoe gaat dat precies in zijn werk? <br />
+            Op deze pagina leggen we je stap voor stap uit wat je kunt verwachten. <br />
             Van het zoeken naar een docent tot de eerste les bij jou thuis.
           </p>
         </div>
@@ -34,8 +41,20 @@ export default function HoeWerktHetPage() {
         </div>
       </section>
 
-      {/* FOTO LIGGEND BEELD (placeholder, volgt via Cloudinary) */}
-      <div className="image-placeholder-liggend" />
+      {/* FOTO LIGGEND BEELD */}
+      <div className="image-placeholder-liggend image-placeholder-liggend-quote">
+        <Image
+          src="/images/hoe-werkt-het/sfeerfoto-bloemen-roze-liggend-01.jpg"
+          alt="Sfeerfoto van bloemen, een rustig en natuurlijk beeld passend bij de yogasfeer"
+          fill
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center" }}
+        />
+        <blockquote className="text-quote">
+          Thuis is niet alleen een plek.<br />
+          Het is ook een gevoel dat je in je lijf mag terugvinden.
+        </blockquote>
+      </div>
 
       {/* SECTIE: stappen */}
       <section className="page-section section-white section-centered">
@@ -157,15 +176,56 @@ export default function HoeWerktHetPage() {
       <section className="page-section section-white">
         <div className="container">
           <div className="drieluik-grid">
-            <div className="drieluik-blok" />
-            <div className="drieluik-blok" />
-            <div className="drieluik-blok" />
+            <div className="drieluik-blok">
+              <Image
+                src="/images/hoe-werkt-het/sfeerfoto-yogamat-blokken-01.png"
+                alt="Sfeerfoto van een yogamat met yogablokken, klaar voor een privéles"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div className="drieluik-blok">
+              <Image
+                src="/images/hoe-werkt-het/suzanne-yin-houding-01.png"
+                alt="Yogadocent Suzanne in een yin yoga-houding tijdens een privéles"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div className="drieluik-blok">
+              <Image
+                src="/images/hoe-werkt-het/sfeerfoto-yogamat-wollen-deken-01.png"
+                alt="Sfeerfoto van een yogamat met een wollen deken, een rustige setting voor een yogales thuis"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTIE: cta */}
+      <section className="page-section section-moss section-centered">
+        <div className="container">
+          <p className="heading-overline on-dark mb-text">Maak een begin</p>
+          <h3 className="heading-h2 on-dark mb-subtitle">Benieuwd welke docent bij jou past?</h3>
+          <p className="text-body on-dark mb-cta">
+            Bekijk de profielen van onze yogadocenten in Haarlem en voel of er iemand is die bij je aansluit. <br />
+            Begin vrijblijvend met een kennismakingsgesprek en <br />
+            ervaar zelf wat persoonlijke yoga aan huis voor jou kan betekenen.
+          </p>
+          <div className="btn-row">
+            <Link className="btn-light" href="/docenten">Bekijk de docenten →</Link>
+            <Link className="btn-dark-a" href="/voor-docenten">Hoe word ik docent? →</Link>
           </div>
         </div>
       </section>
 
       {/* SECTIE: faq */}
-      <section className="page-section section-white section-centered">
+      <section className="page-section footer-margin section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Veelgestelde vragen</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">Nog vragen?</h2>
@@ -234,21 +294,6 @@ export default function HoeWerktHetPage() {
               </p>
             </details>
 
-          </div>
-        </div>
-      </section>
-
-      {/* SECTIE: cta */}
-      <section className="page-section section-white section-centered">
-        <div className="container">
-          <p className="heading-overline mb-text">Maak een begin</p>
-          <h3 className="heading-h2 accent-moss mb-subtitle">Benieuwd welke docent bij jou past?</h3>
-          <p className="text-body mb-cta">
-            Bekijk de profielen van onze yogadocenten in Haarlem en voel of er iemand is die bij je aansluit. Begin vrijblijvend met een kennismakingsgesprek — en ervaar zelf wat persoonlijke yoga aan huis voor jou kan betekenen.
-          </p>
-          <div className="btn-row">
-            <Link className="btn-light" href="/docenten">Bekijk de docenten →</Link>
-            <Link className="btn-dark-b" href="/voor-docenten">Hoe word ik docent? →</Link>
           </div>
         </div>
       </section>

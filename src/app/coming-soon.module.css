@@ -69,12 +69,12 @@
 
 .aanmeldenSection {
   padding-top: 0;
-  padding-bottom: 64px;
+  padding-bottom: 96px;
 }
 
 @media (min-width: 640px) {
   .aanmeldenSection {
-    padding-bottom: 80px;
+    padding-bottom: 128px;
   }
 }
 

@@ -1387,9 +1387,18 @@ a:hover {
 }
 
 /* Resultaten wrapper */
+/* padding-bottom: 128px/160px minus de 48px (py-12) die Footer.tsx
+   zelf al bijdraagt = 80px/112px, zodat de totale ruimte tot de
+   footer-inhoud uitkomt op de vaste standaard 128px/160px. */
 .zoek-resultaten-wrapper {
   padding-top: 28px;
-  padding-bottom: 56px;
+  padding-bottom: 80px;
+}
+
+@media (min-width: 640px) {
+  .zoek-resultaten-wrapper {
+    padding-bottom: 112px;
+  }
 }
 
 /* Kaartjes grid v2: 3 kolommen op desktop */
@@ -1434,6 +1443,30 @@ a:hover {
   background-color: #d4baad;
 }
 
+.image-placeholder-liggend-quote {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.image-placeholder-liggend-quote::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(235, 227, 224, 0.4);
+  z-index: 1;
+}
+
+.image-placeholder-liggend-quote .text-quote {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  color: #260f09;
+}
+
 .drieluik-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1447,6 +1480,8 @@ a:hover {
 }
 
 .drieluik-blok {
+  position: relative;
+  overflow: hidden;
   aspect-ratio: 3 / 2;
   background-color: #d4baad;
 }
@@ -1806,4 +1841,24 @@ a:hover {
 
 .toelichting-anker {
   scroll-margin-top: 96px;
+}
+
+
+/* ----------------------------------------------------------
+   25. FOOTER-MARGE — vaste ruimte boven de footer
+   Extra padding-bottom op de laatste sectie van een pagina,
+   zodat de totale ruimte tot de footer-inhoud overal 128px/160px
+   is. Footer.tsx/DocentFooter.tsx dragen zelf al 48px (py-12)
+   bij aan die ruimte, dus hier staat het restant: 128-48=80px
+   en 160-48=112px.
+   ---------------------------------------------------------- */
+
+.footer-margin {
+  padding-bottom: 80px;
+}
+
+@media (min-width: 640px) {
+  .footer-margin {
+    padding-bottom: 112px;
+  }
 }

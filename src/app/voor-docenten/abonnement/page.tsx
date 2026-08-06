@@ -354,7 +354,7 @@ export default function AbonnementPage() {
       </section>
 
       {/* SECTIE 5 — CTA-sectie (sectietype 3: gekleurd blok, gecentreerd — achtergrond #484f47, witte tekst) */}
-      <section className="page-section section-moss section-centered">
+      <section className="page-section footer-margin section-moss section-centered">
         <div className="container">
           <p className="heading-overline on-dark mb-text">Klaar om aan te sluiten?</p>
           <h2 className="heading-h2 on-dark mb-heading">Meld je aan als privé yogadocent</h2>
