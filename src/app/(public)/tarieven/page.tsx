@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 export default function TarievenPage() {
@@ -6,7 +7,13 @@ export default function TarievenPage() {
     <>
       {/* HERO */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/tarieven/hero-anneke-laptop.png"
+          alt="Yogadocent achter haar laptop aan tafel thuis"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
           <h1 className="heading-h1 on-dark">Tarieven privé yoga aan huis</h1>
         </div>
@@ -17,19 +24,25 @@ export default function TarievenPage() {
         <div className="container-narrow">
           <p className="heading-overline mb-text">Persoonlijke begeleiding</p>
           <h2 className="heading-h2 accent-moss mb-heading">
-            Persoonlijke begeleiding, afgestemd op jouw wensen
+            Persoonlijke begeleiding, <br />
+            afgestemd op jouw wensen
           </h2>
           <p className="text-body mb-text">
-            Bij Private Yoga at Home geloven we dat privé yoga toegankelijk moet zijn voor zoveel mogelijk mensen. Daarom werken we met twee ervaringsniveaus: Startende yogadocenten en Ervaren yogadocenten.
+            Bij Private Yoga at Home geloven we dat privé yoga toegankelijk moet zijn voor zoveel mogelijk mensen. <br />
+            Daarom werken we met twee ervaringsniveaus: Startende yogadocenten en Ervaren yogadocenten.
           </p>
           <p className="text-body mb-text">
-            Welke docent je ook kiest, je kunt rekenen op persoonlijke aandacht, professionele begeleiding en lessen die volledig worden afgestemd op jouw lichaam, wensen en doelen.
+            Welke docent je ook kiest, je kunt rekenen op persoonlijke aandacht, professionele begeleiding en<br />
+            lessen die volledig worden afgestemd op jouw lichaam, wensen en doelen.
           </p>
           <p className="text-body mb-text">
-            Voordat een docent wordt toegelaten tot het platform, doorloopt hij of zij een zorgvuldige selectie. Iedere docent heeft een erkende yogaopleiding afgerond, beschikt over praktijkervaring en voldoet aan de kwaliteitsrichtlijnen van Private Yoga at Home.
+            Voordat een docent wordt toegelaten tot het platform, doorloopt hij of zij een zorgvuldige selectie. <br />
+            Iedere docent heeft een erkende yogaopleiding afgerond, beschikt over praktijkervaring en <br />
+            voldoet aan de kwaliteitsrichtlijnen van Private Yoga at Home.
           </p>
           <p className="text-body">
-            Het verschil zit dan ook niet in de kwaliteit, maar in de hoeveelheid ervaring en eventuele specialisaties.
+            Het verschil zit dan ook niet in de kwaliteit, <br />
+            maar in de hoeveelheid ervaring en eventuele specialisaties.
           </p>
         </div>
       </section>
@@ -42,10 +55,12 @@ export default function TarievenPage() {
             Kies de docent die bij jou past
           </h2>
           <p className="text-body mb-text">
-            Iedereen heeft andere wensen. Misschien zoek je een toegankelijke manier om kennis te maken met privé yoga. Of misschien heb je juist specifieke klachten of doelen waarbij je graag begeleid wordt door iemand met veel praktijkervaring.
+            Iedereen heeft andere wensen. Misschien zoek je een toegankelijke manier om kennis te maken met privé yoga. <br />
+            Of misschien heb je juist specifieke klachten of doelen waarbij je graag begeleid wordt door iemand met veel praktijkervaring.
           </p>
           <p className="text-body">
-            Door te werken met twee ervaringsniveaus kun je een keuze maken die past bij jouw persoonlijke situatie én budget.
+            Door te werken met twee ervaringsniveaus kun je een keuze maken <br />
+            die past bij jouw persoonlijke situatie én budget.
           </p>
 
           <div className="divider-accent" />
@@ -54,22 +69,31 @@ export default function TarievenPage() {
             <div>
               <h3 className="heading-h3 accent-moss mb-text">Startende yogadocent</h3>
               <p className="text-body mb-text">
-                Een startende yogadocent heeft een erkende yogaopleiding afgerond en beschikt over praktijkervaring. Hij of zij bouwt de lessenpraktijk verder uit en begeleidt je met veel aandacht, enthousiasme en persoonlijke betrokkenheid.
+                Een startende yogadocent heeft een erkende yogaopleiding afgerond en beschikt over praktijkervaring. <br />
+                Hij of zij bouwt de lessenpraktijk verder uit en begeleidt je met veel aandacht,<br />
+                enthousiasme en persoonlijke betrokkenheid.
               </p>
               <p className="text-body">
-                Ben je op zoek naar privé yoga aan huis tegen een toegankelijker tarief? Dan kan een startende yogadocent een mooie keuze zijn.
+                Ben je op zoek naar privé yoga aan huis tegen een toegankelijker tarief? <br />
+                Dan kan een startende yogadocent een mooie keuze zijn.
               </p>
             </div>
             <div>
               <h3 className="heading-h3 accent-moss mb-text">Ervaren yogadocent</h3>
               <p className="text-body mb-text">
-                Een ervaren yogadocent heeft meerdere jaren leservaring en begeleidt al langere tijd uiteenlopende mensen met verschillende wensen en behoeften.
+                Een ervaren yogadocent heeft meerdere jaren leservaring en <br />
+                begeleidt al langere tijd uiteenlopende mensen <br />
+                met verschillende wensen en behoeften.
               </p>
               <p className="text-body mb-text">
-                Veel ervaren docenten hebben zich daarnaast verder gespecialiseerd, bijvoorbeeld in yin yoga, ademwerk, ontspanning, zwangerschap of rug- en nekklachten. Door hun ervaring kunnen zij lessen snel afstemmen op wat jij op dat moment nodig hebt.
+                Veel ervaren docenten hebben zich daarnaast verder gespecialiseerd, bijvoorbeeld in yin yoga, <br />
+                ademwerk, ontspanning, zwangerschap of rug- en nekklachten. Door hun ervaring kunnen zij lessen <br />
+                snel afstemmen op wat jij op dat moment nodig hebt.
               </p>
               <p className="text-body">
-                Heb je een specifieke hulpvraag of vind je het prettig om begeleid te worden door een docent met veel praktijkervaring? Dan past een ervaren yogadocent mogelijk beter bij jou.
+                Heb je een specifieke hulpvraag of vind je het prettig om begeleid te worden <br />
+                door een docent met veel praktijkervaring? <br />
+                Dan past een ervaren yogadocent mogelijk beter bij jou.
               </p>
             </div>
           </div>
@@ -90,14 +114,40 @@ export default function TarievenPage() {
             Benieuwd welke docent bij jou past?
           </h2>
           <p className="text-body on-dark mb-cta">
-            Iedere yogadocent heeft een eigen achtergrond, stijl en specialisaties. Op de docentenpagina ontdek je meer over hun ervaring en expertise, zodat je rustig kunt bekijken wie het beste bij jou past.
+            Iedere yogadocent heeft een eigen achtergrond, stijl en specialisaties. <br />
+            Op de docentenpagina ontdek je meer over hun ervaring en expertise, <br />
+            zodat je rustig kunt bekijken wie het beste bij jou past.
           </p>
           <Link className="btn-dark-a" href="/docenten">Bekijk onze docenten →</Link>
 
           <div className="drieluik-grid mt-section">
-            <div className="drieluik-blok" />
-            <div className="drieluik-blok" />
-            <div className="drieluik-blok" />
+            <div className="drieluik-blok">
+              <Image
+                src="/images/tarieven/docent-marijke-crop.png"
+                alt="Yogadocent Marijke, portret"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div className="drieluik-blok">
+              <Image
+                src="/images/tarieven/sfeerfoto-3-kaarsen-01-crop.png"
+                alt="Sfeerfoto van drie brandende kaarsen met een kralenketting"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div className="drieluik-blok">
+              <Image
+                src="/images/tarieven/sfeerfoto-yogamat-opgerold-01-crop.png"
+                alt="Sfeerfoto van handen die een yogamat oprollen"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </div>
       </section>
