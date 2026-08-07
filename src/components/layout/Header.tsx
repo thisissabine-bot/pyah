@@ -30,6 +30,10 @@ export default function Header() {
 
           <nav>
             <ul className="nav-menu">
+              {/* TIJDELIJK: verwijderen zodra de nieuwe Homepage live staat op "/" — logo doet dit dan vanzelf. */}
+              <li>
+                <Link href="/homepage-preview" className="nav-link">Home</Link>
+              </li>
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className={isActive(item.href) ? "nav-link-active" : "nav-link"}>
@@ -65,6 +69,8 @@ export default function Header() {
         onClick={() => setMenuOpen(false)}
       />
       <div className={`nav-drawer${menuOpen ? " nav-drawer-open" : ""}`}>
+        {/* TIJDELIJK: verwijderen zodra de nieuwe Homepage live staat op "/" — logo doet dit dan vanzelf. */}
+        <Link href="/homepage-preview" className="nav-link" onClick={() => setMenuOpen(false)}>Home</Link>
         {NAV_ITEMS.map((item) => (
           <Link
             key={item.href}
