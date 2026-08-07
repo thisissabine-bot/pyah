@@ -360,7 +360,7 @@ export default function DocentzoneHoeWerktHetPage() {
       </section>
 
       {/* SECTIE 8 — Veelgestelde vragen (sectietype 1: gecentreerd) */}
-      <section className="page-section footer-margin section-white section-centered">
+      <section className="page-section section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Nog vragen?</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">Veelgestelde vragen</h2>

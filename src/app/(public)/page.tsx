@@ -217,7 +217,7 @@ export default function HomePage() {
       </section>
 
       {/* SECTIE 7 — CTA */}
-      <section className="page-section footer-margin section-moss section-centered">
+      <section className="page-section section-moss section-centered">
         <div className="container">
           <p className="heading-overline on-dark mb-text">Maak een begin</p>
           <h3 className="heading-h2 on-dark mb-subtitle">Benieuwd welke docent bij jou past?</h3>

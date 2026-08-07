@@ -7,6 +7,8 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.19 | 07-08-2026 | Sectie-overgang-standaard (v1.18, 160px/200px) op basis van visuele screenshot-review kortstondig gehalveerd naar 80px/100px site-breed — bleek achteraf gebaseerd op een meetfout in het geannoteerde-screenshot-script (een overgang werd als 100px gelabeld terwijl de werkelijke waarde 200px was, gelijk aan de rest van de pagina), waardoor de halvering op een onjuiste aanname stoelde. Teruggedraaid naar de bewuste 160px/200px-waarde van v1.18 op `.page-section`, `.page-section-hero`, `Footer.tsx`/`DocentFooter.tsx`, `.zoek-resultaten-wrapper` en `.image-placeholder-liggend-margin`. Netto blijvende wijziging: twee bewuste, kleinere uitzonderingen vastgelegd — de quote-balk op `/hoe-werkt-het` (geen eigen marge, dus 80px/100px i.p.v. 160px/200px) en het "Tussenblok" op `/voor-docenten/hoe-werkt-het` (ongewijzigd, was al een uitzondering). Sectie "Sectie-overgangen — vaste standaard" bijgewerkt met deze twee uitzonderingen |
+| v1.18 | 06-08-2026 | Sectie-overgang-standaard verhoogd en site-breed symmetrisch gemaakt: was 128px/160px (met de hero-overgang als asymmetrische uitzondering op 144px/192px), wordt overal — inclusief hero en footer — een vaste, symmetrische 160px (<640px) / 200px (≥640px), 80/80 resp. 100/100 verdeeld. Ontdekt via een handmatige visuele check (twee gelijk-hoge referentieblokken naast de witruimte) dat de oude waarden weliswaar een correct totaal gaven maar niet symmetrisch waren rond de kleurgrens. Doorgevoerd via \`.page-section\`/\`.page-section-hero\` (\`layout.css\`) en de padding-top van \`Footer.tsx\`/\`DocentFooter.tsx\` (was vast 48px \`py-12\`, nu 80px/100px) — de \`.footer-margin\`-klasse is hierdoor overbodig geworden en verwijderd; sectie "Footer-marge" en nieuwe sectie "Sectie-overgangen — vaste standaard" bijgewerkt |
 | v1.17 | 06-08-2026 | Nieuwe sectie "Footer-marge" toegevoegd aan "Pagina-layout — patroon": vaste standaard van 128px (<640px) / 160px (≥640px) ruimte boven de footer op alle pagina's, geverifieerd tegen de daadwerkelijk gerenderde output i.p.v. alleen de CSS-bron; toegepast via nieuwe klasse \`footer-margin\` (\`layout.css\`) als losse toevoeging op de laatste sectie van een pagina, zonder \`Footer.tsx\`/\`DocentFooter.tsx\` of \`.page-section\` zelf aan te passen; \`/docenten\` en de live coming-soon pagina op \`/\` hebben een eigen losse aanpassing omdat ze niet het standaard \`.page-section\`-patroon voor de laatste sectie volgen |
 | v1.16 | 31-07-2026 | Sectie "Tabellen met veel rijen — striping & hover" gecorrigeerd: de eerder vastgelegde striping (\`#ebe3e0\` 100%/60%) bleek onzichtbaar op een \`section-pearl\`-achtergrond (zelfde kleur als de sectie zelf) — ontdekt bij livegang van de Abonnementen-pagina. Vervangen door een vaste, sectie-onafhankelijke combinatie (\`rgba(255,255,255,0.5)\` + \`#ebe3e0\`) die op zowel witte als pearl-secties werkt |
 | v1.15 | 31-07-2026 | Kleurmodifiers (.accent-terracotta / .accent-moss / .on-dark) uitgebreid naar H4 en H5, die dit voorheen niet hadden; default-kleur van H4 en H5 in typography.css gewijzigd van terracotta naar mosgroen (H4 daarnaast 20px → 18px); FAQ-pagina (Abonnement) H4's krijgen hierdoor mosgroen i.p.v. terracotta; Abonnementen-pagina toelichting-sectie: item-titels worden H5 i.p.v. losse alinea-stijl, zodat ze visueel linken met de categoriekoppen in de vergelijkingstabel |
@@ -1303,16 +1305,19 @@ Bij hover over een rij: achtergrond wordt `#d4baad` met een zachte `transition-c
 
 Referentie: Abonnementen-pagina, sectie 3 (vergelijkingstabel).
 
+### Sectie-overgangen — vaste standaard (v1.18)
+Elke sectie-overgang op elke pagina — tussen twee secties, na de hero, én naar de footer — gebruikt dezelfde vaste, symmetrische marge: **160px (<640px) / 200px (≥640px)**, opgebouwd uit twee gelijke helften van 80px/100px (padding-bottom van de bovenste sectie = padding-top van de onderste sectie). Dit komt uit `.page-section` en `.page-section-hero` in `layout.css`, die beide standaard 80px/80px (<640px) en 100px/100px (≥640px) padding hebben — top én bottom altijd gelijk, dus symmetrisch van zichzelf.
+
+Twee bewuste uitzonderingen op deze standaard (vastgesteld 07-08-2026, zie v1.19):
+- Quote-balk op `/hoe-werkt-het` (`.image-placeholder-liggend-quote`): een dunne decoratieve foto-balk met citaat voelde bij de volle standaard te ruim aan. Deze heeft zelf geen marge — de ruimte errond komt uitsluitend van de omliggende secties (dus 80px/100px in plaats van 160px/200px).
+- "Tussenblok" op `/voor-docenten/hoe-werkt-het` (`.page-section-top`): intentionele same-color-continuering zonder eigen bottom-padding — geen echte kleurgrens, dus geen volledige overgang nodig.
+
 ### Footer-marge
-Alle pagina's gebruiken een vaste marge tussen de laatste sectie en de footer: 128px (<640px) / 160px (≥640px) — gelijk aan een standaard sectie-overgang (page-section × 2).
+De footer-marge volgt automatisch uit diezelfde standaard, zonder aparte compensatie-klasse: `Footer.tsx` en `DocentFooter.tsx` hebben zelf een padding-top van 80px/100px (i.p.v. de vroegere vaste 48px `py-12`), exact gelijk aan de padding-bottom van een standaard `.page-section`. De eerder gebruikte `.footer-margin`-klasse is hierdoor overbodig geworden en verwijderd.
 
-CSS-klasse: `.footer-margin` (in `layout.css`), toegepast als extra klasse op de laatste sectie vóór de footer. Let op: de klasse zelf zet 80px/112px, niet 128px/160px — `Footer.tsx`/`DocentFooter.tsx` dragen via hun `py-12` al 48px eigen ruimte bij (80+48=128, 112+48=160).
-
-Niet toepassen als wijziging aan `Footer.tsx` of `DocentFooter.tsx` zelf — dat zou ook niet-gerelateerde pagina's raken (zoals `/docenten/[slug]`).
-
-Twee pagina's wijken af en gebruiken geen `.footer-margin`:
-- `/docenten` (zoekpagina): laatste blok is `.zoek-resultaten-wrapper`, padding-bottom direct op 80px/112px gezet.
-- `/` (live coming-soon pagina): eigen footer los van `Footer.tsx`, met vaste 32px eigen padding-top — `.aanmeldenSection` staat daarom op 96px/128px.
+Twee pagina's hebben een eigen losse waarde omdat hun laatste blok niet het standaard `.page-section`-patroon volgt:
+- `/docenten` (zoekpagina): laatste blok is `.zoek-resultaten-wrapper`, padding-bottom rechtstreeks op 80px/100px gezet.
+- `/` (live coming-soon pagina): eigen footer los van `Footer.tsx`/`DocentFooter.tsx` — `.footer` in `coming-soon.module.css` heeft nu zelf ook 80px/100px padding-top, en `.aanmeldenSection` staat op 80px/100px padding-bottom.
 
 Referentie: doorgevoerd op alle bestaande klant- en docentzijde-pagina's, augustus 2026.
 

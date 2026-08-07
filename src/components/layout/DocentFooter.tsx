@@ -4,7 +4,7 @@ import { ExternalLink, Mail } from "lucide-react";
 export default function DocentFooter() {
   return (
     <footer className="bg-pyah-accent text-white/80 mt-auto">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-[80px] sm:pt-[100px] pb-12">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-start">
           <div>
             <img

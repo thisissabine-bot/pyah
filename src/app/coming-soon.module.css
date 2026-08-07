@@ -35,9 +35,16 @@
 .footer {
   background-color: #260f09;
   border-top: 1px solid rgba(235, 227, 224, 0.1);
-  padding: 32px 0;
+  padding-top: 80px;
+  padding-bottom: 32px;
   margin-top: auto;
   text-align: center;
+}
+
+@media (min-width: 640px) {
+  .footer {
+    padding-top: 100px;
+  }
 }
 
 .footerText {
@@ -69,12 +76,12 @@
 
 .aanmeldenSection {
   padding-top: 0;
-  padding-bottom: 96px;
+  padding-bottom: 80px;
 }
 
 @media (min-width: 640px) {
   .aanmeldenSection {
-    padding-bottom: 128px;
+    padding-bottom: 100px;
   }
 }
 

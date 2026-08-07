@@ -268,7 +268,7 @@ export default function VoorDocentenPage() {
       </section>
 
       {/* SECTIE 8 — Veelgestelde vragen (FAQ) */}
-      <section className="page-section footer-margin section-white section-centered">
+      <section className="page-section section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Praktische antwoorden voor twijfelaars</p>
           <h2 className="heading-h2 accent-moss mb-heading">Veelgestelde vragen</h2>
