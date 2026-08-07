@@ -45,7 +45,7 @@ export default function Header() {
           </nav>
 
           <div className="nav-actions">
-            <Link href="/auth/login" className="nav-link-secondary">Inloggen</Link>
+            <Link href="/login" className="nav-link-secondary">Inloggen</Link>
             <Link href="/voor-docenten" className="btn-1 on-dark">Docent worden</Link>
           </div>
 
@@ -82,7 +82,7 @@ export default function Header() {
           </Link>
         ))}
         <div className="nav-actions">
-          <Link href="/auth/login" className="nav-link-secondary" onClick={() => setMenuOpen(false)}>Inloggen</Link>
+          <Link href="/login" className="nav-link-secondary" onClick={() => setMenuOpen(false)}>Inloggen</Link>
           <Link href="/voor-docenten" className="btn-1 on-dark" onClick={() => setMenuOpen(false)}>Docent worden</Link>
         </div>
       </div>
