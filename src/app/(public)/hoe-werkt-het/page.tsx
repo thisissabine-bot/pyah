@@ -57,7 +57,7 @@ export default function HoeWerktHetPage() {
       </div>
 
       {/* SECTIE: stappen */}
-      <section className="page-section section-white section-centered">
+      <section className="page-section-top section-white section-centered">
         <div className="container-narrow">
           <div className="stappen-lijst">
 

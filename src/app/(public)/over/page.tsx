@@ -1,16 +1,24 @@
+import Image from "next/image";
+
 export default function OverPage() {
   return (
     <>
       {/* HERO */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/over/marijke-suzanne_04.png"
+          alt="Yogadocent begeleidt klant tijdens een ontspanningsoefening thuis"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
           <h1 className="heading-h1 on-dark">Over Private Yoga at Home</h1>
         </div>
       </section>
 
       {/* SECTIE: Over de Founder */}
-      <section className="page-section section-white">
+      <section className="page-section-top section-white">
         <div className="container">
           <div className="grid-2col-40-60-foto-rechts">
             <div className="text-intro">
@@ -27,17 +35,23 @@ export default function OverPage() {
               <p className="text-small">— Sabine Blok, founder Private Yoga at Home</p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/over/pyah-sabine-blok-founder-02.jpg"
+                alt="Sabine Blok, founder Private Yoga at Home"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover", objectPosition: "center 80%" }}
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* SECTIE: Het verhaal achter PYAH */}
-      <section className="page-section section-white section-centered">
+      <section className="page-section-top section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Het verhaal achter PYAH</p>
-          <h2 className="heading-h2 accent-terracotta mb-heading">Van een persoonlijk avontuur naar een grotere missie</h2>
+          <h2 className="heading-h2 accent-terracotta mb-heading">Van een persoonlijk avontuur <br />naar een grotere missie</h2>
           <p className="text-body mb-text">
             Private Yoga Amsterdam begon ooit als een manier om mijn eigen pad te volgen. Na jarenlang yogales te hebben gegeven in verschillende studio&apos;s ontdekte ik dat ik het anders wilde. Persoonlijker. Vrijer. Meer afgestemd op de mens die voor me stond.
           </p>
@@ -62,16 +76,28 @@ export default function OverPage() {
         </div>
       </section>
 
-      {/* FOTO LIGGEND BEELD (placeholder, volgt via Cloudinary) */}
-      <div className="image-placeholder-liggend image-placeholder-liggend-margin" />
+      {/* FOTO LIGGEND BEELD */}
+      <section className="page-section-top section-white">
+        <div className="container">
+          <div className="image-placeholder-liggend">
+            <Image
+              src="/images/over/suzanne-handen-hart-02.png"
+              alt="Handen op het hart tijdens een moment van rust en verbinding"
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover", objectPosition: "center 20%" }}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* SECTIE: Onze droom */}
-      <section className="page-section section-white">
+      <section className="page-section-top section-white">
         <div className="container">
           <div className="grid-2col-40-60-foto-links">
             <div className="text-intro">
               <p className="heading-overline mb-text">Onze droom</p>
-              <h2 className="heading-h2 accent-moss mb-heading">Een beweging die verder gaat dan mij</h2>
+              <h2 className="heading-h2 accent-moss mb-heading">Een beweging die<br /> verder gaat dan mij</h2>
               <p className="text-body mb-text">
                 Mijn droom is niet om de grootste yogastudio van Nederland te bouwen.
               </p>
@@ -92,7 +118,13 @@ export default function OverPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/over/suzanne-yin-houding-02.png"
+                alt="Yogadocent in een ontspannen yin yoga-houding op een yogamat"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
             </div>
           </div>
         </div>
@@ -104,7 +136,7 @@ export default function OverPage() {
           <div className="grid-2col-40-60-foto-rechts">
             <div className="text-intro">
               <p className="heading-overline mb-text">Stap voor stap</p>
-              <h2 className="heading-h2 accent-terracotta mb-heading">Stap voor stap bouwen aan iets moois</h2>
+              <h2 className="heading-h2 accent-terracotta mb-heading">Stap voor stap<br /> bouwen aan iets moois</h2>
               <p className="text-body mb-text">
                 Private Yoga at Home staat nog aan het begin van zijn reis.
               </p>
@@ -119,26 +151,27 @@ export default function OverPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/over/sophie-voor-de-deur-01-crop.png"
+                alt="Yogadocent staat voor de voordeur bij een klant thuis, klaar voor de les"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOTO LIGGEND BEELD (placeholder, volgt via Cloudinary) */}
-      <section className="page-section section-white">
-        <div className="container">
-          <div className="image-placeholder-liggend" />
-        </div>
-      </section>
-
       {/* SECTIE: Onze toekomst — Visie & Missie */}
-      <section className="page-section section-white">
+      <section className="page-section section-creme">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Onze toekomst</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">Visie</h2>
           <p className="text-body">
-            We dromen van een wereld waarin persoonlijke yoga aan huis net zo vanzelfsprekend is als een Personal Trainer. Een wereld waarin steeds meer mensen rust, energie en balans ervaren dankzij persoonlijke begeleiding die écht aansluit bij hun leven.
+            We dromen van een wereld waarin persoonlijke yoga aan huis net zo vanzelfsprekend is als een Personal Trainer. <br />
+            Een wereld waarin steeds meer mensen rust, energie en balans ervaren dankzij persoonlijke begeleiding <br />
+            die écht aansluit bij hun leven.
           </p>
 
           <div className="divider-accent" />
@@ -146,7 +179,8 @@ export default function OverPage() {
           <p className="heading-overline mb-text">Waar we iedere dag aan werken</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">Missie</h2>
           <p className="text-body">
-            Wij maken het eenvoudig om een yogadocent te vinden die past bij jouw lichaam, jouw leven en jouw behoeften. Zodat je in je eigen vertrouwde omgeving kunt werken aan meer rust, energie en balans.
+            Wij maken het eenvoudig om een yogadocent te vinden die past bij jouw lichaam, jouw leven en jouw behoeften. <br />
+            Zodat je in je eigen vertrouwde omgeving kunt werken aan meer rust, energie en balans.
           </p>
         </div>
       </section>

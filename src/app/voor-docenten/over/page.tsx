@@ -75,7 +75,7 @@ export default function DocentzoneOverPage() {
       </section>
 
       {/* FOTO LIGGEND BEELD (placeholder, volgt via Cloudinary) */}
-      <div className="image-placeholder-liggend image-placeholder-liggend-margin" />
+      <div className="image-placeholder-liggend" />
 
       {/* SECTIE: Onze droom */}
       <section className="page-section section-white">

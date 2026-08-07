@@ -1437,27 +1437,14 @@ a:hover {
    ---------------------------------------------------------- */
 
 .image-placeholder-liggend {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 400px;
   aspect-ratio: 16 / 9;
   background-color: #d4baad;
 }
 
-/* Voor liggend-beeld-instanties die los tussen twee secties staan
-   (niet binnen een eigen <section className="page-section">) — zonder
-   deze marge heeft de foto zelf geen top/bottom-ruimte en wordt de
-   overgang aan weerszijden asymmetrisch t.o.v. de 160px/200px-standaard. */
-.image-placeholder-liggend-margin {
-  margin-top: 80px;
-  margin-bottom: 80px;
-}
-
-@media (min-width: 640px) {
-  .image-placeholder-liggend-margin {
-    margin-top: 100px;
-    margin-bottom: 100px;
-  }
-}
 
 .image-placeholder-liggend-quote {
   position: relative;
