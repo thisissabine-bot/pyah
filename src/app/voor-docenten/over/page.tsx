@@ -1,16 +1,25 @@
+import Image from "next/image";
+
 export default function DocentzoneOverPage() {
   return (
     <>
       {/* HERO */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/voor-docenten/over/marijke-suzanne_04.png"
+          alt="Yogadocent begeleidt klant tijdens een ontspanningsoefening thuis"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
+          <p className="heading-overline on-dark mb-text">Wie wij zijn</p>
           <h1 className="heading-h1 on-dark">Over Private Yoga at Home</h1>
         </div>
       </section>
 
       {/* SECTIE: Over de Founder */}
-      <section className="page-section section-white">
+      <section className="page-section-top section-white">
         <div className="container">
           <div className="grid-2col-40-60-foto-rechts">
             <div className="text-intro">
@@ -27,14 +36,20 @@ export default function DocentzoneOverPage() {
               <p className="text-small">— Sabine Blok, founder Private Yoga at Home</p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/over/pyah-sabine-blok-founder-02.jpg"
+                alt="Sabine Blok, founder Private Yoga at Home"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover", objectPosition: "center 80%" }}
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* SECTIE: Het verhaal achter PYAH */}
-      <section className="page-section section-white section-centered">
+      <section className="page-section-top section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Het verhaal achter PYAH</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">
@@ -75,10 +90,22 @@ export default function DocentzoneOverPage() {
       </section>
 
       {/* FOTO LIGGEND BEELD (placeholder, volgt via Cloudinary) */}
-      <div className="image-placeholder-liggend" />
+      <section className="page-section-top section-white">
+        <div className="container">
+          <div className="image-placeholder-liggend">
+            <Image
+              src="/images/voor-docenten/over/suzanne-handen-hart-02.png"
+              alt="Handen op het hart tijdens een moment van rust en verbinding"
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover", objectPosition: "center 20%" }}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* SECTIE: Onze droom */}
-      <section className="page-section section-white">
+      <section className="page-section-top section-white">
         <div className="container">
           <div className="grid-2col-40-60-foto-links">
             <div className="text-intro">
@@ -107,7 +134,13 @@ export default function DocentzoneOverPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/over/suzanne-yin-houding-02.png"
+                alt="Yogadocent in een ontspannen yin yoga-houding op een yogamat"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover", objectPosition: "center top" }}
+              />
             </div>
           </div>
         </div>
@@ -137,21 +170,20 @@ export default function DocentzoneOverPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/over/sophie-voor-de-deur-01-crop.png"
+                alt="Yogadocent staat voor de voordeur bij een klant thuis, klaar voor de les"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* FOTO LIGGEND BEELD (placeholder, volgt via Cloudinary) */}
-      <section className="page-section section-white">
-        <div className="container">
-          <div className="image-placeholder-liggend" />
-        </div>
-      </section>
-
       {/* SECTIE: Onze toekomst — Visie & Missie */}
-      <section className="page-section section-white">
+      <section className="page-section section-creme">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Onze toekomst</p>
           <h2 className="heading-h2 accent-terracotta mb-heading">Visie</h2>

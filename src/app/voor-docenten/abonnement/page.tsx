@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
 
@@ -233,7 +234,13 @@ export default function AbonnementPage() {
     <>
       {/* SECTIE 1 — Hero (sectietype 1: gecentreerd, 1-koloms) */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/voor-docenten/abonnement/docent-thomas-venster-landscape-01.png"
+          alt="Yogadocent ontspannen op de bank"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
           <p className="heading-overline on-dark mb-text">Voor yogadocenten</p>
           <h1 className="heading-h1 on-dark">

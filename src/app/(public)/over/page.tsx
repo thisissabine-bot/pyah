@@ -13,6 +13,7 @@ export default function OverPage() {
         />
         <div className="hero-overlay" />
         <div className="container hero-content">
+          <p className="heading-overline on-dark mb-text">Wie wij zijn</p>
           <h1 className="heading-h1 on-dark">Over Private Yoga at Home</h1>
         </div>
       </section>

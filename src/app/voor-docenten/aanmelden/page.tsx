@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -12,7 +13,13 @@ export default function AanmeldenPage() {
     <>
       {/* SECTIE 1 — Hero (sectietype 1: gecentreerd, 1-koloms) */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/voor-docenten/aanmelden/docent-sophie-laptop-landscape-01.png"
+          alt="Yogadocent geconcentreerd achter laptop"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
           <p className="heading-overline on-dark mb-text">Voor yogadocenten</p>
           <h1 className="heading-h1 on-dark">Meld je aan als privé yogadocent</h1>

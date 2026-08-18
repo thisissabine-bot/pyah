@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
@@ -13,7 +14,13 @@ export default function VoorDocentenPage() {
     <>
       {/* SECTIE 1 — Hero */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/voor-docenten/veronique-joyce-houding-04.png"
+          alt="Privé yogadocent die een klant helpt in een yogahouding"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
           <p className="heading-overline on-dark mb-text">Ruimte om te groeien op jouw manier</p>
           <h1 className="heading-h1 on-dark mb-subtitle">
@@ -77,7 +84,13 @@ export default function VoorDocentenPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/docent-marijke-yogahouding-01.png"
+                alt="Yogadocent thuis yoga beoefent"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
@@ -109,7 +122,13 @@ export default function VoorDocentenPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/thomas-babette-bank-03.png"
+                alt="Privé yogadocent in gesprek met een klant"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
@@ -142,7 +161,13 @@ export default function VoorDocentenPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/docenten-samen-koffietentje-01.png"
+                alt="Yogadocenten samen koffietje te drinken"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
 
@@ -168,7 +193,13 @@ export default function VoorDocentenPage() {
               </ul>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/docent-veronique-yogales-voorbereiden-denken-vertical-4x5.png"
+                alt="Yogadocent voorbereiden voor de les"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
@@ -243,7 +274,13 @@ export default function VoorDocentenPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/darcey_sabine-18.jpg"
+                alt="Yogadocent met inspirerende kaarten"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>

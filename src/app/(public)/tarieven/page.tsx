@@ -15,6 +15,7 @@ export default function TarievenPage() {
         />
         <div className="hero-overlay" />
         <div className="container hero-content">
+          <p className="heading-overline on-dark mb-text">Wat kost het?</p>
           <h1 className="heading-h1 on-dark">Tarieven privé yoga aan huis</h1>
         </div>
       </section>

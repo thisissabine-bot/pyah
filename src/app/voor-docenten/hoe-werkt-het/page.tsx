@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
@@ -6,32 +7,59 @@ export default function DocentzoneHoeWerktHetPage() {
     <>
       {/* SECTIE 1 — Hero (sectietype 1: gecentreerd, 1-koloms) */}
       <section className="page-section-hero hero-with-image">
-        <div className="hero-placeholder" />
+        <Image
+          src="/images/voor-docenten/hoe-werkt-het/hero-sophie-voor-de-deur-02.png"
+          alt="Privé yogadocent voor de deur bij een klant"
+          fill
+          priority
+        />
+        <div className="hero-overlay" />
         <div className="container hero-content">
           <p className="heading-overline on-dark mb-text">Van aanmelding tot livegang</p>
-          <h1 className="heading-h1 on-dark mb-subtitle">
+          <h1 className="heading-h1 on-dark">
             Yogadocent worden<br />
             bij Private Yoga at Home<br />
             zo werkt het
           </h1>
-          <p className="text-intro on-dark mb-text">
-            Bij Private Yoga at Home geloven we dat goede yogadocenten de ruimte moeten krijgen<br />
-            om les te geven op een manier die bij hen past. Daarom zorgen wij voor zichtbaarheid,<br />
-            aanvragen en een professioneel platform, zodat jij je kunt richten op waar je goed in bent:<br />
-            mensen begeleiden.<br />
-          </p>
-          <p className="text-intro on-dark mb-text">
-            In zes stappen word je yogadocent bij Private Yoga at Home:<br />
-            aanmelden, kennismaken, profiel maken en live gaan.
-          </p>
-          <p className="text-intro on-dark">
-            Ook leggen we uit hoe we werken met de twee ervaringsniveaus<br />
-            Startend en Ervaren docent, zodat je weet wat je kunt verwachten.
-          </p>
         </div>
       </section>
 
-      {/* SECTIE 2 — Zo werkt het (sectietype 1: gecentreerd) */}
+      {/* SECTIE 2 — Intro (sectietype 2: tekst links, foto rechts) */}
+      <section className="page-section-top section-white">
+        <div className="container">
+          <div className="grid-2col-40-60-foto-rechts">
+            <div className="text-intro">
+              <p className="heading-overline mb-text">Jouw rol, onze ondersteuning</p>
+              <h2 className="heading-h2 accent-moss mb-heading">Ruimte om te doen<br />waar je goed in bent</h2>
+              <p className="text-intro mb-text">
+                Bij Private Yoga at Home geloven we dat goede yogadocenten de ruimte moeten krijgen
+                om les te geven op een manier die bij hen past. Daarom zorgen wij voor zichtbaarheid,
+                aanvragen en een professioneel platform, zodat jij je kunt richten op waar je goed in bent:
+                mensen begeleiden.
+              </p>
+              <p className="text-intro mb-text">
+                In zes stappen word je yogadocent bij Private Yoga at Home:
+                aanmelden, kennismaken, profiel maken en live gaan.
+              </p>
+              <p className="text-intro">
+                Ook leggen we uit hoe we werken met de twee ervaringsniveaus
+                Startend en Ervaren docent, zodat je weet wat je kunt verwachten.
+              </p>
+            </div>
+            <div className="image-col-inner">
+              <Image
+                src="/images/voor-docenten/hoe-werkt-het/yoga-lotushouding-namaste.jpg"
+                alt="Lotushouding mediteren namaste"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTIE 3 — Zo werkt het (sectietype 1: gecentreerd) */}
       <section className="page-section section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Stap voor stap</p>
@@ -146,7 +174,7 @@ export default function DocentzoneHoeWerktHetPage() {
         </div>
       </section>
 
-      {/* SECTIE 3A — Twee ervaringsniveaus: intro (sectietype 3: gekleurd blok, gecentreerd) */}
+      {/* SECTIE 4A — Twee ervaringsniveaus: intro (sectietype 3: gekleurd blok, gecentreerd) */}
       <section id="ervaringsniveaus" className="page-section section-terracotta section-centered">
         <div className="container-narrow">
           <p className="heading-overline on-dark mb-text">Startend of ervaren</p>
@@ -179,7 +207,7 @@ export default function DocentzoneHoeWerktHetPage() {
         </div>
       </section>
 
-      {/* SECTIE 3B — Startend docent (sectietype 2: foto links, tekst rechts) */}
+      {/* SECTIE 4B — Startend docent (sectietype 2: foto links, tekst rechts) */}
       <section className="page-section section-white">
         <div className="container">
           <div className="grid-2col-40-60-foto-links">
@@ -209,13 +237,19 @@ export default function DocentzoneHoeWerktHetPage() {
               </ul>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/hoe-werkt-het/docent-sophie-warrior2-anneke-vertical-01.png"
+                alt="Yogadocent assisteert klant bij privé yoga aan huis"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTIE 3C — Ervaren docent (sectietype 2: foto rechts, tekst links) */}
+      {/* SECTIE 4C — Ervaren docent (sectietype 2: foto rechts, tekst links) */}
       <section className="page-section section-white">
         <div className="container">
           <div className="grid-2col-40-60-foto-rechts">
@@ -247,13 +281,19 @@ export default function DocentzoneHoeWerktHetPage() {
               </ul>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/hoe-werkt-het/marijke-suzanne_05.png"
+                alt="Privé yogadocent helpt een klant in de houding"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTIE 4 — Hoe bepalen we jouw ervaringsniveau? (sectietype 3: gekleurd blok, gecentreerd) */}
+      {/* SECTIE 5 — Hoe bepalen we jouw ervaringsniveau? (sectietype 3: gekleurd blok, gecentreerd) */}
       <section className="page-section section-moss section-centered">
         <div className="container-narrow">
           <p className="heading-overline on-dark mb-text">Geen aannames, wel aandacht</p>
@@ -272,7 +312,7 @@ export default function DocentzoneHoeWerktHetPage() {
         </div>
       </section>
 
-      {/* SECTIE 5 — Groeipad (sectietype 2: foto rechts, tekst links) */}
+      {/* SECTIE 6 — Groeipad (sectietype 2: foto rechts, tekst links) */}
       <section className="page-section section-white">
         <div className="container">
           <div className="grid-2col-40-60-foto-rechts">
@@ -297,13 +337,19 @@ export default function DocentzoneHoeWerktHetPage() {
               </p>
             </div>
             <div className="image-col-inner">
-              <div className="hero-placeholder" />
+              <Image
+                src="/images/voor-docenten/hoe-werkt-het/sabine-cobra-yogahouding-01.png"
+                alt="Yoga docent in cobra houding"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTIE 6 — Waarom werken we met verschillende commissies? (sectietype 1: gecentreerd) */}
+      {/* SECTIE 7 — Waarom werken we met verschillende commissies? (sectietype 1: gecentreerd) */}
       <section className="page-section section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Eerlijk en transparant</p>
@@ -344,7 +390,7 @@ export default function DocentzoneHoeWerktHetPage() {
         </div>
       </section>
 
-      {/* SECTIE 7 — CTA-sectie (sectietype 3: gekleurd blok, gecentreerd — achtergrond #484f47, witte tekst) */}
+      {/* SECTIE 8 — CTA-sectie (sectietype 3: gekleurd blok, gecentreerd — achtergrond #484f47, witte tekst) */}
       <section className="page-section section-moss section-centered">
         <div className="container">
           <p className="heading-overline on-dark mb-text">Maak een begin</p>
@@ -359,7 +405,7 @@ export default function DocentzoneHoeWerktHetPage() {
         </div>
       </section>
 
-      {/* SECTIE 8 — Veelgestelde vragen (sectietype 1: gecentreerd) */}
+      {/* SECTIE 9 — Veelgestelde vragen (sectietype 1: gecentreerd) */}
       <section className="page-section section-white section-centered">
         <div className="container-narrow">
           <p className="heading-overline mb-text">Nog vragen?</p>

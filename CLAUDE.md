@@ -7,6 +7,10 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.24 | 18-08-2026 | Sectie "Sectie-overgangen — vaste standaard" uitgebreid met een derde, bredere uitzondering: reeksen opeenvolgende secties met dezelfde achtergrondkleur gebruiken `.page-section-top` op elke sectie behalve de laatste van de reeks, waardoor de tussenruimte halveert naar 80px/100px in plaats van de volle 160px/200px. Dit patroon bleek al toegepast op de klantpagina `/over` maar was nog niet gedocumenteerd; nu ook doorgevoerd op `/voor-docenten/over` (inclusief het alsnog correct in een `.container`/sectie wrappen van de eerste "FOTO LIGGEND BEELD", die voorheen als kale `<div>` zonder eigen marge tussen twee secties stond). |
+| v1.23 | 12-08-206 | Maandelijkse pop-up/reminder voor KOR-docenten gekoppeld aan activiteit: alleen actief bij minimaal 1 bevestigde les in de voorafgaande maand, om docenten zonder boekingen niet onnodig lastig te vallen. Hervat automatisch bij de eerstvolgende bevestigde les. Maandoverzicht uitgebreid met 5e categorie "Geen check deze maand" zodat inactieve docenten niet ten onrechte als "geen reactie" worden geteld. Opschortingsregel bij uitblijven reactie na reminder verwijst nu naar Platformovereenkomst Art. 6.7 lid g / Art. 5.5 (optie A: automatisch opschorten, geen individuele afweging per geval). |
+| v1.22 | 11-08-2026 | Nieuwe subsectie "E-mail bij verzending uitbetalingsspecificatie — KOR-docent" toegevoegd: begeleidende e-mail bij de uitbetalingsspecificatie bevat voor KOR-docenten een aanvullende meldplicht-herinnering over de omzetgrens (totale omzet, niet alleen via PYAH). Staat los van de factuur/PDF zelf, die ongewijzigd blijft. |
+| v1.21 | 10-08-2026 | Nieuwe sectie "KOR-monitoring — btw-status Docenten" toegevoegd: maandelijkse btw-statuscheck voor KOR-docenten (pop-up bij inloggen, 3 keuzes + toelichting eigen verantwoordelijkheid bij werk elders), reminder-mail na 5 werkdagen zonder reactie, maandelijks overzicht naar Sabine rond de 10e (4 categorieën incl. "geen reactie"). De maandelijkse zelf-check is robuuster omdat deze niet afhankelijk is van omzet die PYAH zelf kan meten, maar de docent zelf om zijn totale positie (incl. werk elders) vraagt. |
 | v1.20 | 07-08-2026 | Klantzijde `Header.tsx`/`Footer.tsx` bijgewerkt (`DocentHeader.tsx`/`DocentFooter.tsx` ongewijzigd): tijdelijk "Home"-item toegevoegd naast het logo in de header, linkend naar \`/homepage-preview\` (de gebouwde maar nog niet live Homepage-route, zolang \`/\` bezet is door de coming-soon pagina) — gemarkeerd met een TIJDELIJK-comment, te verwijderen zodra de Homepage live gaat op \`/\`; footer-navigatie aangevuld met "Hoe werkt het?" en "Tarieven", en "Voor docenten" hernoemd naar "Docent worden" (zelfde route \`/voor-docenten\`, voorkomt een dubbele link naast de nieuwe "Docent worden"-eis); footer-onderbalk herverdeeld: copyright links, vier nieuwe legal-links rechts (Algemene voorwaarden • Privacybeleid • Cookiebeleid • Disclaimer, zelfde stijl als copyright-tekst), op mobiel gestapeld en gecentreerd; vier bijbehorende placeholder-pagina's aangemaakt (\`/algemene-voorwaarden\`, \`/privacybeleid\`, \`/cookiebeleid\`, \`/disclaimer\` — titel + "Binnenkort beschikbaar", content volgt later los) |
 | v1.19 | 07-08-2026 | Sectie-overgang-standaard (v1.18, 160px/200px) op basis van visuele screenshot-review kortstondig gehalveerd naar 80px/100px site-breed — bleek achteraf gebaseerd op een meetfout in het geannoteerde-screenshot-script (een overgang werd als 100px gelabeld terwijl de werkelijke waarde 200px was, gelijk aan de rest van de pagina), waardoor de halvering op een onjuiste aanname stoelde. Teruggedraaid naar de bewuste 160px/200px-waarde van v1.18 op `.page-section`, `.page-section-hero`, `Footer.tsx`/`DocentFooter.tsx`, `.zoek-resultaten-wrapper` en `.image-placeholder-liggend-margin`. Netto blijvende wijziging: twee bewuste, kleinere uitzonderingen vastgelegd — de quote-balk op `/hoe-werkt-het` (geen eigen marge, dus 80px/100px i.p.v. 160px/200px) en het "Tussenblok" op `/voor-docenten/hoe-werkt-het` (ongewijzigd, was al een uitzondering). Sectie "Sectie-overgangen — vaste standaard" bijgewerkt met deze twee uitzonderingen |
 | v1.18 | 06-08-2026 | Sectie-overgang-standaard verhoogd en site-breed symmetrisch gemaakt: was 128px/160px (met de hero-overgang als asymmetrische uitzondering op 144px/192px), wordt overal — inclusief hero en footer — een vaste, symmetrische 160px (<640px) / 200px (≥640px), 80/80 resp. 100/100 verdeeld. Ontdekt via een handmatige visuele check (twee gelijk-hoge referentieblokken naast de witruimte) dat de oude waarden weliswaar een correct totaal gaven maar niet symmetrisch waren rond de kleurgrens. Doorgevoerd via \`.page-section\`/\`.page-section-hero\` (\`layout.css\`) en de padding-top van \`Footer.tsx\`/\`DocentFooter.tsx\` (was vast 48px \`py-12\`, nu 80px/100px) — de \`.footer-margin\`-klasse is hierdoor overbodig geworden en verwijderd; sectie "Footer-marge" en nieuwe sectie "Sectie-overgangen — vaste standaard" bijgewerkt |
@@ -15,10 +19,9 @@
 | v1.15 | 31-07-2026 | Kleurmodifiers (.accent-terracotta / .accent-moss / .on-dark) uitgebreid naar H4 en H5, die dit voorheen niet hadden; default-kleur van H4 en H5 in typography.css gewijzigd van terracotta naar mosgroen (H4 daarnaast 20px → 18px); FAQ-pagina (Abonnement) H4's krijgen hierdoor mosgroen i.p.v. terracotta; Abonnementen-pagina toelichting-sectie: item-titels worden H5 i.p.v. losse alinea-stijl, zodat ze visueel linken met de categoriekoppen in de vergelijkingstabel |
 | v1.14 | 30-07-2026 | Sectie "Pagina-layout — patroon" uitgebreid met nieuw sectietype 2b (tekst/tekst naast elkaar, voor Startend/Ervaren-vergelijkingen) en met een paragraaf over gestripete tabelachtergronden met hover-state (referentie: Abonnementen-pagina); toekomstig punt toegevoegd bij "Toekomstige uitbreiding": "Delen van eigen workshops & trainingen binnen de docenten-community" is geparkeerd voor de pilotfase, zelfde patroon als het 4-lessenpakket |
 | v1.13 | 28-07-2026 | Open bouwpunt toegevoegd na \`CREATE TABLE aanmeldingen\`: schema mist kolommen voor yogastijlen, andere disciplines, motivatie, toelichting en de verklaringen/akkoordpunten (incl. AVB-checkbox) uit de definitieve Aanmeldformulier-paginatekst; pagina wordt vooralsnog als statische UI gebouwd, schema-uitbreiding + functioneel maken volgt in de backend-fase |
-| 
-v1.12	27-07-2026	Regel toegevoegd aan "Pagina-layout — patroon": opsommingen binnen gecentreerde secties (sectietype 1) gebruiken geen bullets maar losse gecentreerde regels, om links uitgelijnde bullets binnen gecentreerde tekst te voorkomen
-v1.11	27-07-2026	Sectie "Pagina-layout — patroon" toegevoegd: drie sectietypes vastgelegd (1-koloms gecentreerd, 2-koloms wisselend, gekleurd blok gecentreerd)
-v1.10 | 24-07-2026 | Verouderde sectie "5. Voor docenten" verwijderd; Mappenstructuur bijgewerkt met geneste docentzone-pagina's (hoe-werkt-het, over, abonnement, aanmelden) en DocentHeader.tsx/DocentFooter.tsx toegevoegd aan components/layout — bracht de bestandsstructuur in lijn met de eerder vastgelegde Docentzone-navigatie |
+| v1.12 | 27-07-2026 | Regel toegevoegd aan "Pagina-layout — patroon": opsommingen binnen gecentreerde secties (sectietype 1) gebruiken geen bullets maar losse gecentreerde regels, om links uitgelijnde bullets binnen gecentreerde tekst te voorkomen |
+| v1.11 | 27-07-2026 | Sectie "Pagina-layout — patroon" toegevoegd: drie sectietypes vastgelegd (1-koloms gecentreerd, 2-koloms wisselend, gekleurd blok gecentreerd) |
+| v1.10 | 24-07-2026 | Verouderde sectie "5. Voor docenten" verwijderd; Mappenstructuur bijgewerkt met geneste docentzone-pagina's (hoe-werkt-het, over, abonnement, aanmelden) en DocentHeader.tsx/DocentFooter.tsx toegevoegd aan components/layout — bracht de bestandsstructuur in lijn met de eerder vastgelegde Docentzone-navigatie |
 | v1.9 | 23-07-2026 | Nieuwe sectie "Docentzone — navigatie & structuur" toegevoegd na "Pagina voor pagina: wat moet er op staan": docentzijde is een volledig gescheiden zone onder \`/voor-docenten\` met eigen navigatie, eigen header-styling (\`\#a66658\`, witte tekst/logo) en een aparte docent-versie van "Over PYAH" (\`/voor-docenten/over\`, los van klant-\`/over\`); oude sectie "5. Voor docenten" gemarkeerd als verouderd/te vervangen door de nieuwe structuur |
 | v1.8 | 22-07-2026 | Facturatie/lesregistratie-sectie (v2) toegevoegd na "Commissie- en tarieflogica", inclusief escape-opmaak gelijkgetrokken met de rest van het document; verouderde sectie "BTW-logica — raadpleeg je boekhouder" en bijbehorende \`uitbetalingen\`-tabel verwijderd (vervangen door \`facturen\`-tabel en herijkte btw-logica in nieuwe sectie); tegenstrijdige zin over uitbetalingsfrequentie in "Betalingsflow" gecorrigeerd (was: einde van de maand, is: tweewekelijks rond de 1e en 15e); verouderd voorbeeldprijzenblok bij \`CREATE TABLE tarieven\` verwijderd (niet-herijkte bedragen, geen toegevoegde waarde op die plek) |
 | v1.7 | 24-05-2026 | Docentgrid kolomverdeling vastgesteld: 2 mobiel / 3 tablet / 4 desktop |
@@ -783,6 +786,20 @@ Na verzenden:
 
 \---
 
+#### E-mail bij verzending uitbetalingsspecificatie — KOR-docent
+
+Voor Docenten met btw-status KOR bevat de begeleidende e-mail bij de uitbetalingsspecificatie,
+naast de standaardtekst, de volgende toegevoegde regel:
+
+"Let op: nadert je omzet de KOR-grens? Meld dit dan direct via je dashboard
+of aan admin@privateyogaathome.nl."
+
+Deze regel staat niet op de factuur/PDF zelf — die blijft kort en feitelijk (zie
+btw-regel in Uitbetalingsspecificatie hierboven). De herinnering is een aanvulling
+op de meldplicht uit Platformovereenkomst Art. 5.6 / AV Docenten Art. 3.8.
+
+\---
+
 \#\#\# Uitbetaling docent — self-billing
 
 PYAH genereert automatisch een \*\*uitbetalingsspecificatie\*\* per docent per uitbetalingsperiode.
@@ -1096,6 +1113,55 @@ ALTER TABLE docenten
 
 \---
 
+## KOR-monitoring — btw-status Docenten
+
+Alleen relevant voor Docenten met btw-status "KOR" (niet voor btw-plichtige Docenten).
+
+### Maandelijkse pop-up bij inloggen
+
+- Trigger: eerste keer inloggen na de 1e van de maand, zolang nog geen bevestiging is
+  gegeven voor de lopende maand.
+- **Alleen actief indien de Docent in de voorafgaande kalendermaand minimaal 1
+  bevestigde les had** (d.w.z. er is een uitbetalingsspecificatie opgesteld). Geen
+  lessen die maand → geen pop-up, geen reminder-mail.
+- Hervat automatisch: zodra de eerstvolgende les wordt bevestigd, wordt de eerstvolgende
+  maandcyclus weer normaal geactiveerd — geen handmatige herstart nodig.
+- Toont: cumulatieve omzet via PYAH dit kalenderjaar tot nu toe.
+- Keuzes (single-select):
+  1. Ik val nog onder de KOR-regeling
+  2. Ik ben niet langer vrijgesteld (btw-plichtig geworden)
+  3. Ik nader mijn omzetgrens (KOR + overig werk samen)
+- Kleine toelichting onderaan de pop-up: "Werk je ook buiten PYAH als zelfstandig
+  ondernemer? Dan telt die omzet mee voor je KOR-grens. Je bent zelf verantwoordelijk
+  voor het bewaken van je totale omzet."
+- Vastlegging: keuze + tijdstip wordt opgeslagen per Docent per maand (bewijsstuk voor
+  btw-statuscontrole).
+
+### Reminder-mail (vangnet)
+
+- Trigger: geen bevestiging ontvangen binnen 5 werkdagen na de 1e van de maand — alleen
+  van toepassing als de pop-up die maand actief was (zie hierboven).
+- Actie: automatische e-mail naar de Docent met dezelfde vraag als de pop-up.
+- Reageert de Docent ook na deze reminder niet vóór de eerstvolgende uitbetalingsdatum,
+  dan schort PYAH de eerstvolgende uitbetaling op conform Platformovereenkomst Art. 6.7
+  lid g / Art. 5.5.
+
+### Maandoverzicht naar Sabine
+
+- Verzending: rond de 10e van de maand.
+- Inhoud: 5 categorieën met docentnamen + aantal per categorie:
+  1. Valt nog onder de KOR
+  2. Niet langer vrijgesteld
+  3. Nadert omzetgrens
+  4. Geen reactie ontvangen (ook niet na reminder)
+  5. Geen check deze maand (geen lessen, dus overgeslagen)
+
+### Openstaand bouwpunt
+
+Platformovereenkomst Art. 6.7 bevat een sub-lid (opschortingsrecht bij niet-bevestigen van btw-status) dat oorspronkelijk was geformuleerd rond het inmiddels vervallen drempel-systeem. Tekst moet nog worden aangepast zodat deze verwijst naar het maandelijkse mechanisme in plaats van naar "een naderende KOR-omzetgrens". Zie ook het losse punt hierover in de juridisch-adviseur-actielijst.
+
+\---
+
 \#\#\# Cron jobs (Supabase Edge Functions)
 
 | Functie | Frequentie | Wat het doet |
@@ -1306,12 +1372,14 @@ Bij hover over een rij: achtergrond wordt `#d4baad` met een zachte `transition-c
 
 Referentie: Abonnementen-pagina, sectie 3 (vergelijkingstabel).
 
-### Sectie-overgangen — vaste standaard (v1.18)
+### Sectie-overgangen — vaste standaard (v1.18, uitgebreid v1.24)
 Elke sectie-overgang op elke pagina — tussen twee secties, na de hero, én naar de footer — gebruikt dezelfde vaste, symmetrische marge: **160px (<640px) / 200px (≥640px)**, opgebouwd uit twee gelijke helften van 80px/100px (padding-bottom van de bovenste sectie = padding-top van de onderste sectie). Dit komt uit `.page-section` en `.page-section-hero` in `layout.css`, die beide standaard 80px/80px (<640px) en 100px/100px (≥640px) padding hebben — top én bottom altijd gelijk, dus symmetrisch van zichzelf.
 
-Twee bewuste uitzonderingen op deze standaard (vastgesteld 07-08-2026, zie v1.19):
-- Quote-balk op `/hoe-werkt-het` (`.image-placeholder-liggend-quote`): een dunne decoratieve foto-balk met citaat voelde bij de volle standaard te ruim aan. Deze heeft zelf geen marge — de ruimte errond komt uitsluitend van de omliggende secties (dus 80px/100px in plaats van 160px/200px).
-- "Tussenblok" op `/voor-docenten/hoe-werkt-het` (`.page-section-top`): intentionele same-color-continuering zonder eigen bottom-padding — geen echte kleurgrens, dus geen volledige overgang nodig.
+Drie bewuste uitzonderingen op deze standaard:
+
+- Quote-balk op `/hoe-werkt-het` (`.image-placeholder-liggend-quote`, vastgesteld 07-08-2026, zie v1.19): een dunne decoratieve foto-balk met citaat voelde bij de volle standaard te ruim aan. Deze heeft zelf geen marge — de ruimte errond komt uitsluitend van de omliggende secties (dus 80px/100px in plaats van 160px/200px).
+- "Tussenblok" op `/voor-docenten/hoe-werkt-het` (`.page-section-top`, vastgesteld 07-08-2026, zie v1.19): intentionele same-color-continuering zonder eigen bottom-padding — geen echte kleurgrens, dus geen volledige overgang nodig.
+- **Reeksen van opeenvolgende secties met dezelfde achtergrondkleur** (vastgesteld 18-08-2026, zie v1.24): wanneer meerdere secties met dezelfde achtergrondkleur direct op elkaar volgen (bijv. een reeks `section-white`-secties zonder echte kleurgrens ertussen), gebruikt elke sectie in die reeks `.page-section-top` in plaats van `.page-section`. Alleen de allerlaatste sectie van de reeks — vlak vóór een echte kleurwissel of vóór de footer — behoudt de volledige `.page-section` (nodig voor de correcte 160px/200px-afsluiting daar). Zo halveert de tussenruimte tussen gelijk-gekleurde secties naar 80px/100px, terwijl de hero-overgang en de footer-marge de volle 160px/200px behouden. Ontdekt doordat de volle 160px/200px tussen twee opeenvolgende witte secties op `/voor-docenten/over` als te ruim werd ervaren; het patroon bleek al toegepast op de klantpagina `/over` maar stond nog niet gedocumenteerd. Doorgevoerd op `/voor-docenten/over` conform het bestaande `/over`-patroon.
 
 ### Footer-marge
 De footer-marge volgt automatisch uit diezelfde standaard, zonder aparte compensatie-klasse: `Footer.tsx` en `DocentFooter.tsx` hebben zelf een padding-top van 80px/100px (i.p.v. de vroegere vaste 48px `py-12`), exact gelijk aan de padding-bottom van een standaard `.page-section`. De eerder gebruikte `.footer-margin`-klasse is hierdoor overbodig geworden en verwijderd.
