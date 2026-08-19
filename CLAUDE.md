@@ -7,6 +7,7 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.25 | 19-08-2026 | Sectie "Tabellen met veel rijen — striping & hover" uitgebreid met een expliciete uitzondering voor tabellen op een witte sectie-achtergrond: de standaard striping-combinatie (rgba(255,255,255,0.5) + #ebe3e0) bleek daar te vlak — wit-op-wit geeft nauwelijks contrast. Ontdekt bij /voor-docenten/tarieven, sectie 2 (Lestarieven). Voor déze tabel een sterkere tint toegepast (koprij en rij "Losse les 60 min." #ebe3e0, rij "Introductieles" en "Losse les 75 min." #f5f1f0) — een bewuste uitzondering voor déze tabel, geen nieuwe algemene regel. |
 | v1.24 | 18-08-2026 | Sectie "Sectie-overgangen — vaste standaard" uitgebreid met een derde, bredere uitzondering: reeksen opeenvolgende secties met dezelfde achtergrondkleur gebruiken `.page-section-top` op elke sectie behalve de laatste van de reeks, waardoor de tussenruimte halveert naar 80px/100px in plaats van de volle 160px/200px. Dit patroon bleek al toegepast op de klantpagina `/over` maar was nog niet gedocumenteerd; nu ook doorgevoerd op `/voor-docenten/over` (inclusief het alsnog correct in een `.container`/sectie wrappen van de eerste "FOTO LIGGEND BEELD", die voorheen als kale `<div>` zonder eigen marge tussen twee secties stond). |
 | v1.23 | 12-08-206 | Maandelijkse pop-up/reminder voor KOR-docenten gekoppeld aan activiteit: alleen actief bij minimaal 1 bevestigde les in de voorafgaande maand, om docenten zonder boekingen niet onnodig lastig te vallen. Hervat automatisch bij de eerstvolgende bevestigde les. Maandoverzicht uitgebreid met 5e categorie "Geen check deze maand" zodat inactieve docenten niet ten onrechte als "geen reactie" worden geteld. Opschortingsregel bij uitblijven reactie na reminder verwijst nu naar Platformovereenkomst Art. 6.7 lid g / Art. 5.5 (optie A: automatisch opschorten, geen individuele afweging per geval). |
 | v1.22 | 11-08-2026 | Nieuwe subsectie "E-mail bij verzending uitbetalingsspecificatie — KOR-docent" toegevoegd: begeleidende e-mail bij de uitbetalingsspecificatie bevat voor KOR-docenten een aanvullende meldplicht-herinnering over de omzetgrens (totale omzet, niet alleen via PYAH). Staat los van de factuur/PDF zelf, die ongewijzigd blijft. |
@@ -1371,6 +1372,15 @@ Categoriekoppen krijgen een eigen onderscheidende stijl (vetgedrukt) en tellen n
 Bij hover over een rij: achtergrond wordt `#d4baad` met een zachte `transition-colors`.
 
 Referentie: Abonnementen-pagina, sectie 3 (vergelijkingstabel).
+
+#### Tabellen op een witte sectie-achtergrond — uitzondering (vastgesteld 19-08-2026)
+
+Op `/voor-docenten/tarieven`, sectie 2 (Lestarieven), staat de tabel op een witte sectie-achtergrond. De standaard striping-combinatie (`rgba(255,255,255,0.5)` + `#ebe3e0`) oogt hier te vlak — wit-op-wit geeft nauwelijks contrast. Voor déze tabel geldt daarom een sterkere, aangepaste tint i.p.v. de standaardcombinatie:
+- Koprij: `#ebe3e0`
+- Rij "Introductieles" en "Losse les 75 min.": `#f5f1f0`
+- Rij "Losse les 60 min.": `#ebe3e0`
+
+Dit is een bewuste uitzondering voor déze tabel, geen nieuwe algemene regel. Bij een vergelijkbare situatie elders (korte tabel op witte achtergrond): eerst aan Sabine vragen of dezelfde aanpak van toepassing is.
 
 ### Sectie-overgangen — vaste standaard (v1.18, uitgebreid v1.24)
 Elke sectie-overgang op elke pagina — tussen twee secties, na de hero, én naar de footer — gebruikt dezelfde vaste, symmetrische marge: **160px (<640px) / 200px (≥640px)**, opgebouwd uit twee gelijke helften van 80px/100px (padding-bottom van de bovenste sectie = padding-top van de onderste sectie). Dit komt uit `.page-section` en `.page-section-hero` in `layout.css`, die beide standaard 80px/80px (<640px) en 100px/100px (≥640px) padding hebben — top én bottom altijd gelijk, dus symmetrisch van zichzelf.

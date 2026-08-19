@@ -291,7 +291,41 @@ export default function AbonnementPage() {
         </div>
       </section>
 
-      {/* SECTIE 3 — Vergelijkingstabel (sectietype 1: gecentreerd, 1-koloms) */}
+      {/* SECTIE 3 — Wat kost je abonnement? (sectietype 3: gekleurd blok, gecentreerd — achtergrond #a66658, witte tekst) */}
+      <section className="page-section section-terracotta section-centered">
+        <div className="container">
+          <p className="heading-overline on-dark mb-text">Je abonnement</p>
+          <h2 className="heading-h2 on-dark mb-heading">Wat kost je abonnement?</h2>
+
+          <div className="abonnement-prijs-tabel-wrapper">
+            <table className="abonnement-prijs-tabel">
+              <thead>
+                <tr>
+                  <th scope="col">Niveau</th>
+                  <th scope="col">Maandelijks abonnement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Startend</td>
+                  <td>€ 10</td>
+                </tr>
+                <tr>
+                  <td>Ervaren</td>
+                  <td>€ 20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-small on-dark abonnement-prijs-tabel-voetnoot">
+            Bedragen zijn exclusief 21% btw. Je eerste 6 maanden krijg je 50% korting op je abonnementstarief. Na
+            afloop van deze periode geldt automatisch het normale tarief.
+          </p>
+        </div>
+      </section>
+
+      {/* SECTIE 4 — Vergelijkingstabel (sectietype 1: gecentreerd, 1-koloms) */}
       <section className="page-section section-pearl section-centered">
         <div className="container">
           <p className="heading-overline mb-text">In één oogopslag</p>
@@ -338,7 +372,7 @@ export default function AbonnementPage() {
         </div>
       </section>
 
-      {/* SECTIE 4 — Toelichting per categorie (sectietype 1: gecentreerd, 1-koloms) */}
+      {/* SECTIE 5 — Toelichting per categorie (sectietype 1: gecentreerd, 1-koloms) */}
       <section className="page-section section-white section-centered">
         <div className="container">
           <p className="heading-overline mb-text">Wat betekent dit voor jou</p>
@@ -360,7 +394,7 @@ export default function AbonnementPage() {
         </div>
       </section>
 
-      {/* SECTIE 5 — CTA-sectie (sectietype 3: gekleurd blok, gecentreerd — achtergrond #484f47, witte tekst) */}
+      {/* SECTIE 6 — CTA-sectie (sectietype 3: gekleurd blok, gecentreerd — achtergrond #484f47, witte tekst) */}
       <section className="page-section section-moss section-centered">
         <div className="container">
           <p className="heading-overline on-dark mb-text">Klaar om aan te sluiten?</p>

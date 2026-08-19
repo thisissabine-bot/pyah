@@ -33,6 +33,11 @@ export default function DocentFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/voor-docenten/tarieven" className="text-sm hover:text-white transition-colors">
+                  Tarieven
+                </Link>
+              </li>
+              <li>
                 <Link href="/voor-docenten/abonnement" className="text-sm hover:text-white transition-colors">
                   Abonnement
                 </Link>

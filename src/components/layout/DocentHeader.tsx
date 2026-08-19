@@ -7,6 +7,7 @@ import { useState } from "react";
 const NAV_ITEMS = [
   { href: "/voor-docenten/hoe-werkt-het", label: "Hoe werkt het?" },
   { href: "/voor-docenten/over", label: "Over PYAH" },
+  { href: "/voor-docenten/tarieven", label: "Tarieven" },
   { href: "/voor-docenten/abonnement", label: "Abonnement" },
   { href: "/voor-docenten/aanmelden", label: "Aanmelden/Inloggen" },
 ];

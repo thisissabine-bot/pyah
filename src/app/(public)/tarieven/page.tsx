@@ -101,10 +101,54 @@ export default function TarievenPage() {
         </div>
       </section>
 
-      {/* SECTIE: Tarieven (kopje — tabel volgt later) */}
+      {/* SECTIE: Tarieven */}
       <section className="page-section section-white section-centered">
         <div className="container-narrow">
-          <h2 className="heading-h2 accent-moss">Tarieven</h2>
+          <p className="heading-overline mb-text">Twee niveaus, één zelfde zorg</p>
+          <h2 className="heading-h2 accent-moss mb-heading">Tarieven</h2>
+
+          <div className="tarieven-tabel-wrapper">
+            <table className="tarieven-tabel">
+              <thead>
+                <tr>
+                  <th className="heading-overline accent-moss">Les</th>
+                  <th className="heading-overline accent-terracotta">Startend</th>
+                  <th className="heading-overline accent-moss">Ervaren</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <p className="heading-h4">Introductieles</p>
+                    <p className="text-small">75 min. · eenmalig</p>
+                  </td>
+                  <td className="tarieven-tabel-prijs">€ 80</td>
+                  <td className="tarieven-tabel-prijs">€ 99</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className="heading-h4">Losse les</p>
+                    <p className="text-small">60 minuten</p>
+                  </td>
+                  <td className="tarieven-tabel-prijs">€ 80</td>
+                  <td className="tarieven-tabel-prijs">€ 99</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p className="heading-h4">Losse les</p>
+                    <p className="text-small">75 minuten</p>
+                  </td>
+                  <td className="tarieven-tabel-prijs">€ 97</td>
+                  <td className="tarieven-tabel-prijs">€ 120</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-small tarieven-tabel-voetnoot">
+            Prijzen zijn inclusief 21% btw. De introductieles duurt 75 minuten en <br />
+            is bewust gelijkgeprijsd aan de losse les van 60 minuten, om de drempel te verlagen.
+          </p>
         </div>
       </section>
 
