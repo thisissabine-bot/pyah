@@ -246,6 +246,12 @@
   text-decoration: none;
 }
 
+/* De globale `a:hover` (layout.css) kleurt links terracotta (#a66658) — onzichtbaar
+   op de eigen terracotta footer-achtergrond. Hier expliciet wit houden bij hover. */
+.docent-footer a:hover {
+  color: #ffffff;
+}
+
 .docent-nav-drawer {
   position: fixed;
   top: 0;

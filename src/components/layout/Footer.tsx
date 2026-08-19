@@ -14,8 +14,9 @@ export default function Footer() {
               className="mb-3"
             />
             <p className="text-sm leading-relaxed">
-              Professionele yogadocenten die bij jou thuis komen. Persoonlijk,
-              zorgvuldig geselecteerd.
+              Professionele yogadocenten <br />
+              die bij jou thuis komen.<br />
+              Persoonlijk, zorgvuldig geselecteerd.
             </p>
           </div>
 
@@ -80,13 +81,7 @@ export default function Footer() {
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/40 text-center sm:text-left">
           <span>© {new Date().getFullYear()} Private Yoga at Home · privateyogaathome.nl</span>
           <span>
-            <Link href="/algemene-voorwaarden" className="hover:text-white transition-colors">Algemene voorwaarden</Link>
-            {" • "}
-            <Link href="/privacybeleid" className="hover:text-white transition-colors">Privacybeleid</Link>
-            {" • "}
-            <Link href="/cookiebeleid" className="hover:text-white transition-colors">Cookiebeleid</Link>
-            {" • "}
-            <Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link>
+            <Link href="/algemene-voorwaarden-klanten" className="hover:text-white transition-colors">Algemene voorwaarden</Link>
           </span>
         </div>
       </div>
