@@ -7,6 +7,7 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.26 | 20-08-2026 | Tabel `boekingen` hernoemd naar `lesregistraties` (en alle verwijzingen ernaar: kolomnaam `boeking_id` → `lesregistratie_id` in `reviews`, `facturen` en `tegoeden`; unieke index, ALTER TABLE-blok, RLS, cron job-beschrijving, dashboardmap). Reden: de tabel wordt gevuld door de Docent die een reeds mondeling/telefonisch afgesproken les vastlegt — niet door een Klant die iets aanvraagt of boekt via het platform. Status-set tegelijk gecorrigeerd van `aangevraagd/bevestigd/voltooid/geannuleerd` naar `ingepland/bevestigd/voltooid/geannuleerd/niet_gegeven`, conform de al langer vastgelegde Statusreeks in de facturatie/lesregistratie-sectie — de basistabel liep hierop achter. ⚠️ Open punt: het component `lesregistraties/LesKiezer.tsx` (Mappenstructuur) beschrijft een klant-facing keuzecomponent voor lestype/duur — dit lijkt een leftover van een eerder concept waarin de klant zelf boekt. Nog te beoordelen of dit component nog past, of dat de lestype/duur-keuze uitsluitend via het Docent-dashboard (lesregistratie) hoort te lopen. |
 | v1.25 | 19-08-2026 | Sectie "Tabellen met veel rijen — striping & hover" uitgebreid met een expliciete uitzondering voor tabellen op een witte sectie-achtergrond: de standaard striping-combinatie (rgba(255,255,255,0.5) + #ebe3e0) bleek daar te vlak — wit-op-wit geeft nauwelijks contrast. Ontdekt bij /voor-docenten/tarieven, sectie 2 (Lestarieven). Voor déze tabel een sterkere tint toegepast (koprij en rij "Losse les 60 min." #ebe3e0, rij "Introductieles" en "Losse les 75 min." #f5f1f0) — een bewuste uitzondering voor déze tabel, geen nieuwe algemene regel. |
 | v1.24 | 18-08-2026 | Sectie "Sectie-overgangen — vaste standaard" uitgebreid met een derde, bredere uitzondering: reeksen opeenvolgende secties met dezelfde achtergrondkleur gebruiken `.page-section-top` op elke sectie behalve de laatste van de reeks, waardoor de tussenruimte halveert naar 80px/100px in plaats van de volle 160px/200px. Dit patroon bleek al toegepast op de klantpagina `/over` maar was nog niet gedocumenteerd; nu ook doorgevoerd op `/voor-docenten/over` (inclusief het alsnog correct in een `.container`/sectie wrappen van de eerste "FOTO LIGGEND BEELD", die voorheen als kale `<div>` zonder eigen marge tussen twee secties stond). |
 | v1.23 | 12-08-206 | Maandelijkse pop-up/reminder voor KOR-docenten gekoppeld aan activiteit: alleen actief bij minimaal 1 bevestigde les in de voorafgaande maand, om docenten zonder boekingen niet onnodig lastig te vallen. Hervat automatisch bij de eerstvolgende bevestigde les. Maandoverzicht uitgebreid met 5e categorie "Geen check deze maand" zodat inactieve docenten niet ten onrechte als "geen reactie" worden geteld. Opschortingsregel bij uitblijven reactie na reminder verwijst nu naar Platformovereenkomst Art. 6.7 lid g / Art. 5.5 (optie A: automatisch opschorten, geen individuele afweging per geval). |
@@ -42,7 +43,7 @@
 
 Een two-sided marketplace genaamd \*\*Private Yoga at Home (PYAH)\*\*.  
 Klanten vinden hier een zorgvuldig geselecteerde yogadocent aan huis.  
-Docenten krijgen een professioneel profiel en boekingssysteem.
+Docenten krijgen een professioneel profiel en lesregistratiesysteem.
 
 \*\*Domeinnaam:\*\* privateyogaathome.nl (geregistreerd via Cloud86)  
 \*\*Hosting:\*\* Netlify (gratis tier, koppelen aan domein na deploy)  
@@ -183,7 +184,7 @@ docent/               \# Docent dashboard (ingelogd)
 page.tsx            \# Overzicht  
 profiel/page.tsx    \# Profiel bewerken  
 aanvragen/page.tsx  \# Klantaanvragen  
-agenda/page.tsx     \# Boekingen  
+agenda/page.tsx     \# Lesregistraties  
 uitbetaling/page.tsx  
 admin/                \# Admin dashboard (alleen Sabine)  
 page.tsx  
@@ -214,7 +215,7 @@ docenten/
 DocentCard.tsx        \# Kaartje in de zoekresultaten  
 DocentProfiel.tsx     \# Volledig openbaar profiel  
 ZoekFilters.tsx       \# Filters (stijl, locatie, niveau)  
-boekingen/  
+lesregistraties/  
 LesKiezer.tsx         \# Introductieles (altijd 75 min, vast) of Losse les (kies 60/75 min)  
 BetalingForm.tsx  
 lib/  
@@ -275,15 +276,15 @@ actief BOOLEAN DEFAULT true
 \-- Introductieles: altijd 75 minuten, eenmalig per klant-docent combinatie  
 \-- Losse les: klant kiest 60 of 75 minuten, elk eigen prijs  
 
-\-- Boekingen (losse lessen)  
-CREATE TABLE boekingen (  
+\-- Lesregistraties (voorheen 'boekingen' — de Docent registreert een reeds afgesproken les, de Klant boekt niet zelf via het platform)  
+CREATE TABLE lesregistraties (  
 id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),  
 klant\_naam TEXT NOT NULL,  
 klant\_email TEXT NOT NULL,  
 klant\_telefoon TEXT,  
 docent\_id UUID REFERENCES docenten(id),  
 tarief\_id UUID REFERENCES tarieven(id),  
-status TEXT CHECK (status IN ('aangevraagd', 'bevestigd', 'voltooid', 'geannuleerd')) DEFAULT 'aangevraagd',  
+status TEXT CHECK (status IN ('ingepland', 'bevestigd', 'voltooid', 'geannuleerd', 'niet\_gegeven')) DEFAULT 'ingepland',  
 mollie\_payment\_id TEXT,  
 mollie\_betaald BOOLEAN DEFAULT false,  
 bedrag\_cent INTEGER,            \-- lesprijs  
@@ -298,7 +299,7 @@ created\_at TIMESTAMPTZ DEFAULT NOW()
 CREATE TABLE reviews (  
 id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),  
 docent\_id UUID REFERENCES docenten(id),  
-boeking\_id UUID REFERENCES boekingen(id),  
+lesregistratie\_id UUID REFERENCES lesregistraties(id),  
 score INTEGER CHECK (score BETWEEN 1 AND 5),  
 tekst TEXT,  
 publiek BOOLEAN DEFAULT true,  
@@ -337,7 +338,7 @@ created\_at TIMESTAMPTZ DEFAULT NOW()
 
 \-- Row Level Security inschakelen  
 ALTER TABLE docenten ENABLE ROW LEVEL SECURITY;  
-ALTER TABLE boekingen ENABLE ROW LEVEL SECURITY;  
+ALTER TABLE lesregistraties ENABLE ROW LEVEL SECURITY;  
 ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
 
 \-- Beleid: iedereen mag actieve docenten zien  
@@ -438,12 +439,12 @@ De link "Docent worden" uit de klant-nav staat niet in het docentmenu zelf — d
 | Lestype        | Duur       | Keuze voor klant         |  
 |----------------|------------|--------------------------|  
 | Introductieles | Altijd 75 min | Geen keuze — vast     |  
-| Losse les      | 60 of 75 min  | Klant kiest bij boeking |
+| Losse les      | 60 of 75 min  | Klant kiest bij lesregistratie |
 
 De introductieles is eenmalig per klant-docent combinatie. Enforce dit in de database:  
 \`\`\`sql  
 CREATE UNIQUE INDEX één\_intro\_per\_klant\_docent  
-ON boekingen (klant\_email, docent\_id)  
+ON lesregistraties (klant\_email, docent\_id)  
 WHERE tarief\_naam \= 'Introductieles';  
 \`\`\`
 
@@ -468,7 +469,7 @@ Technisch via Mollie:
 const payment \= await mollieClient.payments.create({  
 amount: { currency: 'EUR', value: bedragEuro },  // bijv. '90.00'  
 description: \`Les bij ${docent.naam}\`,  
-redirectUrl: \`${process.env.NEXT\_PUBLIC\_URL}/boeking/bevestigd\`,  
+redirectUrl: \`${process.env.NEXT\_PUBLIC\_URL}/lesregistratie/bevestigd\`,  
 webhookUrl: \`${process.env.NEXT\_PUBLIC\_URL}/api/webhooks/mollie\`,  
 metadata: {  
 docent\_id: docent.id,  
@@ -594,7 +595,7 @@ Dit is de basis voor facturatie én voor uitbetaling. Zonder geregistreerde les:
 \- Reisafstand in km (optioneel; systeem berekent reiskosten automatisch als > 10 km)
 \- Notities (optioneel)
 
-\#\#\#\# Statusreeks boekingen
+\#\#\#\# Statusreeks lesregistraties
 
 \`\`\`
 ingepland → bevestigd → voltooid
@@ -664,7 +665,7 @@ De factuur wordt aangemaakt door de docent in het dashboard, maar gaat uit onder
 
 Als een losse les buiten 24 uur voor aanvang wordt geannuleerd:
 
-\- Boeking krijgt status \`geannuleerd\`
+\- Lesregistratie krijgt status \`geannuleerd\`
 \- Klant ontvangt automatisch een \*\*tegoed\*\* van het volledige lesbedrag
 \- Tegoed is geldig voor \*\*4 weken\*\* vanaf de annuleringsdatum
 \- Tegoed is gekoppeld aan dezelfde docent
@@ -773,10 +774,10 @@ Geef een korte toelichting:
 \`\`\`
 
 Na verzenden:
-\- Boeking krijgt status \`niet\_gegeven\`
-\- Reden wordt opgeslagen in de database (\`boekingen.niet\_gegeven\_reden\`)
+\- Lesregistratie krijgt status \`niet\_gegeven\`
+\- Reden wordt opgeslagen in de database (\`lesregistraties.niet\_gegeven\_reden\`)
 \- Admin (Sabine) ontvangt een notificatie: "Les niet gegeven — [naam docent] / [naam klant] / [datum]"
-\- De boeking is zichtbaar in het docent-dashboard met status "Niet gegeven" en de opgegeven reden
+\- De lesregistratie is zichtbaar in het docent-dashboard met status "Niet gegeven" en de opgegeven reden
 \- Sabine handelt de situatie handmatig af (buiten het systeem om of via admin-dashboard)
 
 \#\#\#\# Bevestigingslogica
@@ -1008,7 +1009,7 @@ CREATE TABLE facturen (
   id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),
   factuurnummer TEXT UNIQUE NOT NULL,
   docent\_id UUID REFERENCES docenten(id),
-  boeking\_id UUID REFERENCES boekingen(id),
+  lesregistratie\_id UUID REFERENCES lesregistraties(id),
   pakket\_id UUID REFERENCES lessenpakketten(id),
   klant\_naam TEXT NOT NULL,
   klant\_email TEXT NOT NULL,
@@ -1054,7 +1055,7 @@ CREATE TABLE tegoeden (
   klant\_email TEXT NOT NULL,
   klant\_naam TEXT NOT NULL,
   docent\_id UUID REFERENCES docenten(id),
-  boeking\_id UUID REFERENCES boekingen(id),
+  lesregistratie\_id UUID REFERENCES lesregistraties(id),
   bedrag\_cent INTEGER NOT NULL,
   geldig\_tot TIMESTAMPTZ NOT NULL,                    -- annulering\_datum + 28 dagen
   gebruikt BOOLEAN DEFAULT false,
@@ -1085,8 +1086,8 @@ $$ LANGUAGE SQL;
 \#\#\#\# Aanpassingen bestaande tabellen
 
 \`\`\`sql
--- boekingen
-ALTER TABLE boekingen
+-- lesregistraties
+ALTER TABLE lesregistraties
   ADD COLUMN pakket\_id UUID REFERENCES lessenpakketten(id),
   ADD COLUMN aantal\_personen INTEGER DEFAULT 1,
   ADD COLUMN bevestigd\_door\_docent BOOLEAN DEFAULT false,
@@ -1167,7 +1168,7 @@ Platformovereenkomst Art. 6.7 bevat een sub-lid (opschortingsrecht bij niet-beve
 
 | Functie | Frequentie | Wat het doet |
 |---|---|---|
-| \`check\_lesbevestiging\` | Elk uur | Zet boekingen ouder dan 24h na lesdatum automatisch op \`voltooid\` als docent niet heeft bevestigd |
+| \`check\_lesbevestiging\` | Elk uur | Zet lesregistraties ouder dan 24h na lesdatum automatisch op \`voltooid\` als docent niet heeft bevestigd |
 | \`check\_betalingsherinnering\` | Elke dag 9:00 | Stuurt herinnering op dag 8 en dag 14 na factuurdatum als niet betaald |
 | \`check\_pakket\_vervaldatum\` | Elke dag 6:00 | Zet pakketten met verlopen \`geldig\_tot\` op \`actief = false\` |
 | \`check\_tegoed\_herinnering\` | Elke dag 9:00 | Stuurt herinnering aan klant op dag 21 als tegoed nog niet gebruikt is |
@@ -1248,7 +1249,7 @@ Gebruik Supabase Auth:
 6\. Docentprofiel pagina  
 7\. Supabase koppeling: echte data laden
 
-\*\*Fase 3 — Boekingen & betalingen\*\*  
+\*\*Fase 3 — Lesregistraties & betalingen\*\*  
 8\. LesKiezer component (introductieles of losse les kiezen)  
 9\. Mollie betaallink integratie  
 10\. Webhook handler voor bevestiging  
