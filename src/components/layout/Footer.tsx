@@ -82,6 +82,10 @@ export default function Footer() {
           <span>© {new Date().getFullYear()} Private Yoga at Home · privateyogaathome.nl</span>
           <span>
             <Link href="/algemene-voorwaarden-klanten" className="hover:text-white transition-colors">Algemene voorwaarden</Link>
+            {" • "}
+            <Link href="/privacybeleid" className="hover:text-white transition-colors">Privacybeleid</Link>
+            {" • "}
+            <Link href="/cookiebeleid" className="hover:text-white transition-colors">Cookiebeleid</Link>
           </span>
         </div>
       </div>
