@@ -18,6 +18,12 @@ const STAD_COORDINATEN: Record<string, [number, number]> = {
   Haarlem: [52.3874, 4.6462],
   Utrecht: [52.0907, 5.1214],
   Rotterdam: [51.9244, 4.4777],
+  Zandvoort: [52.3717, 4.5342],
+  Heemstede: [52.3489, 4.6321],
+  Aerdenhout: [52.3608, 4.5814],
+  Vijfhuizen: [52.3444, 4.6926],
+  Hoofddorp: [52.3061, 4.6907],
+  Bloemendaal: [52.3959, 4.6221],
 }
 
 export default function ZoekKaart({ docenten }: { docenten: Docent[] }) {

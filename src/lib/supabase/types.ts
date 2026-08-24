@@ -27,6 +27,7 @@ export interface Database {
         };
         Insert: Omit<Database["public"]["Tables"]["docenten"]["Row"], "id" | "created_at">;
         Update: Partial<Database["public"]["Tables"]["docenten"]["Insert"]>;
+        Relationships: [];
       };
       tarieven: {
         Row: {
@@ -39,6 +40,7 @@ export interface Database {
         };
         Insert: Omit<Database["public"]["Tables"]["tarieven"]["Row"], "id">;
         Update: Partial<Database["public"]["Tables"]["tarieven"]["Insert"]>;
+        Relationships: [];
       };
       boekingen: {
         Row: {
@@ -60,6 +62,7 @@ export interface Database {
         };
         Insert: Omit<Database["public"]["Tables"]["boekingen"]["Row"], "id" | "created_at">;
         Update: Partial<Database["public"]["Tables"]["boekingen"]["Insert"]>;
+        Relationships: [];
       };
       reviews: {
         Row: {
@@ -73,20 +76,35 @@ export interface Database {
         };
         Insert: Omit<Database["public"]["Tables"]["reviews"]["Row"], "id" | "created_at">;
         Update: Partial<Database["public"]["Tables"]["reviews"]["Insert"]>;
+        Relationships: [];
       };
       aanmeldingen: {
         Row: {
           id: string;
           naam: string;
           email: string;
-          locatie: string | null;
-          bericht: string | null;
+          woonplaats: string | null;
+          opleiding: string | null;
+          trainingsuren: string | null;
+          jaren_leservaring: string | null;
+          recente_lespraktijk: string | null;
+          ervaring_privelessen: string | null;
+          yogastijlen: string | null;
+          andere_disciplines: string | null;
+          motivatie: string | null;
+          toelichting: string | null;
+          regio: string | null;
+          akkoord_erkende_opleiding: boolean;
+          akkoord_geen_garantie: boolean;
+          akkoord_avb: boolean;
+          akkoord_privacyverklaring: boolean;
           type: "docent" | "klant";
           verwerkt: boolean;
           created_at: string;
         };
         Insert: Omit<Database["public"]["Tables"]["aanmeldingen"]["Row"], "id" | "created_at">;
         Update: Partial<Database["public"]["Tables"]["aanmeldingen"]["Insert"]>;
+        Relationships: [];
       };
       uitbetalingen: {
         Row: {
@@ -104,7 +122,10 @@ export interface Database {
         };
         Insert: Omit<Database["public"]["Tables"]["uitbetalingen"]["Row"], "id" | "created_at">;
         Update: Partial<Database["public"]["Tables"]["uitbetalingen"]["Insert"]>;
+        Relationships: [];
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
   };
 }

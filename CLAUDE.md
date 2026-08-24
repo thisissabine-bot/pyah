@@ -7,6 +7,9 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.30 | 24-08-2026 | Aanmeldformulier docenten (sectie 4 van `/voor-docenten/aanmelden`) bijgesteld op vraag van Sabine. Vraag "Welke yogaopleiding(en) heb je gevolgd?" vervangen door "Bij welk (internationaal) erkend instituut zoals Yoga Alliance of gelijkwaardig heb je je opleiding gevolgd?" (oude toelichting over trainingsuren vervalt); nieuw verplicht veld "Hoeveel trainingsuren heeft je yogaopleiding omvat?" toegevoegd direct erna (keuzelijst: 200 uur / 400 uur / Meer dan 400 uur — 200 uur is de minimumeis voor toelating, dus de laagste optie) — hiervoor nieuwe kolom `trainingsuren` TEXT+CHECK toegevoegd aan `aanmeldingen` (migratie `20260824134937_aanmeldingen_trainingsuren.sql`). "Welke yogastijlen geef je les?" is nu verplicht (was optioneel). "Bied je daarnaast nog andere disciplines aan?" en "Is er nog iets dat je met ons wilt delen?" zijn beide verplicht gemaakt met een Nee/Ja-schakelvraag (Nee eerst, zodat bij "Ja" het bijbehorende invulveld er direct op aansluit) — bij "Ja" verschijnt een verplicht tekstveld ("Zo ja, welke?" resp. "Zo ja, licht toe:"), bij "Nee" wordt de onderliggende kolom leeg opgeslagen; dit is puur een UI-laag (`heeft_andere_disciplines`/`heeft_toelichting`, alleen client-side, niet naar de API/DB gestuurd) bovenop de bestaande `andere_disciplines`/`toelichting`-kolommen, dus geen schema-wijziging nodig. Spacing tussen H3-subkop en volgende bodytekst binnen dit formulier eerst volledig verwijderd op verzoek, bleek in de praktijk te krap oogend naast de rest van de pagina — teruggezet, maar met de bestaande kleine `.mb-text` (10px) in plaats van de standaard `.mb-section` (48px) die de rest van de site gebruikt: een bewuste, kleinere tussenmaat, alleen toegepast op de H3's binnen dit formulier. CTA-sectie onderaan de pagina (overline "Nog vragen?" / H3 "Benieuwd naar tarief en commissie?") bijgewerkt: bodytekst en knoppen "Bekijk de abonnementen"/"Hoe werkt het?" vervangen door "Tarieven" (→ `/voor-docenten/tarieven`) / "Abonnement" (→ `/voor-docenten/abonnement`) — beide routes bestonden al. |
+| v1.29 | 21-08-2026 | Aanmeldformulier (`/voor-docenten/aanmelden`) functioneel gemaakt: invullen → react-hook-form + zod-validatie → insert in `aanmeldingen` (`type='docent'`, `verwerkt=false`) → bevestigingsmail naar de docent + notificatiemail naar Sabine via Resend, alles op basis van de live paginatekst (niet het conceptdocument). Bij het koppelen bleken twee dingen niet meer overeen te komen tussen live pagina en het inmiddels uitgebreide schema: (1) de regio-keuze stond nog als twee losse, niet-verplichte checkboxes (`akkoord_pilotregio`/`akkoord_wachtlijst`) zonder DB-kolom — vervangen door een verplichte radio-groep die naar de nieuwe kolom `regio` schrijft (`haarlem_eo` / `wachtlijst`); (2) de zichtbare tekst bij "Hoeveel jaar geef je yogales?" gebruikte een en-dash ("1–2 jaar"), terwijl de DB-CHECK-constraint een koppelteken verwacht ("1-2 jaar") — na overleg met Sabine de weergave aangepast naar koppelteken zodat weergave en opgeslagen waarde gelijk zijn (empirisch bevestigd: insert met koppelteken-waarde slaagt). `recente_lespraktijk`/`ervaring_privelessen` slaan nu de zichtbare labeltekst op (bijv. "Ja, wekelijks") i.p.v. de eerdere value-slugs, voor consistentie met `jaren_leservaring` — er staat geen DB-constraint op deze twee kolommen, dus dit is geen harde eis. CREATE TABLE-blok `aanmeldingen` bijgewerkt naar het daadwerkelijke schema (was op punten verouderd: `jaren_leservaring` stond nog als INTEGER i.p.v. TEXT+CHECK); open bouwpunt over de ontbrekende schema-uitbreiding is hiermee opgelost. `src/lib/supabase/types.ts` (sterk verouderde hand-written Supabase-types) aangevuld met `Relationships`/`Views`/`Functions` zodat het `Database`-type structureel voldoet aan wat `@supabase/supabase-js` v2.105 verwacht — nodig omdat dit de eerste `.insert()`-aanroep in de codebase is; verdere veroudering van dat bestand (bijv. `boekingen` i.p.v. `lesregistraties`) niet aangepakt, buiten scope van deze opdracht. Nieuwe CSS-classes `.form-radio-row` en `.form-error` toegevoegd aan sectie 21 van `layout.css`, zelfde patroon als het bestaande `.form-checkbox-row`. Na livetest bleek de RESEND_API_KEY verlopen/ongeldig; na vernieuwing werkte de bevestigingsmail meteen, maar de notificatiemail naar `admin@privateyogaathome.nl` bouncete eerst ("Recipient not found") omdat die mailbox nog niet bestond — Resend zette het adres daardoor automatisch op de suppression-lijst; na aanmaken van de mailbox én handmatig verwijderen uit de suppression-lijst kwam de mail wel aan. Notificatiemail naar Sabine uitgebreid van het oorspronkelijk voorziene korte overzicht (naam, woonplaats, regio, opleiding, ervaring) naar álle ingevulde velden (incl. yogastijlen, andere disciplines, motivatie, toelichting) op verzoek na livetest. Toelichtingsregels toegevoegd op de pagina: "Kies één van de twee." onder de regio-radio's, "Vink alle vier de onderdelen aan om je aanmelding te kunnen versturen." boven de verklaringen. Privacyverklaring-checkboxtekst gecorrigeerd naar een link "Privacybeleid" → `/privacybeleid` (stond eerst als kale tekst zonder link). Buiten scope (later): admin-beoordelingsscherm, welkomstmail-met-registratietoken, wachtlijstbeheer-UI. |
+| v1.28 | 21-08-2026 | Kaart met pin op docentprofiel (`DocentKaart.tsx`) en de kaart op `/docenten` (`ZoekKaart.tsx`) tonen geen pin voor docenten buiten de vier oorspronkelijke steden (Amsterdam, Haarlem, Utrecht, Rotterdam) — de component rendert dan stil niets, zonder foutmelding. Ontdekt bij Emma van Dijk (Vijfhuizen): geen kaart, wel bij Anne de Vries (Haarlem). `STAD_COORDINATEN` in beide bestanden (was al gedupliceerd, niet samengevoegd — buiten scope van deze fix) uitgebreid met de overige pilotplaatsen: Zandvoort, Heemstede, Aerdenhout, Vijfhuizen, Hoofddorp, Bloemendaal. |
 | v1.27 | 21-08-2026 | Privacybeleid en Cookiebeleid gepubliceerd: placeholder-inhoud op `/privacybeleid` en `/cookiebeleid` vervangen door paginatitel + PDF-link (`privacybeleid-v1.pdf` / `cookiebeleid-v1.pdf`, `target="_blank"`, geen download-attribuut — zelfde patroon als AV Klanten/AV Docenten). Legal-linkregel in `Footer.tsx` en `DocentFooter.tsx` (die sinds de AV-livegang alleen "Algemene voorwaarden" toonde) aangevuld met "Privacybeleid" en "Cookiebeleid"; "Disclaimer" blijft bewust ongelinkt tot die pagina inhoud heeft. `av-docenten-v5.pdf` en `av-klanten-v5.pdf` vervangen door bijgewerkte versies (zelfde bestandsnaam, dus geen codewijziging nodig). |
 | v1.26 | 20-08-2026 | Tabel `boekingen` hernoemd naar `lesregistraties` (en alle verwijzingen ernaar: kolomnaam `boeking_id` → `lesregistratie_id` in `reviews`, `facturen` en `tegoeden`; unieke index, ALTER TABLE-blok, RLS, cron job-beschrijving, dashboardmap). Reden: de tabel wordt gevuld door de Docent die een reeds mondeling/telefonisch afgesproken les vastlegt — niet door een Klant die iets aanvraagt of boekt via het platform. Status-set tegelijk gecorrigeerd van `aangevraagd/bevestigd/voltooid/geannuleerd` naar `ingepland/bevestigd/voltooid/geannuleerd/niet_gegeven`, conform de al langer vastgelegde Statusreeks in de facturatie/lesregistratie-sectie — de basistabel liep hierop achter. ⚠️ Open punt: het component `lesregistraties/LesKiezer.tsx` (Mappenstructuur) beschrijft een klant-facing keuzecomponent voor lestype/duur — dit lijkt een leftover van een eerder concept waarin de klant zelf boekt. Nog te beoordelen of dit component nog past, of dat de lestype/duur-keuze uitsluitend via het Docent-dashboard (lesregistratie) hoort te lopen. |
 | v1.25 | 19-08-2026 | Sectie "Tabellen met veel rijen — striping & hover" uitgebreid met een expliciete uitzondering voor tabellen op een witte sectie-achtergrond: de standaard striping-combinatie (rgba(255,255,255,0.5) + #ebe3e0) bleek daar te vlak — wit-op-wit geeft nauwelijks contrast. Ontdekt bij /voor-docenten/tarieven, sectie 2 (Lestarieven). Voor déze tabel een sterkere tint toegepast (koprij en rij "Losse les 60 min." #ebe3e0, rij "Introductieles" en "Losse les 75 min." #f5f1f0) — een bewuste uitzondering voor déze tabel, geen nieuwe algemene regel. |
@@ -308,34 +311,32 @@ created\_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 \-- Aanmeldingen (wachtlijst docenten)  
-\-- Velden komen rechtstreeks uit het aanmeldformulier op /voor-docenten (stap 1 onboarding)  
+\-- Velden komen rechtstreeks uit het aanmeldformulier op /voor-docenten/aanmelden — functioneel sinds 21-08-2026  
 CREATE TABLE aanmeldingen (  
 id UUID PRIMARY KEY DEFAULT gen\_random\_uuid(),  
 naam TEXT NOT NULL,  
 email TEXT NOT NULL,  
-woonplaats TEXT,                        \-- woonplaats / regio  
-opleiding TEXT,                         \-- yoga-opleiding(en) en discipline  
-jaren\_leservaring INTEGER,              \-- jaren leservaring  
-recente\_lespraktijk TEXT,              \-- lespraktijk afgelopen 6-12 maanden  
-ervaring\_privelessen TEXT,             \-- ervaring met privélessen  
+woonplaats TEXT,                        \-- woonplaats  
+opleiding TEXT,                         \-- welke yogaopleiding(en) heb je gevolgd?  
+jaren\_leservaring TEXT CHECK (jaren\_leservaring IN ('Minder dan 1 jaar', '1-2 jaar', '3-5 jaar', '6-10 jaar', 'Meer dan 10 jaar')),  
+recente\_lespraktijk TEXT,               \-- lespraktijk afgelopen 6-12 maanden (keuzelijst, geen DB-constraint)  
+ervaring\_privelessen TEXT,              \-- ervaring met privélessen (keuzelijst, geen DB-constraint)  
+yogastijlen TEXT,                       \-- welke yogastijlen geef je? (vrij tekstveld)  
+andere\_disciplines TEXT,                \-- ademwerk, meditatie, sound healing, coaching, workshops (vrij tekstveld)  
+motivatie TEXT,                         \-- waarom wil je je aansluiten? (verplicht in het formulier, niet op DB-niveau)  
+toelichting TEXT,                       \-- vrij tekstveld, optioneel  
+regio TEXT CHECK (regio IN ('haarlem\_eo', 'wachtlijst')),  \-- radio-knoppen, precies één verplicht  
+akkoord\_erkende\_opleiding BOOLEAN DEFAULT false,  
+akkoord\_geen\_garantie BOOLEAN DEFAULT false,  
+akkoord\_avb BOOLEAN DEFAULT false,  
+akkoord\_privacyverklaring BOOLEAN DEFAULT false,  
 type TEXT CHECK (type IN ('docent', 'klant')) DEFAULT 'docent',  
 verwerkt BOOLEAN DEFAULT false,         \-- false \= nog niet beoordeeld door Sabine  
 created\_at TIMESTAMPTZ DEFAULT NOW()  
 );
-
-\-- ⚠️ OPEN BOUWPUNT — schema-uitbreiding \`aanmeldingen\` (nog niet gebouwd)  
-\-- De definitieve paginatekst van /voor-docenten/aanmelden (PYAH\_Aanmeldformulier\_definitief.docx)  
-\-- bevat een aantal velden en verklaringen die nog niet in dit schema staan:  
-\--   \- yogastijlen (welke yogastijlen geef je?)  
-\--   \- andere\_disciplines (ademwerk, meditatie, sound healing, coaching, workshops)  
-\--   \- motivatie (waarom wil je je aansluiten bij Private Yoga at Home?)  
-\--   \- toelichting (vrij tekstveld — "is er nog iets dat je met ons wilt delen?")  
-\--   \- akkoord\_erkende\_opleiding, akkoord\_regio\_pilot, akkoord\_wachtlijst,  
-\--     akkoord\_geen\_garantie, akkoord\_avb, akkoord\_privacyverklaring (verklaringen-checkboxes)  
-\-- De pagina zelf wordt vooralsnog als statische/visuele UI gebouwd (geen submit-logica),  
-\-- omdat livegang nog niet aan de orde is. Deze schema-uitbreiding \+ het functioneel maken  
-\-- van het formulier (submit-verwerking) volgt pas zodra de backend-fase (Supabase/Mollie)  
-\-- weer opgepakt wordt, na afronding van het traject met de belastingadviseur.
+\-- Let op: dit schema is al akkoord\_erkende\_opleiding / akkoord\_geen\_garantie / akkoord\_avb / akkoord\_privacyverklaring
+\-- (4 verklaringen) i.p.v. de oorspronkelijk voorziene 6 (akkoord\_regio\_pilot en akkoord\_wachtlijst zijn vervangen
+\-- door de \`regio\`-kolom met radio-knoppen op de pagina, in plaats van twee losse checkboxes).
 
 \-- Row Level Security inschakelen  
 ALTER TABLE docenten ENABLE ROW LEVEL SECURITY;  
