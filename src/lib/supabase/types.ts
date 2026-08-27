@@ -100,9 +100,22 @@ export interface Database {
           akkoord_privacyverklaring: boolean;
           type: "docent" | "klant";
           verwerkt: boolean;
+          niveau_inschatting: "startend" | "ervaren" | null;
+          match_beslissing: "ja" | "nee" | null;
+          beoordeeld_op: string | null;
+          mail_verzonden_op: string | null;
           created_at: string;
         };
-        Insert: Omit<Database["public"]["Tables"]["aanmeldingen"]["Row"], "id" | "created_at">;
+        Insert: Omit<
+          Database["public"]["Tables"]["aanmeldingen"]["Row"],
+          "id" | "created_at" | "niveau_inschatting" | "match_beslissing" | "beoordeeld_op" | "mail_verzonden_op"
+        > &
+          Partial<
+            Pick<
+              Database["public"]["Tables"]["aanmeldingen"]["Row"],
+              "niveau_inschatting" | "match_beslissing" | "beoordeeld_op" | "mail_verzonden_op"
+            >
+          >;
         Update: Partial<Database["public"]["Tables"]["aanmeldingen"]["Insert"]>;
         Relationships: [];
       };
