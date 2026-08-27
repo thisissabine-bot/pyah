@@ -55,6 +55,8 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     return NextResponse.json({ error: "Beslissing kon niet worden opgeslagen." }, { status: 500 });
   }
 
+  // TIJDELIJK — debug RESEND_API_KEY-mismatch tussen deze route en /api/voor-docenten/aanmelden, te verwijderen na diagnose.
+  console.log("[debug] RESEND_API_KEY laatste 4 tekens (beslissing):", process.env.RESEND_API_KEY?.slice(-4) ?? "(leeg/undefined)");
   const resend = new Resend(process.env.RESEND_API_KEY);
   const email = body.match_beslissing === "ja" ? uitnodigingEmail(aanmelding.naam) : afwijzingEmail(aanmelding.naam);
 
