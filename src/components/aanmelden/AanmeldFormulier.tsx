@@ -21,9 +21,14 @@ export default function AanmeldFormulier() {
   const bevestigingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (verzonden) {
-      bevestigingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (!verzonden) return;
+    // Instant i.p.v. smooth: een geanimeerde scroll kan halverwege worden afgebroken door een
+    // layout-verschuiving vlak na de submit (bijv. het lettertype dat nog inlaadt), waardoor de
+    // pagina ergens halverwege bleef hangen in plaats van bij de bevestigingstekst.
+    const scrollNaarBevestiging = () => {
+      bevestigingRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
+    };
+    requestAnimationFrame(() => requestAnimationFrame(scrollNaarBevestiging));
   }, [verzonden]);
 
   const {
