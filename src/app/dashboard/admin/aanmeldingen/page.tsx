@@ -3,11 +3,11 @@ import { createServerClient } from "@/lib/supabase/server";
 import { sorteerAanmeldingen, statusLabel } from "@/lib/aanmeldingenBeoordeling";
 
 interface Props {
-  searchParams: Promise<{ toast?: string; naam?: string }>;
+  searchParams: Promise<{ toast?: string; mail?: string; naam?: string }>;
 }
 
 export default async function AanmeldingenOverzichtPage({ searchParams }: Props) {
-  const { toast, naam } = await searchParams;
+  const { toast, mail, naam } = await searchParams;
   const supabase = createServerClient();
 
   const { data } = await supabase
@@ -17,18 +17,22 @@ export default async function AanmeldingenOverzichtPage({ searchParams }: Props)
 
   const rows = sorteerAanmeldingen(data ?? []);
 
+  const mailMislukt = mail === "mislukt";
+  const beslissingLabel = toast === "uitgenodigd" ? "uitnodiging" : toast === "afgewezen" ? "afwijzing" : null;
   const toastTekst =
-    toast === "uitgenodigd"
-      ? `Uitnodiging verstuurd naar ${naam ?? "de docent"}.`
-      : toast === "afgewezen"
-        ? `Afwijzing verstuurd naar ${naam ?? "de docent"}.`
+    beslissingLabel && mailMislukt
+      ? `Beslissing opgeslagen, maar de ${beslissingLabel}smail kon niet worden verstuurd naar ${naam ?? "de docent"}.`
+      : beslissingLabel
+        ? `${beslissingLabel === "uitnodiging" ? "Uitnodiging" : "Afwijzing"} verstuurd naar ${naam ?? "de docent"}.`
         : null;
 
   return (
     <div className="container page-section">
       <h2 className="heading-h2 accent-terracotta mb-section">Aanmeldingen</h2>
 
-      {toastTekst && <p className="admin-toast mb-section">{toastTekst}</p>}
+      {toastTekst && (
+        <p className={`admin-toast mb-section${mailMislukt ? " admin-toast--warning" : ""}`}>{toastTekst}</p>
+      )}
 
       {rows.length === 0 ? (
         <p className="text-body">Er zijn nog geen docentaanmeldingen.</p>

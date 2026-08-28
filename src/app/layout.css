@@ -2087,6 +2087,12 @@ a:hover {
   border-left: 3px solid #a66658;
 }
 
+.admin-toast--warning {
+  color: #ffffff;
+  background-color: #a66658;
+  border-left-color: #260f09;
+}
+
 .admin-aanmeldingen-tabel-wrapper {
   overflow-x: auto;
 }

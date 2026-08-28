@@ -45,7 +45,6 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       niveau_inschatting: body.niveau_inschatting ?? null,
       match_beslissing: body.match_beslissing,
       beoordeeld_op: nu,
-      mail_verzonden_op: nu,
       verwerkt: true,
     })
     .eq("id", id);
@@ -55,11 +54,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     return NextResponse.json({ error: "Beslissing kon niet worden opgeslagen." }, { status: 500 });
   }
 
-  // TIJDELIJK — debug RESEND_API_KEY-mismatch tussen deze route en /api/voor-docenten/aanmelden, te verwijderen na diagnose.
-  console.log("[debug] RESEND_API_KEY laatste 4 tekens (beslissing):", process.env.RESEND_API_KEY?.slice(-4) ?? "(leeg/undefined)");
   const resend = new Resend(process.env.RESEND_API_KEY);
   const email = body.match_beslissing === "ja" ? uitnodigingEmail(aanmelding.naam) : afwijzingEmail(aanmelding.naam);
 
+  let mailVerzonden = false;
   try {
     const verstuurd = await resend.emails.send({
       from: "Private Yoga at Home <docenten@privateyogaathome.nl>",
@@ -70,10 +68,29 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     });
     if (verstuurd.error) {
       console.error("[aanmeldingen/beslissing] Resend-fout:", verstuurd.error);
+    } else {
+      mailVerzonden = true;
     }
   } catch (emailError) {
     console.error("[aanmeldingen/beslissing] Resend-fout:", emailError);
   }
 
-  return NextResponse.json({ ok: true, naam: aanmelding.naam, match_beslissing: body.match_beslissing });
+  // mail_verzonden_op blijft leeg als de mail niet is gelukt, zodat dit zichtbaar blijft
+  // (ook bij later terugkijken op de detailpagina) — niet alleen in de toast direct na de actie.
+  if (mailVerzonden) {
+    const { error: mailUpdateError } = await supabase
+      .from("aanmeldingen")
+      .update({ mail_verzonden_op: nu })
+      .eq("id", id);
+    if (mailUpdateError) {
+      console.error("[aanmeldingen/beslissing] Supabase mail_verzonden_op-fout:", mailUpdateError.message);
+    }
+  }
+
+  return NextResponse.json({
+    ok: true,
+    naam: aanmelding.naam,
+    match_beslissing: body.match_beslissing,
+    mail_verzonden: mailVerzonden,
+  });
 }

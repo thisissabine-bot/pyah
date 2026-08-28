@@ -87,6 +87,13 @@ export default async function AanmeldingDetailPage({ params }: Props) {
             {" — niveau: "}
             {niveauLabel(aanmelding.niveau_inschatting)}
           </p>
+          {!aanmelding.mail_verzonden_op && (
+            <p className="admin-toast admin-toast--warning mb-text">
+              De {aanmelding.match_beslissing === "ja" ? "uitnodigings" : "afwijzings"}mail is niet verstuurd. Neem
+              handmatig contact op met {aanmelding.naam} — deze beslissing kan niet opnieuw via het systeem worden
+              verstuurd.
+            </p>
+          )}
         </div>
       ) : (
         <BeoordelingForm id={aanmelding.id} naam={aanmelding.naam} />

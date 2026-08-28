@@ -33,15 +33,17 @@ export default function BeoordelingForm({ id, naam }: Props) {
         }),
       });
 
+      const data = await res.json().catch(() => null);
+
       if (!res.ok) {
-        const data = await res.json().catch(() => null);
         setFout(data?.error ?? "Er ging iets mis. Probeer het opnieuw.");
         setBezig(false);
         return;
       }
 
       const toast = matchBeslissing === "ja" ? "uitgenodigd" : "afgewezen";
-      router.push(`/dashboard/admin/aanmeldingen?toast=${toast}&naam=${encodeURIComponent(naam)}`);
+      const mail = data?.mail_verzonden ? "ok" : "mislukt";
+      router.push(`/dashboard/admin/aanmeldingen?toast=${toast}&mail=${mail}&naam=${encodeURIComponent(naam)}`);
     } catch {
       setFout("Er ging iets mis. Probeer het opnieuw.");
       setBezig(false);
