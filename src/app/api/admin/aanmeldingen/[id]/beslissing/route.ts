@@ -64,6 +64,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       to: aanmelding.email,
       replyTo: "docenten@privateyogaathome.nl",
       subject: email.subject,
+      html: email.html,
       text: email.text,
     });
     if (verstuurd.error) {
