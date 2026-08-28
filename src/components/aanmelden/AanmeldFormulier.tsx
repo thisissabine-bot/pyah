@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +18,13 @@ import {
 export default function AanmeldFormulier() {
   const [verzonden, setVerzonden] = useState(false);
   const [serverFout, setServerFout] = useState("");
+  const bevestigingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (verzonden) {
+      bevestigingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [verzonden]);
 
   const {
     register,
@@ -88,7 +95,7 @@ export default function AanmeldFormulier() {
 
   if (verzonden) {
     return (
-      <div>
+      <div ref={bevestigingRef}>
         <h3 className="heading-h3 mb-text">Bedankt voor je aanmelding!</h3>
         <p className="text-body">
           We hebben je aanmelding ontvangen en sturen je zo een bevestiging per e-mail. Je hoort meestal binnen 5 werkdagen van ons.
