@@ -42,8 +42,6 @@ export async function POST(request: Request) {
   }
 
   const regioLabel = REGIO_OPTIES.find((o) => o.value === values.regio)?.label ?? values.regio;
-  // TIJDELIJK — debug RESEND_API_KEY-mismatch t.o.v. /api/admin/aanmeldingen/[id]/beslissing, te verwijderen na diagnose.
-  console.log("[debug] RESEND_API_KEY laatste 4 tekens (aanmelden):", process.env.RESEND_API_KEY?.slice(-4) ?? "(leeg/undefined)");
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
