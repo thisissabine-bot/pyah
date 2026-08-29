@@ -1,5 +1,6 @@
 // E-mailteksten voor de match-beslissing op een docentaanmelding (CC-opdracht: Aanmeldingen-overzicht, Stap 2;
-// HTML-opmaak + handtekening toegevoegd via CC-opdracht: HTML e-mailsjabloon met handtekening, 28-08-2026).
+// HTML-opmaak + handtekening toegevoegd via CC-opdracht: HTML e-mailsjabloon met handtekening, 28-08-2026;
+// wachtlijstEmail() toegevoegd via CC-opdracht: Wachtlijst-optie, Stap 2, 29-08-2026).
 
 import { wrapEmailHtml } from "./emailLayout";
 
@@ -81,6 +82,32 @@ Sabine — Private Yoga at Home`,
         <p style="margin: 0 0 16px 0;">Bedankt voor je aanmelding en de tijd die je erin hebt gestoken. We hebben je gegevens met aandacht bekeken.</p>
         <p style="margin: 0 0 16px 0;">Op dit moment zien we helaas geen goede match tussen jouw profiel en waar we nu naar op zoek zijn binnen de pilot in de regio Haarlem.</p>
         <p style="margin: 0;">We wensen je alle goeds toe.</p>
+      `,
+    }),
+  };
+}
+
+export function wachtlijstEmail(naam: string) {
+  const voor = voornaam(naam);
+  return {
+    subject: "Je staat op de wachtlijst — Private Yoga at Home",
+    text: `Hoi ${voor},
+
+Bedankt voor je aanmelding bij Private Yoga at Home!
+
+We bewaren je aanmelding en nemen contact met je op zodra we uitbreiden naar
+een nieuwe regio.
+
+Heb je in de tussentijd vragen? Mail gerust naar docenten@privateyogaathome.nl.
+
+Hartelijke groet,
+Team Private Yoga at Home`,
+    html: wrapEmailHtml({
+      bodyHtml: `
+        <p style="margin: 0 0 16px 0;">Hoi ${escapeHtml(voor)},</p>
+        <p style="margin: 0 0 16px 0;">Bedankt voor je aanmelding bij Private Yoga at Home!</p>
+        <p style="margin: 0 0 16px 0;">We bewaren je aanmelding en nemen contact met je op zodra we uitbreiden naar een nieuwe regio.</p>
+        <p style="margin: 0;">Heb je in de tussentijd vragen? Mail gerust naar <a href="mailto:docenten@privateyogaathome.nl" style="color: #a66658;">docenten@privateyogaathome.nl</a>.</p>
       `,
     }),
   };

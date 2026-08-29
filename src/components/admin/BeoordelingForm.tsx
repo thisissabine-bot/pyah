@@ -15,7 +15,13 @@ export default function BeoordelingForm({ id, naam }: Props) {
   const [fout, setFout] = useState("");
   const [bezig, setBezig] = useState(false);
 
-  const beslis = async (matchBeslissing: "ja" | "nee") => {
+  const TOAST_PER_BESLISSING = {
+    ja: "uitgenodigd",
+    nee: "afgewezen",
+    wachtlijst: "wachtlijst",
+  } as const;
+
+  const beslis = async (matchBeslissing: "ja" | "nee" | "wachtlijst") => {
     setFout("");
     if (matchBeslissing === "ja" && !niveau) {
       setFout("Kies eerst een niveau-inschatting voordat je een uitnodiging verstuurt.");
@@ -41,7 +47,7 @@ export default function BeoordelingForm({ id, naam }: Props) {
         return;
       }
 
-      const toast = matchBeslissing === "ja" ? "uitgenodigd" : "afgewezen";
+      const toast = TOAST_PER_BESLISSING[matchBeslissing];
       const mail = data?.mail_verzonden ? "ok" : "mislukt";
       router.push(`/dashboard/admin/aanmeldingen?toast=${toast}&mail=${mail}&naam=${encodeURIComponent(naam)}`);
     } catch {
@@ -78,6 +84,9 @@ export default function BeoordelingForm({ id, naam }: Props) {
         </button>
         <button type="button" className="btn-dark-a" disabled={bezig} onClick={() => beslis("nee")}>
           {bezig ? "Bezig…" : "Geen match — afwijzen"}
+        </button>
+        <button type="button" className="btn-dark-b" disabled={bezig} onClick={() => beslis("wachtlijst")}>
+          {bezig ? "Bezig…" : "Wachtlijst"}
         </button>
       </div>
     </div>

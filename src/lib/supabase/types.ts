@@ -101,7 +101,7 @@ export interface Database {
           type: "docent" | "klant";
           verwerkt: boolean;
           niveau_inschatting: "startend" | "ervaren" | null;
-          match_beslissing: "ja" | "nee" | null;
+          match_beslissing: "ja" | "nee" | "wachtlijst" | null;
           beoordeeld_op: string | null;
           mail_verzonden_op: string | null;
           created_at: string;

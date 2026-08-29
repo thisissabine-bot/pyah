@@ -1,18 +1,21 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { createServerClient } from "@/lib/supabase/server";
-import { uitnodigingEmail, afwijzingEmail } from "@/lib/email/aanmeldingBeoordeling";
+import { uitnodigingEmail, afwijzingEmail, wachtlijstEmail } from "@/lib/email/aanmeldingBeoordeling";
 
 interface Body {
   niveau_inschatting?: "startend" | "ervaren";
-  match_beslissing?: "ja" | "nee";
+  match_beslissing?: "ja" | "nee" | "wachtlijst";
 }
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const body = (await request.json().catch(() => null)) as Body | null;
 
-  if (!body || (body.match_beslissing !== "ja" && body.match_beslissing !== "nee")) {
+  if (
+    !body ||
+    (body.match_beslissing !== "ja" && body.match_beslissing !== "nee" && body.match_beslissing !== "wachtlijst")
+  ) {
     return NextResponse.json({ error: "Ongeldige beslissing." }, { status: 400 });
   }
   if (body.niveau_inschatting !== undefined && body.niveau_inschatting !== "startend" && body.niveau_inschatting !== "ervaren") {
@@ -55,7 +58,12 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const email = body.match_beslissing === "ja" ? uitnodigingEmail(aanmelding.naam) : afwijzingEmail(aanmelding.naam);
+  const email =
+    body.match_beslissing === "ja"
+      ? uitnodigingEmail(aanmelding.naam)
+      : body.match_beslissing === "wachtlijst"
+        ? wachtlijstEmail(aanmelding.naam)
+        : afwijzingEmail(aanmelding.naam);
 
   let mailVerzonden = false;
   try {

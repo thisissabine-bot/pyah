@@ -7,11 +7,12 @@ export const NIVEAU_OPTIES = [
   { value: "ervaren", label: "Ervaren" },
 ] as const;
 
-export type StatusLabel = "Nieuw" | "Uitgenodigd" | "Afgewezen";
+export type StatusLabel = "Nieuw" | "Uitgenodigd" | "Afgewezen" | "Wachtlijst";
 
 export function statusLabel(aanmelding: Pick<Aanmelding, "verwerkt" | "match_beslissing">): StatusLabel {
   if (!aanmelding.verwerkt) return "Nieuw";
   if (aanmelding.match_beslissing === "ja") return "Uitgenodigd";
+  if (aanmelding.match_beslissing === "wachtlijst") return "Wachtlijst";
   return "Afgewezen";
 }
 
@@ -29,4 +30,15 @@ export function sorteerAanmeldingen<T extends Pick<Aanmelding, "verwerkt" | "cre
     .filter((row) => row.verwerkt)
     .sort((a, b) => (b.beoordeeld_op ?? "").localeCompare(a.beoordeeld_op ?? ""));
   return [...nietVerwerkt, ...verwerkt];
+}
+
+// Alfabetisch op woonplaats, ongeacht status — bedoeld om clusters van (vooral wachtlijst-)
+// aanmeldingen per plaats te herkennen. Overschrijft de standaard status-gebaseerde groepering
+// hierboven zolang deze sortering actief is (CC-opdracht: Wachtlijst-optie, Stap 2).
+export function sorteerOpWoonplaats<T extends Pick<Aanmelding, "woonplaats">>(
+  rows: T[],
+  richting: "asc" | "desc",
+): T[] {
+  const gesorteerd = [...rows].sort((a, b) => (a.woonplaats ?? "").localeCompare(b.woonplaats ?? "", "nl"));
+  return richting === "desc" ? gesorteerd.reverse() : gesorteerd;
 }

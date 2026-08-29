@@ -2117,6 +2117,18 @@ a:hover {
   padding: 10px 16px;
 }
 
+.admin-sort-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin-sort-link:hover {
+  text-decoration: underline;
+}
+
 .admin-aanmeldingen-cel-link {
   display: block;
   padding: 14px 16px;
@@ -2146,6 +2158,21 @@ a:hover {
 .admin-status-badge--nieuw       { background-color: #a66658; color: #ffffff; }
 .admin-status-badge--uitgenodigd { background-color: #484f47; color: #ffffff; }
 .admin-status-badge--afgewezen   { background-color: #ebe3e0; color: #260f09; }
+.admin-status-badge--wachtlijst  { background-color: #d4baad; color: #260f09; }
+
+.admin-badge-regio {
+  display: inline-block;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #a66658;
+  border: 1px solid #a66658;
+  padding: 1px 8px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
 
 .admin-detail-veld {
   display: flex;

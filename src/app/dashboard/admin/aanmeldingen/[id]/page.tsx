@@ -44,7 +44,10 @@ export default async function AanmeldingDetailPage({ params }: Props) {
         ← Terug naar overzicht
       </Link>
 
-      <h2 className="heading-h2 accent-terracotta mb-section">{aanmelding.naam}</h2>
+      <h2 className="heading-h2 accent-terracotta mb-section">
+        {aanmelding.naam}
+        {aanmelding.regio === "wachtlijst" && <span className="admin-badge-regio">Buiten regio</span>}
+      </h2>
 
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Persoonlijke gegevens</h3>
@@ -83,15 +86,24 @@ export default async function AanmeldingDetailPage({ params }: Props) {
               ? new Date(aanmelding.beoordeeld_op).toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" })
               : "—"}
             {" — "}
-            {aanmelding.match_beslissing === "ja" ? "Uitgenodigd" : "Afgewezen"}
+            {aanmelding.match_beslissing === "ja"
+              ? "Uitgenodigd"
+              : aanmelding.match_beslissing === "wachtlijst"
+                ? "Op wachtlijst"
+                : "Afgewezen"}
             {" — niveau: "}
             {niveauLabel(aanmelding.niveau_inschatting)}
           </p>
           {!aanmelding.mail_verzonden_op && (
             <p className="admin-toast admin-toast--warning mb-text">
-              De {aanmelding.match_beslissing === "ja" ? "uitnodigings" : "afwijzings"}mail is niet verstuurd. Neem
-              handmatig contact op met {aanmelding.naam} — deze beslissing kan niet opnieuw via het systeem worden
-              verstuurd.
+              De{" "}
+              {aanmelding.match_beslissing === "ja"
+                ? "uitnodigings"
+                : aanmelding.match_beslissing === "wachtlijst"
+                  ? "wachtlijst"
+                  : "afwijzings"}
+              mail is niet verstuurd. Neem handmatig contact op met {aanmelding.naam} — deze beslissing kan niet
+              opnieuw via het systeem worden verstuurd.
             </p>
           )}
         </div>

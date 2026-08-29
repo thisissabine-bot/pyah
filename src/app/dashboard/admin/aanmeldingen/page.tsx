@@ -1,30 +1,46 @@
 import Link from "next/link";
 import { createServerClient } from "@/lib/supabase/server";
-import { sorteerAanmeldingen, statusLabel } from "@/lib/aanmeldingenBeoordeling";
+import { sorteerAanmeldingen, sorteerOpWoonplaats, statusLabel } from "@/lib/aanmeldingenBeoordeling";
 
 interface Props {
-  searchParams: Promise<{ toast?: string; mail?: string; naam?: string }>;
+  searchParams: Promise<{ toast?: string; mail?: string; naam?: string; sort?: string; dir?: string }>;
 }
 
+const TOAST_BERICHTEN: Record<string, { ok: (naam: string) => string; mislukt: (naam: string) => string }> = {
+  uitgenodigd: {
+    ok: (naam) => `Uitnodiging verstuurd naar ${naam}.`,
+    mislukt: (naam) => `Beslissing opgeslagen, maar de uitnodigingsmail kon niet worden verstuurd naar ${naam}.`,
+  },
+  afgewezen: {
+    ok: (naam) => `Afwijzing verstuurd naar ${naam}.`,
+    mislukt: (naam) => `Beslissing opgeslagen, maar de afwijzingsmail kon niet worden verstuurd naar ${naam}.`,
+  },
+  wachtlijst: {
+    ok: (naam) => `${naam} is op de wachtlijst gezet en de bevestigingsmail is verstuurd.`,
+    mislukt: (naam) => `Beslissing opgeslagen, maar de wachtlijstmail kon niet worden verstuurd naar ${naam}.`,
+  },
+};
+
 export default async function AanmeldingenOverzichtPage({ searchParams }: Props) {
-  const { toast, mail, naam } = await searchParams;
+  const { toast, mail, naam, sort, dir } = await searchParams;
   const supabase = createServerClient();
 
   const { data } = await supabase
     .from("aanmeldingen")
-    .select("id, naam, woonplaats, created_at, verwerkt, match_beslissing, beoordeeld_op")
+    .select("id, naam, woonplaats, created_at, verwerkt, match_beslissing, beoordeeld_op, regio")
     .eq("type", "docent");
 
-  const rows = sorteerAanmeldingen(data ?? []);
+  const woonplaatsRichting = sort === "woonplaats" ? (dir === "desc" ? "desc" : "asc") : null;
+  const rows = woonplaatsRichting
+    ? sorteerOpWoonplaats(data ?? [], woonplaatsRichting)
+    : sorteerAanmeldingen(data ?? []);
+
+  const woonplaatsSortHref = `/dashboard/admin/aanmeldingen?sort=woonplaats&dir=${woonplaatsRichting === "asc" ? "desc" : "asc"}`;
+  const woonplaatsSortIndicator = woonplaatsRichting === "asc" ? " ↑" : woonplaatsRichting === "desc" ? " ↓" : "";
 
   const mailMislukt = mail === "mislukt";
-  const beslissingLabel = toast === "uitgenodigd" ? "uitnodiging" : toast === "afgewezen" ? "afwijzing" : null;
-  const toastTekst =
-    beslissingLabel && mailMislukt
-      ? `Beslissing opgeslagen, maar de ${beslissingLabel}smail kon niet worden verstuurd naar ${naam ?? "de docent"}.`
-      : beslissingLabel
-        ? `${beslissingLabel === "uitnodiging" ? "Uitnodiging" : "Afwijzing"} verstuurd naar ${naam ?? "de docent"}.`
-        : null;
+  const bericht = toast ? TOAST_BERICHTEN[toast] : undefined;
+  const toastTekst = bericht ? (mailMislukt ? bericht.mislukt : bericht.ok)(naam ?? "de docent") : null;
 
   return (
     <div className="container page-section">
@@ -42,7 +58,11 @@ export default async function AanmeldingenOverzichtPage({ searchParams }: Props)
             <thead>
               <tr>
                 <th>Naam</th>
-                <th>Woonplaats</th>
+                <th>
+                  <Link className="admin-sort-link" href={woonplaatsSortHref}>
+                    Woonplaats{woonplaatsSortIndicator}
+                  </Link>
+                </th>
                 <th>Datum aanmelding</th>
                 <th>Status</th>
               </tr>
@@ -61,6 +81,7 @@ export default async function AanmeldingenOverzichtPage({ searchParams }: Props)
                     <td>
                       <Link className="admin-aanmeldingen-cel-link" href={href}>
                         {row.woonplaats ?? "—"}
+                        {row.regio === "wachtlijst" && <span className="admin-badge-regio">Buiten regio</span>}
                       </Link>
                     </td>
                     <td>
