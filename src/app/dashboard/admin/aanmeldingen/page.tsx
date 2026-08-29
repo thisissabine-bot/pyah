@@ -2,6 +2,11 @@ import Link from "next/link";
 import { createServerClient } from "@/lib/supabase/server";
 import { sorteerAanmeldingen, sorteerOpWoonplaats, statusLabel } from "@/lib/aanmeldingenBeoordeling";
 
+// Voorkomt dat Netlify's durable/edge-cache een eerder gerenderde snapshot van dit overzicht
+// blijft serveren nadat de status/data van een aanmelding is gewijzigd.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 interface Props {
   searchParams: Promise<{ toast?: string; mail?: string; naam?: string; sort?: string; dir?: string }>;
 }

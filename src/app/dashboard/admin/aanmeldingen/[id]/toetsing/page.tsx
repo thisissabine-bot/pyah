@@ -4,6 +4,11 @@ import { createServerClient } from "@/lib/supabase/server";
 import { REGIO_OPTIES } from "@/lib/aanmeldformulier";
 import ToetsingForm from "@/components/admin/ToetsingForm";
 
+// Voorkomt dat Netlify's durable/edge-cache een eerder gerenderde snapshot van deze toetsing
+// blijft serveren nadat het formulier is opgeslagen.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 interface Props {
   params: Promise<{ id: string }>;
 }

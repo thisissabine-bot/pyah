@@ -5,6 +5,12 @@ import { REGIO_OPTIES } from "@/lib/aanmeldformulier";
 import { niveauLabel } from "@/lib/aanmeldingenBeoordeling";
 import BeoordelingForm from "@/components/admin/BeoordelingForm";
 
+// Voorkomt dat Netlify's durable/edge-cache een eerder gerenderde snapshot van een specifieke
+// aanmelding blijft serveren nadat de status/data is gewijzigd (bijv. na een nieuwe deploy of
+// na een beslissing) — deze pagina moet altijd verse data tonen.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 interface Props {
   params: Promise<{ id: string }>;
 }
