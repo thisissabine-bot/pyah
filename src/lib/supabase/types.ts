@@ -119,6 +119,40 @@ export interface Database {
         Update: Partial<Database["public"]["Tables"]["aanmeldingen"]["Insert"]>;
         Relationships: [];
       };
+      toetsingen: {
+        Row: {
+          id: string;
+          aanmelding_id: string;
+          datum_gesprek: string | null;
+          geboortedatum: string | null;
+          kvk_nummer: string | null;
+          verzekering_geldig_tot: string | null;
+          niveau_definitief: "startend" | "ervaren" | null;
+          opleiding_in_orde: boolean | null;
+          verzekering_in_orde: boolean | null;
+          certificaten_besproken: boolean | null;
+          ytt_200u_in_orde: "ja" | "nee" | "twijfel" | null;
+          geschikt_1op1: "ja" | "nee" | "twijfel" | null;
+          regio_passend: "ja" | "nee" | "twijfel" | null;
+          houding_passend_pyah: "ja" | "nee" | "twijfel" | null;
+          veiligheid_professionaliteit: "ja" | "nee" | "twijfel" | null;
+          community_gevoel: "ja" | "nee" | "twijfel" | null;
+          intuitieve_match: "ja" | "nee" | "twijfel" | null;
+          checklist_opmerkingen: string | null;
+          praktisch_professioneel: string | null;
+          vakinhoudelijk: string | null;
+          geschiktheid_1op1_toelichting: string | null;
+          houding_cultuur: string | null;
+          energie_intuitie: string | null;
+          ingevuld_door: string;
+          extra_notities: string | null;
+          updated_at: string;
+        };
+        Insert: Omit<Database["public"]["Tables"]["toetsingen"]["Row"], "id" | "updated_at"> &
+          Partial<Pick<Database["public"]["Tables"]["toetsingen"]["Row"], "id" | "updated_at">>;
+        Update: Partial<Database["public"]["Tables"]["toetsingen"]["Insert"]>;
+        Relationships: [];
+      };
       uitbetalingen: {
         Row: {
           id: string;

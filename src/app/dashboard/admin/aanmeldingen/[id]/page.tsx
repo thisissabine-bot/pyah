@@ -81,7 +81,7 @@ export default async function AanmeldingDetailPage({ params }: Props) {
 
       {aanmelding.verwerkt ? (
         <div className="admin-samenvatting">
-          <p className="text-body">
+          <p className="text-body mb-text">
             Beoordeeld op {aanmelding.beoordeeld_op
               ? new Date(aanmelding.beoordeeld_op).toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" })
               : "—"}
@@ -105,6 +105,13 @@ export default async function AanmeldingDetailPage({ params }: Props) {
               mail is niet verstuurd. Neem handmatig contact op met {aanmelding.naam} — deze beslissing kan niet
               opnieuw via het systeem worden verstuurd.
             </p>
+          )}
+          {aanmelding.match_beslissing === "ja" && (
+            <div className="btn-row">
+              <Link className="btn-dark-b" href={`/dashboard/admin/aanmeldingen/${aanmelding.id}/toetsing`}>
+                Toetsingsdocument invullen/bekijken
+              </Link>
+            </div>
           )}
         </div>
       ) : (
