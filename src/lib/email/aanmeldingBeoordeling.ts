@@ -4,8 +4,8 @@
 
 import { wrapEmailHtml } from "./emailLayout";
 
-// De Calendly-link staat nog niet vast — één plek, eenvoudig aan te passen zodra bekend.
-export const CALENDLY_LINK_PLACEHOLDER = "#"; // TODO: vervangen zodra Calendly-link bekend is
+// Eén plek, eenvoudig aan te passen mocht de link ooit wijzigen.
+export const CALENDLY_LINK_PLACEHOLDER = "https://calendly.com/privateyogaathome-info/30min?back=1&month=2026-08";
 
 function voornaam(naam: string): string {
   return naam.trim().split(/\s+/)[0] ?? naam;
@@ -50,7 +50,7 @@ Sabine — Private Yoga at Home`,
         <p style="margin: 0 0 16px 0;">Graag plannen we een kort online kennismakingsgesprek. Daarin bespreken we onder andere je ervaring, de abonnementsvorm en of het van beide kanten voelt als een match.</p>
         <p style="margin: 0 0 8px 0;">Plan hier je gesprek in:</p>
         <p style="margin: 0 0 16px 0;">
-          <a href="${CALENDLY_LINK_PLACEHOLDER}" style="background-color: #a66658; color: #ffffff; padding: 12px 24px; text-decoration: none; display: inline-block; font-family: Arial, Helvetica, sans-serif; font-size: 15px;">Plan je kennismakingsgesprek</a>
+          <a href="${escapeHtml(CALENDLY_LINK_PLACEHOLDER)}" style="background-color: #a66658; color: #ffffff; padding: 12px 24px; text-decoration: none; display: inline-block; font-family: Arial, Helvetica, sans-serif; font-size: 15px;">Plan je kennismakingsgesprek</a>
         </p>
         <p style="margin: 0 0 16px 0;">Mochten deze data voor jou niet goed uitkomen, mail me dan gerust met nieuwe data.</p>
         <p style="margin: 0 0 16px 0;">Heb je vooraf vragen? Mail gerust naar <a href="mailto:docenten@privateyogaathome.nl" style="color: #a66658;">docenten@privateyogaathome.nl</a>.</p>
