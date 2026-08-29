@@ -23,6 +23,15 @@ CREATE TABLE docenten (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ⚠️ OPEN BOUWPUNT — verplicht certificaten-uploadveld bij docentprofiel (nog niet gebouwd)
+-- Net als avb_document_url (verplicht AVB-bewijs vóór livegang) moet een docentprofiel
+-- ook niet live kunnen gaan zonder geüpload bewijs van yoga-certificering.
+-- Voorstel: kolom certificaat_document_url TEXT toevoegen aan de tabel docenten,
+-- met dezelfde regel als avb_document_url: geen upload → profiel kan niet live.
+-- Certificaten worden tijdens het kennismakingsgesprek (Stap 3) alleen besproken,
+-- niet geverifieerd — verificatie/bewijs volgt pas bij het aanmaken van het profiel.
+-- Relevant zodra de profielaanmaak-flow (Fase 4) gebouwd wordt.
+
 -- Tarieven per docent (losse lessen)
 -- Elke docent heeft maximaal 3 rijen: introductieles (altijd 75 min) + losse les 60 min + losse les 75 min
 CREATE TABLE tarieven (
