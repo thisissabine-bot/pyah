@@ -96,7 +96,7 @@ export function wachtlijstEmail(naam: string) {
 Bedankt voor je aanmelding bij Private Yoga at Home!
 
 We bewaren je aanmelding en nemen contact met je op zodra we uitbreiden naar
-een nieuwe regio.
+jouw regio.
 
 Heb je in de tussentijd vragen? Mail gerust naar docenten@privateyogaathome.nl.
 
@@ -106,7 +106,7 @@ Team Private Yoga at Home`,
       bodyHtml: `
         <p style="margin: 0 0 16px 0;">Hoi ${escapeHtml(voor)},</p>
         <p style="margin: 0 0 16px 0;">Bedankt voor je aanmelding bij Private Yoga at Home!</p>
-        <p style="margin: 0 0 16px 0;">We bewaren je aanmelding en nemen contact met je op zodra we uitbreiden naar een nieuwe regio.</p>
+        <p style="margin: 0 0 16px 0;">We bewaren je aanmelding en nemen contact met je op zodra we uitbreiden naar jouw regio.</p>
         <p style="margin: 0;">Heb je in de tussentijd vragen? Mail gerust naar <a href="mailto:docenten@privateyogaathome.nl" style="color: #a66658;">docenten@privateyogaathome.nl</a>.</p>
       `,
     }),
