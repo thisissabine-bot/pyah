@@ -85,19 +85,13 @@ CREATE TABLE aanmeldingen (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ⚠️ OPEN BOUWPUNT — schema-uitbreiding `aanmeldingen` (nog niet gebouwd)
--- De definitieve paginatekst van /voor-docenten/aanmelden (PYAH_Aanmeldformulier_definitief.docx)
--- bevat een aantal velden en verklaringen die nog niet in dit schema staan:
---   - yogastijlen (welke yogastijlen geef je?)
---   - andere_disciplines (ademwerk, meditatie, sound healing, coaching, workshops)
---   - motivatie (waarom wil je je aansluiten bij Private Yoga at Home?)
---   - toelichting (vrij tekstveld — "is er nog iets dat je met ons wilt delen?")
---   - akkoord_erkende_opleiding, akkoord_regio_pilot, akkoord_wachtlijst,
---     akkoord_geen_garantie, akkoord_avb, akkoord_privacyverklaring (verklaringen-checkboxes)
--- De pagina zelf wordt vooralsnog als statische/visuele UI gebouwd (geen submit-logica),
--- omdat livegang nog niet aan de orde is. Deze schema-uitbreiding + het functioneel maken
--- van het formulier (submit-verwerking) volgt pas zodra de backend-fase (Supabase/Mollie)
--- weer opgepakt wordt, na afronding van het traject met de belastingadviseur.
+-- ✅ OPGELOST (was hier: "OPEN BOUWPUNT — schema-uitbreiding aanmeldingen, nog niet gebouwd").
+-- Het aanmeldformulier is sinds 21-08-2026 (v1.29) functioneel; de destijds ontbrekende velden
+-- en verklaringen (yogastijlen, andere_disciplines, motivatie, toelichting, regio, de vier
+-- akkoord_*-verklaringen) zijn toen rechtstreeks via de SQL Editor toegevoegd, zonder
+-- bijbehorend migratiebestand. Met terugwerkende kracht vastgelegd in
+-- 20260829120000_aanmeldingen_historische_inhaalslag.sql (29-08-2026), geverifieerd tegen de
+-- daadwerkelijke live database.
 
 -- Row Level Security inschakelen
 ALTER TABLE docenten ENABLE ROW LEVEL SECURITY;
