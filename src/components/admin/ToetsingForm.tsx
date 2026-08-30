@@ -336,6 +336,18 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
         {ENERGIE_ITEMS.map((item) => vrijTekstveld(item.veld, item.label))}
       </div>
 
+      <div className="form-fieldset">
+        <div className="form-group">
+          <label className="form-label" htmlFor="extra_notities">Extra notities</label>
+          <textarea
+            className="form-textarea form-textarea--klein"
+            id="extra_notities"
+            value={waarden.extra_notities}
+            onChange={(e) => zet("extra_notities", e.target.value)}
+          />
+        </div>
+      </div>
+
       {/* 5. Vaste referentietekst */}
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Referentie — Startend / Ervaren</h3>
@@ -383,16 +395,6 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
             id="ingevuld_door"
             value={waarden.ingevuld_door}
             onChange={(e) => zet("ingevuld_door", e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="extra_notities">Extra notities</label>
-          <textarea
-            className="form-textarea form-textarea--klein"
-            id="extra_notities"
-            value={waarden.extra_notities}
-            onChange={(e) => zet("extra_notities", e.target.value)}
           />
         </div>
       </div>
