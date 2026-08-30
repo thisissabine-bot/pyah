@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { NIVEAU_OPTIES } from "@/lib/aanmeldingenBeoordeling";
 
 type JaNeeTwijfel = "" | "ja" | "nee" | "twijfel";
@@ -399,9 +400,17 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
       {fout && <p className="form-error mb-text">{fout}</p>}
       {opgeslagen && <p className="admin-toast mb-text">Toetsing opgeslagen.</p>}
 
-      <button type="button" className="btn-light" disabled={bezig} onClick={opslaan}>
-        {bezig ? "Bezig…" : "Opslaan"}
-      </button>
+      <div className="btn-row">
+        <button type="button" className="btn-light" disabled={bezig} onClick={opslaan}>
+          {bezig ? "Bezig…" : "Opslaan"}
+        </button>
+        <Link className="btn-dark-a" href={`/dashboard/admin/aanmeldingen/${aanmeldingId}`}>
+          ← Terug naar aanmelding
+        </Link>
+        <Link className="btn-dark-b" href="/dashboard/admin/aanmeldingen">
+          ← Terug naar overzicht
+        </Link>
+      </div>
     </div>
   );
 }
