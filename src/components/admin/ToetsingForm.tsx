@@ -151,27 +151,11 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
     }
   };
 
-  const jaNeeTwijfelRadio = (veld: keyof ToetsingWaarden, huidigeWaarde: string) => (
-    <>
-      {(["ja", "nee", "twijfel"] as const).map((optie) => (
-        <label className="form-radio-row" key={optie}>
-          <input
-            type="radio"
-            name={veld}
-            checked={huidigeWaarde === optie}
-            onChange={() => zet(veld, optie as never)}
-          />
-          <span className="text-body">{optie === "ja" ? "Ja" : optie === "nee" ? "Nee" : "Twijfel"}</span>
-        </label>
-      ))}
-    </>
-  );
-
   const vrijTekstveld = (veld: keyof ToetsingWaarden, label: string) => (
     <div className="form-group" key={veld}>
       <label className="form-label" htmlFor={veld}>{label}</label>
       <textarea
-        className="form-textarea"
+        className="form-textarea form-textarea--klein"
         id={veld}
         value={waarden[veld] as string}
         onChange={(e) => zet(veld, e.target.value as never)}
@@ -185,86 +169,92 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Basisgegevens</h3>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="datum_gesprek">Datum gesprek</label>
-          <input
-            className="form-input"
-            type="date"
-            id="datum_gesprek"
-            value={waarden.datum_gesprek}
-            onChange={(e) => zet("datum_gesprek", e.target.value)}
-          />
-        </div>
+        <div className="toetsing-basisgegevens-grid">
+          <div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="datum_gesprek">Datum gesprek</label>
+              <input
+                className="form-input"
+                type="date"
+                id="datum_gesprek"
+                value={waarden.datum_gesprek}
+                onChange={(e) => zet("datum_gesprek", e.target.value)}
+              />
+            </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="geboortedatum">Geboortedatum</label>
-          <input
-            className="form-input"
-            type="date"
-            id="geboortedatum"
-            value={waarden.geboortedatum}
-            onChange={(e) => zet("geboortedatum", e.target.value)}
-          />
-        </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="geboortedatum">Geboortedatum</label>
+              <input
+                className="form-input"
+                type="date"
+                id="geboortedatum"
+                value={waarden.geboortedatum}
+                onChange={(e) => zet("geboortedatum", e.target.value)}
+              />
+            </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="kvk_nummer">KvK-nummer</label>
-          <input
-            className="form-input"
-            type="text"
-            id="kvk_nummer"
-            value={waarden.kvk_nummer}
-            onChange={(e) => zet("kvk_nummer", e.target.value)}
-          />
-        </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="kvk_nummer">KvK-nummer</label>
+              <input
+                className="form-input"
+                type="text"
+                id="kvk_nummer"
+                value={waarden.kvk_nummer}
+                onChange={(e) => zet("kvk_nummer", e.target.value)}
+              />
+            </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="kor_van_toepassing_per">KOR van toepassing per</label>
-          <input
-            className="form-input"
-            type="date"
-            id="kor_van_toepassing_per"
-            value={waarden.kor_van_toepassing_per}
-            onChange={(e) => zet("kor_van_toepassing_per", e.target.value)}
-          />
-        </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="niveau_definitief">Niveau (definitief)</label>
+              <select
+                className="form-select"
+                id="niveau_definitief"
+                value={waarden.niveau_definitief}
+                onChange={(e) => zet("niveau_definitief", e.target.value as ToetsingWaarden["niveau_definitief"])}
+              >
+                <option value="">Nog niet bepaald</option>
+                {NIVEAU_OPTIES.map((optie) => (
+                  <option key={optie.value} value={optie.value}>{optie.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="kor_verdiend_euro">KOR verdiend tot nu toe (€)</label>
-          <input
-            className="form-input"
-            type="text"
-            inputMode="decimal"
-            id="kor_verdiend_euro"
-            value={waarden.kor_verdiend_euro}
-            onChange={(e) => zet("kor_verdiend_euro", e.target.value)}
-          />
-        </div>
+          <div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="verzekering_geldig_tot">Verzekering geldig tot</label>
+              <input
+                className="form-input"
+                type="date"
+                id="verzekering_geldig_tot"
+                value={waarden.verzekering_geldig_tot}
+                onChange={(e) => zet("verzekering_geldig_tot", e.target.value)}
+              />
+            </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="verzekering_geldig_tot">Verzekering geldig tot</label>
-          <input
-            className="form-input"
-            type="date"
-            id="verzekering_geldig_tot"
-            value={waarden.verzekering_geldig_tot}
-            onChange={(e) => zet("verzekering_geldig_tot", e.target.value)}
-          />
-        </div>
+            <div className="form-group">
+              <label className="form-label" htmlFor="kor_van_toepassing_per">KOR van toepassing per</label>
+              <input
+                className="form-input"
+                type="date"
+                id="kor_van_toepassing_per"
+                value={waarden.kor_van_toepassing_per}
+                onChange={(e) => zet("kor_van_toepassing_per", e.target.value)}
+              />
+            </div>
 
-        <div className="form-group">
-          <label className="form-label" htmlFor="niveau_definitief">Niveau (definitief)</label>
-          <select
-            className="form-select"
-            id="niveau_definitief"
-            value={waarden.niveau_definitief}
-            onChange={(e) => zet("niveau_definitief", e.target.value as ToetsingWaarden["niveau_definitief"])}
-          >
-            <option value="">Nog niet bepaald</option>
-            {NIVEAU_OPTIES.map((optie) => (
-              <option key={optie.value} value={optie.value}>{optie.label}</option>
-            ))}
-          </select>
+            <div className="form-group">
+              <label className="form-label" htmlFor="kor_verdiend_euro">KOR verdiend tot nu toe (€)</label>
+              <input
+                className="form-input"
+                type="text"
+                inputMode="decimal"
+                id="kor_verdiend_euro"
+                value={waarden.kor_verdiend_euro}
+                onChange={(e) => zet("kor_verdiend_euro", e.target.value)}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -285,12 +275,38 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Checklist</h3>
 
-        {CHECKLIST_ITEMS.map((item) => (
-          <div className="form-group" key={item.veld}>
-            <p className="form-label">{item.label}</p>
-            {jaNeeTwijfelRadio(item.veld, waarden[item.veld] as string)}
-          </div>
-        ))}
+        <div className="admin-aanmeldingen-tabel-wrapper mb-section">
+          <table className="admin-aanmeldingen-tabel admin-checklist-tabel">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Ja</th>
+                <th>Nee</th>
+                <th>Twijfel</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CHECKLIST_ITEMS.map((item, index) => (
+                <tr
+                  key={item.veld}
+                  className={`admin-aanmeldingen-rij ${index % 2 === 0 ? "admin-aanmeldingen-rij-a" : "admin-aanmeldingen-rij-b"}`}
+                >
+                  <td>{item.label}</td>
+                  {(["ja", "nee", "twijfel"] as const).map((optie) => (
+                    <td className="admin-checklist-radio-cel" key={optie}>
+                      <input
+                        type="radio"
+                        name={item.veld}
+                        checked={waarden[item.veld] === optie}
+                        onChange={() => zet(item.veld, optie as never)}
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <div className="form-group">
           <label className="form-label" htmlFor="checklist_opmerkingen">Opmerkingen/aandachtspunten</label>

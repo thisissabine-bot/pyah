@@ -42,7 +42,7 @@ export default async function ToetsingPage({ params }: Props) {
       </Link>
 
       <h2 className="heading-h2 accent-terracotta mb-text">Toetsingsdocument — {aanmelding.naam}</h2>
-      <p className="text-body mb-section">{aanmelding.woonplaats ?? "—"}</p>
+      <h3 className="heading-h3 mb-section">{aanmelding.woonplaats ?? "—"}</h3>
 
       <ToetsingForm
         aanmeldingId={id}
