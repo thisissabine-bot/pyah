@@ -3,22 +3,29 @@
 import { useState } from "react";
 import { NIVEAU_OPTIES } from "@/lib/aanmeldingenBeoordeling";
 
-type JaNee = "" | "ja" | "nee";
 type JaNeeTwijfel = "" | "ja" | "nee" | "twijfel";
 
-export interface ToetsingWaarden {
+export interface DocentAntwoorden {
   opleiding: string;
+  trainingsuren: string;
+  jaren_leservaring: string;
+  recente_lespraktijk: string;
+  ervaring_privelessen: string;
   yogastijlen: string;
   andere_disciplines: string;
+}
+
+export interface ToetsingWaarden {
   niveau_definitief: "" | "startend" | "ervaren";
   datum_gesprek: string;
   geboortedatum: string;
   kvk_nummer: string;
+  kor_van_toepassing_per: string;
+  kor_verdiend_euro: string;
   verzekering_geldig_tot: string;
-  opleiding_in_orde: JaNee;
-  verzekering_in_orde: JaNee;
-  certificaten_besproken: JaNee;
+
   ytt_200u_in_orde: JaNeeTwijfel;
+  verzekering_in_orde: JaNeeTwijfel;
   geschikt_1op1: JaNeeTwijfel;
   regio_passend: JaNeeTwijfel;
   houding_passend_pyah: JaNeeTwijfel;
@@ -26,22 +33,35 @@ export interface ToetsingWaarden {
   community_gevoel: JaNeeTwijfel;
   intuitieve_match: JaNeeTwijfel;
   checklist_opmerkingen: string;
-  praktisch_professioneel: string;
-  vakinhoudelijk: string;
-  geschiktheid_1op1_toelichting: string;
-  houding_cultuur: string;
-  energie_intuitie: string;
+
+  vak_intake_ervaring: string;
+  vak_werkwijze_verwoorden: string;
+  vak_grenzen_doorverwijzing: string;
+  vak_rust_aandacht: string;
+  vak_veilig_zonder_groep: string;
+  vak_flexibiliteit: string;
+  vak_certificering_vs_ervaring: string;
+  houding_feedback_ontwikkeling: string;
+  houding_samenwerkingsstructuur: string;
+  houding_community_bereidheid: string;
+  houding_respect_platform: string;
+  energie_gelijkwaardig_zuiver: string;
+  energie_samenwerken_niet_halen: string;
+  energie_aanraden_dierbare: string;
+
   ingevuld_door: string;
   extra_notities: string;
 }
 
 interface Props {
   aanmeldingId: string;
+  docentAntwoorden: DocentAntwoorden;
   initieel: ToetsingWaarden;
 }
 
 const CHECKLIST_ITEMS: { veld: keyof ToetsingWaarden; label: string }[] = [
   { veld: "ytt_200u_in_orde", label: "YTT 200u in orde" },
+  { veld: "verzekering_in_orde", label: "Verzekering in orde" },
   { veld: "geschikt_1op1", label: "1-op-1 geschikt" },
   { veld: "regio_passend", label: "Regio passend" },
   { veld: "houding_passend_pyah", label: "Houding passend bij PYAH" },
@@ -50,40 +70,44 @@ const CHECKLIST_ITEMS: { veld: keyof ToetsingWaarden; label: string }[] = [
   { veld: "intuitieve_match", label: "Intuïtieve match" },
 ];
 
-const VERDIEPING_ITEMS: { veld: keyof ToetsingWaarden; label: string; placeholder: string }[] = [
+const DOCENT_ANTWOORD_VELDEN: { veld: keyof DocentAntwoorden; label: string }[] = [
+  { veld: "opleiding", label: "Welk erkend opleidingsinstituut?" },
+  { veld: "trainingsuren", label: "Hoeveel trainingsuren?" },
+  { veld: "jaren_leservaring", label: "Hoeveel jaar geef je yogales?" },
+  { veld: "recente_lespraktijk", label: "Actief lesgegeven laatste 6–12 maanden?" },
+  { veld: "ervaring_privelessen", label: "Ervaring met privélessen aan huis?" },
+  { veld: "yogastijlen", label: "Welke yogastijlen?" },
+  { veld: "andere_disciplines", label: "Extra disciplines?" },
+];
+
+const VAKINHOUDELIJK_ITEMS: { veld: keyof ToetsingWaarden; label: string }[] = [
+  { veld: "vak_intake_ervaring", label: "Heeft de docent ervaring met intakegesprekken?" },
+  { veld: "vak_werkwijze_verwoorden", label: "Kan de docent zijn/haar werkwijze helder verwoorden?" },
+  { veld: "vak_grenzen_doorverwijzing", label: "Is er bewustzijn van eigen grenzen en doorverwijzing waar nodig?" },
+  { veld: "vak_rust_aandacht", label: "Is er rust, aanwezigheid en aandacht in contact?" },
+  { veld: "vak_veilig_zonder_groep", label: "Kan de docent veilig werken zonder vaste groepsstructuur?" },
+  { veld: "vak_flexibiliteit", label: "Is er flexibiliteit in het aanpassen van lessen op het moment zelf?" },
   {
-    veld: "praktisch_professioneel",
-    label: "Praktisch & professioneel",
-    placeholder:
-      "Komt de docent administratief betrouwbaar over (reactietijd, volledigheid, helderheid in communicatie)? Is de beschikbaarheid realistisch en passend bij de regio?",
-  },
-  {
-    veld: "vakinhoudelijk",
-    label: "Vakinhoudelijk",
-    placeholder:
+    veld: "vak_certificering_vs_ervaring",
+    label:
       "Van welke opgegeven yogastijlen heeft de docent een formele certificering, en welke worden gegeven op basis van ervaring/eigen beoefening zonder certificering? Is dat onderscheid besproken en voelt het verantwoord?",
-  },
-  {
-    veld: "geschiktheid_1op1_toelichting",
-    label: "1-op-1 geschiktheid",
-    placeholder:
-      "Is er rust, aanwezigheid en aandacht in het contact? Kan de docent veilig werken zonder vaste groepsstructuur? Is er flexibiliteit om lessen op het moment zelf aan te passen?",
-  },
-  {
-    veld: "houding_cultuur",
-    label: "Houding & cultuur",
-    placeholder:
-      "Staat de docent open voor feedback en ontwikkeling? Voelt de docent zich comfortabel in een samenwerkingsstructuur? Is er bereidheid om onderdeel te zijn van een community, en respect voor het platform, de afspraken en de gezamenlijke visie?",
-  },
-  {
-    veld: "energie_intuitie",
-    label: "Energie/intuïtieve check",
-    placeholder:
-      "Voelt het gesprek gelijkwaardig en zuiver, als samenwerken in plaats van 'iets halen'? Zou ik deze docent met vertrouwen bij een dierbare aanraden?",
   },
 ];
 
-export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
+const HOUDING_ITEMS: { veld: keyof ToetsingWaarden; label: string }[] = [
+  { veld: "houding_feedback_ontwikkeling", label: "Staat de docent open voor feedback en ontwikkeling?" },
+  { veld: "houding_samenwerkingsstructuur", label: "Voelt de docent zich comfortabel in een samenwerkingsstructuur?" },
+  { veld: "houding_community_bereidheid", label: "Is er bereidheid om onderdeel te zijn van een community?" },
+  { veld: "houding_respect_platform", label: "Is er respect voor het platform, de afspraken en de gezamenlijke visie?" },
+];
+
+const ENERGIE_ITEMS: { veld: keyof ToetsingWaarden; label: string }[] = [
+  { veld: "energie_gelijkwaardig_zuiver", label: "Voelt het gesprek gelijkwaardig en zuiver?" },
+  { veld: "energie_samenwerken_niet_halen", label: "Voelt het als samenwerken, niet als 'iets halen'?" },
+  { veld: "energie_aanraden_dierbare", label: "Zou ik deze docent met vertrouwen bij een dierbare aanraden?" },
+];
+
+export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel }: Props) {
   const [waarden, setWaarden] = useState<ToetsingWaarden>(initieel);
   const [bezig, setBezig] = useState(false);
   const [fout, setFout] = useState("");
@@ -97,6 +121,10 @@ export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
   const opslaan = async () => {
     setFout("");
     setBezig(true);
+
+    const euroInput = waarden.kor_verdiend_euro.trim().replace(",", ".");
+    const koorVerdiendCent = euroInput === "" ? null : Math.round(parseFloat(euroInput) * 100);
+
     try {
       const res = await fetch(`/api/admin/aanmeldingen/${aanmeldingId}/toetsing`, {
         method: "POST",
@@ -104,9 +132,7 @@ export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
         body: JSON.stringify({
           ...waarden,
           niveau_definitief: waarden.niveau_definitief || null,
-          opleiding_in_orde: waarden.opleiding_in_orde === "" ? null : waarden.opleiding_in_orde === "ja",
-          verzekering_in_orde: waarden.verzekering_in_orde === "" ? null : waarden.verzekering_in_orde === "ja",
-          certificaten_besproken: waarden.certificaten_besproken === "" ? null : waarden.certificaten_besproken === "ja",
+          kor_verdiend_cent: Number.isNaN(koorVerdiendCent) ? null : koorVerdiendCent,
         }),
       });
 
@@ -141,78 +167,21 @@ export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
     </>
   );
 
-  const jaNeeRadio = (veld: keyof ToetsingWaarden, huidigeWaarde: string) => (
-    <>
-      {(["ja", "nee"] as const).map((optie) => (
-        <label className="form-radio-row" key={optie}>
-          <input
-            type="radio"
-            name={veld}
-            checked={huidigeWaarde === optie}
-            onChange={() => zet(veld, optie as never)}
-          />
-          <span className="text-body">{optie === "ja" ? "Ja" : "Nee"}</span>
-        </label>
-      ))}
-    </>
+  const vrijTekstveld = (veld: keyof ToetsingWaarden, label: string) => (
+    <div className="form-group" key={veld}>
+      <label className="form-label" htmlFor={veld}>{label}</label>
+      <textarea
+        className="form-textarea"
+        id={veld}
+        value={waarden[veld] as string}
+        onChange={(e) => zet(veld, e.target.value as never)}
+      />
+    </div>
   );
 
   return (
     <div className="form-body">
-      {/* 4.1 Vooraf ingevuld, overschrijfbaar */}
-      <div className="form-fieldset">
-        <h3 className="heading-h3 mb-text">Opleiding &amp; niveau</h3>
-        <p className="form-hint mb-text">
-          Vooraf overgenomen uit de aanmelding — vanaf nu een gewoon bewerkbaar veld.
-        </p>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="opleiding">Opleiding &amp; discipline</label>
-          <textarea
-            className="form-textarea"
-            id="opleiding"
-            value={waarden.opleiding}
-            onChange={(e) => zet("opleiding", e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="yogastijlen">Yogastijlen</label>
-          <textarea
-            className="form-textarea"
-            id="yogastijlen"
-            value={waarden.yogastijlen}
-            onChange={(e) => zet("yogastijlen", e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="andere_disciplines">Extra specialisaties</label>
-          <textarea
-            className="form-textarea"
-            id="andere_disciplines"
-            value={waarden.andere_disciplines}
-            onChange={(e) => zet("andere_disciplines", e.target.value)}
-          />
-        </div>
-
-        <div className="form-group">
-          <label className="form-label" htmlFor="niveau_definitief">Niveau (definitief)</label>
-          <select
-            className="form-select"
-            id="niveau_definitief"
-            value={waarden.niveau_definitief}
-            onChange={(e) => zet("niveau_definitief", e.target.value as ToetsingWaarden["niveau_definitief"])}
-          >
-            <option value="">Nog niet bepaald</option>
-            {NIVEAU_OPTIES.map((optie) => (
-              <option key={optie.value} value={optie.value}>{optie.label}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {/* 4.2 Live in te vullen — basisgegevens */}
+      {/* 1. Basisgegevens */}
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Basisgegevens</h3>
 
@@ -250,6 +219,29 @@ export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
         </div>
 
         <div className="form-group">
+          <label className="form-label" htmlFor="kor_van_toepassing_per">KOR van toepassing per</label>
+          <input
+            className="form-input"
+            type="date"
+            id="kor_van_toepassing_per"
+            value={waarden.kor_van_toepassing_per}
+            onChange={(e) => zet("kor_van_toepassing_per", e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label" htmlFor="kor_verdiend_euro">KOR verdiend tot nu toe (€)</label>
+          <input
+            className="form-input"
+            type="text"
+            inputMode="decimal"
+            id="kor_verdiend_euro"
+            value={waarden.kor_verdiend_euro}
+            onChange={(e) => zet("kor_verdiend_euro", e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
           <label className="form-label" htmlFor="verzekering_geldig_tot">Verzekering geldig tot</label>
           <input
             className="form-input"
@@ -261,26 +253,35 @@ export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
         </div>
 
         <div className="form-group">
-          <p className="form-label">Opleiding in orde</p>
-          {jaNeeRadio("opleiding_in_orde", waarden.opleiding_in_orde)}
-        </div>
-
-        <div className="form-group">
-          <p className="form-label">Verzekering in orde</p>
-          {jaNeeRadio("verzekering_in_orde", waarden.verzekering_in_orde)}
-        </div>
-
-        <div className="form-group">
-          <p className="form-label">Certificaten besproken</p>
-          <p className="form-hint mb-text">
-            Gaat niet over een daadwerkelijke upload/controle — alleen of is besproken dat certificaten bij het
-            aanmaken van het profiel geüpload moeten worden.
-          </p>
-          {jaNeeRadio("certificaten_besproken", waarden.certificaten_besproken)}
+          <label className="form-label" htmlFor="niveau_definitief">Niveau (definitief)</label>
+          <select
+            className="form-select"
+            id="niveau_definitief"
+            value={waarden.niveau_definitief}
+            onChange={(e) => zet("niveau_definitief", e.target.value as ToetsingWaarden["niveau_definitief"])}
+          >
+            <option value="">Nog niet bepaald</option>
+            {NIVEAU_OPTIES.map((optie) => (
+              <option key={optie.value} value={optie.value}>{optie.label}</option>
+            ))}
+          </select>
         </div>
       </div>
 
-      {/* Checklist */}
+      {/* 2. Docent's eigen antwoorden — read-only, geen opslag in toetsingen */}
+      <div className="form-fieldset">
+        <h3 className="heading-h3 mb-text">Docent&rsquo;s eigen antwoorden</h3>
+        {DOCENT_ANTWOORD_VELDEN.map((item) => (
+          <div className="admin-detail-veld" key={item.veld}>
+            <span className="admin-detail-label">{item.label}</span>
+            <span className="text-body">
+              {docentAntwoorden[item.veld] && docentAntwoorden[item.veld].trim() !== "" ? docentAntwoorden[item.veld] : "—"}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* 3. Checklist */}
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Checklist</h3>
 
@@ -302,25 +303,23 @@ export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
         </div>
       </div>
 
-      {/* Verdieping */}
+      {/* 4. Open vragen */}
       <div className="form-fieldset">
-        <h3 className="heading-h3 mb-text">Verdieping</h3>
-
-        {VERDIEPING_ITEMS.map((item) => (
-          <div className="form-group" key={item.veld}>
-            <label className="form-label" htmlFor={item.veld}>{item.label}</label>
-            <textarea
-              className="form-textarea"
-              id={item.veld}
-              placeholder={item.placeholder}
-              value={waarden[item.veld] as string}
-              onChange={(e) => zet(item.veld, e.target.value as never)}
-            />
-          </div>
-        ))}
+        <h3 className="heading-h3 mb-text">Vakinhoudelijk</h3>
+        {VAKINHOUDELIJK_ITEMS.map((item) => vrijTekstveld(item.veld, item.label))}
       </div>
 
-      {/* 4.3 Vaste referentietekst */}
+      <div className="form-fieldset">
+        <h3 className="heading-h3 mb-text">Houding &amp; cultuur</h3>
+        {HOUDING_ITEMS.map((item) => vrijTekstveld(item.veld, item.label))}
+      </div>
+
+      <div className="form-fieldset">
+        <h3 className="heading-h3 mb-text">Energie/intuïtieve check</h3>
+        {ENERGIE_ITEMS.map((item) => vrijTekstveld(item.veld, item.label))}
+      </div>
+
+      {/* 5. Vaste referentietekst */}
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Referentie — Startend / Ervaren</h3>
         <div className="admin-samenvatting">
@@ -355,7 +354,7 @@ export default function ToetsingForm({ aanmeldingId, initieel }: Props) {
         </div>
       </div>
 
-      {/* 4.4 Afsluiting */}
+      {/* 6. Afsluiting */}
       <div className="form-fieldset">
         <h3 className="heading-h3 mb-text">Afsluiting</h3>
 

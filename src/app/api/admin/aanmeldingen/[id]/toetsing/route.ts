@@ -4,21 +4,17 @@ import { createServerClient } from "@/lib/supabase/server";
 type JaNeeTwijfel = "ja" | "nee" | "twijfel" | null;
 
 interface Body {
-  opleiding?: string | null;
-  yogastijlen?: string | null;
-  andere_disciplines?: string | null;
   niveau_definitief?: "startend" | "ervaren" | null;
 
   datum_gesprek?: string | null;
   geboortedatum?: string | null;
   kvk_nummer?: string | null;
+  kor_van_toepassing_per?: string | null;
+  kor_verdiend_cent?: number | null;
   verzekering_geldig_tot?: string | null;
 
-  opleiding_in_orde?: boolean | null;
-  verzekering_in_orde?: boolean | null;
-  certificaten_besproken?: boolean | null;
-
   ytt_200u_in_orde?: JaNeeTwijfel;
+  verzekering_in_orde?: JaNeeTwijfel;
   geschikt_1op1?: JaNeeTwijfel;
   regio_passend?: JaNeeTwijfel;
   houding_passend_pyah?: JaNeeTwijfel;
@@ -27,11 +23,20 @@ interface Body {
   intuitieve_match?: JaNeeTwijfel;
   checklist_opmerkingen?: string | null;
 
-  praktisch_professioneel?: string | null;
-  vakinhoudelijk?: string | null;
-  geschiktheid_1op1_toelichting?: string | null;
-  houding_cultuur?: string | null;
-  energie_intuitie?: string | null;
+  vak_intake_ervaring?: string | null;
+  vak_werkwijze_verwoorden?: string | null;
+  vak_grenzen_doorverwijzing?: string | null;
+  vak_rust_aandacht?: string | null;
+  vak_veilig_zonder_groep?: string | null;
+  vak_flexibiliteit?: string | null;
+  vak_certificering_vs_ervaring?: string | null;
+  houding_feedback_ontwikkeling?: string | null;
+  houding_samenwerkingsstructuur?: string | null;
+  houding_community_bereidheid?: string | null;
+  houding_respect_platform?: string | null;
+  energie_gelijkwaardig_zuiver?: string | null;
+  energie_samenwerken_niet_halen?: string | null;
+  energie_aanraden_dierbare?: string | null;
 
   ingevuld_door?: string | null;
   extra_notities?: string | null;
@@ -65,12 +70,12 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
         datum_gesprek: body.datum_gesprek || null,
         geboortedatum: body.geboortedatum || null,
         kvk_nummer: body.kvk_nummer || null,
+        kor_van_toepassing_per: body.kor_van_toepassing_per || null,
+        kor_verdiend_cent: body.kor_verdiend_cent ?? null,
         verzekering_geldig_tot: body.verzekering_geldig_tot || null,
         niveau_definitief: body.niveau_definitief || null,
-        opleiding_in_orde: body.opleiding_in_orde ?? null,
-        verzekering_in_orde: body.verzekering_in_orde ?? null,
-        certificaten_besproken: body.certificaten_besproken ?? null,
         ytt_200u_in_orde: body.ytt_200u_in_orde || null,
+        verzekering_in_orde: body.verzekering_in_orde || null,
         geschikt_1op1: body.geschikt_1op1 || null,
         regio_passend: body.regio_passend || null,
         houding_passend_pyah: body.houding_passend_pyah || null,
@@ -78,11 +83,20 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
         community_gevoel: body.community_gevoel || null,
         intuitieve_match: body.intuitieve_match || null,
         checklist_opmerkingen: body.checklist_opmerkingen || null,
-        praktisch_professioneel: body.praktisch_professioneel || null,
-        vakinhoudelijk: body.vakinhoudelijk || null,
-        geschiktheid_1op1_toelichting: body.geschiktheid_1op1_toelichting || null,
-        houding_cultuur: body.houding_cultuur || null,
-        energie_intuitie: body.energie_intuitie || null,
+        vak_intake_ervaring: body.vak_intake_ervaring || null,
+        vak_werkwijze_verwoorden: body.vak_werkwijze_verwoorden || null,
+        vak_grenzen_doorverwijzing: body.vak_grenzen_doorverwijzing || null,
+        vak_rust_aandacht: body.vak_rust_aandacht || null,
+        vak_veilig_zonder_groep: body.vak_veilig_zonder_groep || null,
+        vak_flexibiliteit: body.vak_flexibiliteit || null,
+        vak_certificering_vs_ervaring: body.vak_certificering_vs_ervaring || null,
+        houding_feedback_ontwikkeling: body.houding_feedback_ontwikkeling || null,
+        houding_samenwerkingsstructuur: body.houding_samenwerkingsstructuur || null,
+        houding_community_bereidheid: body.houding_community_bereidheid || null,
+        houding_respect_platform: body.houding_respect_platform || null,
+        energie_gelijkwaardig_zuiver: body.energie_gelijkwaardig_zuiver || null,
+        energie_samenwerken_niet_halen: body.energie_samenwerken_niet_halen || null,
+        energie_aanraden_dierbare: body.energie_aanraden_dierbare || null,
         ingevuld_door: body.ingevuld_door || "Sabine Blok",
         extra_notities: body.extra_notities || null,
         updated_at: new Date().toISOString(),
@@ -95,18 +109,13 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     return NextResponse.json({ error: "Toetsing kon niet worden opgeslagen." }, { status: 500 });
   }
 
-  // Sectie 4.1: opleiding, yogastijlen, andere_disciplines en niveau_definitief zijn hier
-  // bewerkbare kopieën van de oorspronkelijke aanmelding-velden (geen eigen kolom in
-  // `toetsingen`) — worden bij opslaan teruggeschreven naar `aanmeldingen`, zodat er één
-  // actuele waarde blijft bestaan die elders (bijv. Stap 4A) gebruikt kan worden.
+  // niveau_definitief blijft de enige waarde die teruggeschreven wordt naar aanmeldingen
+  // (aanmeldingen.niveau_inschatting) — opleiding/yogastijlen/andere_disciplines zijn sinds de
+  // herstructurering puur read-only op deze pagina (sectie "Docent's eigen antwoorden"),
+  // niet meer overschrijfbaar.
   const { error: aanmeldingUpdateError } = await supabase
     .from("aanmeldingen")
-    .update({
-      opleiding: body.opleiding || null,
-      yogastijlen: body.yogastijlen || null,
-      andere_disciplines: body.andere_disciplines || null,
-      niveau_inschatting: body.niveau_definitief || null,
-    })
+    .update({ niveau_inschatting: body.niveau_definitief || null })
     .eq("id", id);
 
   if (aanmeldingUpdateError) {
