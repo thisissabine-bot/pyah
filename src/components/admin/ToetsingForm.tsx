@@ -389,7 +389,7 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
         <div className="form-group">
           <label className="form-label" htmlFor="extra_notities">Extra notities</label>
           <textarea
-            className="form-textarea"
+            className="form-textarea form-textarea--klein"
             id="extra_notities"
             value={waarden.extra_notities}
             onChange={(e) => zet("extra_notities", e.target.value)}
