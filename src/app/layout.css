@@ -2199,19 +2199,19 @@ a:hover {
 
 .toetsing-basisgegevens-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 32px;
+  grid-template-columns: 320px 320px;
+  gap: 0 40px;
 }
 
 @media (max-width: 639px) {
   .toetsing-basisgegevens-grid {
     grid-template-columns: 1fr;
   }
-}
 
-.toetsing-basisgegevens-grid .form-input,
-.toetsing-basisgegevens-grid .form-select {
-  max-width: 320px;
+  .toetsing-basisgegevens-grid .form-input,
+  .toetsing-basisgegevens-grid .form-select {
+    max-width: 320px;
+  }
 }
 
 .admin-checklist-tabel th,
