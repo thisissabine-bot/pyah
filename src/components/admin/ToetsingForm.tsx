@@ -378,7 +378,7 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
         <div className="form-group">
           <label className="form-label" htmlFor="ingevuld_door">Ingevuld door</label>
           <input
-            className="form-input"
+            className="form-input form-input--smal"
             type="text"
             id="ingevuld_door"
             value={waarden.ingevuld_door}
@@ -400,7 +400,7 @@ export default function ToetsingForm({ aanmeldingId, docentAntwoorden, initieel 
       {fout && <p className="form-error mb-text">{fout}</p>}
       {opgeslagen && <p className="admin-toast mb-text">Toetsing opgeslagen.</p>}
 
-      <div className="btn-row">
+      <div className="btn-row mb-section">
         <button type="button" className="btn-light" disabled={bezig} onClick={opslaan}>
           {bezig ? "Bezig…" : "Opslaan"}
         </button>

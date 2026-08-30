@@ -1718,6 +1718,10 @@ a:hover {
   min-height: 55px;
 }
 
+.form-input--smal {
+  max-width: 320px;
+}
+
 .form-checkbox-row {
   display: flex;
   align-items: flex-start;
