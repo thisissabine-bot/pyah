@@ -104,16 +104,33 @@ export interface Database {
           match_beslissing: "ja" | "nee" | "wachtlijst" | null;
           beoordeeld_op: string | null;
           mail_verzonden_op: string | null;
+          eindbeslissing: "match" | "geen_match" | null;
+          eindbeslissing_op: string | null;
+          eindbeslissing_mail_verzonden_op: string | null;
           created_at: string;
         };
         Insert: Omit<
           Database["public"]["Tables"]["aanmeldingen"]["Row"],
-          "id" | "created_at" | "niveau_inschatting" | "match_beslissing" | "beoordeeld_op" | "mail_verzonden_op"
+          | "id"
+          | "created_at"
+          | "niveau_inschatting"
+          | "match_beslissing"
+          | "beoordeeld_op"
+          | "mail_verzonden_op"
+          | "eindbeslissing"
+          | "eindbeslissing_op"
+          | "eindbeslissing_mail_verzonden_op"
         > &
           Partial<
             Pick<
               Database["public"]["Tables"]["aanmeldingen"]["Row"],
-              "niveau_inschatting" | "match_beslissing" | "beoordeeld_op" | "mail_verzonden_op"
+              | "niveau_inschatting"
+              | "match_beslissing"
+              | "beoordeeld_op"
+              | "mail_verzonden_op"
+              | "eindbeslissing"
+              | "eindbeslissing_op"
+              | "eindbeslissing_mail_verzonden_op"
             >
           >;
         Update: Partial<Database["public"]["Tables"]["aanmeldingen"]["Insert"]>;

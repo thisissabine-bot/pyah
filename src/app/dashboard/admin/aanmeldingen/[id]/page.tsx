@@ -119,6 +119,29 @@ export default async function AanmeldingDetailPage({ params }: Props) {
               </Link>
             </div>
           )}
+          {aanmelding.eindbeslissing && (
+            <>
+              <p className="text-body mb-text" style={{ marginTop: 14 }}>
+                Eindbeslissing op{" "}
+                {aanmelding.eindbeslissing_op
+                  ? new Date(aanmelding.eindbeslissing_op).toLocaleDateString("nl-NL", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })
+                  : "—"}
+                {" — "}
+                {aanmelding.eindbeslissing === "match" ? "Profiel uitgenodigd" : "Afgewezen (na gesprek)"}
+              </p>
+              {!aanmelding.eindbeslissing_mail_verzonden_op && (
+                <p className="admin-toast admin-toast--warning">
+                  De {aanmelding.eindbeslissing === "match" ? "welkomst" : "afwijzings"}mail (na het gesprek) is niet
+                  verstuurd. Neem handmatig contact op met {aanmelding.naam} — deze beslissing kan niet opnieuw via
+                  het systeem worden verstuurd.
+                </p>
+              )}
+            </>
+          )}
         </div>
       ) : (
         <BeoordelingForm id={aanmelding.id} naam={aanmelding.naam} />

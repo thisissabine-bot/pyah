@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createServerClient } from "@/lib/supabase/server";
 import ToetsingForm from "@/components/admin/ToetsingForm";
+import EindbeslissingForm from "@/components/admin/EindbeslissingForm";
 
 // Voorkomt dat Netlify's durable/edge-cache een eerder gerenderde snapshot van deze toetsing
 // blijft serveren nadat het formulier is opgeslagen.
@@ -19,7 +20,7 @@ export default async function ToetsingPage({ params }: Props) {
   const { data: aanmelding } = await supabase
     .from("aanmeldingen")
     .select(
-      "id, naam, woonplaats, opleiding, trainingsuren, jaren_leservaring, recente_lespraktijk, ervaring_privelessen, yogastijlen, andere_disciplines, niveau_inschatting, match_beslissing, type",
+      "id, naam, woonplaats, opleiding, trainingsuren, jaren_leservaring, recente_lespraktijk, ervaring_privelessen, yogastijlen, andere_disciplines, niveau_inschatting, match_beslissing, type, eindbeslissing, eindbeslissing_op, eindbeslissing_mail_verzonden_op",
     )
     .eq("id", id)
     .eq("type", "docent")
@@ -91,6 +92,32 @@ export default async function ToetsingPage({ params }: Props) {
           extra_notities: toetsing?.extra_notities ?? "",
         }}
       />
+
+      {aanmelding.eindbeslissing ? (
+        <div className="admin-samenvatting">
+          <p className="text-body mb-text">
+            Eindbeslissing op{" "}
+            {aanmelding.eindbeslissing_op
+              ? new Date(aanmelding.eindbeslissing_op).toLocaleDateString("nl-NL", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })
+              : "—"}
+            {" — "}
+            {aanmelding.eindbeslissing === "match" ? "Profiel uitgenodigd" : "Afgewezen (na gesprek)"}
+          </p>
+          {!aanmelding.eindbeslissing_mail_verzonden_op && (
+            <p className="admin-toast admin-toast--warning">
+              De {aanmelding.eindbeslissing === "match" ? "welkomst" : "afwijzings"}mail (na het gesprek) is niet
+              verstuurd. Neem handmatig contact op met {aanmelding.naam} — deze beslissing kan niet opnieuw via het
+              systeem worden verstuurd.
+            </p>
+          )}
+        </div>
+      ) : (
+        <EindbeslissingForm aanmeldingId={id} />
+      )}
     </div>
   );
 }

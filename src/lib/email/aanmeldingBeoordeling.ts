@@ -3,22 +3,10 @@
 // wachtlijstEmail() toegevoegd via CC-opdracht: Wachtlijst-optie, Stap 2, 29-08-2026).
 
 import { wrapEmailHtml } from "./emailLayout";
+import { voornaam, escapeHtml } from "./emailHelpers";
 
 // Eén plek, eenvoudig aan te passen mocht de link ooit wijzigen.
 export const CALENDLY_LINK_PLACEHOLDER = "https://calendly.com/privateyogaathome-info/30min?back=1&month=2026-08";
-
-function voornaam(naam: string): string {
-  return naam.trim().split(/\s+/)[0] ?? naam;
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
 
 export function uitnodigingEmail(naam: string) {
   const voor = voornaam(naam);

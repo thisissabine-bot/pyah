@@ -3,7 +3,16 @@
 
 const LOGO_URL = "https://privateyogaathome.nl/email/logo-pyah-email.png";
 
-export function wrapEmailHtml({ bodyHtml }: { bodyHtml: string }): string {
+const STANDAARD_HANDTEKENING = `Hartelijke groet,<br />
+                      Team Private Yoga at Home`;
+
+export function wrapEmailHtml({
+  bodyHtml,
+  handtekeningHtml = STANDAARD_HANDTEKENING,
+}: {
+  bodyHtml: string;
+  handtekeningHtml?: string;
+}): string {
   return `<!DOCTYPE html>
 <html lang="nl">
   <head>
@@ -26,8 +35,7 @@ export function wrapEmailHtml({ bodyHtml }: { bodyHtml: string }): string {
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                   <tr>
                     <td style="border-top: 1px solid #d4baad; padding-top: 24px; font-family: Arial, Helvetica, sans-serif; font-size: 15px; line-height: 1.6; color: #484f47;">
-                      Hartelijke groet,<br />
-                      Team Private Yoga at Home
+                      ${handtekeningHtml}
                     </td>
                   </tr>
                   <tr>

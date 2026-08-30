@@ -2164,6 +2164,17 @@ a:hover {
 .admin-status-badge--afgewezen   { background-color: #ebe3e0; color: #260f09; }
 .admin-status-badge--wachtlijst  { background-color: #d4baad; color: #260f09; }
 
+/* Stap 4-statussen (na het kennismakingsgesprek): alle 4 paletkleuren zijn al vergeven aan
+   de Stap 2-badges hierboven, dus deze twee zijn bewust een outline-variant i.p.v. een
+   volle vlakkleur — meteen visueel te onderscheiden van de Stap 2-status ernaast. */
+.admin-status-badge--profiel-uitgenodigd,
+.admin-status-badge--afgewezen-na-gesprek {
+  background-color: transparent;
+  border: 1px solid;
+}
+.admin-status-badge--profiel-uitgenodigd  { color: #484f47; border-color: #484f47; }
+.admin-status-badge--afgewezen-na-gesprek { color: #a66658; border-color: #a66658; }
+
 .admin-badge-regio {
   display: inline-block;
   font-family: 'Lato', sans-serif;

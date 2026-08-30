@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { createServerClient } from "@/lib/supabase/server";
-import { sorteerAanmeldingen, sorteerOpWoonplaats, statusLabel } from "@/lib/aanmeldingenBeoordeling";
+import { sorteerAanmeldingen, sorteerOpWoonplaats, statusLabel, statusBadgeSlug } from "@/lib/aanmeldingenBeoordeling";
 
 // Voorkomt dat Netlify's durable/edge-cache een eerder gerenderde snapshot van dit overzicht
 // blijft serveren nadat de status/data van een aanmelding is gewijzigd.
@@ -32,7 +32,7 @@ export default async function AanmeldingenOverzichtPage({ searchParams }: Props)
 
   const { data } = await supabase
     .from("aanmeldingen")
-    .select("id, naam, woonplaats, created_at, verwerkt, match_beslissing, beoordeeld_op, regio")
+    .select("id, naam, woonplaats, created_at, verwerkt, match_beslissing, beoordeeld_op, regio, eindbeslissing")
     .eq("type", "docent");
 
   const woonplaatsRichting = sort === "woonplaats" ? (dir === "desc" ? "desc" : "asc") : null;
@@ -96,7 +96,7 @@ export default async function AanmeldingenOverzichtPage({ searchParams }: Props)
                     </td>
                     <td>
                       <Link className="admin-aanmeldingen-cel-link" href={href}>
-                        <span className={`admin-status-badge admin-status-badge--${status.toLowerCase()}`}>{status}</span>
+                        <span className={`admin-status-badge admin-status-badge--${statusBadgeSlug(status)}`}>{status}</span>
                       </Link>
                     </td>
                   </tr>
