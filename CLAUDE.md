@@ -7,6 +7,8 @@
 
 | Versie | Datum | Wijzigingen |
 | :----- | :---- | :---------- |
+| v1.58 | 05-09-2026 | Openstaand bouwpunt vastgelegd in sectie "Facturatie — docent maakt factuur aan", direct na stap 7 van de Stap-voor-stap (betaallink generatie/verzending): nog onduidelijk waar/hoe de Klant de AV Klanten accordeert vóór betaling — via een eigen PYAH-tussenpagina met verplicht vinkje vóór doorsturen naar Mollie, of gaat de betaallink rechtstreeks naar een kale Mollie-checkout zonder ruimte voor zo'n eigen stap. Bepaalt de technische haalbaarheid van het AV-akkoordmechanisme uit AV Klanten Art. 2.2/3.1 — nog te onderzoeken bij Mollie-documentatie of te bespreken met CC. Puur documentatie, geen schema- of codewijziging. |
+| v1.57 | 05-09-2026 | Openstaand bouwpunt vastgelegd in sectie "Facturatie, lesregistratie & uitbetaling", direct na "Uitbetaling docent — self-billing": een apart, docent-facing referentiedocument "Zo werkt de facturatie & lesregistratie" (aangekondigd in de Checklist docenten voordat je start, punt 10) moet nog worden opgesteld vóór onboarding van de eerste lichting docenten — met lesregistratie-stappen, de automatische factuurgeneratie namens PYAH, betaaltermijn, reiskostenberekening, toeslag extra persoon en de annuleringsregeling, zonder 4-lessenpakket-inhoud zolang dat geparkeerd blijft. Puur documentatie, geen schema- of codewijziging. |
 | v1.56 | 30-08-2026 | "Extra notities" verplaatst van de Afsluiting-sectie naar tussen "Energie/intuïtieve check" en "Referentie — Startend / Ervaren" (eigen losse `.form-fieldset`, geen sectiekop) — voelde daar rommelig aan naast "Ingevuld door", los van de rest van de open vragen. Afsluiting bevat nu alleen nog "Ingevuld door". Gebouwd op branch `stap4-eindbeslissing`. |
 | v1.55 | 30-08-2026 | Correctie op v1.54: het smaller maken bleek voor "Ingevuld door" bedoeld te zijn (die stond al goed) — de daadwerkelijk bedoelde fix was de hoogte van "Extra notities", die nu (`.form-textarea--klein`) even compact is als de open-vraagvelden i.p.v. de standaard 110px. Gebouwd op branch `stap4-eindbeslissing`. |
 | v1.54 | 30-08-2026 | Twee kleine weergave-fixes op het Toetsingsdocument na livetest van Stap 4: "Ingevuld door" is nu smaller (`.form-input--smal`, max-width 320px, zelfde breedte als de Basisgegevens-velden) i.p.v. de volle paginabreedte; extra ruimte (`mb-section`) tussen de knoppenrij (Opslaan/Terug naar aanmelding/Terug naar overzicht) en de kop "Eindbeslissing na het gesprek" eronder, die er eerst direct tegenaan stond. Gebouwd op branch `stap4-eindbeslissing`. |
@@ -678,6 +680,10 @@ De factuur wordt aangemaakt door de docent in het dashboard, maar gaat uit onder
 6\. Factuur + betaallink worden automatisch per e-mail verstuurd naar de klant
 7\. Betaallink is ook zichtbaar in het docent-dashboard zodat de docent hem handmatig kan kopiëren en via WhatsApp kan sturen
 
+\#\#\#\# Openstaand bouwpunt — AV Klanten-akkoord vóór betaling
+
+Waar/hoe accordeert de Klant de AV Klanten vóór betaling: via een eigen PYAH-tussenpagina met verplicht vinkje vóór doorsturen naar Mollie, of gaat de betaallink rechtstreeks naar een kale Mollie-checkout (geen ruimte voor eigen stap)? Dit bepaalt de technische haalbaarheid van het AV-akkoordmechanisme uit AV Klanten Art. 2.2/3.1. Nog te onderzoeken bij Mollie-documentatie of te bespreken met CC.
+
 \#\#\#\# Introductieles — directe betaling
 
 \- Betalingstermijn is \*\*direct\*\* (niet 7 dagen)
@@ -881,6 +887,22 @@ Overgemaakt naar IBAN: [IBAN docent]
 \- Docent ontvangt de specificatie per e-mail op de uitbetalingsdatum
 \- Downloadbaar als PDF in docent-dashboard → "Uitbetalingen"
 \- Dit document dient als administratief bewijs voor de docent (boekhouding)
+
+\#\#\#\# Docent-facing referentiedocument — "Zo werkt de facturatie & lesregistratie"
+
+Los van deze bouwinstructie (CLAUDE.md, voor Claude Code) is er ook een \*\*docent-facing\*\* referentiedocument nodig: "Zo werkt de facturatie & lesregistratie". Dit document wordt aangekondigd in de Checklist docenten voordat je start (punt 10), maar is nog niet opgesteld.
+
+Basis voor de inhoud: deze sectie ("Facturatie, lesregistratie & uitbetaling") hierboven. Bevat:
+\- Lesregistratie-stappen
+\- Hoe de factuur automatisch namens PYAH wordt gegenereerd
+\- Betaaltermijn (7 dagen / direct bij introductieles)
+\- Reiskostenberekening
+\- Toeslag extra persoon
+\- Annuleringsregeling
+
+Zonder 4-lessenpakket-inhoud, zolang dat geparkeerd blijft — apart toevoegen zodra het pakket wordt geactiveerd.
+
+Op te stellen vóór onboarding van de eerste lichting docenten. Puur documentatie — geen schema- of codewijziging.
 
 \---
 
