@@ -23,6 +23,7 @@ export interface Database {
           actief: boolean;
           abonnement: "startend" | "ervaren";
           stripe_account_id: string | null;
+          info_meerdere_opdrachtgevers_bevestigd_op: string | null;
           created_at: string;
         };
         Insert: Omit<Database["public"]["Tables"]["docenten"]["Row"], "id" | "created_at">;
@@ -177,6 +178,17 @@ export interface Database {
         Insert: Omit<Database["public"]["Tables"]["toetsingen"]["Row"], "id" | "updated_at"> &
           Partial<Pick<Database["public"]["Tables"]["toetsingen"]["Row"], "id" | "updated_at">>;
         Update: Partial<Database["public"]["Tables"]["toetsingen"]["Insert"]>;
+        Relationships: [];
+      };
+      info_meerdere_opdrachtgevers_log: {
+        Row: {
+          id: string;
+          docent_id: string;
+          geopend_op: string;
+        };
+        Insert: Omit<Database["public"]["Tables"]["info_meerdere_opdrachtgevers_log"]["Row"], "id" | "geopend_op"> &
+          Partial<Pick<Database["public"]["Tables"]["info_meerdere_opdrachtgevers_log"]["Row"], "id" | "geopend_op">>;
+        Update: Partial<Database["public"]["Tables"]["info_meerdere_opdrachtgevers_log"]["Insert"]>;
         Relationships: [];
       };
       uitbetalingen: {
