@@ -38,7 +38,7 @@ const TABEL: TabelCategorie[] = [
       { label: "Kans op uitgelicht worden via website / socials", startend: false, ervaren: true },
       { label: "Bloggen voor extra zichtbaarheid & vindbaarheid (SEO)", startend: false, ervaren: true },
       { label: "Content gekoppeld aan profiel", startend: false, ervaren: true },
-      { label: "Mogelijkheid om trainingen, workshops te delen op het platform", startend: false, ervaren: true },
+      { label: "Mogelijkheid om trainingen, workshops te delen op het platform (binnenkort)", startend: false, ervaren: true },
       { label: "Je profiel verschijnt hoger in de zoekresultaten op het platform", startend: false, ervaren: true },
       { label: "Extra zichtbaarheid via website, nieuwsbrief of social media", startend: false, ervaren: true },
       { label: "Zichtbaarheid in campagnes waar mogelijk", startend: false, ervaren: true },
@@ -160,11 +160,11 @@ const TOELICHTING = [
       },
       {
         naam: "Content gekoppeld aan profiel",
-        tekst: "Alles wat je deelt — blogs, trainingen, workshops — wordt gekoppeld aan je profiel. Zo zien klanten niet alleen wie je bent, maar ook waar je voor staat.",
+        tekst: "Alles wat je deelt - blogs, trainingen, workshops - wordt gekoppeld aan je PYAH-profiel. Zo bouw je zichtbaarheid op binnen het platform, als PYAH-docent. Dit is niet vanuit jouw eigen bedrijf.",
       },
       {
         naam: "Mogelijkheid om trainingen, workshops te delen op het platform",
-        tekst: "Je deelt trainingen, workshops of verdiepende sessies via het platform, naast je privélessen aan huis.",
+        tekst: "Je kunt eigen workshops, trainingen of verdiepende sessies voor PYAH-klanten aanbieden via het platform, naast je privélessen aan huis. Dit zijn extra aanbiedingen die je vanuit PYAH organiseert, gepresenteerd op je profiel. Geen ruimte voor losse promotie van een eigen bedrijf ernaast. Deze functionaliteit is nog niet actief in de pilotfase.",
       },
       {
         naam: "Je profiel verschijnt hoger in de zoekresultaten op het platform",
